@@ -79,6 +79,30 @@ back and confirm the ref line):
   for a question already open.
 - The brief reports a count and a pointer, never the question bodies.
 
+## 3b. Closed payment tasks — the mail follows (carve-out 5, added 2026-09-07)
+
+Policy is in `config/routing-rules.md` § The payment task and `AGENTS.md`
+§ Phase gates carve-out 5; these are the steps. Runs once per run, after the
+dedupe reads in § 3, using the same `find-completed-tasks` result (project
+Personal, last 60 days).
+
+1. Keep the completed tasks whose `content` starts with `Pay ` **and** whose
+   description's first line is `ref: mail:<thread_id>`. Anything else is out
+   of class — a payment tracked from WhatsApp or by hand has no thread.
+2. For each, `get_thread` (`METADATA_ONLY`). Read the labels off **every**
+   message. If no message carries `Needs-Payment` (id in state) → already
+   handled or never in class; skip and count. If any message carries it →
+   in class.
+3. In class: `label_thread` with `Paid` (`paid_label_id` in state); read
+   back. Then `unlabel_thread` with `Needs-Payment`; read back absent. Then
+   `unlabel_thread` with `INBOX`; read back absent. Stop at the first failed
+   read-back and report the thread in that state — never continue past a
+   failed step.
+4. A task in the **Done section but not completed** is not in class. Done is
+   the assistant's proposal column; only `checked: true` counts.
+5. Output for the brief's Board movement section and the run log: per
+   thread — task id, ref, the three read-backs. Zero is stated as zero.
+
 ## 4. The board — sections as columns
 
 Personal is used as a Kanban board. Its six sections, ordered, with ids cached

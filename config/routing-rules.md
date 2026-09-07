@@ -176,7 +176,14 @@ the sender's own words, else none; p2 if due within 7 days, else p3; `size/S`;
 description: `ref: mail:<thread_id>`, `source: <sender>, <date>`, then amount,
 due date, invoice or client number, and the thread link. Dedupe on the ref
 before creating. The thread keeps its label and stays in the inbox until Eriks
-pays and archives it.
+pays and archives it. WIDENED 2026-09-07 by Eriks: "until Eriks pays and
+archives it" becomes "until Eriks **completes the task**" — the run then
+applies `Paid` (id `paid_label_id` in state), removes `Needs-Payment`, and
+archives the thread. Eriks: *"when the "payment" task has been closed (DONE),
+change the label on the corresponding e-mail and archive it"*. Carve-out 5 in
+`AGENTS.md` § Phase gates; steps in `procedures/step-2-triage.md` § Closed
+payment tasks. Idempotent by thread state: a thread already carrying `Paid`
+and not `Needs-Payment` is never touched again.
 
 **The auto-archive classes** — Newsletters & Learning, Promotions & Ads,
 Receipts & Subscriptions (after the ledger row is written and verified), and

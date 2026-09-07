@@ -451,3 +451,21 @@ lands"). Each read back by grep. Existing task `6hRVRpcjfmcPGFrx` "Pay Bite
 Latvija 20.06 EUR" (top-level, no parent) moved Backlog → This Week with
 `update-tasks` (sectionId only); `fetch-object` read back `sectionId`
 6hJQ557XXQ7fRjVQ. Lessons entry appended.
+
+## 2026-09-07 — Carve-out 5 recorded: completed payment task → Paid label + archive (20:05)
+
+Eriks asked in chat whether closing a payment task relabels and archives its
+mail; it did not. The cost (a mistaken completion is acted on the same way;
+the mail is handled at the next run, not at the click) was named; Eriks:
+*"it's okay, I won't click by mistake. worst case, they (whoever that is)
+will send a reminder later on."* "Change the label" read as swap
+(add `Paid`, remove `Needs-Payment`), his words. Edits, each read back by
+grep: `AGENTS.md` § Phase gates carve-out 5, § Security boundary
+allowed/forbidden annotations; `config/routing-rules.md` § The payment task;
+`config/sources/gmail.md` allowed-write 4 and forbidden annotation;
+`config/tools.md` Gmail write line; `procedures/step-2-triage.md` § 3b (the
+steps); `state/state.json` `sources.gmail.paid_label_id` =
+Label_2307425248756940905 (from today's `list_labels`, name
+`Finance & Accounts/Paid`, 209 threads). No thread acted on now: the only
+completed `Pay …` tasks in the last 60 days (two Margosik WhatsApp payments)
+carry no `ref: mail:` line, so they are out of class.

@@ -47,6 +47,9 @@ used by this instance, whatever it is.
 - **Write:** `label_thread` (one of the thirteen ids in state, on an unlabelled
   inbox thread); `unlabel_thread` with `["INBOX"]` only, on the four carve-out
   classes only; `create_draft`, `update_draft` — only when Eriks asks for a draft.
+  WIDENED 2026-09-07 (carve-out 5): on a thread whose payment task Eriks
+  completed, `label_thread` with `Paid` and `unlabel_thread` with
+  `Needs-Payment` then `INBOX` — see `config/sources/gmail.md` allowed-write 4.
 - **Never used:** `send_message`, `reply`, `forward`, `label_message`,
   `unlabel_message`, `update_message_labels`, `create_label`, `update_label`,
   `delete_label`, `trash_thread`, `trash_message`, `mark_thread_spam`,

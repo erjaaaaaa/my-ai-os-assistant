@@ -63,3 +63,14 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   promoted the same day into `config/routing-rules.md` § The payment task,
   with annotations in `AGENTS.md` § Security boundary and
   `procedures/step-2-triage.md` § 4.
+- 2026-09-07 — **A completed payment task closes its mail** — Eriks asked
+  whether completing a `Pay …` task relabels and archives the thread; it did
+  not. Eriks: *"when the "payment" task has been closed (DONE), change the
+  label on the corresponding e-mail and archive it"*, and on the
+  mistaken-click cost: *"it's okay, I won't click by mistake."* **Rule:**
+  carve-out 5 — on a completed `Pay …` task with a `ref: mail:` line whose
+  thread still carries `Needs-Payment`: apply `Paid`, remove `Needs-Payment`,
+  remove `INBOX`, each read back. Never on a task merely moved to Done.
+  Promoted the same day into `AGENTS.md` § Phase gates,
+  `config/routing-rules.md`, `config/sources/gmail.md`, `config/tools.md`
+  and `procedures/step-2-triage.md` § 3b.

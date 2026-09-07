@@ -92,6 +92,13 @@ actually processed.
 3. **A draft, when Eriks asks for one.** A draft does not leave the mailbox,
    so it does not touch the property the security boundary protects. This
    permits the mechanism, not the initiative: proactive drafting is gated.
+4. **The closed-payment swap** (WIDENED 2026-09-07, Eriks; carve-out 5 in
+   `AGENTS.md` § Phase gates): on a thread still carrying `Needs-Payment`
+   whose `Pay …` task with a `ref: mail:` line Eriks has completed —
+   `label_thread` with `Paid` (id `paid_label_id` in state), then
+   `unlabel_thread` with `Needs-Payment`, then `unlabel_thread` with `INBOX`.
+   Each read back. The only label removal and the only non-taxonomy label
+   this adapter ever writes.
 
 ## Forbidden
 
@@ -99,7 +106,8 @@ actually processed.
 `label_message`, `unlabel_message`, `update_message_labels` (labels are
 thread-level here), `create_label`, `update_label`, `delete_label`,
 `unlabel_thread` with any id other than `INBOX` or on any thread outside the
-four carve-out classes, `apply_sensitive_thread_label`, trashing, marking
+four carve-out classes (NARROWED 2026-09-07: allowed-write 4 above is the one
+exception), `apply_sensitive_thread_label`, trashing, marking
 spam, marking read. Sending is Eriks's act and theirs alone.
 
 ## Verified defects (carried from the system this adapter was generalised from)
