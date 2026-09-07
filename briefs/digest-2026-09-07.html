@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly Newsletter Digest — 2026-09-07</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === VIEWPORT BASE (mandatory, verbatim) === */
+/*
+===========================================
+VIEWPORT FITTING: MANDATORY BASE STYLES
+Include this ENTIRE file in every presentation.
+These styles ensure slides fit exactly in the viewport.
+===========================================
+*/
+
+/* 1. Lock html/body to viewport */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* 2. Each slide = exact viewport height */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 3. Content container with flex for centering */
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+  overflow: hidden; /* Double-protection against overflow */
+  padding: var(--slide-padding);
+}
+
+/* 4. ALL typography uses clamp() for responsive scaling */
+:root {
+  /* Titles scale from mobile to desktop */
+  --title-size: clamp(1.5rem, 5vw, 4rem);
+  --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+  --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+
+  /* Body text */
+  --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+  --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+  /* Spacing scales with viewport */
+  --slide-padding: clamp(1rem, 4vw, 4rem);
+  --content-gap: clamp(0.5rem, 2vw, 2rem);
+  --element-gap: clamp(0.25rem, 1vw, 1rem);
+}
+
+/* 5. Cards/containers use viewport-relative max sizes */
+.card,
+.container,
+.content-box {
+  max-width: min(90vw, 1000px);
+  max-height: min(80vh, 700px);
+}
+
+/* 6. Lists auto-scale with viewport */
+.feature-list,
+.bullet-list {
+  gap: clamp(0.4rem, 1vh, 1rem);
+}
+
+.feature-list li,
+.bullet-list li {
+  font-size: var(--body-size);
+  line-height: 1.4;
+}
+
+/* 7. Grids adapt to available space */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+/* 8. Images constrained to viewport */
+img,
+.image-container {
+  max-width: 100%;
+  max-height: min(50vh, 400px);
+  object-fit: contain;
+}
+
+/*
+===========================================
+RESPONSIVE BREAKPOINTS
+Aggressive scaling for smaller viewports
+===========================================
+*/
+
+/* Short viewports (< 700px height) */
+@media (max-height: 700px) {
+  :root {
+    --slide-padding: clamp(0.75rem, 3vw, 2rem);
+    --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+    --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+    --h2-size: clamp(1rem, 3vw, 1.75rem);
+  }
+}
+
+/* Very short viewports (< 600px height) */
+@media (max-height: 600px) {
+  :root {
+    --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+    --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+    --title-size: clamp(1.1rem, 4vw, 2rem);
+    --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+  }
+
+  /* Hide non-essential elements */
+  .nav-dots,
+  .keyboard-hint,
+  .decorative {
+    display: none;
+  }
+}
+
+/* Extremely short (landscape phones, < 500px height) */
+@media (max-height: 500px) {
+  :root {
+    --slide-padding: clamp(0.4rem, 2vw, 1rem);
+    --title-size: clamp(1rem, 3.5vw, 1.5rem);
+    --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    --body-size: clamp(0.65rem, 1vw, 0.85rem);
+  }
+}
+
+/* Narrow viewports (< 600px width) */
+@media (max-width: 600px) {
+  :root {
+    --title-size: clamp(1.25rem, 7vw, 2.5rem);
+  }
+
+  /* Stack grids vertically */
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+===========================================
+REDUCED MOTION
+Respect user preferences
+===========================================
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* === THEME: paper ledger — warm cream ground, ink type, one oxblood accent === */
+:root {
+  --paper: #f4efe6;
+  --paper-deep: #e9e1d2;
+  --ink: #1d1a17;
+  --ink-soft: #55504a;
+  --rule: #cdc3b1;
+  --accent: #8a1f2b;
+  --accent-soft: #c96b74;
+  --promo: #1f4e5f;
+  --promo-soft: #6fa3b3;
+  --serif: "Fraunces", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --sans: "Public Sans", "Helvetica Neue", sans-serif;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(138,31,43,0.07), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(31,78,95,0.08), transparent 45%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(0,0,0,0.035) 31px 32px);
+}
+.slide-content { max-width: min(92vw, 1100px); margin: 0 auto; width: 100%; }
+h1, h2 { font-family: var(--serif); margin: 0; line-height: 1.05; letter-spacing: -0.01em; }
+h1 { font-size: var(--title-size); font-weight: 600; }
+h2 { font-size: var(--h2-size); font-weight: 600; max-height: 2.4em; overflow: hidden; }
+.kicker, .meta, .byline, .counter, .hint { font-family: var(--mono); font-size: var(--small-size); color: var(--ink-soft); letter-spacing: 0.04em; text-transform: uppercase; }
+.subtitle { font-size: var(--body-size); color: var(--ink-soft); margin: var(--element-gap) 0 0; }
+.date { color: var(--accent); font-style: italic; font-weight: 400; }
+.dot { color: var(--rule); padding: 0 0.35em; }
+.hint { margin-top: var(--content-gap); text-transform: none; letter-spacing: 0; }
+.meta { display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 0.4em; margin-bottom: var(--element-gap); }
+.kind { color: var(--accent); font-weight: 500; }
+.promotion .kind { color: var(--promo); }
+.byline { text-transform: none; letter-spacing: 0; margin: 0.4em 0 var(--element-gap); }
+.byline a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+.promotion .byline a { color: var(--promo); border-color: var(--promo-soft); }
+.oneliner { font-family: var(--serif); font-size: clamp(0.9rem, 1.8vw, 1.35rem); font-style: italic; margin: 0 0 var(--element-gap); color: var(--ink); }
+.bullet-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; max-height: 48vh; overflow: hidden; }
+.bullet-list li { color: var(--ink); }
+.bullet-list li::marker { color: var(--accent); }
+.promotion .bullet-list li::marker { color: var(--promo); }
+.unreadable { font-family: var(--mono); color: var(--accent); font-size: var(--body-size); }
+.divider-slide { background: var(--ink); color: var(--paper); }
+.divider-slide .kicker, .divider-slide .subtitle { color: var(--paper-deep); }
+.divider-slide h1 { color: var(--promo-soft); }
+.end-slide h1 { color: var(--accent); }
+
+/* === REVEAL: staggered entrance on each slide === */
+.slide-content > * { opacity: 0; transform: translateY(12px); animation: rise 0.6s ease forwards; }
+.slide-content > *:nth-child(1) { animation-delay: 0.05s; }
+.slide-content > *:nth-child(2) { animation-delay: 0.15s; }
+.slide-content > *:nth-child(3) { animation-delay: 0.25s; }
+.slide-content > *:nth-child(4) { animation-delay: 0.35s; }
+.slide-content > *:nth-child(5) { animation-delay: 0.45s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* === NAV: progress bar === */
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0; z-index: 10; transition: width 0.2s; }
+.keyboard-hint { position: fixed; bottom: 0.8rem; right: 1rem; font-family: var(--mono); font-size: var(--small-size); color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<section class="slide title-slide">
+  <div class="slide-content">
+    <p class="kicker">Personal assistant</p>
+    <h1>Weekly Newsletter Digest<br><span class="date">2026-09-07</span></h1>
+    <p class="subtitle">17 newsletters from 13 brands <span class="dot">•</span> 21 promotions from 13 brands</p>
+    <p class="hint">Arrow keys, space, or scroll to move. Nothing here was sent anywhere.</p>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">1 / 17</span></div>
+    <h2>Weekly Newsletter Digest — 2026-09-04</h2>
+    <p class="byline">Eriks&#x27;s earlier automation <span class="dot">•</span> gmail.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06c9d71352cc80" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">The earlier n8n automation&#x27;s own digest mail, sent to self; not a newsletter</p><ul class="bullet-list"><li>States it covered 37 newsletters from 25 sources this week (mostly promotions: LyraBet, The Statsman, Curiosity Stream, Audible, Bolt, Airalo).</li><li>Sent from epetersons87@gmail.com to epetersons87+digest@gmail.com; footer says it was sent automatically with n8n.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">2 / 17</span></div>
+    <h2>Weekly Newsletter Digest — 2026-09-04</h2>
+    <p class="byline">Eriks&#x27;s earlier automation <span class="dot">•</span> gmail.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06c90972cbc178" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">The earlier n8n automation&#x27;s own digest mail, sent to self; not a newsletter</p><ul class="bullet-list"><li>States it covered 42 newsletters from 30 sources this week (FutureTools, Claude Code, Ideabrowser, Sleep Doctor, NEXT.io, Etsy, Todoist, etc.).</li><li>Sent from epetersons87@gmail.com to epetersons87+digest@gmail.com; footer says it was sent automatically with n8n.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">3 / 17</span></div>
+    <h2>The Gaming Edge: September Edition</h2>
+    <p class="byline">GO-Academy (Gaming Operations Academy) <span class="dot">•</span> gamingoperationsacademy.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06cd7acfa3d479" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">GO-Academy&#x27;s monthly iGaming roundup lists free workshops and masterclasses from Sept 8 onward, four new knowledge partners, an SBC Summit Lisbon promo, and regulatory shifts in affiliate marketing, AI and responsible advertising.</p><ul class="bullet-list"><li>Free 1-hour workshops: AI for affiliate managers (8 Sep), VIP Intelligence (24 Sep), Responsible Gaming (12 Oct), CRM next 6 months (15 Oct), VIP Growth (26 Nov).</li><li>Paid masterclasses: Affiliate Management 14-16 Sep, Leadership Affiliate Ops 8 Oct, Casino Marketing in Haarlem 19-21 Oct, VIP Management 21-22 Oct, Responsible Gaming 16-17 Nov.</li><li>New Knowledge Partners: Sumsub, Presswhizz, GR8_TECH and Kinser Content.</li><li>SBC Summit Lisbon 29 Sep-1 Oct 2026: Michael Jordan keynote, 600+ speakers, 40,000+ attendees, 800 exhibitors; VIP pass promo code GOACADEMYPARTNERVIP.</li><li>Google&#x27;s updated gambling ad rules took effect 26 August: certified affiliates must link only to licensed operators in targeted markets.</li><li>EU AI Act transparency requirements became applicable in August; eight US betting operators adopted ROGA&#x27;s new Marketing and Advertising Code.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">4 / 17</span></div>
+    <h2>A YouTuber owns GoPro now?</h2>
+    <p class="byline">Ideabrowser <span class="dot">•</span> ideabrowser.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06cc6094fb37f5" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Ideabrowser pitches an autograph-collectible flipping business and flags Markiplier&#x27;s GoPro stake as a sign creators with distribution are the new private equity.</p><ul class="bullet-list"><li>Idea of the Day: source partially signed posters, complete missing cast signatures via Comic-Con schedules, flip and split profit with the owner.</li><li>PFC40 Autograph Index is up 825% since 2000; a Batman poster with five cast signatures sold for $2,577.60 in August.</li><li>Trend: GoPro fell from $24 at IPO to 60 cents; Markiplier (~39M subscribers) bought a stake and the stock jumped 20%.</li><li>Ideabrowser is planning a small, paid, application-only workshop on its agent operating system; waitlist open.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">5 / 17</span></div>
+    <h2>Meet our AI PM Academy&#x27;s Faculty!</h2>
+    <p class="byline">Marily&#x27;s AI PM Academy (Dr. Marily Nika) <span class="dot">•</span> marily.substack.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06cfa6e40e9cb3" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Marily Nika announces the nine-person faculty for her AI Product Academy fellowship, which starts September 7 and ships an M6 Mac mini to every fellow.</p><ul class="bullet-list"><li>Faculty includes Marily Nika (Google), Dmitry Shapiro (MyRemy.ai), Deb Liu (ex-Ancestry CEO), Constantinos Neo (Anthropic), Amit Fulay (Uber), Abhai Pratap Singh (Amazon Alexa+), Lewis Lin.</li><li>Core program is the AI PM Bootcamp &amp; Certification: models, evals, APIs, MCP, RAG, agents, guardrails, production monitoring; ends with shipping a product with an eval suite.</li><li>Year-long fellowship covers every certification plus new courses and community; starts September 7th.</li><li>Every fellow receives an M6 Mac mini to keep; group discounts and private cohorts offered via a call.</li><li>Newsletter has passed 200,000 readers; more deep dives and lightning lessons promised this fall.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">6 / 17</span></div>
+    <h2>Claude gets cheaper?!</h2>
+    <p class="byline">FutureTools <span class="dot">•</span> futuretools.beehiiv.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06d2a50dc38608" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">FutureTools covers NVIDIA&#x27;s $12.93B acquisition of Hugging Face, Anthropic&#x27;s cheaper Claude Fable 5.1 launch, Amazon&#x27;s Alexa scam detection, and a batch of major model releases.</p><ul class="bullet-list"><li>NVIDIA confirmed acquiring Hugging Face for $12.93B, its second-largest deal; Hugging Face has 18M developers and 3M models and stays open.</li><li>Anthropic launched Claude Fable 5.1: ~25% cheaper in typical use, up to 45% cheaper for agentic tasks, more precise safeguards, enterprise data kept in customer clouds.</li><li>Amazon added scam-message verification to Alexa for Shopping; about 360,000 customers a year ask support whether a message is genuine.</li><li>OpenAI unveiled GPT-6 Astra scoring 99.9% on ARC-AGI-3; Microsoft shipped MAI-Transcribe-2 at $0.10 per hour; Meta released Muse Spark 1.3.</li><li>Google reportedly offering Hollywood studios up to ~$40M per character for AI training rights; Bernie Sanders introduced a bill to pause AI development.</li><li>New tools featured: Choicely (chat-built native iOS/Android apps) and Vendo (open-source in-product AI customization layer).</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">7 / 17</span></div>
+    <h2>What&#x27;s something we&#x27;ve normalized in the workplace that makes absolutely no...</h2>
+    <p class="byline">Glassdoor Community <span class="dot">•</span> glassdoor.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06f8e168624982" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Glassdoor&#x27;s Finance community digest lists ten trending Bowl discussions on workplace norms, pay and career moves plus one job listing.</p><ul class="bullet-list"><li>Top post from a Financial Advisor on normalized workplace practices that make no sense: 9 reactions, 29 comments.</li><li>Threads on year-end bonus for a backup admin (9 comments), motivation by recognition vs money (9 comments), and answering salary-expectation questions (7 comments).</li><li>Rocket Mortgage employee asks whether leaving is required for a raise after 6 years without one; 4-day workweek with pay cut poll draws 3 comments.</li><li>Job spotlight: Barnes &amp; Noble (3.8 stars) part-time Bookseller in Austin, TX, Easy Apply.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">8 / 17</span></div>
+    <h2>V6, Studio 2.0, Voices on mobile, and more</h2>
+    <p class="byline">Suno <span class="dot">•</span> suno.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a072bef24cf792f" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Suno&#x27;s monthly update announces a BMG partnership, Studio 2.0 browser DAW for Premier subscribers, Voices on iOS/Android, offline playlists, and a coming v6 model.</p><ul class="bullet-list"><li>Suno announced a global partnership with BMG, described as a step toward artist-centered music experiences.</li><li>Studio 2.0 (web only) adds MIDI, audio effects, chat, automation and custom plugin design; available to all Suno Premier subscribers now.</li><li>Voices is now on iOS and Android: record your own voice and use it on a song; available on free plans with more on paid plans.</li><li>Playlists can now be listened to offline without network connectivity.</li><li>v6, described as a huge model update, is listed as coming soon.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">9 / 17</span></div>
+    <h2>Weekly digest for Sun, Aug 30 2026</h2>
+    <p class="byline">The RoboNuggets Network (Skool) <span class="dot">•</span> skool.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07572f3cba9b4c" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">A Skool weekly digest notification for The RoboNuggets Network (free) whose plain-text body contains only links; the snippet references a WebMCP post.</p><ul class="bullet-list"><li>Plain-text body holds only a Read More link, a turn-off-digests link and a Skool promo; no post content rendered.</li><li>Message snippet names a post by Nei E Maldaner: &#x27;WebMCP are you Ready? WebMCP: Why You Should Implement It Now&#x27;, describing WebMCP as a way for AI agents to interact directly with websites.</li><li>Digest covers group activity for the week of Sun, Aug 30, 2026.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">10 / 17</span></div>
+    <h2>What your sleep is really thirsty for</h2>
+    <p class="byline">Sleep Doctor <span class="dot">•</span> sleepdoctor.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a076d55ccf8d102" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Sleep Doctor&#x27;s Sunday Sleeper argues nighttime dehydration disrupts sleep, plugs Dr. Breus&#x27;s book on sale, and previews a chronotype-focused podcast episode.</p><ul class="bullet-list"><li>Lead article: the body releases a fluid-retention hormone overnight; disruption links to headaches, night awakenings and possibly obstructive sleep apnea.</li><li>Dr. Breus&#x27;s book &#x27;Sleep, Drink, Breathe&#x27; is on sale on Amazon now.</li><li>Linked pieces on alcohol undermining deep sleep and on cannabis and sleep in older adults (YouTube).</li><li>Dr. Breus featured on the Spectrum Of Health podcast and in a Reader&#x27;s Digest article on dinner timing.</li><li>Next Better in Bed episode: &#x27;Stop Fighting Your Biology! Find Your PERFECT Sleep-Wake Schedule&#x27;.</li><li>Products promoted: Home Sleep Study and Transcend Micro 510 Travel Auto CPAP; chronotype quiz link.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">11 / 17</span></div>
+    <h2>From $100/month to $10K/month</h2>
+    <p class="byline">Starter Story <span class="dot">•</span> starterstory.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a076d4307e7d96e" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Pat Walls&#x27;s Sunday Breakfast highlights a founder who persisted two years at $100/month before hitting $10K/month, plus a $69K/month SaaS and several micro-app case studies.</p><ul class="bullet-list"><li>Video: builder stayed at ~$100/month for 2 years before one change took him to $10K/month.</li><li>Video: a $69K/month SaaS built on one &#x27;most underrated&#x27; marketing strategy.</li><li>Sponsored: HubSpot Smart CRM promoted as a free pipeline tool for early founders.</li><li>Video: app builder nearly lost his portfolio, now at $250K/month.</li><li>Case studies: a ChatGPT-wrapper side project at $5K/month and an Excel-exercises website at $4-6K/month.</li><li>Starter Story database cited at 3,000+ case studies plus GPT-wrapper and micro-SaaS idea lists.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">12 / 17</span></div>
+    <h2>$18M/year newsetter about corn</h2>
+    <p class="byline">Ideabrowser <span class="dot">•</span> ideabrowser.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07712695054ab3" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Ideabrowser pitches an AI creative-director product for agencies and spotlights Kevin Van Trump&#x27;s $18M/year agriculture newsletter as proof that boring, high-value curation pays.</p><ul class="bullet-list"><li>Idea of the Day: sell agencies a design-system and creative-brief agent; 62% of designers find brief-only AI output not useful.</li><li>Weekly AI use among designers rose from 54% in 2025 to 91% in 2026 (AI in Design Report).</li><li>Trend: Kevin Van Trump&#x27;s corn-market newsletter has 30,000 customers at $600/yr (~$18M/yr); a similar finance newsletter does $32M/yr at $999/yr.</li><li>Marketing tip: static images with music posted as reels are reportedly lifting view counts.</li><li>Promotes a 1-week Shipping Sprint (two workshops) and a 2-day &#x27;Offline Mode&#x27; retreat in Nashville next month, application only.</li><li>Side note calls GPT-6 Astra &#x27;insane&#x27;.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">13 / 17</span></div>
+    <h2>🎹 New song in Simply Piano!</h2>
+    <p class="byline">Simply Piano <span class="dot">•</span> piano.hellosimply.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a0777c238decdd4" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Simply Piano&#x27;s weekly release adds &#x27;All I Have To Do Is Dream&#x27; by The Everly Brothers.</p><ul class="bullet-list"><li>New song available: &#x27;All I Have To Do Is Dream&#x27; by The Everly Brothers.</li><li>Trivia: the Everly Brothers recorded the song in just two takes.</li><li>Support available by replying to the email or via the Simply Piano Community.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">14 / 17</span></div>
+    <h2>7 steps to build a content strategist in Claude.</h2>
+    <p class="byline">Future Proof (Marina Mogilko) <span class="dot">•</span> marinamogilko.co <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a079063da173179" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Marina Mogilko shares a seven-step setup using Claude Code and Apify to analyze her Instagram reels data and generate scripts, testing whether it beats 15 years of instinct on new-follower conversion.</p><ul class="bullet-list"><li>Her 9.1M-view reel brought 1,396 followers (~0.015% conversion) versus a 0.02-0.05% benchmark; target band is 150K-300K views.</li><li>Setup: new Claude Code project on an empty folder, connect Apify, paste a prompt defining Claude as content strategist and scriptwriter.</li><li>Claude interviews you on niche, goals, audience and filming capacity (20-30 minutes); Instagram Insights screenshots fill data gaps.</li><li>First audit ranks reels by outlier score vs recent median, transcribes best/worst, reads comments; pulling 200 posts cost 46 cents.</li><li>Each script returns 3 hooks, a timecoded shooting table, caption, hashtags, cover and a hypothesis; results checked at 24h, 72h and 1 week.</li><li>She still validates every idea herself; says faceless or product accounts could let Claude carry 80-90% of the work. Results promised in about a month.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">15 / 17</span></div>
+    <h2>Pregnancy, menopause, and your snoring 💤</h2>
+    <p class="byline">Sleep Doctor <span class="dot">•</span> sleepdoctor.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c14819a008f8" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Sleep Doctor explains hormonal and other causes of snoring in women as a possible sleep apnea signal and promotes its home sleep study at as little as $0 with insurance.</p><ul class="bullet-list"><li>Causes listed: pregnancy (second-trimester fluid retention), menopause (declining estrogen/progesterone), sleep apnea, nasal congestion, sleep position, thyroid issues.</li><li>Home sleep study may cost as little as $0 for eligible insured patients; cash-pay option is $189.</li><li>Claims 65,000+ patients consulted; two patient testimonials on diagnosis and CPAP outcomes.</li><li>SMS updates offered by texting JOIN to 1 (844) 470-1447.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">16 / 17</span></div>
+    <h2>One side hustle away (zero to $120k/mo in 18 months)</h2>
+    <p class="byline">Side Hustle Nation <span class="dot">•</span> sidehustlenation.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c59940e558e5" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Nick Loper profiles Phil McEleney, whose high-ticket campervan-accessories store Camper Nation grew to over $120k/month revenue in under two years using Google Shopping ads and long-tail SEO.</p><ul class="bullet-list"><li>Camper Nation hit $40k/month while Phil kept his day job and now exceeds $120k/month revenue at ~15-30% gross margins.</li><li>Niche checklist: passionate buyers, 20,000+ monthly category searches (Ubersuggest), local suppliers, fewer than 20 online-only competitors.</li><li>Built the website first, then applied to ~20 suppliers as a dealer and got 4 yeses to launch.</li><li>Google Shopping: 3-tier funnel with negative keywords; $0.02-0.05 bids on generic terms, $5-8 on specific product searches; phone number on site drives sales.</li><li>&#x27;Avalanche SEO&#x27;: stack ~100 long-tail articles at 10-50 visitors each to climb Google&#x27;s traffic tiers.</li><li>Sponsor: Wealthfront Cash Account 3.30% base APY plus 0.75% boost for 3 months; also promotes Dropship Breakthru&#x27;s free training.</li></ul>
+  </div>
+</section>
+<section class="slide card-slide newsletter">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">newsletter</span><span class="counter">17 / 17</span></div>
+    <h2>Create some leverage for yourself</h2>
+    <p class="byline">Ideabrowser <span class="dot">•</span> ideabrowser.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c38a8b50e6aa" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Ideabrowser&#x27;s Labor Day issue pitches turning niche instrument recordings into royalty-paying sample-pack plugins and flags a consumables-refill trend led by Dyson&#x27;s camera toothbrush.</p><ul class="bullet-list"><li>Idea of the Day: record niche instruments played by top musicians into sample packs, sell as plugins, pay the musician royalties; a free antique harmonium plugin got 9,000 downloads.</li><li>Sponsored by Google AI Studio: Lyria 3.5 now generates expressive vocals inside AI Studio.</li><li>Trend: Dyson&#x27;s $499 toothbrush with a built-in camera requires its own foam-free toothpaste, creating monthly refill revenue.</li><li>SharkNinja&#x27;s $200 countertop water filter reorders a $40 replacement via QR code; Traeger consumables grew to a quarter of revenue after grill sales dropped.</li><li>Promotes a 1-week Shipping Sprint and a 2-day &#x27;Offline Mode&#x27; retreat in Nashville next month, application only, few spots left.</li></ul>
+  </div>
+</section>
+<section class="slide divider-slide">
+  <div class="slide-content">
+    <p class="kicker">Part two</p>
+    <h1>Promotions &amp; Ads</h1>
+    <p class="subtitle">21 mails from 13 brands</p>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">1 / 21</span></div>
+    <h2>Checked your website insights lately?</h2>
+    <p class="byline">Bluehost <span class="dot">•</span> e.bluehost.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06d03b0499d4b7" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Bluehost announces a new Website Insights panel in the Customer Portal showing Performance, SEO, Accessibility and Best Practices scores, included with the existing plan.</p><ul class="bullet-list"><li>New feature: Website Insights now in the Bluehost Customer Portal, included with the plan at no extra cost</li><li>Shows Lighthouse scores for Performance, SEO, Accessibility and Best Practices plus core web vitals</li><li>Lighthouse Scans graph tracks scores over time</li><li>Path: Log in, Websites, Manage, Insights</li><li>Footer offer: Refer a friend, get $50</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">2 / 21</span></div>
+    <h2>This Week&#x27;s Top Game Picks Have Landed</h2>
+    <p class="byline">LyraBet <span class="dot">•</span> lyrabet.com <span class="dot">•</span> 2026-09-04 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06d5d2b496a379" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">LyraBet casino promotes six newly released slot games from its providers; no bonus or discount is attached.</p><ul class="bullet-list"><li>Six featured new releases: Hearts of Venus (Pragmatic), Thunderline Express: Hold &amp; Win (Penguin King), Triumph of the 3 Gods (Hacksaw)</li><li>Also: Tale of Fire Hold &amp; Win (Novomatic), ULTRA POWER LINK: RUNNING WINS (Fugaso), Infernal Trinity GO Guaranteed (Play N Go)</li><li>No bonus, code or deadline in the email; pure catalogue promotion</li><li>Sent to the +lyra alias; footer notes gambling can be addictive</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">3 / 21</span></div>
+    <h2>Can your business function without you?</h2>
+    <p class="byline">EMyth <span class="dot">•</span> emyth.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06fbfcdaa6082c" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">EMyth invites Eriks to a free live 30-minute webinar on 9 September titled &#x27;How to Stop Being the Bottleneck and Build a Business That Works Without You&#x27;.</p><ul class="bullet-list"><li>Free live webinar, 30 minutes, Wednesday 9 September at 9am PST / noon EST (19:00 Riga)</li><li>Title: How to Stop Being the Bottleneck and Build a Business That Works Without You</li><li>Topics: Technician vs Entrepreneur thinking, working on the business not in it, what to do first</li><li>Registration required via link in the email</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">4 / 21</span></div>
+    <h2>What does your life look like if nothing changes by next September?</h2>
+    <p class="byline">EMyth <span class="dot">•</span> emyth.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a06fbbb54529f30" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">EMyth promotes its three-month Culture Builder Series inside EMyth Connect, starting Tuesday 8 September.</p><ul class="bullet-list"><li>Culture Builder Series starts Tuesday 8 September inside EMyth Connect</li><li>Runs three months; builds Hiring, Training and Accountability systems</li><li>Led by EMyth coaches Ryan Peterson, Jon Slater and Brandon McGuiness</li><li>No price stated in the email; join link only</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">5 / 21</span></div>
+    <h2>20,000 ₽ for reading books (20 000 ₽ за чтение книг)</h2>
+    <p class="byline">Литрес (Litres) <span class="dot">•</span> nsl.litres.ru <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a070594d908f825" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Litres promotes its 2026 self-publishing reading marathon (litres_marathon_2026 on selfpub.ru) alongside a grid of self-published ebooks; the body is almost entirely image links with no explanatory text.</p><ul class="bullet-list"><li>Subject promises 20,000 ₽ for reading books; body text only says &#x27;choose which to start with&#x27;</li><li>Links point to landing.selfpub.ru/litres_marathon_2026 (Samizdat campaign dated 05-09-2026)</li><li>Featured ebooks priced from 130 ₽ to 990 ₽ per the link parameters; titles not given in text</li><li>Marathon rules, dates and how the 20,000 ₽ is awarded are not in the email body</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">6 / 21</span></div>
+    <h2>Maestro Gintaras Rinkevičius in Riga (Maestro Gintaras Rinkevičius Rīgā)</h2>
+    <p class="byline">Biļešu serviss <span class="dot">•</span> bilesuserviss.lv <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a0706a58d2c000b" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Ticket promotion for the Lithuanian State Symphony Orchestra concert in Riga on 11 September, conducted by Gintaras Rinkevičius with cellist David Geringas.</p><ul class="bullet-list"><li>Concert: 11 September 2026 in Riga, Lithuanian State Symphony Orchestra (LVSO)</li><li>Conductor Gintaras Rinkevičius; guest cellist David Geringas, concert dedicated to his 80th birthday</li><li>Programme: Dvořák Symphony No. 7 and Cello Concerto in B minor</li><li>Second link advertises an Asmik Grigorian / Rinkevičius / LVSO concert (no date given)</li><li>Ticket price not stated; tickets via bilesuserviss.lv</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">7 / 21</span></div>
+    <h2>65% off your new piano teacher</h2>
+    <p class="byline">flowkey <span class="dot">•</span> flowkey.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a070ed9530d6416" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">flowkey offers 65% off a full year of flowkey Premium if you sign up before midnight the following day.</p><ul class="bullet-list"><li>65% off one year of flowkey Premium (all lessons, self-paced path)</li><li>Deadline: sign up before midnight tomorrow, i.e. end of 6 September</li><li>No promo code; discount applied via the pricing link</li><li>Campaign: back_to_piano_promo_2026</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">8 / 21</span></div>
+    <h2>From 1 artist to 30+ members</h2>
+    <p class="byline">Bluehost <span class="dot">•</span> e.bluehost.com <span class="dot">•</span> 2026-09-05 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07219912e17b6c" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Bluehost customer-spotlight story about Strange Fruit Arts Center (Atlanta nonprofit) using its hosting, with a nudge to explore Bluehost hosting.</p><ul class="bullet-list"><li>Case study: Strange Fruit Arts Center grew from 1 founding artist to 30+ members</li><li>Five-year anniversary drew 41 RSVPs on day one, 150+ guests expected</li><li>Cited features: WordPress integration, preview before publishing, automated updates</li><li>Footer offer: Refer a friend, get $25</li><li>No discount or deadline</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">9 / 21</span></div>
+    <h2>Discounts up to 70% end at midnight (Скидки до 70% уйдут в полночь)</h2>
+    <p class="byline">Литрес (Litres) <span class="dot">•</span> nsl.litres.ru <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a0756112b1b2212" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Litres runs an autumn sale of up to 70% off a curated ebook collection, ending at midnight on 6 September.</p><ul class="bullet-list"><li>Up to 70% off the &#x27;Into autumn with discounts&#x27; collection</li><li>Deadline: midnight, 6 September 2026</li><li>Mostly Russian genre fiction: Serganova, Atamanov, Demina, Prokofiev, Bilik, Sugralinov</li><li>Also includes Strugatsky &#x27;Monday Begins on Saturday&#x27;, Cipolla &#x27;Fundamental Laws of Human Stupidity&#x27;, Edith Eger</li><li>Individual prices not shown in the email</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">10 / 21</span></div>
+    <h2>Complete your Purchase USE CODE Thank you for you special discount</h2>
+    <p class="byline">Le-Glue <span class="dot">•</span> le-glue.myshopify.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a0766048c4a1ac9" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Shopify abandoned-cart reminder from Le-Glue for a &#x27;3 pack Super Saver&#x27; of Le-Glue Spout left in the cart; the subject mentions a code but none appears in the body.</p><ul class="bullet-list"><li>Cart item: Le-Glue 3 pack Super Saver!! x 1 (3 pack of Le-Glue Spout)</li><li>Subject says USE CODE, but no code or discount amount is present in the body</li><li>No price or deadline stated</li><li>Sent via Shopify (store+10342215@g.shopifyemail.com), locale en-LV</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">11 / 21</span></div>
+    <h2>&#x27;Bazara 0 Fight Club&#x27; - last tickets! (&#x27;Bazara 0 Fight Club&#x27; - pēdējās biļetes!!!)</h2>
+    <p class="byline">Biļešu serviss <span class="dot">•</span> bilesuserviss.lv <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07698af851e28f" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Last-tickets alert for the Bazara 0 Fight Club IV fight show on 12 September at Xiaomi Arena, Riga.</p><ul class="bullet-list"><li>Event: Bazara 0 Fight Club IV, 12 September 2026, Xiaomi Arēna</li><li>12-fight card; headline bout Kaspars Kambala vs Kristaps Zutis</li><li>Email says tickets are nearly sold out; no price given</li><li>Tickets via bilesuserviss.lv</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">12 / 21</span></div>
+    <h2>Have you used Lumenate for sleep? We&#x27;d love to hear from you</h2>
+    <p class="byline">Lumenate <span class="dot">•</span> lumenategrowth.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07698a0615a9b5" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Gabby from Lumenate asks users who used the app for sleep to complete a short anonymous survey; no offer or incentive.</p><ul class="bullet-list"><li>Request: fill in a short anonymous survey about using Lumenate for sleep</li><li>From Gabby (Impact at Lumenate), Bristol UK</li><li>No reward, discount or deadline mentioned</li><li>Survey link only; nothing else asked</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">13 / 21</span></div>
+    <h2>Take note! Offer ends tonight</h2>
+    <p class="byline">flowkey <span class="dot">•</span> flowkey.com <span class="dot">•</span> 2026-09-06 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a076de498ec5b6c" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Final reminder that flowkey&#x27;s Back to School 65% discount on a year of Premium ends at midnight on 6 September.</p><ul class="bullet-list"><li>65% off one year of flowkey Premium</li><li>Deadline: tonight at midnight, 6 September 2026</li><li>Follow-up to the 5 September email (same campaign, message 4 of the sequence)</li><li>No code; discount via pricing link</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">14 / 21</span></div>
+    <h2>Your business doesn&#x27;t have to consume you.</h2>
+    <p class="byline">EMyth <span class="dot">•</span> emyth.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07a0bff5440ba2" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Reminder to register for EMyth&#x27;s free 30-minute webinar on Wednesday 9 September about building a business that operates without the owner.</p><ul class="bullet-list"><li>Same webinar as the 5 September email: Wednesday 9 September, 9am PST / noon EST, 30 minutes</li><li>Topics: the three owner personalities, turning the business into a sellable asset, building systems</li><li>Free; registration link in email</li><li>Third EMyth email this week</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">15 / 21</span></div>
+    <h2>As political pressure grows, is Brazil still the &#x27;promised land&#x27;?</h2>
+    <p class="byline">NEXT.io <span class="dot">•</span> next.io <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07b39fb5bca18c" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">NEXT.io daily iGaming newsletter leading on Brazil&#x27;s regulated betting market, plus regulatory headlines and a Brazil market webinar on 17 September.</p><ul class="bullet-list"><li>Lead: Brazil&#x27;s regulated market made $6.5bn in year one, 20% above forecast; tax burden heading to 42% by 2033</li><li>Webinar: NEXT iGaming Market in Focus: Brazil, with Pragmatic Solutions, 17 September</li><li>KSA (Netherlands) to act against casinos accepting fake IDs</li><li>Bally&#x27;s CFO resigns amid concerns about the company&#x27;s future</li><li>FINTRAC fines Canadian gaming bodies C$632k over AML failures</li><li>Sweden preparing regulation after review of young-adult gambling</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">16 / 21</span></div>
+    <h2>Your account is inactive</h2>
+    <p class="byline">Pinnacle <span class="dot">•</span> pinnacle.bet <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07b760a4a58285" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Pinnacle notifies that the account has had no activity for 7 consecutive years and that any remaining funds will go to responsible-gambling causes if they cannot reach the holder.</p><ul class="bullet-list"><li>Account inactive for 7 consecutive years per Pinnacle</li><li>Pinnacle will try existing contact details to return any remaining balance</li><li>If no contact is made, remaining funds go to responsible gambling endeavours</li><li>No deadline date given; log-in links provided</li><li>Licensed in Malta, MGA/B2C/290/2015</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">17 / 21</span></div>
+    <h2>What to read now? (Что читать сейчас?)</h2>
+    <p class="byline">Литрес (Litres) <span class="dot">•</span> nsl.litres.ru <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07b5be445af938" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Litres personalised reading recommendations, mostly Russian-language thrillers, cosy mysteries and popular fiction; no discount attached.</p><ul class="bullet-list"><li>Recommendation digest, no sale or code</li><li>Includes Steve Cavanagh &#x27;The Deal&#x27;, Colleen Hoover &#x27;Verity&#x27;, Nikolai Svechin, Darya Dontsova</li><li>Also classics: Hašek &#x27;Good Soldier Švejk&#x27;, Corelli &#x27;The Sorrows of Satan&#x27;</li><li>Footer links to a &#x27;readonlitres2026&#x27; landing page</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">18 / 21</span></div>
+    <h2>Top up €10 to get a chance to win big</h2>
+    <p class="byline">Monese <span class="dot">•</span> news.monese.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c083089a25e4" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Monese weekly sweepstakes: top up at least €10 before 4:00pm Friday to get a scratch card in the app with a chance to win up to €250.</p><ul class="bullet-list"><li>Top up €10 or more before 4:00pm Friday to enter</li><li>Prize: up to €250; result shown as a scratch card on the app home screen after 4pm Friday</li><li>Can be entered every week</li><li>Preheader also says &#x27;finish signing up&#x27;, suggesting onboarding is incomplete</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">19 / 21</span></div>
+    <h2>Unlock Up to €200 Over 3 Days</h2>
+    <p class="byline">LyraBet <span class="dot">•</span> lyrabet.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07bfc95809cafa" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">LyraBet offers three consecutive daily deposit bonuses (Cash Boosts) worth up to €200 in total, with a 5x wagering requirement.</p><ul class="bullet-list"><li>Monday: 50% Cash Boost up to €50; Tuesday: 75% up to €50; Wednesday: 100% up to €100</li><li>Minimum deposit €20; Monday deposit must be made within 10 hours of the email</li><li>Deposit plus bonus subject to 5x wagering on Slots, Live Casino or Sports (min odds 1.5)</li><li>Table Games and Virtual Games excluded; days run midnight to midnight UTC</li><li>Each day&#x27;s offer claimable once</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">20 / 21</span></div>
+    <h2>Heads-up: Fabric change for some products</h2>
+    <p class="byline">Printful <span class="dot">•</span> info.printful.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c5480b959a70" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Printful announces fabric changes for all-over-print (AOP) products and all-over-cotton (AOC) sweatshirts at its Mexico and Latvia facilities, and asks sellers to update product descriptions after each switch.</p><ul class="bullet-list"><li>Mexico, 14 September: AOP fabric moves from 75% recycled polyester/25% elastane (225 g/m²) to 78% polyester/22% elastane (290 g/m²)</li><li>Mexico, 5 October: AOC sweatshirts move from 95/5 cotton-elastane (275 g/m²) to 90/10 (330 g/m²)</li><li>Latvia, 28 September: AOP sports fabric 190 to 150 g/m²; T-shirt 215 to 240 g/m²; pillow 220 to 250 g/m²; sweatshirt thicker</li><li>Action: update product descriptions after each switch date; designs need no change</li><li>Printful product pages update automatically</li></ul>
+  </div>
+</section>
+<section class="slide card-slide promotion">
+  <div class="slide-content">
+    <div class="meta"><span class="kind">promotion</span><span class="counter">21 / 21</span></div>
+    <h2>OPEN: To unlock a 22-year old secret</h2>
+    <p class="byline">Mindvalley <span class="dot">•</span> hello.mindvalley.com <span class="dot">•</span> 2026-09-07 <span class="dot">•</span> <a href="https://mail.google.com/mail/u/0/#all/1a07c2c2de36c58d" target="_blank" rel="noopener">open in Gmail</a></p>
+    <p class="oneliner">Mindvalley invites Eriks to the free, live 3-day &#x27;Expert to Authority Summit&#x27; on Zoom, 18-20 September 2026, on turning expertise into a recognised brand.</p><ul class="bullet-list"><li>Event: Expert to Authority Summit, free, live on Zoom</li><li>Dates: 18-20 September 2026 (Friday to Sunday)</li><li>Covers message and identity, platforms, funnels and revenue, offer and product, team and scale</li><li>Claims to reveal the method used with 110+ Mindvalley teachers and authors</li><li>Registration link in email; no cost</li></ul>
+  </div>
+</section>
+<section class="slide title-slide end-slide">
+  <div class="slide-content">
+    <h1>End of digest</h1>
+    <p class="subtitle">Ledger rows marked as digested on this date. The next run of /digest picks up only what arrives after it.</p>
+  </div>
+</section>
+<div class="keyboard-hint">← → space</div>
+<script>
+/* === NAVIGATION: keyboard + progress === */
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const bar = document.getElementById('progress');
+  function current() {
+    const y = window.scrollY + window.innerHeight / 2;
+    return slides.findIndex(s => s.offsetTop <= y && s.offsetTop + s.offsetHeight > y);
+  }
+  function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({ behavior: 'smooth' });
+  }
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); go(current() + 1); }
+    if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(current() - 1); }
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(slides.length - 1);
+  });
+  function update() { bar.style.width = ((current() + 1) / slides.length * 100) + '%'; }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>

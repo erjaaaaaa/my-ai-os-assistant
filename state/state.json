@@ -33,7 +33,7 @@
     "gmail": {
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
-      "mail.last_internaldate_ms": 0,
+      "mail.last_internaldate_ms": 1788797988000,
       "_verified": "2026-09-07",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
@@ -59,7 +59,7 @@
         "epetersons87@gmail.com",
         "family17271500024496324001@group.calendar.google.com"
       ],
-      "calendar.last_scanned_date": null,
+      "calendar.last_scanned_date": "2026-09-07",
       "_verified": "2026-09-07"
     }
   },
@@ -72,7 +72,7 @@
   },
   "superseded": [],
   "digest": {
-    "last_run_date": null
+    "last_run_date": "2026-09-07"
   },
   "ledgers": {
     "migrated": "2026-09-07",

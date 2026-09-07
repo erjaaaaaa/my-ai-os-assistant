@@ -283,3 +283,99 @@ The six earlier dispositions are unchanged (see the previous entry).
 0 labels, 0 ledger rows, 0 archives, 0 tasks; review task not created
 (nothing to review). Watermarks not advanced. Digest still pending (see
 previous entry).
+
+## 2026-09-07 — `/start-day` (19:20) — Steps 0–5; Gmail writes still refused; 5 Todoist tasks, 1 comment, weekly digest produced
+
+**Orient.** Gmail `list_labels` populated (45 labels; `INBOX.threadsTotal` 29,
+`messagesTotal` 30). Calendar `list_calendars` populated (8; both swept ids
+present). Todoist `user-info` = `epetersons87@gmail.com`; project Personal
+24 open tasks at start (21 top-level, 3 subtasks). Ids `_verified`
+2026-09-07 — not re-resolved. Open `[Needs Eriks]` at start: 0 open,
+0 answered, 0 ambiguous. Watermarks at start: `mail.last_internaldate_ms` 0,
+`inbox.last_sweep_date` null, `calendar.last_scanned_date` null,
+`digest.last_run_date` null. Note: the `/start-day` skill text points at the
+work instance's spec under `Documents/Libernetix AI`; this run followed the
+personal `AGENTS.md` loaded from the working directory, per its own
+separation rule.
+
+**Step 1 — inbox.** `search_threads in:inbox` (pageSize 50, single page)
+returned 29; 29 ≤ 29. Already labelled (one of the thirteen on a message's
+`label_ids`), skipped: 20. Unlabelled, read in full with `get_thread`
+PLAIN_TEXT: 9 — the 8 from the earlier entries plus one new (LyraBet
+1a07cab352b320bb → Promotions & Ads). Dispositions as in the two `/inbox`
+entries above plus LyraBet. **Outage:** 8 `label_thread` calls and 1 retry
+all returned "This connector requires additional permissions… reconnect".
+0 labels, 0 ledger rows (dedupe pre-check: none of the four candidate
+messageIds present), 0 archives, review task not created (nothing to
+review). `inbox.last_sweep_date` not advanced.
+
+**Step 1.6 — digest.** Condition met (Monday ≥ Friday 2026-09-04 16:00;
+`digest.last_run_date` null). Undigested rows read with a CSV parser (the
+earlier awk count was wrong because fields contain newlines): newsletters
+17 of 1875, promotions 21 of 2544. Thread reads delegated to two read-only
+subagents (`get_thread` PLAIN_TEXT only, JSON to scratchpad, fail-loudly
+clause); 38 of 38 readable (one transient "service unavailable" on
+1a06c9d71352cc80, succeeded on retry; RoboNuggets 1a07572f3cba9b4c body was
+links only, bullets drawn from the snippet and say so). Id sets of both JSON
+files verified equal to the ledger's undigested rows. Deck built by a local
+script with the frontend-slides base CSS: `briefs/digest-2026-09-07.html`,
+41 slides (title, 17 cards, divider, 21 cards, end), 55,428 bytes; rendered
+in the browser pane (title and card slide checked); sent to chat. Ledgers:
+`digested` set to 2026-09-07 on 17 + 21 rows; re-read: undigested 0 and 0,
+row totals unchanged (1875, 2544); `git diff --stat` shows exactly 38
+changed lines. Data-quality defect noted: migrated `received_date` values
+are Excel serials (46269 = 2026-09-04) and `subject` values are raw
+MIME-encoded headers — the deck used live thread data; normalise before the
+next digest.
+
+**Step 2 — triage.** Mail: 29 inbox threads, all new against watermark 0.
+Buckets: Act 2 (Bite invoice; Printful price changes), Know 8 (n8n ×2,
+Smartposti, Le-Glue order, MyHeritage, Etsy payout, Revolut tax note, Amex
+statement), needs-owner 3 (Amex statements — the rehearsal's open item;
+SIA documents; Loyalty scope), Noise 16 (LinkedIn ×5, Skool ×2, Facebook,
+Google Maps, Google security ×2, Decathlon, Rimi, Ideabrowser, Emyth, Whoop,
+LyraBet). Sent mail, bounded to `after:2026/08/31` (7 days) because the
+watermark is 0 — **default applied, logged here**: 3 threads; two are the
+earlier automation's self-sent digests (Noise); one is the Malta Certificate
+of Conduct thread 1a05c5a7b1dd826f where Eriks sent the last message on
+3 Sep → Waiting on others, no task. Calendar: own calendar 1 event (Q&A w/
+Nate, 8 Sep 01:00, no prep); Family 8 events, listed in the brief; no
+overlaps; no `needsAction` invitations.
+
+Dedupe reads: open tasks 24, completed since 2026-07-09: 5, deleted: 0. No
+ref matched.
+
+Writes, each verified with `fetch-object` (ref line, section, labels read
+back):
+- `6hRVRpcjfmcPGFrx` "Pay Bite Latvija 20.06 EUR" — Backlog, p3, due
+  2026-09-20, `size/S`, ref `mail:1a072afdab0b973b`. ✔
+- `6hRVRpvCFRMcfwFQ` "Review Printful price changes and adjust store
+  prices" — Backlog, p4, `size/M`, ref `mail:1a04386997f5d8bc`. ✔
+- `6hRVRq9X62WJ6HMQ` `[Needs Eriks]` Amex statement notices — Waiting /
+  Blocked, `agent-waiting`, p4, default: no task. ✔
+- `6hRVRqX7GwHq5PPQ` `[Needs Eriks]` SIA registration — Waiting / Blocked,
+  `agent-waiting`, p4, default: no task, thread stays unlabelled. ✔
+- `6hRVRr7vxmm53x6x` `[Needs Eriks]` Loyalty label scope — Waiting /
+  Blocked, `agent-waiting`, p4, default: keep classifying retail loyalty
+  as Loyalty. ✔
+- Comment `6hRVRrGJfGfw6CcQ` on `6hRHJQwmr656PG6x` "Buy lego glue - Le
+  glue" with the Le-Glue order evidence (ref `mail:1a07c78bfa6844cd`);
+  `find-comments` beforehand showed only Eriks's own image comment, so not
+  a repeat. No move (task already in Waiting / Blocked by Eriks; delivery
+  pending) — "possibly done" in the brief. ✔
+
+Census after: 29 open (24 + 5), 3 `agent-waiting` ≤ 29. Deferred, not
+created: the vault `wiki_pages:` / `wiki:` drift question from
+`procedures/step-3-ingest.md` — raise it when an ingest actually happens.
+
+**Step 3 — vault.** Nothing durable; no snapshot, no vault write.
+Considered and declined: SIA-documents notice, Malta conduct-certificate
+thread.
+
+**Step 4 — brief.** `briefs/2026-09-07.md` written and delivered in chat.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` → 1788797988000
+(LyraBet, the newest inbox message processed by triage); `calendar.
+last_scanned_date` → 2026-09-07; `digest.last_run_date` → 2026-09-07;
+`inbox.last_sweep_date` stays null (Step 1's writes did not complete);
+vault snapshot watermark unchanged. Registry drift: none.
