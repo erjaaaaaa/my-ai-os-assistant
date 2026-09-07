@@ -255,3 +255,31 @@ watermark, and Step 1 does not own it); calendar and digest keys untouched.
 
 **Registry drift.** `config/tools.md` — added the write-scope defect under
 Gmail's verified facts. `lessons-learned.md` — one entry appended.
+
+## 2026-09-07 — `/inbox` second attempt (19:12) — Gmail write scope still refused
+
+**Orient.** Gmail `list_labels` populated (`INBOX.threadsTotal` 28,
+`messagesTotal` 29). Calendar `list_calendars` populated (8, both swept ids).
+Todoist `user-info` = `epetersons87@gmail.com`. Open `[Needs Eriks]`: 0.
+
+**Census.** `search_threads in:inbox` returned 28; 28 ≤ 28. Skipped
+(already labelled): 20. Unlabelled: 8 — the six from the earlier entry plus
+two new, both read in full with `get_thread` PLAIN_TEXT; the five earlier
+label targets re-read (METADATA_ONLY) and confirmed still unlabelled.
+
+New since the earlier read:
+
+| Thread | Sender / subject | Proposed label | Post-action |
+|---|---|---|---|
+| 1a07ca01b0fcdd03 | hello@info.n8n.io, "Your n8n cloud subscription was cancelled" (body: account and backups removed after three months; export workflows) | Receipts & Subscriptions | receipts row (no amount in body) + archive |
+| 1a07c9ff9217215a | help@paddle.com, "Your Subscription for n8n has been canceled." (Cloud Starter, cancelled 7 Sep 2026, access until 23 Sep 2026, ref 74546241-168117680) | Receipts & Subscriptions | receipts row (no amount in body) + archive |
+
+The six earlier dispositions are unchanged (see the previous entry).
+
+**Outage.** All 7 `label_thread` calls and 1 retry returned the same
+"requires additional permissions… reconnect" error. `ToolSearch` for
+`label_thread` found exactly one Gmail instance
+(the same one), so no reconnected connector is available to this session.
+0 labels, 0 ledger rows, 0 archives, 0 tasks; review task not created
+(nothing to review). Watermarks not advanced. Digest still pending (see
+previous entry).
