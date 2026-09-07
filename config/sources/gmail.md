@@ -7,6 +7,8 @@ watermark_key: mail.last_internaldate_ms
 watermark_unit: epoch_ms
 reference_format: "mail:<thread_id>"
 control_query: list_labels
+labels: sources.gmail.labels in state/state.json (13 ids)
+labels_verified: 2026-09-07
 ---
 
 # Mail — epetersons87@gmail.com
@@ -27,8 +29,9 @@ cannot be trusted to exclude what it claims to.
 Scope, and anything excluded wholesale, is in `config/routing-rules.md`
 § Source-specific notes — edit that file to change it, never this adapter.
 
-**Read-only for triage.** The only permitted write is a draft, written when
-Eriks asks for one. Never send, reply, forward, archive, trash, label, or mark
+**Writes are narrow and listed below.** Step 1 adds one of thirteen labels to
+an unlabelled inbox thread and archives the four carve-out classes; a draft is
+written when Eriks asks for one. Never send, reply, forward, trash, or mark
 anything read or spam.
 
 Before recording an absence, run the control query below. An unreadable
@@ -43,6 +46,11 @@ Match on the stable tool name. Connector instance ids appear in tool names as
 - `get_thread`, `get_message` — full thread and message bodies. Read. Use
   `messageFormat: PLAIN_TEXT`.
 - `list_labels` — the control query. Read.
+- `label_thread` — add exactly one of the thirteen label ids (from state) to
+  an inbox thread carrying none of them. **Write, additive only.**
+- `unlabel_thread` with `["INBOX"]` — archive, **only** for the four carve-out
+  classes after their post-action was verified. **Write.** Never any other
+  label id.
 - `create_draft`, `update_draft` — drafts only, only on Eriks's request.
   Write, never sent.
 
@@ -71,22 +79,28 @@ actually processed.
 
 ## Allowed writes
 
-**A draft, when Eriks asks for one. Nothing else.** A draft does not leave the
-mailbox, so it does not touch the property the security boundary protects. This
-permits the mechanism, not the initiative: the assistant deciding unprompted
-that a thread deserves a reply is gated (see § Phase gates in `AGENTS.md`).
-
-No label is written in this phase, including creating one. The mailbox's label
-tree is Eriks's own, and the assistant's own namespace has not been designed
-yet — a deferred decision recorded in `logs/run-log.md`, not a permission.
+1. **One label per thread, from the thirteen** in `state/state.json`
+   (`sources.gmail.labels`), on an inbox thread that carries none of them.
+   These are Eriks's own labels, by Eriks's choice on 2026-09-07 — the sweep
+   replicates the automation that used them before. Additive only: a label is
+   never removed, renamed or created, and a thread already labelled is never
+   relabelled by a run (Eriks's correction wins).
+2. **Archive — removing `INBOX` — for exactly four classes**: Newsletters &
+   Learning, Promotions & Ads, Receipts & Subscriptions once its ledger row
+   is verified, Schedule Calendar once handled. The carve-out and its
+   boundaries are in `AGENTS.md` § Phase gates.
+3. **A draft, when Eriks asks for one.** A draft does not leave the mailbox,
+   so it does not touch the property the security boundary protects. This
+   permits the mechanism, not the initiative: proactive drafting is gated.
 
 ## Forbidden
 
 `send_message`, `reply`, `forward`, sending or scheduling a draft,
-`label_thread`, `unlabel_thread`, `label_message`, `unlabel_message`,
-`update_message_labels`, `create_label`, `update_label`, `delete_label`,
-archiving, trashing, marking spam, marking read. Sending is Eriks's act and
-theirs alone.
+`label_message`, `unlabel_message`, `update_message_labels` (labels are
+thread-level here), `create_label`, `update_label`, `delete_label`,
+`unlabel_thread` with any id other than `INBOX` or on any thread outside the
+four carve-out classes, `apply_sensitive_thread_label`, trashing, marking
+spam, marking read. Sending is Eriks's act and theirs alone.
 
 ## Verified defects (carried from the system this adapter was generalised from)
 

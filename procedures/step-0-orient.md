@@ -34,7 +34,7 @@ For each file in `config/sources/`:
 
 Then the tracker: `user-info` must return `epetersons87@gmail.com`. Anything
 else is an outage of the commitment layer — report it and stop the run before
-Step 1, because there is nowhere to write.
+Step 2, because there is nowhere to write.
 
 ## 4. Read the answers to open questions — before any other step does work
 
@@ -62,10 +62,10 @@ Record the count: open, answered-and-closed, ambiguous.
 
 If `calendar.last_scanned_date` already equals today and the mail sweep
 finds nothing newer than `mail.last_internaldate_ms`, the run is a rerun:
-Steps 1 and 2 no-op and the brief says so.
+Steps 2 and 3 no-op and the brief says so.
 
 ## Output of this step
 
-A short orient block, kept for the run-log entry at Step 4: per source
+A short orient block, kept for the run-log entry at Step 5: per source
 live / outage / not configured with the containing totals; tracker status;
 open-question counts; whether ids were re-resolved.

@@ -1,6 +1,6 @@
 # Planning rules — sizing and capacity
 
-Read by `PLANNING.md` at the start of every planning run, and by Step 1 for
+Read by `PLANNING.md` at the start of every planning run, and by Step 2 for
 the auto-sizing and full-label-set rules. Policy lives here; steps live in
 `PLANNING.md`.
 

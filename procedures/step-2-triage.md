@@ -1,4 +1,4 @@
-# Step 1 — Triage
+# Step 2 — Triage
 
 Read at the start of this step. Sources are swept from their watermarks,
 items are classified per `config/routing-rules.md`, and tasks are created or
@@ -24,10 +24,12 @@ and performs every write.
    `internalDate` is greater than `mail.last_internaldate_ms`.
 3. Census: the number of inbox threads read must not exceed
    `INBOX.threadsTotal` from Step 0. State both numbers.
-4. Classify each new thread per the routing rules. Eriks's own labels on the
-   thread are signal, never written.
+4. Classify each new thread per the routing rules. The label Step 1 applied
+   is signal: a **Reply/Do** thread is the main input here; a **Needs-Payment**
+   thread already has its task (dedupe on the ref will find it); Newsletters,
+   Promotions and Receipts were archived and produce no task.
 5. Track the newest `internalDate` actually processed — that is the value
-   Step 4 will write.
+   Step 5 will write.
 
 ## 2. Sweep calendar (skip if Step 0 recorded outage or not configured)
 

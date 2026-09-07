@@ -1,4 +1,4 @@
-# Step 4 — Close out
+# Step 5 — Close out
 
 Read at the start of this step.
 
@@ -14,9 +14,13 @@ Read at the start of this step.
    - `calendar.last_scanned_date` → today, **only if** `list_calendars`
      populated this run.
    - `vault.mail_snapshot.last_internaldate_ms` → the newest message
-     snapshotted, if Step 2 ran.
+     snapshotted, if Step 3 ran.
+   - `sources.gmail.inbox.last_sweep_date` → today, only if Step 1 ran against
+     a populated control.
+   - `digest.last_run_date` → today, only if the digest was produced.
    Re-read the file after writing and confirm the values.
-3. **Commit.** `git add -A && git commit -m "run YYYY-MM-DD"` in the instance.
+3. **Commit.** `git add -A && git commit -m "run YYYY-MM-DD"` in the instance —
+   this includes `ledgers/`.
    Backups are commits, not copies. The vault is not a git repository and is
    not committed from here.
 4. **Registry drift.** If any tool used this run is missing from

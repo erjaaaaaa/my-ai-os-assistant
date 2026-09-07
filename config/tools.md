@@ -15,7 +15,7 @@ used by this instance, whatever it is.
 
 - **Connected:** desktop-app connector, authenticated as Eriks's own account
   (`user-info` returns `epetersons87@gmail.com`).
-- **Used by:** Step 0 (read), Step 1 (read/write), Step 3 (read), PLANNING
+- **Used by:** Step 0 (read), Step 2 (read/write), Step 4 (read), PLANNING
   (read/write), ad-hoc chat (read; write only on Eriks's explicit yes).
 - **Read:** `user-info`, `find-projects`, `find-sections`, `find-labels`,
   `find-tasks` (always pass `limit`, max 100, and paginate on `cursor`),
@@ -39,37 +39,42 @@ used by this instance, whatever it is.
 
 - **Connected:** desktop-app connector, personal mailbox (the label tree
   returned by `list_labels` is Eriks's personal one).
-- **Used by:** Step 0 (control), Step 1 (read), Step 2 (read, for snapshots),
+- **Used by:** Step 0 (control), Step 1 (read; write: labels, archive in four
+  classes), Step 2 (read), Step 3 (read, for snapshots), digest (read),
   drafting on request (write: draft only).
 - **Read:** `search_threads`, `get_thread` (`PLAIN_TEXT`), `get_message`,
   `list_labels`.
-- **Write:** `create_draft`, `update_draft` — only when Eriks asks for a draft.
-- **Never used:** `send_message`, `reply`, `forward`, `label_thread`,
-  `unlabel_thread`, `label_message`, `unlabel_message`,
-  `update_message_labels`, `create_label`, `update_label`, `delete_label`,
-  `trash_thread`, `trash_message`, `mark_thread_spam`, `mark_message_spam`,
-  `apply_sensitive_*`.
+- **Write:** `label_thread` (one of the thirteen ids in state, on an unlabelled
+  inbox thread); `unlabel_thread` with `["INBOX"]` only, on the four carve-out
+  classes only; `create_draft`, `update_draft` — only when Eriks asks for a draft.
+- **Never used:** `send_message`, `reply`, `forward`, `label_message`,
+  `unlabel_message`, `update_message_labels`, `create_label`, `update_label`,
+  `delete_label`, `trash_thread`, `trash_message`, `mark_thread_spam`,
+  `mark_message_spam`, `apply_sensitive_*`, `unlabel_thread` with any other id.
 - **If broken:** outage; watermark does not move; brief names it.
 
 ## Google Calendar — a source
 
 - **Connected:** desktop-app connector, same Google account.
-- **Used by:** Step 0 (control), Step 1 (read), PLANNING (read, for conflicts
+- **Used by:** Step 0 (control), Step 2 (read), PLANNING (read, for conflicts
   and prep only — capacity is a declared budget, not a calendar derivation).
 - **Read:** `list_calendars`, `list_events`, `get_event`, `search_events`.
-- **Never used:** `create_event`, `update_event`, `delete_event`,
-  `respond_to_event`, `suggest_time` (a per-request booking Eriks authorises
-  in chat is a logged one-time exception, never a standing permission).
+- **Write, per item only:** `create_event` on `epetersons87@gmail.com`, no
+  attendees, only after Eriks's yes naming a calendar proposal from the brief;
+  read back and logged each time.
+- **Never used:** `create_event` with attendees or without a per-item yes,
+  `update_event`, `delete_event`, `respond_to_event`, `suggest_time`.
 - **If broken:** outage; scanned-date key does not move; brief names it.
 
 ## Filesystem
 
 - **This folder** — read/write. `state/state.json` holds ids, watermarks,
   flags; `logs/run-log.md` is append-only; `briefs/` and `plans/` are the
-  record.
+  record; `ledgers/*.csv` are written only by Step 1 and the digest, and only
+  once migrated (`ledgers/README.md`).
 - **The vault `../My Brain/`** — declared in `.claude/settings.json`.
   Read anywhere; write **only through the ingest workflow** in
-  `procedures/step-2-ingest.md`. `raw/processed/` is never edited.
+  `procedures/step-3-ingest.md`. `raw/processed/` is never edited.
 - **Git** — the instance is a repository. Backups are commits, not `.bak`
   files.
 
@@ -104,3 +109,16 @@ used by this instance, whatever it is.
 - **2026-09-07 — The Personal project already had six sections including an
   explicit `Backlog`.** → The board's backlog is that section, not "no
   section". → **Newly created tasks land in the Backlog section by id.**
+- **2026-09-07 — The Gmail connector exposes attachment names, not content.**
+  `get_thread` / `get_message` return `attachment_ids` and metadata; no tool
+  downloads a body. → A PDF-only invoice cannot be parsed. → **Never claim an
+  amount that is not in the message body; write the ledger row with a note and
+  the task without an amount.**
+- **2026-09-07 — The Drive connector is signed in as a different Google account
+  (work), and cannot append rows to any sheet even where it can read one.** →
+  The personal Google Sheets are invisible to it and unwritable regardless. →
+  **Ledgers are local CSVs; historical rows come in via Eriks's CSV exports.**
+- **2026-09-07 — Gmail labels are applied at thread level here** (`label_thread`),
+  while the earlier automation applied them per message. → A thread read back
+  shows the label on every message. → **Check "already labelled" across all
+  messages' `label_ids`, not just the newest.**

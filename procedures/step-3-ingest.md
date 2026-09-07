@@ -1,4 +1,4 @@
-# Step 2 — Vault ingest
+# Step 3 — Vault ingest
 
 Read at the start of this step. The vault is the existing Obsidian wiki at
 `../My Brain/` (declared in `.claude/settings.json`). **Its own `AGENTS.md`
@@ -67,7 +67,7 @@ the default *use `wiki:`, leave existing files untouched*.
 7. Append an entry to `log.md`.
 8. **Move the snapshot** to `raw/processed/`.
 9. Advance `vault.mail_snapshot.last_internaldate_ms` in the instance's
-   state — at Step 4, with the other watermarks.
+   state — at Step 5, with the other watermarks.
 
 Distinguish source claims from synthesis, as the vault's conventions require:
 a fact from a message is written as "the message says X" with the link,

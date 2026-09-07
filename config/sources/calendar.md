@@ -79,11 +79,15 @@ populated control query.
 
 ## Allowed writes
 
-**None. This source is read-only in every phase.** `create_event`,
-`update_event`, `delete_event` and `respond_to_event` are never called
-autonomously. A calendar write reaches other people — attendees are notified —
-so it sits squarely against the property the boundary protects.
+**None autonomously. This source is read-only in every sweep.** `create_event`,
+`update_event`, `delete_event` and `respond_to_event` are never called by a run
+on its own judgement. A calendar write reaches other people — attendees are
+notified — so it sits squarely against the property the boundary protects.
 
-A per-request booking Eriks explicitly authorises in chat is a separate,
-logged, one-time act. It is never a standing permission, and the next such
-write needs their yes again.
+**The one exception, per item:** a calendar proposal from the inbox sweep (a
+confirmed booking found in mail and matched on neither calendar) that Eriks
+answers with a yes **naming that item** in chat is created with `create_event`
+on `epetersons87@gmail.com` — **never with attendees**, because an invite
+reaches another person. Each creation is read back, logged with Eriks's words,
+and the source thread is then archived. It is never a standing permission, and
+the next such write needs their yes again.

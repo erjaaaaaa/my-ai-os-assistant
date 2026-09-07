@@ -34,7 +34,24 @@
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
       "mail.last_internaldate_ms": 0,
-      "_verified": "2026-09-07"
+      "_verified": "2026-09-07",
+      "labels": {
+        "Needs-Payment": "Label_302269771500551203",
+        "Reply/Do": "Label_1359182492550918712",
+        "Schedule Calendar": "Label_2686036584998218020",
+        "Family & Personal": "Label_8961704554796012415",
+        "Banking & Cards": "Label_1333855282355875324",
+        "Receipts & Subscriptions": "Label_8316160478815561067",
+        "Newsletters & Learning": "Label_6571319530419234897",
+        "Professional Networking": "Label_5437124985126992273",
+        "Promotions & Ads": "Label_6413919896574930163",
+        "Social Media": "Label_7152263838153304409",
+        "Loyalty": "Label_5518719782818058235",
+        "Security & Verification": "Label_626686719135409347",
+        "Travel - Bookings & Iterinary": "Label_219377032455978970"
+      },
+      "labels_verified": "2026-09-07",
+      "inbox.last_sweep_date": null
     },
     "calendar": {
       "configured": true,
@@ -51,7 +68,10 @@
     "mail_snapshot.last_internaldate_ms": 0
   },
   "flags": {
-    "inbox_sweep": false
+    "inbox_sweep": true
   },
-  "superseded": []
+  "superseded": [],
+  "digest": {
+    "last_run_date": null
+  }
 }

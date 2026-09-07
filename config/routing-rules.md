@@ -1,7 +1,7 @@
 # Routing rules — how an item becomes a task, or does not
 
-Read at Step 0. Applied at Step 1 (triage). This file is policy; the steps
-that apply it live in `procedures/step-1-triage.md`. When the two disagree,
+Read at Step 0. Applied at Step 2 (triage). This file is policy; the steps
+that apply it live in `procedures/step-2-triage.md`. When the two disagree,
 this file wins and the disagreement is a defect to fix.
 
 **Standing bias: when in doubt, do not create a task.** A missed task costs
@@ -37,7 +37,7 @@ anything else. There is no sensitive-content filter in this instance.
 | **Act** | Eriks must do a concrete thing, and the source says so or Eriks said so themselves. | Task in Personal, Backlog section, imperative title, priority, `ref:` line. |
 | **Decide** | A choice only Eriks can make, with options visible in the source. | Task titled `Decide: …`, options in the description, no due date unless the source states one. |
 | **Delegate** | Someone else's work; only the handoff is Eriks's. | Task titled `Delegate: … → <person>`; no nameable person → `[Needs Eriks]` instead. |
-| **Know** | Context Eriks should have; nothing to do. | One line in the brief. A durable item (a decision, a person, a document) is a vault-snapshot candidate — see `procedures/step-2-ingest.md`. |
+| **Know** | Context Eriks should have; nothing to do. | One line in the brief. A durable item (a decision, a person, a document) is a vault-snapshot candidate — see `procedures/step-3-ingest.md`. |
 | **Noise** | Promotions, newsletters, automated receipts with no action, platform notifications, social chatter. | Nothing. Counted in the run log. |
 | **needs-owner** | Classification confidence is low, or two rules disagree. | `[Needs Eriks]` task, label `agent-waiting`, section Waiting / Blocked, default stated. Never a guess. |
 
@@ -110,15 +110,22 @@ another.
   cap here, with a "remainder reported, not skipped" rule, if it grows past
   ~200), plus sent mail since the watermark for Eriks's own commitments.
 - Excluded wholesale: nothing, by Eriks's decision above.
-- **Eriks's own label tree — never touched, never removed, never renamed:**
+- **The label sweep (Step 1) writes into Eriks's own label tree** — the
+  thirteen classes in § Mail label taxonomy, one per thread, ids in state. A
+  thread already carrying any of the thirteen is **skipped**: whether Eriks or
+  an earlier run put it there, that label wins. Labels are only ever **added**;
+  never removed, never renamed, never created, and never any label outside the
+  thirteen.
+- **Eriks's own label tree — never removed, never renamed, never created:**
   `Action Required` (with `Reply/Do`, `Schedule Calendar`, `Needs-Payment`,
   `Waiting / Follow-up`), `Finance & Accounts` (with `Banking & Cards`,
   `Paid`, `Receipts & Subscriptions`), `Interests & Marketing` (with
   `Professional Networking`, `Promotions & Ads`, `Newsletters & Learning`,
   `Social Media`), `Archive-Categories/*`, `Family & Personal`, `Security &
-  Verification`, `Loyalty`, `Travel - Bookings & Iterinary`, `Notes`. These are
-  read as signal (a thread Eriks filed under `Action Required/Reply/Do` is a
-  strong Act hint) and are never written.
+  Verification`, `Loyalty`, `Travel - Bookings & Iterinary`, `Notes`. The
+  thirteen taxonomy classes below are the only ones the assistant applies; the
+  rest (`Archive-Categories/*`, `Paid`, `Notes`, `Waiting / Follow-up`) are
+  Eriks's alone and are read as signal only.
 
 ### Calendar scope
 
@@ -128,3 +135,48 @@ another.
   would count every task twice), the three holiday calendars, and any event
   calendar. Add a calendar here only when Eriks names it.
 - Routine recurring series: none named yet.
+
+## Mail label taxonomy — the thirteen classes and what follows each
+
+Applied by `procedures/step-1-inbox.md`. Every inbox thread that carries none
+of the thirteen gets **exactly one**, chosen from the full thread text (not the
+snippet). The class then decides what else happens. Carried over in substance
+from Eriks's earlier automation on 2026-09-07.
+
+| Class (Eriks's label) | Test | Then |
+|---|---|---|
+| **Needs-Payment** (`Action Required/Needs-Payment`) | A request to pay a specific invoice or bill, or approve a payment due: invoice/receipt numbers, due dates, amounts, bank details, "pay invoice", "payment due", "outstanding balance". **Not** fundraising or charity ("donate", "give now", "support our mission"), marketing, newsletters, or anything with an unsubscribe cue. | Label + **payment task** (shape below). Stays in inbox. |
+| **Reply/Do** (`Action Required/Reply/Do`) | A direct ask needing Eriks's reply or a small action: "Can you confirm?", "Please send me the file", "Can you do X?" | Label. Feeds Step 2 triage (Act / Decide). Stays in inbox. |
+| **Schedule Calendar** (`Action Required/Schedule Calendar`) | **Only** real invites, updates or confirmed bookings: must contain invitation / accepted / declined / rescheduled / canceled, or an `.ics`, or an explicit travel booking (itinerary, boarding pass). Newsletter cues (unsubscribe, manage preferences) mean it is **not** Schedule. | Sub-rule first: a Google Calendar daily agenda or "no events scheduled" mail, a marketing webinar / live session / register / sign up / subscribe / YouTube event, or anything from `bilesuserviss.lv` → label **Promotions & Ads** instead and archive. Otherwise: label, then the calendar match check and, if unmatched, a **calendar proposal** in the brief. Archived once handled. |
+| **Family & Personal** | Personal or family messages: school, kids, health, family updates. | Label. Stays in inbox. |
+| **Banking & Cards** (`Finance & Accounts/Banking & Cards`) | Bank statements, card alerts, suspicious transactions, balance notifications. | Label. Stays in inbox. |
+| **Receipts & Subscriptions** (`Finance & Accounts/…`) | Bills already charged, invoices paid, subscriptions, renewals, receipts showing charges. | Label + **ledger row** in `ledgers/receipts.csv`, then archive. |
+| **Newsletters & Learning** (`Interests & Marketing/…`) | Recurring editorial content from publishers (Substack, Beehiiv, Mailchimp, industry blogs). Google Calendar daily agendas land here too. | Label + row in `ledgers/newsletters.csv`, then archive. Digested weekly. |
+| **Professional Networking** (`Interests & Marketing/…`) | LinkedIn, AngelList and other professional-community notifications. | Label. Stays in inbox. |
+| **Promotions & Ads** (`Interests & Marketing/…`) | Marketing, retail offers, casino ads, sales campaigns, discounts. Includes fundraising appeals and NGO campaigns unless a specific bill is due. | Label + row in `ledgers/promotions.csv`, then archive. Digested weekly. |
+| **Social Media** (`Interests & Marketing/…`) | Facebook, Instagram, TikTok, X and similar notifications. | Label. Stays in inbox. |
+| **Loyalty** | Airline or hotel loyalty programmes: miles, points, tier status, bonus offers, statements. | Label. Stays in inbox. |
+| **Security & Verification** | Verification codes, login alerts, password resets, suspicious sign-in notices. | Label. Stays in inbox. |
+| **Travel - Bookings & Iterinary** | Flight, hotel or car bookings with itineraries, boarding passes, check-in mail, travel confirmations. | Label. Stays in inbox. |
+
+**Tie-breaks.** If a thread fits several, pick the most specific: **Travel >
+Loyalty > Receipts > Promotions.** Unsure between Newsletters and Promotions →
+**Promotions**. Unsure between any action class (Needs-Payment, Reply/Do,
+Schedule) and anything else → leave the thread **unlabelled and list it in the
+brief** rather than guess; a wrong action label costs more than a missing one.
+
+**The payment task** (Needs-Payment only): title `Pay <vendor> <amount>
+<currency>` (omit what the mail does not state; never invent an amount from an
+attachment the connector cannot read); Backlog; `dueString` = the due date in
+the sender's own words, else none; p2 if due within 7 days, else p3; `size/S`;
+description: `ref: mail:<thread_id>`, `source: <sender>, <date>`, then amount,
+due date, invoice or client number, and the thread link. Dedupe on the ref
+before creating. The thread keeps its label and stays in the inbox until Eriks
+pays and archives it.
+
+**The auto-archive classes** — Newsletters & Learning, Promotions & Ads,
+Receipts & Subscriptions (after the ledger row is written and verified), and
+Schedule Calendar (after a calendar match, an event created on Eriks's yes, or
+the sub-rule re-route) — are archived by removing `INBOX` from the thread.
+This is the carve-out recorded in `AGENTS.md` § Phase gates; no other class is
+ever archived, and nothing is ever trashed.

@@ -15,3 +15,9 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   account** — `someday`, `agent-waiting` and `size/*` already existed.
   **Rule:** every task search that filters by label is scoped to project
   Personal by id, never run account-wide.
+- 2026-09-07 — **Attachment content is not retrievable through the Gmail
+  connector** — the receipts branch of the earlier automation fell back to
+  PDF text; here no tool downloads an attachment. **Rule:** never state an
+  amount, currency or due date that is not in the message body; leave the
+  field empty, add `notes: amount not in body; attachment not readable via
+  connector`, and say so in the brief.
