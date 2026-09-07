@@ -196,3 +196,62 @@ Rows with `digested` empty are what the earlier automation had not yet sent in
 a digest; the first `/digest` picks them all up. The Google Sheets were not
 modified. Rows the earlier automation adds before it is deactivated can be
 re-migrated by repeating this step; dedupe absorbs the overlap.
+
+## 2026-09-07 — `/inbox` (Step 0 + Step 1 + close-out) — Gmail write scope refused; no external write landed
+
+**Orient.** Gmail `list_labels` populated (45 labels; `INBOX.threadsTotal`
+26, `messagesTotal` 27). Calendar `list_calendars` populated (8 calendars;
+both swept ids present). Todoist `user-info` returned
+`epetersons87@gmail.com`. Ids `_verified` 2026-09-07 — not re-resolved.
+Open `[Needs Eriks]` questions in Personal: 0 open, 0 answered, 0 ambiguous.
+Watermarks at start: `mail.last_internaldate_ms` 0, `inbox.last_sweep_date`
+null, `calendar.last_scanned_date` null, `digest.last_run_date` null.
+
+**Census.** `search_threads in:inbox` (pageSize 50, no next page) returned
+26 threads; 26 ≤ 26 threadsTotal; no per-container count exceeds the total.
+Already labelled (one of the thirteen on a message's `label_ids` in the
+search result), skipped: **20**. Unlabelled, read in full with `get_thread`
+PLAIN_TEXT and confirmed to carry none of the thirteen on any message: **6**.
+
+**Proposed dispositions (none applied — see outage below):**
+
+| Thread | Sender / subject | Proposed label | Post-action |
+|---|---|---|---|
+| 1a07c80a5a923025 | no-reply@accounts.google.com, "Security alert" (Claude for Google Drive access granted) | Security & Verification | label only |
+| 1a07c8046c543b3f | noreply-accounts@google.com, "You shared some Google Account data with Claude" | Security & Verification | label only |
+| 1a07c681b6c85794 | noreply-lv@email.decathlon.com, "Krājiet punktus, lai saņemtu 3 € kuponu!" | Loyalty (tie-break Loyalty > Promotions; Rimi precedent) | label only; description-widening question still open for Eriks |
+| 1a04386997f5d8bc | support@info.printful.com, "❗Price changes are live" | Reply/Do (direct ask: review prices, adjust margins; sibling thread 19ffb512ae9ff08a carries Reply/Do) | label only; Step 2 would task it |
+| 1a0436df9d46894f | reply@official.whoop.com, "Introducing Meridian" | Promotions & Ads | ledger row (messageId not in `promotions.csv`, checked) + archive |
+| 1a02fe21d1a9f1d8 | do-not-reply@siadokumenti.lv, "Tavi dokumenti SIA reģistrācijai ir gatavi!" (starred) | **none — listed** | unsure between Reply/Do and Family & Personal; 14-day window closed 2026-09-06 |
+
+Needs-Payment: none new (Bite invoice 1a072afdab0b973b already labelled,
+skipped; its task is Step 2's). Calendar proposals: none. Receipts rows: none.
+
+**Outage — Gmail writes.** Every `label_thread` call (5, then 1 retry on
+1a0436df9d46894f) returned: *"This connector requires additional
+permissions. The user needs to reconnect it with the appropriate access."*
+Reads (`list_labels`, `search_threads`, `get_thread`) worked throughout, so
+the control query proved read scope only. Consequence: 0 labels applied,
+0 ledger rows written, 0 threads archived, 0 payment tasks. No Todoist write
+either: the daily review task was **not** created because nothing was
+labelled and it would have had nothing to review — the proposals above are
+the record until the connector is reconnected and `/inbox` rerun; the rerun
+is safe (the sweep skips only threads already carrying a label).
+
+**Verification.** `find-tasks` searchText "Review inbox labels" in Personal:
+0 tasks (nothing to upsert against). `grep -c 1a0436df9d46894f
+ledgers/promotions.csv`: 0 (row never written). No Gmail read-back needed —
+no write succeeded.
+
+**Watermarks.** None advanced. `inbox.last_sweep_date` stays null (Step 1 did
+not complete its writes — an outage does not advance a watermark);
+`mail.last_internaldate_ms` stays 0 (Step 2 has not run; it is triage's
+watermark, and Step 1 does not own it); calendar and digest keys untouched.
+
+**Digest hand-off.** Condition met (today ≥ Friday 2026-09-04 16:00 and
+`digest.last_run_date` null) but **not run**: `/inbox` is scoped to Steps 0,
+1 and close-out, and the digest is its own procedure (`/digest`). Rows with
+`digested` empty per the migration log: 17 newsletters, 21 promotions.
+
+**Registry drift.** `config/tools.md` — added the write-scope defect under
+Gmail's verified facts. `lessons-learned.md` — one entry appended.

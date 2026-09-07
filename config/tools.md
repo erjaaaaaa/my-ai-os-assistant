@@ -118,6 +118,14 @@ used by this instance, whatever it is.
   (work), and cannot append rows to any sheet even where it can read one.** →
   The personal Google Sheets are invisible to it and unwritable regardless. →
   **Ledgers are local CSVs; historical rows come in via Eriks's CSV exports.**
+- **2026-09-07 — The Gmail connector's read scope does not imply write
+  scope.** The control query and every read populated, then `label_thread`
+  returned "This connector requires additional permissions. The user needs to
+  reconnect it with the appropriate access." → A run can pass Step 0 and still
+  be unable to label or archive. → **A permission error on a write is an
+  outage of that write class: retry once, stop, log the proposals, advance no
+  watermark; ask Eriks to reconnect the Gmail connector with label-modify
+  access.**
 - **2026-09-07 — Gmail labels are applied at thread level here** (`label_thread`),
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all
