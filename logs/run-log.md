@@ -399,3 +399,43 @@ vault snapshot watermark unchanged. Registry drift: none.
    `procedures/digest.md` narrowed. The digest now runs only on `/digest`.
    A fixed weekly trigger would be a scheduled `/digest`, offered to Eriks,
    not set up. Two entries appended to `lessons-learned.md`.
+
+## 2026-09-07 — Step 1 completed after Gmail reconnect (19:43–19:46)
+
+Eriks reconnected the Gmail connector (the app's tool-permission panel had
+shown every write tool as "Always allow" throughout; the missing piece was
+the Google OAuth grant — see `config/tools.md` RESOLVED note and
+`lessons-learned.md`). Eriks: *"try now"*. Same connector instance id.
+
+**Control write.** `label_thread` on 1a0436df9d46894f (Whoop) with
+Promotions & Ads → `{}`; `get_thread` METADATA_ONLY read back
+`Label_6413919896574930163` on the message. Inbox re-listed: 29 threads,
+29 ≤ `INBOX.threadsTotal` 29; one thread (Google "Security alert"
+1a07c80a5a923025) had gained a second message at 16:42:46Z — "You allowed
+Claude for Gmail access", the reconnect itself — re-read in full, same
+class.
+
+**Labels applied, each read back on every message (8 threads):**
+LyraBet 1a07cab352b320bb → Promotions & Ads ✔; n8n 1a07ca01b0fcdd03 →
+Receipts ✔; Paddle 1a07c9ff9217215a → Receipts ✔; Google
+1a07c8046c543b3f → Security ✔; Google 1a07c80a5a923025 (2 messages) →
+Security ✔; Decathlon 1a07c681b6c85794 → Loyalty ✔; Printful
+1a04386997f5d8bc → Reply/Do ✔; Whoop 1a0436df9d46894f → Promotions ✔.
+Left unlabelled: SIA documents 1a02fe21d1a9f1d8 (open question).
+
+**Ledger rows (dedupe on messageId, each read back):** promotions +2
+(LyraBet 2026-09-07, `list_unsubscribe: body-cue`; Whoop 2026-08-27),
+receipts +2 (n8n and Paddle, no amount — not in body; Paddle ref
+74546241-168117680 as invoice_no). `git diff --stat`: 2 + 2 insertions.
+
+**Archived (INBOX removed, read back absent):** Whoop, LyraBet, n8n,
+Paddle — 4. `list_labels` after: `INBOX.threadsTotal` 25 = 29 − 4;
+Promotions & Ads threadsTotal 2728 → 2730, Receipts 668 → 670, Security
+215 → 217, Loyalty 30 → 31, Reply/Do 95 → 96 — every delta matches.
+
+**Review task.** `6hRVc6H632PVx4cQ` "[Act] Review inbox labels —
+2026-09-07", Backlog, p3, due today, counts in the description;
+`fetch-object` read back. Project Personal now 30 open tasks.
+
+**Watermark.** `sources.gmail.inbox.last_sweep_date` → 2026-09-07 (Step 1
+completed against a populated control). Other keys unchanged.

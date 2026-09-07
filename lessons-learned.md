@@ -43,3 +43,14 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   digest runs only on `/digest`; a weekly cadence is a scheduled `/digest` set
   up on Eriks's yes, never a hand-off inside the daily routine. Promoted into
   `AGENTS.md` § Delivery and `procedures/digest.md` the same day.
+- 2026-09-07 — **"Requires additional permissions" from Gmail is an OAuth
+  scope problem, not an app permission problem** — three runs failed every
+  `label_thread` while the desktop app's Gmail tool-permission panel showed
+  all write tools as "Always allow". Eriks disconnected and reconnected the
+  connector; the first write afterwards succeeded. **Rule:** when a Gmail
+  write returns "This connector requires additional permissions… reconnect",
+  do not ask Eriks to check the app's tool-permission panel — ask for a
+  disconnect and reconnect with every checkbox on Google's consent screen
+  ticked, then prove it with one `label_thread` on one thread read back
+  before rerunning the sweep. Extends the 2026-09-07 write-scope entry
+  above; does not replace it.

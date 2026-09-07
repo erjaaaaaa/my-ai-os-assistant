@@ -125,7 +125,15 @@ used by this instance, whatever it is.
   be unable to label or archive. → **A permission error on a write is an
   outage of that write class: retry once, stop, log the proposals, advance no
   watermark; ask Eriks to reconnect the Gmail connector with label-modify
-  access.**
+  access.** RESOLVED 2026-09-07 19:43: the cause was the Google OAuth grant
+  made at connection time (read scope only), not the desktop app's
+  tool-permission panel, which already showed every write tool as "Always
+  allow". Eriks disconnected and reconnected Gmail; the first `label_thread`
+  afterwards returned `{}` and the label read back on the thread. The rule
+  above stands; the diagnostic to add is: **when the app's permission panel
+  allows the tool and the connector still says "requires additional
+  permissions", the fix is a reconnect with every Google consent checkbox
+  ticked.**
 - **2026-09-07 — Gmail labels are applied at thread level here** (`label_thread`),
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all
