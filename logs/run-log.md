@@ -175,3 +175,24 @@ upserted: `[Act] Review inbox labels — 2026-09-07`.
 is signed in as the work account and cannot see the personal sheets; the Chrome
 extension was not connected. Waiting on Eriks's CSV exports into
 `ledgers/import/` (see `ledgers/README.md`).
+
+## 2026-09-07 — Ledgers migrated from the Google Sheets
+
+Drive connector reconnected to `epetersons87@gmail.com` (both sheets returned
+with that owner). Method: `download_file_content` — the archive workbook
+exported as .xlsx and parsed tab by tab locally; the receipts sheet exported as
+CSV. The export is the whole file, so the containing total is the workbook's
+own row count. `sent` mapped to `digested` (`TRUE` → `migrated-sent`, else
+empty). Dedupe on `messageId`, first occurrence kept. Each ledger re-read after
+writing; header, row count, first and last row confirmed.
+
+| Ledger | Source rows | Written | Duplicates dropped | Blank messageId | sent=TRUE |
+|---|---|---|---|---|---|
+| newsletters | 1875 | 1875 | 0 | 0 | 1858 |
+| promotions | 2544 | 2544 | 0 | 0 | 2523 |
+| receipts | 533 | 525 | 8 | 0 | — |
+
+Rows with `digested` empty are what the earlier automation had not yet sent in
+a digest; the first `/digest` picks them all up. The Google Sheets were not
+modified. Rows the earlier automation adds before it is deactivated can be
+re-migrated by repeating this step; dedupe absorbs the overlap.
