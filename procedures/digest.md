@@ -1,8 +1,12 @@
 # Weekly digest — newsletters and promotions
 
-Runs on `/digest`, or from Step 1 on the first run on or after Friday 16:00
-Europe/Riga each week. Reads the two ledgers; writes one HTML deck and marks
-rows digested. Nothing is sent anywhere.
+Runs on `/digest` only. NARROWED 2026-09-07 by Eriks: *"Digest should be
+just sent once a week or on demand."* Superseded text: "or from Step 1 on
+the first run on or after Friday 16:00 Europe/Riga each week". Reads the two
+ledgers; writes one HTML deck and marks rows digested. Nothing is sent
+anywhere. Card links use
+`https://mail.google.com/mail/?authuser=epetersons87@gmail.com#all/<threadId>`
+(the account-naming form; see `step-1-inbox.md` § 3 for why).
 
 1. Read `ledgers/newsletters.csv` and `ledgers/promotions.csv`. Select rows
    whose `digested` is empty. Zero rows → say so in chat and stop; no file, no

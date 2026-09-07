@@ -379,3 +379,23 @@ thread.
 last_scanned_date` → 2026-09-07; `digest.last_run_date` → 2026-09-07;
 `inbox.last_sweep_date` stays null (Step 1's writes did not complete);
 vault snapshot watermark unchanged. Registry drift: none.
+
+## 2026-09-07 — Corrections after the `/start-day` brief (Eriks, in chat)
+
+1. *"open in Gmail in the newsletter doesn't carry the direct thread link, it
+   just opens inbox."* Cause: links used `mail.google.com/mail/u/0/#all/<id>`
+   (the earlier automation's form); opened from outside Gmail, `u/0` is the
+   browser's first Google account and Gmail falls back to its inbox when the
+   thread is not there. Fix: link form changed to
+   `https://mail.google.com/mail/?authuser=epetersons87@gmail.com#all/<id>`
+   in `procedures/step-1-inbox.md` § 3 and `procedures/digest.md`; deck
+   rebuilt (38 links in the new form, 0 in the old, verified by grep) and
+   re-sent. **Unverified by the assistant** — it has no signed-in Gmail;
+   Eriks asked to click one. Existing ledger `threadUrl` values and the two
+   task descriptions written today still carry the old form; not rewritten.
+2. *"Digest should be just sent once a week or on demand."* The Friday
+   hand-off inside Step 1 is withdrawn: `AGENTS.md` § Delivery narrowed in
+   place, `procedures/step-1-inbox.md` § 6 marked WITHDRAWN,
+   `procedures/digest.md` narrowed. The digest now runs only on `/digest`.
+   A fixed weekly trigger would be a scheduled `/digest`, offered to Eriks,
+   not set up. Two entries appended to `lessons-learned.md`.

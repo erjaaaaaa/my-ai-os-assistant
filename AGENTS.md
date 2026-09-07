@@ -445,8 +445,13 @@ archived to `briefs/YYYY-MM-DD.md`. The routine runs when Eriks asks
 (`/start-day`); `/inbox` runs Step 1 alone; nothing is scheduled. It is
 idempotent: a second run the same day no-ops. **The weekly digest** of
 newsletters and promotions (`procedures/digest.md`) is an HTML slide deck in
-`briefs/`, shown in chat, produced by `/digest` or by the first run on or
-after Friday 16:00 — never sent anywhere.
+`briefs/`, shown in chat, produced **only by `/digest`** — never by
+`/start-day`, never sent anywhere. NARROWED 2026-09-07 by Eriks after the
+first `/start-day` produced it: *"Digest should be just sent once a week or
+on demand."* Superseded text: "produced by `/digest` or by the first run on
+or after Friday 16:00". The on-demand half survives; the Friday hand-off
+inside the daily routine is withdrawn. A fixed weekly trigger, if Eriks
+wants one, is a scheduled `/digest`, set up only on their yes.
 
 ## Maintenance
 

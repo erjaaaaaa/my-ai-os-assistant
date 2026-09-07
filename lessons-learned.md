@@ -30,3 +30,16 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   and archive nothing, do not advance `inbox.last_sweep_date`, and report the
   proposals in the run log and chat so a rerun after reconnection picks them
   up. Never advance a watermark on the strength of reads alone.
+- 2026-09-07 — **Gmail links must name the account** — The digest's "open in
+  Gmail" links used `mail.google.com/mail/u/0/#all/<threadId>`; Eriks: "it
+  just opens inbox". Opened from outside Gmail, `u/0` is whichever Google
+  account the browser treats as first, and Gmail falls back to that account's
+  inbox when the thread is not in it. **Rule:** every Gmail link this instance
+  writes — ledgers, digest cards, task descriptions — uses
+  `https://mail.google.com/mail/?authuser=epetersons87@gmail.com#all/<threadId>`.
+- 2026-09-07 — **The digest is not part of `/start-day`** — The first
+  `/start-day` produced the weekly digest via the Friday hand-off in Step 1.
+  Eriks: "Digest should be just sent once a week or on demand." **Rule:** the
+  digest runs only on `/digest`; a weekly cadence is a scheduled `/digest` set
+  up on Eriks's yes, never a hand-off inside the daily routine. Promoted into
+  `AGENTS.md` § Delivery and `procedures/digest.md` the same day.

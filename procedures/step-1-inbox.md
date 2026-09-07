@@ -62,7 +62,12 @@ file to confirm the row; then archive.
 **Newsletters & Learning / Promotions & Ads.** Append to
 `ledgers/newsletters.csv` / `ledgers/promotions.csv`: received_date (message
 date), from_name, from_address, source_domain, subject, threadId, messageId,
-threadUrl (`https://mail.google.com/mail/u/0/#all/<threadId>`), list_id
+threadUrl
+(`https://mail.google.com/mail/?authuser=epetersons87@gmail.com#all/<threadId>`
+— CORRECTED 2026-09-07: the earlier `…/mail/u/0/#all/<threadId>` form opens
+whichever Google account the browser treats as first and falls back to that
+account's inbox when the thread is not there; Eriks: "open in Gmail … doesn't
+carry the direct thread link, it just opens inbox"), list_id
 (empty — not exposed by the connector), list_unsubscribe (`body-cue` when the
 body carries unsubscribe / manage-preferences text, else empty), digested
 (empty). Dedupe on messageId; re-read; then archive.
@@ -88,11 +93,15 @@ per class, payment tasks created (titles), calendar proposals (titles), threads
 left unlabelled (subjects). Search by title first; update rather than
 duplicate.
 
-## 6. Weekly digest hand-off
+## 6. Weekly digest hand-off — WITHDRAWN 2026-09-07
 
-If today is on or after the most recent Friday 16:00 Europe/Riga and
-`digest.last_run_date` in state is before that Friday, run `procedures/digest.md`
-now, after the ledgers are updated.
+Withdrawn by Eriks after the first `/start-day` produced the digest:
+*"Digest should be just sent once a week or on demand."* The digest is now
+produced only by `/digest` (see `AGENTS.md` § Delivery). Superseded text:
+"If today is on or after the most recent Friday 16:00 Europe/Riga and
+`digest.last_run_date` in state is before that Friday, run
+`procedures/digest.md` now, after the ledgers are updated." This step does
+nothing.
 
 ## Output
 
