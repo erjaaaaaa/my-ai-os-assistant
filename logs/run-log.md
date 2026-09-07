@@ -63,3 +63,45 @@ defect:**
 ### Rehearsal
 
 See the entry below this one.
+
+## 2026-09-07 — Rehearsal (read-only; nothing written to any external system)
+
+Watermarks at zero, sweep bounded to the last three days.
+
+**Heartbeat.** Gmail: live — `list_labels` populated (55 labels);
+`INBOX.threadsTotal` 24; 17 inbox threads read (17 ≤ 24). Calendar: live —
+`list_calendars` populated (8), both swept ids present. Todoist: live —
+`user-info` returned the owner's account; project Personal 23 open tasks.
+
+**Mail, inbox, 3 days: 17 threads.** Act 1 (Bite Latvija invoice, 20.06 EUR,
+due 20.09.2026 — Eriks's own label `Action Required/Needs-Payment` on it);
+Know 3 (Etsy payout notice; a genealogy-site birthday alert; a LinkedIn
+"message waiting" notification); needs-owner 1 (Amex statement-ready notice
+— no amount or due date in the mail; question: is the card on direct debit,
+or should each statement become a pay task? default: no task); Noise 12
+(newsletters, promotions, social and platform notifications, loyalty-terms
+update). Sent mail, 3 days: 0 threads (believable against a populated
+control; `SENT` holds 1,533 threads mailbox-wide).
+
+**Calendar, 7 days.** Own calendar: 1 event (a 01:00 online Q&A on 8 Sep;
+no prep, no task). Family calendar: 8 events — two football sessions, a
+chess session on 11 Sep, three rubbish-collection reminders, a cleaner visit,
+one more football; two of them were added today by Eriks's wife. No
+conflicts. No invitations awaiting response. Tasks: none — the chess session
+relates to the open task "Contact in-home chess coaches" but is not evidence
+of movement; flagged as possibly related, no move.
+
+**Open questions.** `agent-waiting` in Personal: 0 (believable against 23
+open tasks in the project).
+
+**Vault.** Nothing durable in the window; no snapshot.
+
+**Would have written (did not):** 1 task (Bite invoice, Backlog, p3,
+`size/S`, ref `mail:1a072afdab0b973b`); 1 `[Needs Eriks]` task (Amex
+statements, Waiting / Blocked, `agent-waiting`, p4); watermark
+`mail.last_internaldate_ms` → 1788789664000; `calendar.last_scanned_date` →
+2026-09-07. All left unwritten; state unchanged.
+
+**Could not decide:** whether a card statement notice with no due date is a
+payment obligation — recorded above as the needs-owner item rather than
+guessed.
