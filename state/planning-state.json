@@ -1,0 +1,13 @@
+{
+  "last_plan": null,
+  "horizons": {
+    "month": null,
+    "week": null,
+    "day": null
+  },
+  "capacity": {
+    "last_used_minutes": null,
+    "last_defaulted": null
+  },
+  "superseded": []
+}

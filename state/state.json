@@ -1,0 +1,57 @@
+{
+  "instance": {
+    "slug": "personal",
+    "timezone": "Europe/Riga",
+    "phase": 1
+  },
+  "tracker": {
+    "tool": "todoist",
+    "user_id": "22613842",
+    "project_id": "6hJQ53x8Pjpr9rJQ",
+    "project_name": "Personal",
+    "sections": {
+      "backlog": "6hJQ54c82gGF4fWQ",
+      "this_month": "6hJQ55cfhvj9Hq6Q",
+      "this_week": "6hJQ557XXQ7fRjVQ",
+      "in_progress": "6hJQ56wWPpH8cfgx",
+      "waiting_blocked": "6hJQ57R2hvM9RQgQ",
+      "done": "6hJQ588WWq4VFX8Q"
+    },
+    "labels": {
+      "someday": "2184639643",
+      "agent-waiting": "2184639649",
+      "size/XS": "2184640964",
+      "size/S": "2184640974",
+      "size/M": "2184640971",
+      "size/L": "2184640973",
+      "size/XL": "2184640972",
+      "size/XXL": "2184640969"
+    },
+    "_verified": "2026-09-07"
+  },
+  "sources": {
+    "gmail": {
+      "configured": true,
+      "mailbox": "epetersons87@gmail.com",
+      "mail.last_internaldate_ms": 0,
+      "_verified": "2026-09-07"
+    },
+    "calendar": {
+      "configured": true,
+      "calendar_ids": [
+        "epetersons87@gmail.com",
+        "family17271500024496324001@group.calendar.google.com"
+      ],
+      "calendar.last_scanned_date": null,
+      "_verified": "2026-09-07"
+    }
+  },
+  "vault": {
+    "path": "../My Brain",
+    "mail_snapshot.last_internaldate_ms": 0
+  },
+  "flags": {
+    "inbox_sweep": false
+  },
+  "superseded": []
+}
