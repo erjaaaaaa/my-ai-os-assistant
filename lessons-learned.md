@@ -54,3 +54,12 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   ticked, then prove it with one `label_thread` on one thread read back
   before rerunning the sweep. Extends the 2026-09-07 write-scope entry
   above; does not replace it.
+- 2026-09-07 — **Payment tasks go to This Week, not Backlog** — the first
+  payment task ("Pay Bite Latvija 20.06 EUR") was created in Backlog per the
+  taxonomy's task shape. Eriks: *"For any e-mail that are required payments -
+  always put in THIS WEEK column in todoist."* **Rule:** a task created from a
+  Needs-Payment mail is created in the This Week section (id `this_week` in
+  state), never Backlog; every other task class still lands in Backlog. Rule
+  promoted the same day into `config/routing-rules.md` § The payment task,
+  with annotations in `AGENTS.md` § Security boundary and
+  `procedures/step-2-triage.md` § 4.

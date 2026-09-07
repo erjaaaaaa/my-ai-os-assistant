@@ -82,7 +82,9 @@ back and confirm the ref line):
 ## 4. The board — sections as columns
 
 Personal is used as a Kanban board. Its six sections, ordered, with ids cached
-in state: **Backlog** (where every new task lands), **This Month**, **This
+in state: **Backlog** (where every new task lands — except payment tasks,
+which land in This Week; CORRECTED 2026-09-07, rule and Eriks's words in
+`config/routing-rules.md` § The payment task), **This Month**, **This
 Week**, **In Progress**, **Waiting / Blocked**, **Done**. The layout is Eriks's
 to manage; triage does not rearrange it.
 

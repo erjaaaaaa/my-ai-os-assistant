@@ -439,3 +439,15 @@ Promotions & Ads threadsTotal 2728 → 2730, Receipts 668 → 670, Security
 
 **Watermark.** `sources.gmail.inbox.last_sweep_date` → 2026-09-07 (Step 1
 completed against a populated control). Other keys unchanged.
+
+## 2026-09-07 — Correction: payment tasks land in This Week (19:55)
+
+Eriks, in chat: *"For any e-mail that are required payments - always put in
+THIS WEEK column in todoist."* Applied as a CORRECTED marker in
+`config/routing-rules.md` § The payment task (authoritative copy), with
+pointer annotations in `AGENTS.md` § Security boundary ("create tasks (in
+Backlog)") and `procedures/step-2-triage.md` § 4 ("where every new task
+lands"). Each read back by grep. Existing task `6hRVRpcjfmcPGFrx` "Pay Bite
+Latvija 20.06 EUR" (top-level, no parent) moved Backlog → This Week with
+`update-tasks` (sectionId only); `fetch-object` read back `sectionId`
+6hJQ557XXQ7fRjVQ. Lessons entry appended.

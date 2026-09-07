@@ -167,7 +167,11 @@ brief** rather than guess; a wrong action label costs more than a missing one.
 
 **The payment task** (Needs-Payment only): title `Pay <vendor> <amount>
 <currency>` (omit what the mail does not state; never invent an amount from an
-attachment the connector cannot read); Backlog; `dueString` = the due date in
+attachment the connector cannot read); **This Week** — CORRECTED 2026-09-07
+by Eriks: *"For any e-mail that are required payments - always put in THIS
+WEEK column in todoist."* Superseded text: "Backlog". This is the one task
+class that does not land in Backlog; every other task created by a run still
+does. Section id `this_week` from `state/state.json`; `dueString` = the due date in
 the sender's own words, else none; p2 if due within 7 days, else p3; `size/S`;
 description: `ref: mail:<thread_id>`, `source: <sender>, <date>`, then amount,
 due date, invoice or client number, and the thread link. Dedupe on the ref
