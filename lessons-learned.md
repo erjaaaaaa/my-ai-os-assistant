@@ -96,3 +96,16 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   `config/routing-rules.md` § Source hints › Calendar and § Mail label
   taxonomy (Schedule sub-rule), with pointers in `procedures/step-2-triage.md`
   § 2, `procedures/step-4-brief.md` § 6 and `config/sources/calendar.md`.
+- 2026-09-08 — **A permission-layer refusal is not a Gmail outage, and is
+  cleared by Eriks's explicit ask** — the desktop app's auto-mode classifier
+  refused `unlabel_thread` (Needs-Payment) mid-swap on the Bite thread and,
+  in the same moment, one routine `find-tasks` read; the archives and labels
+  before and after it all succeeded. Eriks later said *"let's fix now this
+  label changing / removing issue you had with Bite"* and the identical call
+  went through. **Rule:** on "Blocked by classifier" during a carve-out
+  write, stop at that step, leave the thread in its half state, report it
+  in the brief with the exact remaining steps, and do not retry inside the
+  run; retry only when Eriks asks in chat, then finish the sequence with a
+  read-back after each step. Never treat it as an outage that blocks
+  watermarks — the control query and the neighbouring writes prove the
+  connector is live.

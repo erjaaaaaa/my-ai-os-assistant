@@ -589,3 +589,17 @@ layer the registry's "If broken" lines do not name; add when it recurs.
    removed; it is out of the inbox either way), and the calendar event itself
    is untouched (calendar is read-only). Two entries appended to
    `lessons-learned.md`. Each edit verified by exact-string read-back.
+
+## 2026-09-08 — Carve-out 5 completed on the Bite thread (Eriks, in chat, 10:05)
+
+Eriks: *"Ok, let's fix now this label changing / removing issue you had with
+Bite."* Fresh read of 1a072afdab0b973b: Paid, UNREAD, Needs-Payment, INBOX
+(unchanged since the run). `unlabel_thread` Needs-Payment → `{}`; read back:
+Paid, UNREAD, INBOX ✔. `unlabel_thread` INBOX → `{}`; read back: Paid,
+UNREAD ✔. `list_labels` after: Needs-Payment threadsTotal 2 → 1, Paid 210
+(unchanged — the label was already on it). The morning's refusal did not
+recur; the same call succeeded on Eriks's explicit ask. Task
+`6hRVRpcjfmcPGFrx` untouched (already completed by Eriks). Note for the next
+run: `INBOX.threadsTotal` reads 8 (was 6 after the run, 5 expected after
+this archive) — three messages arrived since the sweep (UNREAD 10115 →
+10118); they are new mail for the next run, not a discrepancy in this one.
