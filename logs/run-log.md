@@ -469,3 +469,98 @@ Label_2307425248756940905 (from today's `list_labels`, name
 `Finance & Accounts/Paid`, 209 threads). No thread acted on now: the only
 completed `Pay …` tasks in the last 60 days (two Margosik WhatsApp payments)
 carry no `ref: mail:` line, so they are out of class.
+
+## 2026-09-08 — `/start-day` run (09:42–09:50 Europe/Riga)
+
+**Step 0 — orient.** Governing files and `lessons-learned.md` read (8
+entries, all applied; `config/methods.md` empty). Gmail live: `list_labels`
+46 labels, `INBOX.threadsTotal` 10. Calendar live: `list_calendars` 8
+calendars, both swept ids present. Todoist live: `user-info` =
+epetersons87@gmail.com. Ids `_verified` 2026-09-07, not re-resolved.
+`agent-waiting` tasks in Personal: 3 (`6hRVRq9X62WJ6HMQ`,
+`6hRVRqX7GwHq5PPQ`, `6hRVRr7vxmm53x6x`); `find-comments` on each: 0
+comments. Open 3, answered 0, ambiguous 0; defaults stay. Not a rerun:
+`calendar.last_scanned_date` was 2026-09-07 and the inbox held 6 threads
+newer than `mail.last_internaldate_ms` 1788797988000.
+
+**Step 1 — inbox.** `search_threads in:inbox` → 10 threads, 10 ≤ 10.
+Skipped, already labelled (label ids read off messages): 3 —
+1a072afdab0b973b Bite (Needs-Payment), 19ffb512ae9ff08a Printful
+(Reply/Do), 19ecbccd34e3286c Revolut (Banking & Cards). Left unlabelled:
+1a02fe21d1a9f1d8 SIA documents (open question). Read in full
+(PLAIN_TEXT) and labelled, each read back on every message with
+METADATA_ONLY:
+- 1a07fb1582a79817 NEXT.io → Newsletters & Learning ✔
+- 1a07f33afd738675 Skool weekly digest → Newsletters & Learning ✔
+- 1a07f2f0c19f46ab EMyth → Promotions & Ads (unsure newsletter vs
+  promotion; tie-break → Promotions) ✔
+- 1a07fa5ced288ed1 LinkedIn invite reminder → Professional Networking ✔
+- 1a07d7b5f870f2af IHG One Rewards → Loyalty (hotel loyalty programme;
+  Loyalty > Promotions) ✔
+- 1a07dd9a6eefff21 Google Calendar notification "Q&A w/ Nate" → Schedule
+  Calendar ✔. Sub-rule did not fire (not a daily agenda / webinar /
+  bilesuserviss). Match check: `list_events` on both calendar ids,
+  2026-09-07T21:55Z–22:35Z → own calendar returned event
+  `ib19cpad1t5oeu0u137e1si258` "Q&A w/ Nate" 01:00–01:30 Riga, organiser
+  Eriks; Family calendar empty → handled.
+Ledger rows (dedupe on messageId — grep 0 hits before; each read back by
+tail; `git diff --stat` 3 insertions): newsletters +2 (NEXT.io, Skool,
+both `body-cue`), promotions +1 (EMyth, `body-cue`). Link form
+`?authuser=…#all/<id>`. Archived (`unlabel_thread ["INBOX"]`, read back
+INBOX absent): NEXT.io, Skool, EMyth, Q&A notification — 4. Review task
+`6hRg233R2fccHJqQ` "[Act] Review inbox labels — 2026-09-08", Backlog, p3,
+due today; read back via `find-tasks` on the Backlog section (16 tasks,
+present). Payment tasks 0, calendar proposals 0.
+
+**Step 2 — triage.** Inbox: 6 new threads (all > watermark), all Noise /
+Know; 0 tasks. Sent (`in:sent after:2026/09/06`): 2 threads —
+1a067fe7acd48584 "Re: Pulciņa rēķins" (Eriks replied "Paid" 2026-09-07
+17:54:42Z to margaritaeliya@gmail.com; Lidl Arena / My Academy corrected
+invoices for Ervins and Marks; two PDFs, unreadable via connector; the
+message says payment proof can be filed with the annual income-tax
+declaration — Know, surfaced as a candidate, no task under the standing
+bias) and 1a079063da173179 (forward of a newsletter to
+daisyqdesign@gmail.com; Noise). Calendar, both ids, 2026-09-08 00:00 →
+2026-09-15 23:59 Riga: own calendar 1 event (Q&A w/ Nate, 01:00); Family
+calendar 10 events (listed in the brief); no overlaps; no `needsAction`
+invitations; no prep tasks. Dedupe reads: `find-tasks` project Personal
+26 open (totalCount 26, hasMore false; 3 agent-waiting ≤ 26);
+`find-completed-tasks` since 2026-07-10: 9; `find-activity` deleted since
+2026-07-10: 0. No movement evidence on any open task; no moves; no
+comments.
+
+**Step 2 § 3b — closed payment tasks (carve-out 5).** In class: 1 —
+`6hRVRpcjfmcPGFrx` "Pay Bite Latvija 20.06 EUR", `checked: true`,
+completed 2026-09-07T17:49:27Z, first description line
+`ref: mail:1a072afdab0b973b`. Out of class: the two Margosik WhatsApp
+`Pay …` tasks (no `ref: mail:` line). `get_thread` METADATA_ONLY on
+1a072afdab0b973b: 1 message, labels UNREAD, Needs-Payment, INBOX → in
+class. Step 1: `label_thread` Paid (Label_2307425248756940905) → `{}`;
+read back: labels Paid, UNREAD, Needs-Payment, INBOX ✔. Step 2:
+`unlabel_thread` Needs-Payment → **refused by the Claude Code auto-mode
+classifier** ("Blocked by classifier"), not a Gmail error. Per § 3b
+stopped at the first failed step; no retry; INBOX not touched. Thread
+state: Paid + Needs-Payment + INBOX. The same response also refused a
+routine `find-tasks` read (searchText) — a second read with different
+parameters succeeded, so this is the desktop app's permission layer, not
+a connector outage. Idempotent on rerun: the thread still carries
+Needs-Payment, so § 3b re-fires; `label_thread` Paid on an already-Paid
+thread is a no-op.
+
+**Step 3 — vault.** Nothing durable; no snapshot, no vault write.
+Considered and declined: Lidl Arena invoices (receipts), the Q&A
+notification (calendar).
+
+**Step 4 — brief.** `briefs/2026-09-08.md` written and delivered in chat.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` 1788797988000 →
+1788848723000 (NEXT.io, newest message processed);
+`calendar.last_scanned_date` → 2026-09-08; `inbox.last_sweep_date` →
+2026-09-08; vault snapshot watermark and `digest.last_run_date`
+unchanged. Registry drift: none — every tool used (`list_labels`,
+`search_threads`, `get_thread`, `label_thread`, `unlabel_thread`,
+`list_calendars`, `list_events`, `user-info`, `find-tasks`,
+`find-comments`, `find-completed-tasks`, `find-activity`, `add-tasks`) is
+listed in `config/tools.md`. Defect noted for the tools file: the
+`unlabel_thread` refusal came from the app's permission classifier, a
+layer the registry's "If broken" lines do not name; add when it recurs.
