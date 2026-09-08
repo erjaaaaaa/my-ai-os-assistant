@@ -74,3 +74,25 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   Promoted the same day into `AGENTS.md` § Phase gates,
   `config/routing-rules.md`, `config/sources/gmail.md`, `config/tools.md`
   and `procedures/step-2-triage.md` § 3b.
+- 2026-09-08 — **The review task goes to This Week** — the daily "[Act]
+  Review inbox labels" task was created in Backlog with a due date of today.
+  Eriks: *"When you add review labels tasks, don't just mark it for today, but
+  also move it THIS WEEK column, same as with the payments."* **Rule:** the
+  review task is created in the This Week section (id `this_week` in state)
+  with `dueString: today`; it joins payment tasks as the only classes not
+  landing in Backlog. Promoted the same day into `procedures/step-1-inbox.md`
+  § 5 and `config/routing-rules.md` § The payment task.
+- 2026-09-08 — **Only real-person calendar events are appointments** — the
+  brief listed "Q&A w/ Nate" (a creator's promotional session Eriks had put on
+  the calendar) as an appointment, and the sweep labelled its Google Calendar
+  notification Schedule Calendar. Eriks: *"For calendar events / invites. I
+  want only real people ones. For example one with Nate is the advertising.
+  You can ask in such cases to be sure."* **Rule:** an event is an appointment
+  only with a named human counterpart or as a Family-calendar entry; a
+  company's or creator's webinar / Q&A / launch / summit is advertising — not
+  listed, not tasked, counted in Anomalies — and its calendar-notification
+  mail goes to Promotions & Ads; when unsure, ask with a `[Needs Eriks]`
+  question (default: advertising). Promoted the same day into
+  `config/routing-rules.md` § Source hints › Calendar and § Mail label
+  taxonomy (Schedule sub-rule), with pointers in `procedures/step-2-triage.md`
+  § 2, `procedures/step-4-brief.md` § 6 and `config/sources/calendar.md`.

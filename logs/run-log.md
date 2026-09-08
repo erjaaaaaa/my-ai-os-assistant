@@ -564,3 +564,28 @@ unchanged. Registry drift: none — every tool used (`list_labels`,
 listed in `config/tools.md`. Defect noted for the tools file: the
 `unlabel_thread` refusal came from the app's permission classifier, a
 layer the registry's "If broken" lines do not name; add when it recurs.
+
+## 2026-09-08 — Corrections after the `/start-day` brief (Eriks, in chat, 09:55)
+
+1. *"When you add review labels tasks, don't just mark it for today, but also
+   move it THIS WEEK column, same as with the payments."* Applied: CORRECTED
+   marker in `procedures/step-1-inbox.md` § 5 (authoritative for the step),
+   NARROWED annotation in `config/routing-rules.md` § The payment task (the
+   "one task class" sentence now names two), pointer annotations in
+   `AGENTS.md` § Security boundary and `procedures/step-2-triage.md` § 4.
+   Today's task `6hRg233R2fccHJqQ` (top-level, no parent) moved Backlog →
+   This Week with `update-tasks` (sectionId only); `find-tasks` on the This
+   Week section read back 5 tasks including it, `sectionId`
+   6hJQ557XXQ7fRjVQ.
+2. *"For calendar events / invites. I want only real people ones. For example
+   one with Nate is the advertising. You can ask in such cases to be sure."*
+   Applied as a new bullet in `config/routing-rules.md` § Source hints ›
+   Calendar (the authoritative copy: real-person test, advertising handling,
+   ask-when-unsure with default *not listed*), a WIDENED note on the Schedule
+   Calendar sub-rule in § Mail label taxonomy, and pointers in
+   `procedures/step-2-triage.md` § 2, `procedures/step-4-brief.md` § 6 and
+   `config/sources/calendar.md`. Not changed: the archived notification thread
+   1a07dd9a6eefff21 keeps its Schedule Calendar label (labels are never
+   removed; it is out of the inbox either way), and the calendar event itself
+   is untouched (calendar is read-only). Two entries appended to
+   `lessons-learned.md`. Each edit verified by exact-string read-back.

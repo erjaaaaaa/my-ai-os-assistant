@@ -37,7 +37,10 @@ For **each** of the two calendar ids in state: `list_events` with
 `startTime` = today 00:00 Europe/Riga, `endTime` = today + 7 days 23:59,
 `timeZone: Europe/Riga`, `pageSize: 250`, `orderBy: startTime`, paginated.
 
-Collect: events needing non-trivial preparation; overlaps (within a calendar
+First apply the real-person test in `config/routing-rules.md` § Source hints
+› Calendar (ADDED 2026-09-08): an advertising event is counted, not listed,
+and never tasked; unsure → `[Needs Eriks]`, default not listed. Then
+collect: events needing non-trivial preparation; overlaps (within a calendar
 and across the two); invitations where Eriks's own attendee entry is
 `needsAction`; everything on the Family calendar, for the brief's Family
 section. If the week reads empty on either calendar, run the adapter's
@@ -108,7 +111,8 @@ Personal, last 60 days).
 Personal is used as a Kanban board. Its six sections, ordered, with ids cached
 in state: **Backlog** (where every new task lands — except payment tasks,
 which land in This Week; CORRECTED 2026-09-07, rule and Eriks's words in
-`config/routing-rules.md` § The payment task), **This Month**, **This
+`config/routing-rules.md` § The payment task; and except the daily review
+task, also This Week — NARROWED 2026-09-08, same section), **This Month**, **This
 Week**, **In Progress**, **Waiting / Blocked**, **Done**. The layout is Eriks's
 to manage; triage does not rearrange it.
 

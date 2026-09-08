@@ -87,7 +87,10 @@ never archive any other class.
 
 ## 5. The review task
 
-Upsert one Todoist task for the day in Personal, Backlog: `[Act] Review inbox
+Upsert one Todoist task for the day in Personal, **This Week** (section id
+`this_week` in state) — CORRECTED 2026-09-08 by Eriks: *"When you add review
+labels tasks, don't just mark it for today, but also move it THIS WEEK column,
+same as with the payments."* Superseded text: "Backlog". Title `[Act] Review inbox
 labels — YYYY-MM-DD`, p3, due today, description = counts per label, archived
 per class, payment tasks created (titles), calendar proposals (titles), threads
 left unlabelled (subjects). Search by title first; update rather than

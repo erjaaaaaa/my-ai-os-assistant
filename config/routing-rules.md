@@ -90,6 +90,23 @@ another.
   up, a decision to pre-form. "Attend" is not a task.
 - **Routine recurring series generate no tasks.** None are named yet; name
   them under Source-specific notes when they appear.
+- **Only an event with a real person on the other side is an appointment.**
+  ADDED 2026-09-08 by Eriks: *"For calendar events / invites. I want only
+  real people ones. For example one with Nate is the advertising. You can
+  ask in such cases to be sure."* Test: a named human counterpart — a
+  doctor, a coach, a friend, a family member, a named colleague — or an entry
+  someone put on the Family calendar → **real**. A session a company or a
+  creator promotes to an audience — a webinar, Q&A, live session, launch,
+  summit, masterclass — is **advertising**, however it reached the calendar
+  (self-created after a registration included; "Q&A w/ Nate" on 8 Sep 2026
+  is the reference case). Advertising is not listed under the brief's "Today
+  and the next 7 days", gets no prep flag and no task; it is counted in the
+  brief's Anomalies as "advertising events on your calendar: N". **Unsure →
+  ask**, one `[Needs Eriks]` question per event, deduped on
+  `event:<calendar_id>/<event_id>`, default *advertising — not listed*. The
+  same test decides the mail side: a Google Calendar notification or reminder
+  for an advertising event follows the Schedule Calendar sub-rule to
+  Promotions & Ads.
 - **Unanswered invitations produce no task.** Name them in the brief's
   calendar section and stop.
 - **A conflict is worth surfacing even though it is not a task** — including
@@ -147,7 +164,7 @@ from Eriks's earlier automation on 2026-09-07.
 |---|---|---|
 | **Needs-Payment** (`Action Required/Needs-Payment`) | A request to pay a specific invoice or bill, or approve a payment due: invoice/receipt numbers, due dates, amounts, bank details, "pay invoice", "payment due", "outstanding balance". **Not** fundraising or charity ("donate", "give now", "support our mission"), marketing, newsletters, or anything with an unsubscribe cue. | Label + **payment task** (shape below). Stays in inbox. |
 | **Reply/Do** (`Action Required/Reply/Do`) | A direct ask needing Eriks's reply or a small action: "Can you confirm?", "Please send me the file", "Can you do X?" | Label. Feeds Step 2 triage (Act / Decide). Stays in inbox. |
-| **Schedule Calendar** (`Action Required/Schedule Calendar`) | **Only** real invites, updates or confirmed bookings: must contain invitation / accepted / declined / rescheduled / canceled, or an `.ics`, or an explicit travel booking (itinerary, boarding pass). Newsletter cues (unsubscribe, manage preferences) mean it is **not** Schedule. | Sub-rule first: a Google Calendar daily agenda or "no events scheduled" mail, a marketing webinar / live session / register / sign up / subscribe / YouTube event, or anything from `bilesuserviss.lv` → label **Promotions & Ads** instead and archive. Otherwise: label, then the calendar match check and, if unmatched, a **calendar proposal** in the brief. Archived once handled. |
+| **Schedule Calendar** (`Action Required/Schedule Calendar`) | **Only** real invites, updates or confirmed bookings: must contain invitation / accepted / declined / rescheduled / canceled, or an `.ics`, or an explicit travel booking (itinerary, boarding pass). Newsletter cues (unsubscribe, manage preferences) mean it is **not** Schedule. | Sub-rule first: a Google Calendar daily agenda or "no events scheduled" mail, a marketing webinar / live session / register / sign up / subscribe / YouTube event, or anything from `bilesuserviss.lv` → label **Promotions & Ads** instead and archive (WIDENED 2026-09-08: also a Google Calendar notification or reminder for an event that § Source hints › Calendar classes as advertising; unsure → ask, per that rule). Otherwise: label, then the calendar match check and, if unmatched, a **calendar proposal** in the brief. Archived once handled. |
 | **Family & Personal** | Personal or family messages: school, kids, health, family updates. | Label. Stays in inbox. |
 | **Banking & Cards** (`Finance & Accounts/Banking & Cards`) | Bank statements, card alerts, suspicious transactions, balance notifications. | Label. Stays in inbox. |
 | **Receipts & Subscriptions** (`Finance & Accounts/…`) | Bills already charged, invoices paid, subscriptions, renewals, receipts showing charges. | Label + **ledger row** in `ledgers/receipts.csv`, then archive. |
@@ -171,7 +188,11 @@ attachment the connector cannot read); **This Week** — CORRECTED 2026-09-07
 by Eriks: *"For any e-mail that are required payments - always put in THIS
 WEEK column in todoist."* Superseded text: "Backlog". This is the one task
 class that does not land in Backlog; every other task created by a run still
-does. Section id `this_week` from `state/state.json`; `dueString` = the due date in
+does. NARROWED 2026-09-08 by Eriks: the daily review task (`[Act] Review inbox
+labels — YYYY-MM-DD`, `procedures/step-1-inbox.md` § 5) is the second class
+that lands in This Week — *"When you add review labels tasks, don't just mark
+it for today, but also move it THIS WEEK column, same as with the payments."*
+Every other task class still lands in Backlog. Section id `this_week` from `state/state.json`; `dueString` = the due date in
 the sender's own words, else none; p2 if due within 7 days, else p3; `size/S`;
 description: `ref: mail:<thread_id>`, `source: <sender>, <date>`, then amount,
 due date, invoice or client number, and the thread link. Dedupe on the ref

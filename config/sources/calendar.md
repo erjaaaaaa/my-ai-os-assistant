@@ -32,7 +32,11 @@ adds things Eriks should know about.
 calendar section only. Appointments needing preparation become tasks only when
 the preparation is non-trivial — a document to bring, a form to fill, a
 decision to make first; "attend" is not a task. Routine recurring series never
-do (none are named yet; name them in `config/routing-rules.md`).
+do (none are named yet; name them in `config/routing-rules.md`). An event
+without a real person on the other side — a vendor's webinar, Q&A, launch —
+is advertising, not an appointment; the test and the ask-when-unsure rule
+are in `config/routing-rules.md` § Source hints › Calendar (ADDED
+2026-09-08).
 
 **The seven-day window bounds how far ahead to scan — it is not a licence to
 write about a date nobody looked at.** When creating or commenting on a task

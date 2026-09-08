@@ -19,7 +19,9 @@ nothing new except the tracker where a count is needed.
    attendees)". Default: not created.
 5. **Receipts logged** — count and total per currency, if any.
 6. **Today and the next 7 days** — from Eriks's own calendar: appointments,
-   each with a prep flag where a task was created; conflicts.
+   each with a prep flag where a task was created; conflicts. Real-person
+   events only (ADDED 2026-09-08, rule in `config/routing-rules.md` § Source
+   hints › Calendar); advertising events are a count in Anomalies.
 7. **Family calendar** — everything on it this week, as a list. Nothing here
    is a commitment of Eriks's unless a task was created for it.
 8. **Invitations awaiting a response** — named, no task.
