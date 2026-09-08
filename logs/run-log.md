@@ -603,3 +603,50 @@ recur; the same call succeeded on Eriks's explicit ask. Task
 run: `INBOX.threadsTotal` reads 8 (was 6 after the run, 5 expected after
 this archive) — three messages arrived since the sweep (UNREAD 10115 →
 10118); they are new mail for the next run, not a discrepancy in this one.
+
+## 2026-09-08 — `/inbox` run (15:27–15:35 Europe/Riga)
+
+**Step 0.** Gmail live: `list_labels` 46 labels, `INBOX.threadsTotal` 14.
+Calendar live: 8 calendars, both swept ids present. Todoist live:
+`user-info` = epetersons87@gmail.com. `agent-waiting` tasks in Personal: 3,
+`find-comments` on each: 0 — open 3, answered 0, ambiguous 0; defaults
+stay.
+
+**Step 1.** `search_threads in:inbox` → 14 threads, 14 ≤ 14. Skipped,
+already labelled (ids read off messages): 4 — 1a07fa5ced288ed1 LinkedIn
+Hazeb (Professional Networking), 1a07d7b5f870f2af IHG (Loyalty),
+19ffb512ae9ff08a Printful (Reply/Do), 19ecbccd34e3286c Revolut (Banking &
+Cards). Left unlabelled on purpose: 1a02fe21d1a9f1d8 SIA (open question)
+and 1a07ff008d25cd60 Supabase "project ChallengeFinds is going to be
+paused" (unsure Reply/Do vs Noise — platform notice with a real
+account-owner decision inside a 90-day window; listed, not guessed). Read
+in full (PLAIN_TEXT) and labelled, each read back on every message:
+- 1a080f5ae9698874 Elektrum invoice → Needs-Payment ✔. Body: 100.15 EUR,
+  "Rēķina apmaksas termiņš: 30.09.2026.", invoice 877797690561, contract
+  87730445301, Dzintaru iela 8. Dedupe: `find-tasks` project Personal 27
+  open (hasMore false), `find-completed-tasks` since 2026-07-10 9,
+  `find-activity` deleted 0 — no `ref: mail:1a080f5ae9698874`. Task
+  `6hRhm7h4x22gqRhx` "Pay Elektrum 100.15 EUR", This Week, p3 (due beyond
+  7 days), size/S, due 2026-09-30; read back via `find-tasks` on the This
+  Week section (6 tasks, present, description first line is the ref).
+- 1a080f1e7c12e29f Productivity Game → Newsletters & Learning ✔
+- 1a08039b3f8efa34 Online Gambling Quarterly → Newsletters & Learning ✔
+- 1a08013b06076a6e LinkedIn PYMK → Professional Networking ✔
+- 1a08012062e6caab Audible trial → Promotions & Ads ✔
+- 1a0800c961da3516 CuriosityStream → Promotions & Ads ✔
+- 1a07fe54cc14a465 LitRes → Promotions & Ads ✔
+- 1a07fcd7140fc49a Canva Enterprise cold sales pitch → Promotions & Ads ✔
+  (a named sender, but a sales campaign with an unsubscribe cue).
+Ledger rows (grep 0 dupes before; each read back by tail; `git diff
+--stat` 6 insertions): newsletters +2, promotions +4, all `body-cue`.
+Archived (`unlabel_thread ["INBOX"]`): Productivity Game, OGQ, Audible,
+CuriosityStream, LitRes, Canva — 6; read-backs recorded below. Review
+task `6hRg233R2fccHJqQ` found by title, description replaced to cover
+both of today's sweeps (`update-tasks` returned the new text). Calendar
+proposals: 0. Payment tasks: 1.
+
+**Close-out.** `inbox.last_sweep_date` already 2026-09-08 (unchanged).
+`mail.last_internaldate_ms` not advanced — that is Step 2's key and
+triage did not run; the Elektrum message (1788869976000) is newer than
+the stored 1788848723000 and will be triage's first new item next run
+(its ref already has a task, so dedupe absorbs it). Registry drift: none.
