@@ -650,3 +650,20 @@ proposals: 0. Payment tasks: 1.
 triage did not run; the Elektrum message (1788869976000) is newer than
 the stored 1788848723000 and will be triage's first new item next run
 (its ref already has a task, so dedupe absorbs it). Registry drift: none.
+
+## 2026-09-08 — Ad-hoc: vitamin D daily task and brief reminder (Eriks, in chat, ~23:58)
+
+Eriks: *"I completely forgot. I need to start drinking 8000DV (vitamin D)
+daily for 3 months - please add it to my todoist daily and remind me about
+it in the briefs."* Dedupe: `find-tasks` project Personal, searchText
+"vitamin" → 0. Created task `6hRpMx6gfFHWRcfQ` "Take vitamin D (8000DV)",
+This Week (`6hJQ557XXQ7fRjVQ`), p4, `size/XS`, description first line
+`ref: chat:2026-09-08-vitamin-d`; `fetch-object` read-back: `dueDate`
+2026-09-08, `recurring` "every day ending 2026-12-08", `sectionId` matches.
+Section choice: This Week, by analogy with Eriks's 2026-09-08 instruction
+that dated review tasks sit in This Week, not Backlog — Eriks did not name
+a section; flagged in chat. Dose written as Eriks wrote it ("8000DV");
+"IU" not assumed. Files: `config/routing-rules.md` new § Standing
+reminders (one active row, end 2026-12-08); `procedures/step-4-brief.md`
+new § 6a; `lessons-learned.md` one entry. No Gmail, calendar or vault
+writes.

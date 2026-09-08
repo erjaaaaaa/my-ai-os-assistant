@@ -153,6 +153,21 @@ another.
   calendar. Add a calendar here only when Eriks names it.
 - Routine recurring series: none named yet.
 
+### Standing reminders — carried in every brief until their end date
+
+ADDED 2026-09-08 by Eriks, in chat: *"I need to start drinking 8000DV
+(vitamin D) daily for 3 months - please add it to my todoist daily and
+remind me about it in the briefs."* A standing reminder is one line in the
+brief's **Standing reminders** section (`procedures/step-4-brief.md` § 6a)
+on every run from its start date to its end date inclusive; after the end
+date the line is dropped and the entry here is marked `ENDED`. The Todoist
+task is the commitment; the brief line is the reminder Eriks asked for, not
+a second task. Nothing is created, completed or moved by this rule.
+
+| Reminder | Todoist task | Start | End | Status |
+|---|---|---|---|---|
+| Take vitamin D (8000DV) daily | `6hRpMx6gfFHWRcfQ`, `ref: chat:2026-09-08-vitamin-d`, recurring every day ending 2026-12-08, This Week | 2026-09-08 | 2026-12-08 | active |
+
 ## Mail label taxonomy — the thirteen classes and what follows each
 
 Applied by `procedures/step-1-inbox.md`. Every inbox thread that carries none

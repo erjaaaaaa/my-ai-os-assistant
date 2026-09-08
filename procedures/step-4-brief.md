@@ -22,6 +22,12 @@ nothing new except the tracker where a count is needed.
    each with a prep flag where a task was created; conflicts. Real-person
    events only (ADDED 2026-09-08, rule in `config/routing-rules.md` § Source
    hints › Calendar); advertising events are a count in Anomalies.
+6a. **Standing reminders** — ADDED 2026-09-08 by Eriks (*"remind me
+   about it in the briefs"*): one line per active entry in
+   `config/routing-rules.md` § Standing reminders whose start ≤ run date ≤
+   end, e.g. "Vitamin D (8000DV) today — course runs to 2026-12-08". Omit
+   the section when no entry is active. The line is a reminder only; the
+   task in Todoist is the commitment and is not re-created here.
 7. **Family calendar** — everything on it this week, as a list. Nothing here
    is a commitment of Eriks's unless a task was created for it.
 8. **Invitations awaiting a response** — named, no task.

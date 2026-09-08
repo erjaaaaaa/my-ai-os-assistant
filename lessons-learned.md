@@ -109,3 +109,13 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   read-back after each step. Never treat it as an outage that blocks
   watermarks — the control query and the neighbouring writes prove the
   connector is live.
+- 2026-09-08 — **Eriks's own recurring health routine is a task plus a brief
+  reminder** — Eriks: *"I need to start drinking 8000DV (vitamin D) daily for
+  3 months - please add it to my todoist daily and remind me about it in the
+  briefs."* **Rule:** a routine Eriks asks for in chat becomes one recurring
+  Todoist task in This Week (dated things Eriks wants in front of them go
+  there, same as payments and the review task) with a `ref: chat:<date>-…`
+  line and an end date, plus one row in `config/routing-rules.md` § Standing
+  reminders; the brief carries one line per active row (procedure
+  `step-4-brief.md` § 6a) and drops it after the end date. Never a second
+  task per day, never a completion by the assistant.
