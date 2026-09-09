@@ -950,3 +950,24 @@ has landed (order #7334)", project `6hJQ53x8Pjpr9rJQ`, section This Month
 default), due 2026-09-19, p4, description with `ref: mail:1a0862502f1d4882`,
 the related task id and Eriks's words. Read back via `fetch-object`
 (section, due date, description checked). No other write.
+
+## 2026-09-09 — ad-hoc: podiatrist shortlist (chat)
+
+Eriks, in chat: *"let's work on the Book podiatrist appointment - find me
+podiatrists near me"*. Todoist read first: `find-tasks` searchText
+"podiatrist" in `6hJQ53x8Pjpr9rJQ` → 1 task, `6hQF5pq7mJqHmXcQ` "Book
+podiatrist appointment (foot nails)", This Month, labels book/health, no
+comments. No home address in state or vault; "near me" read as Riga
+(instance timezone) and named as an assumption in the comment.
+
+Research (WebSearch + WebFetch): vc4.lv (prices and two Riga sites),
+capitalclinicriga.lv (four named podologists, no prices), arsmed.lv
+(Skolas 5, no prices on cenrādis index), zl.lv (Ilga Prinkalne, Čaka 50),
+piearsta.lv listing for Podoloģijas akadēmija. Fetch failures reported as
+such: 1slimnica.lv 403, piearsta.lv 403, arstnieciskaispedikirs.lv has no
+phone or prices.
+
+Write: `add-comments` on `6hQF5pq7mJqHmXcQ` → `6hV249G5VvR5V3HQ` (postedAt
+2026-09-09T15:00:43Z), six-entry shortlist with addresses, phones,
+booking route and vc4 prices. Read back via `find-comments commentId`.
+No section move, no due date, no completion. Watermarks unchanged.
