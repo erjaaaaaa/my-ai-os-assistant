@@ -938,3 +938,15 @@ Not touched: conversation thread `1a0813348da28051` "Message from Le-Glue"
 (still in INBOX, unlabelled, Eriks's own reply is the newest message) — now
 moot after the refund; left for the next sweep. No task created for the
 refund check; offered in chat. Watermarks unchanged (ad-hoc, not a run).
+
+## 2026-09-09 — ad-hoc: refund watch task (chat)
+
+Eriks, in chat, on the offer above: *"Yes, add the 19 SEP watch task. It
+shouldn't be this week though. Place it in This Month column."*
+
+Write: `add-tasks` → `6hRxmG7HFGvq6Pwx` "Check Le-Glue refund of €105.15
+has landed (order #7334)", project `6hJQ53x8Pjpr9rJQ`, section This Month
+`6hJQ55cfhvj9Hq6Q` (Eriks's explicit placement, overriding the Backlog
+default), due 2026-09-19, p4, description with `ref: mail:1a0862502f1d4882`,
+the related task id and Eriks's words. Read back via `fetch-object`
+(section, due date, description checked). No other write.
