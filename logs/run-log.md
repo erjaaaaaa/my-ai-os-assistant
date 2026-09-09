@@ -827,3 +827,41 @@ Note for maintenance: `AGENTS.md` is 5,553 words against its stated
 3,000-word target (it was over before today); the carve-out text is the
 growth. Not trimmed now — a candidate to move § Phase gates carve-outs into
 a procedure file, on Eriks's yes.
+
+## 2026-09-09 — ad-hoc: TRUS booking (chat)
+
+Eriks booked transrectal prostate USG themself on piearsta.lv: 18.09.2026
+10:30, Republikas laukuma klīnika, Republikas laukums 3-18, Dr V. Šalajevs,
+service "Ultrasonoskopija prostatai", €70. Confirmation mail in inbox:
+thread `1a085a1af2a3db83` (pieraksti@piearsta.lv, "Tavs pieraksts ir
+apstiprināts!", internalDate 1788948360000); application receipt thread
+`1a08582e68045a8d`. Research comment `6hRp9m9VXrGmrmhx` on task
+`6hRV8xr4fHJP3gQQ` was written 2026-09-08 and read back.
+
+Outages this session: Todoist `add-comments` and `update-tasks` rejected
+every call with "expected array, received string" (3 attempts each,
+schemas loaded as opaque `{type: object}`), so the booking comment and the
+move to Done were NOT written. Calendar `list_events` and `search_events`
+failed on every call (5 attempts, both calendars); `list_calendars`
+succeeded, so the connector is alive but event reads are down. Conflict
+check for 18.09 10:30 therefore not done. No calendar write attempted
+(needs Eriks's per-item yes). Task completion awaits Eriks's yes naming it.
+
+Addendum, same day, after Eriks's yes in chat — *"yes, update the calendar
+and todoist - you can spawn new agents / chats for this"* — answering the two
+numbered questions (complete task 6hRV8xr4fHJP3gQQ; create the calendar
+event). Subagent a646a1a49e415f432 executed with a fully specified brief:
+`create_event` on `epetersons87@gmail.com`, no attendees → event
+`vmenfco7t7tf96qr0fb2cl7vt0`, "Transrektālā USG — Republikas laukuma
+klīnika", 2026-09-18T10:30:00+03:00 → 11:00, description ends
+`ref: mail:1a085a1af2a3db83`. Manager read it back via `search_events`
+("Transrektālā USG"): one event, id/summary/start/end match, no attendees,
+status confirmed. Working calendar param shape is the one in
+`config/sources/calendar.md:54-56` (startTime/endTime), not timeMin/timeMax
+— the earlier "outage" was partly a wrong param name on the manager's side.
+Conflict found on the Family calendar the same morning: "A KLINIKA "
+10:00–13:00 (creator daisyqdesign@gmail.com); surfaced to Eriks as data.
+Todoist comment and completion still NOT written: `add-comments` and
+`complete-tasks` reject array input in this session (schemas load empty);
+no API token exists outside the MCP connector. Handed to a fresh session via
+a spawn-task chip carrying Eriks's words.
