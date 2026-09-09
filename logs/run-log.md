@@ -865,3 +865,35 @@ Todoist comment and completion still NOT written: `add-comments` and
 `complete-tasks` reject array input in this session (schemas load empty);
 no API token exists outside the MCP connector. Handed to a fresh session via
 a spawn-task chip carrying Eriks's words.
+
+## 2026-09-09 — ad-hoc: TRUS task closed (chat, fresh session)
+
+Eriks, in chat, naming the item: *"Complete Todoist task 6hRV8xr4fHJP3gQQ
+"Book Transrectal ultrasound — Transrektāla USG" in project Personal. I
+said yes to this on 2026-09-09."* Carve-out 2 (per-item yes naming the
+task). Follows the hand-off in the entry above.
+
+Pre-checks: `fetch-object` → projectId `6hJQ53x8Pjpr9rJQ` (= Personal in
+state), sectionId `6hJQ557XXQ7fRjVQ` (This Week), `checked: false`;
+`find-comments` → 1 existing comment (research `6hRp9m9VXrGmrmhx`).
+
+Writes, in order, each read back:
+1. `add-comments` → comment `6hRwXjm592Rx4CVx` (postedAt
+   2026-09-09T10:21:46Z): booked 18.09.2026 10:30, Republikas laukuma
+   klīnika, Republikas laukums 3-18, Dr Vladimirs Šalajevs,
+   "Ultrasonoskopija prostatai", €70, tel 28002363, `ref:
+   mail:1a085a1af2a3db83`, calendar event `vmenfco7t7tf96qr0fb2cl7vt0`,
+   Family-calendar overlap "A KLINIKA" 10:00–13:00 noted. Read back via
+   `find-comments commentId` — content matches.
+2. `complete-tasks ["6hRV8xr4fHJP3gQQ"]` → successCount 1, failureCount 0.
+   Read back via `fetch-object` → `checked: true`, completedAt
+   2026-09-09T10:21:53.031Z.
+
+No other task touched. No Gmail or Calendar write (the event already
+existed; thread 1a085a1af2a3db83 left as is — not a Needs-Payment thread,
+so carve-out 5 does not apply).
+
+Connector note: the `add-comments` / `complete-tasks` "expected array,
+received string" failures in the previous session did not recur. Loading
+the four tools through `ToolSearch select:<name>,…` returned full schemas
+and both accepted array input first time. Lesson appended.

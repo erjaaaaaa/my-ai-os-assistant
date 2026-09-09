@@ -140,3 +140,4 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   day into `AGENTS.md` § Phase gates, `config/routing-rules.md`,
   `config/sources/calendar.md`, `config/tools.md`, `procedures/step-1-inbox.md`
   and `procedures/step-4-brief.md`.
+- 2026-09-09 — **Todoist array-input "outage" was a schema-loading problem** — In one session `add-comments`, `update-tasks` and `complete-tasks` rejected every call with "expected array, received string" and the schemas had loaded as opaque `{type: object}`; a fresh session that loaded the same tools with `ToolSearch select:<tool>,<tool>` got full schemas and both writes succeeded first time. **Rule:** when a Todoist write tool rejects an array with "expected array, received string", reload its schema with `ToolSearch select:` (not a keyword search) and retry once before recording a connector outage; log which shape the schema loaded in.
