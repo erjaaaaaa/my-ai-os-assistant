@@ -984,3 +984,27 @@ no due date, no completion. Watermarks unchanged.
 
 Noted (assistant memory, not state): the question implies Eriks's home
 area is Mārupe — recorded as inferred and unconfirmed.
+
+## 2026-09-09 — ad-hoc: podiatrist availability check (chat)
+
+Eriks, in chat: *"they're all available only in October"*. Checked the two
+public booking portals in the browser, no login, read-only:
+
+- vc4.piearsta.lv, catalogue filtered to Podologs → 3 podologists:
+  Olga Gogajeva (Capital Clinic, Duntes 15A) 25.09.2026 09:00; Agnese
+  Arsentjeva (same clinic) 01.10.2026 12:00; Iveta Šūmākere (VC4
+  Dermatoloģijas klīnika, Skanstes 50) 12.10.2026 08:00.
+- ars.eveselibaspunkts.lv, service "Ārstnieciskā pēdu aprūpe (podologs)",
+  InstitutionCode 010064801 ServiceCode 48 → 4 podologists, all at ARS
+  Rehabilitācija, Brīvības 39: Kuļpe 01.10 09:00, Kuhta 12.10 14:30,
+  Maškanceva 29.10 09:00, Kozlovska 04.11 13:00.
+
+So the earliest online slot in Riga is 25 Sep, not October — Eriks's
+statement holds for Mārupes Doktorāts and for most but not all of the
+Riga list. VC4 Pēdu centrs (K. Barona 115) and Ilga Prinkalne are not on
+either portal; phone only, availability unknown, named as unknown.
+
+Write: `add-comments` on `6hQF5pq7mJqHmXcQ` → `6hV26R5MPjPMjHWQ` (postedAt
+2026-09-09T15:14:22Z). Read back via `find-comments commentId`. No
+booking made (Phase 1: booking is Eriks's act), no section move, no due
+date, no completion. Watermarks unchanged.
