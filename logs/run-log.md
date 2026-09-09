@@ -971,3 +971,16 @@ Write: `add-comments` on `6hQF5pq7mJqHmXcQ` → `6hV249G5VvR5V3HQ` (postedAt
 2026-09-09T15:00:43Z), six-entry shortlist with addresses, phones,
 booking route and vc4 prices. Read back via `find-comments commentId`.
 No section move, no due date, no completion. Watermarks unchanged.
+
+## 2026-09-09 — ad-hoc: podiatrist shortlist, Mārupe follow-up (chat)
+
+Eriks, in chat: *"is there anything in Marupe?"*. WebSearch + WebFetch:
+marupesdoktorats.lv podologs page (Pededzes 10, tel 20004039, four
+podologists with days, price list quoted), zl.lv listing for a Piņķi
+practice (Jūrmalas 14, unverified). Write: `add-comments` on
+`6hQF5pq7mJqHmXcQ` → `6hV256M59ghcqcCQ` (postedAt 2026-09-09T15:06:10Z),
+entries 7 and 8. Read back via `find-comments commentId`. No section move,
+no due date, no completion. Watermarks unchanged.
+
+Noted (assistant memory, not state): the question implies Eriks's home
+area is Mārupe — recorded as inferred and unconfirmed.
