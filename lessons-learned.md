@@ -141,3 +141,13 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   `config/sources/calendar.md`, `config/tools.md`, `procedures/step-1-inbox.md`
   and `procedures/step-4-brief.md`.
 - 2026-09-09 — **Todoist array-input "outage" was a schema-loading problem** — In one session `add-comments`, `update-tasks` and `complete-tasks` rejected every call with "expected array, received string" and the schemas had loaded as opaque `{type: object}`; a fresh session that loaded the same tools with `ToolSearch select:<tool>,<tool>` got full schemas and both writes succeeded first time. **Rule:** when a Todoist write tool rejects an array with "expected array, received string", reload its schema with `ToolSearch select:` (not a keyword search) and retry once before recording a connector outage; log which shape the schema loaded in.
+- 2026-09-09 — **A Receipts thread was archived without its ledger row** —
+  the Le-Glue order #7334 thread (`1a07c78bfa6844cd`, 7 Sep) was labelled
+  Receipts & Subscriptions and archived, but `ledgers/receipts.csv` held no
+  row for it; found only when the refund arrived and there was nothing to
+  net it against. The row was backfilled with a note. **Rule:** the archive
+  read-back for a Receipts / Newsletters / Promotions thread is a grep of the
+  ledger for that thread's `messageId` *after* the append, and the run log
+  quotes the line number; the review task's per-class count of "archived"
+  must equal the count of ledger rows appended that run, and a mismatch is
+  reported, not archived through.

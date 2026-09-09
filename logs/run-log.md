@@ -897,3 +897,44 @@ Connector note: the `add-comments` / `complete-tasks` "expected array,
 received string" failures in the previous session did not recur. Loading
 the four tools through `ToolSearch select:<name>,…` returned full schemas
 and both accepted array input first time. Lesson appended.
+
+## 2026-09-09 — ad-hoc: Le-Glue refund, Block Lock reorder (chat)
+
+Eriks, in chat: *"Le Glue refunded transaction. Reordered via Block Lock.
+Check the e-mail"* (Gmail web link to the refund thread).
+
+Read: `search_threads` Le-Glue newer_than:10d → 4 threads; Block Lock →
+1 thread. `get_thread` PLAIN_TEXT on both new threads:
+- `1a0862502f1d4882` "Refund notification", Shopify for Le-Glue, 12:29Z,
+  INBOX, unlabelled — order #7334 refunded in full, €105.15, "up to 10 days".
+- `1a0863ff623d94e1` "Order #1359 confirmed", Block Lock Toy Glue, 12:58Z,
+  INBOX, unlabelled — €41.90 (€23.95 + €17.95 shipping), standard shipping
+  up to 10 working days.
+Todoist `find-tasks` first returned HTTP 401 (retry_after 1280); the
+`fetch-object` retry ~1 min later succeeded — transient, not an outage.
+Task `6hRHJQwmr656PG6x` "Buy lego glue - Le glue": Waiting / Blocked
+(`6hJQ57R2hvM9RQgQ`), `checked: false`.
+
+Defect found: order thread `1a07c78bfa6844cd` (#7334, 7 Sep) carries the
+Receipts label and is archived, but `ledgers/receipts.csv` had no row for
+it (grep on messageId, 7334, "glue", 105.15 → 0 hits). Backfilled below.
+
+Writes, each read back:
+1. `label_thread` Receipts & Subscriptions on `1a0862502f1d4882` and
+   `1a0863ff623d94e1` → `{}` each.
+2. `ledgers/receipts.csv` +3 rows (528 → 531 lines): #7334 order backfill
+   (105.15, dated 2026-09-07, note says backfilled), #7334 refund (-105.15),
+   Block Lock #1359 (41.90). Read back by grep on the three messageIds.
+3. `unlabel_thread ["INBOX"]` on both threads (carve-out 4, Receipts after
+   ledger row). Read back via `search_threads` METADATA_ONLY: both show
+   `labelIds: ["Label_8316160478815561067"]` only — INBOX absent.
+4. `add-comments` on `6hRHJQwmr656PG6x` → `6hRxPP8xfXqV24vQ` (postedAt
+   2026-09-09T13:01:55Z): refund + reorder evidence, both `ref: mail:` ids,
+   watch-items (credit by 19 Sep, Block Lock dispatch). Read back via
+   `find-comments commentId` — content matches. No section move (already
+   Waiting / Blocked; still waiting, now on Block Lock), no completion.
+
+Not touched: conversation thread `1a0813348da28051` "Message from Le-Glue"
+(still in INBOX, unlabelled, Eriks's own reply is the newest message) — now
+moot after the refund; left for the next sweep. No task created for the
+refund check; offered in chat. Watermarks unchanged (ad-hoc, not a run).
