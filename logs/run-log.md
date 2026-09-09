@@ -667,3 +667,120 @@ a section; flagged in chat. Dose written as Eriks wrote it ("8000DV");
 reminders (one active row, end 2026-12-08); `procedures/step-4-brief.md`
 new § 6a; `lessons-learned.md` one entry. No Gmail, calendar or vault
 writes.
+
+## 2026-09-09 — `/start-day` run (11:06–11:20 Europe/Riga)
+
+**Step 0.** Gmail live: `list_labels` 46 labels, `INBOX.threadsTotal` 11.
+Calendar live: `list_calendars` 8 calendars, both swept ids present.
+Todoist live: `user-info` = epetersons87@gmail.com, user 22613842. Ids
+`_verified` 2026-09-07 (2 days) — not re-resolved. `agent-waiting` tasks in
+Personal: 3, `find-comments` on each: 1 comment each, none with the
+assistant marker → open 3, answered 3, ambiguous 0.
+- `6hRVRq9X62WJ6HMQ` Amex — Eriks: *"No task, this is just notification. I
+  don't use it for long time, but it just keeps coming since the card itself
+  is still active."* → rule added `config/routing-rules.md` § Source hints ›
+  Mail (line 85, read back). Closing comment posted; completed.
+- `6hRVRqX7GwHq5PPQ` SIA — Eriks: *"Company is registered. All done."* →
+  option (a), no task. Thread 1a02fe21d1a9f1d8 read (`get_thread`): no
+  `label_ids` at all — not in INBOX, not STARRED any more. Label not applied:
+  the allowed write is on an inbox thread; failed closed. Closing comment
+  posted; completed.
+- `6hRVRr7vxmm53x6x` Loyalty — Eriks: *"a)"* → Loyalty row widened in
+  `config/routing-rules.md` § Mail label taxonomy (line 206, superseded text
+  quoted, read back). Closing comment posted; completed.
+`complete-tasks` returned all three; `find-tasks agent-waiting` afterwards
+returned only the new Supabase question (then 2 after the vault question).
+Idempotency: `calendar.last_scanned_date` 2026-09-08 ≠ today; mail newer
+than 1788848723000 present → full run.
+
+**Step 1.** `search_threads in:inbox` → 11 threads, 11 ≤ 11. Skipped, already
+labelled (ids read off messages): 3 — 1a080f5ae9698874 Elektrum
+(Needs-Payment), 19ffb512ae9ff08a Printful (Reply/Do), 19ecbccd34e3286c
+Revolut (Banking & Cards). Labelled, each `label_thread` → `{}` and read
+back on every message:
+- 1a085304965f8d0b Facebook friend update → Social Media ✔ (sender domain
+  decisive; body not read).
+- 1a084f8c7ad692c9 NEXT.io newsletter → Newsletters & Learning ✔; row
+  appended to `ledgers/newsletters.csv` line 6212 (0 dupes before, read
+  back); `unlabel_thread INBOX` → `{}`; read back: label only ✔.
+- 1a084d1f3a7e8531 LitRes promo → Promotions & Ads; `get_thread` read-back
+  failed 2× "The caller does not have permission"; `search_threads
+  in:anywhere from:info@nsl.litres.ru after:2026/09/08 includeTrash` returned
+  it with `label_ids` UNREAD, Promotions & Ads, **TRASH** (historyId
+  14176083, i.e. trashed during the run, after the label). Row appended to
+  `ledgers/promotions.csv` line 10073 (0 dupes before, read back). No archive
+  step (already out of the inbox by someone else's act).
+- 1a08533da23e4a09 "New event: Yoga home" and 1a0853412c516cf2 "Cancelled
+  event: Yoga home" (both margaritaeliya@gmail.com, Google Calendar
+  notifications, `.ics` attached, Family calendar) → Schedule Calendar ✔ ✔.
+  Real-person test: Family-calendar entry → real, not advertising. Match
+  check: `list_events` both calendars 16 Sep 09:25–10:35 `fullText: Yoga
+  home` → empty on both (the event was cancelled 15 s after creation). No
+  proposal (source withdrew it); no archive (carve-out 4 needs a match).
+Left unlabelled (3): 1a0813348da28051 Le-Glue (Eriks sent last, 17:22Z 8
+Sep; live conversation kept re-sweepable); 1a07ff008d25cd60 Supabase (now
+`[Needs Eriks]` `6hRvw46QX46528XQ`, ref line read back via `fetch-object`);
+1a0844c180ffb6a3 Glassdoor (`get_thread` PLAIN_TEXT failed 3× "does not
+have permission"; `search_threads in:anywhere … includeTrash` shows UNREAD,
+**TRASH**, historyId 14175968 — trashed during the run, before any label).
+Payment tasks: 0. Calendar proposals: 0. Review task `6hRvwQr3m62FCXHQ`
+"[Act] Review inbox labels — 2026-09-09", This Week, p3, `dueDate`
+2026-09-09 (returned object checked; no prior task by that title in the 27
+open). `list_labels` at close: INBOX threadsTotal 10 (11 − NEXT.io −
+Elektrum − 2 trashed + 3 arrived: 1a0853aa0510037f LinkedIn "Khushi",
+1a085390f0a4865a Supabase "has been paused", 1a08535dba44ab62 Audible —
+all after the sweep read, left for next run); TRASH 218 → 220; Paid 210 →
+211; Needs-Payment 2 → 1; Schedule Calendar 272 → 274; Social Media 11 →
+12; Newsletters 1952 → 1953; Promotions 2735 (unchanged — a trashed thread
+keeps its label but the count reads the same).
+
+**Step 2.** Mail: 11 inbox threads read; new since 1788848723000: 8
+(Elektrum, Supabase, Le-Glue, Glassdoor, LitRes, NEXT.io, Facebook, Yoga
+×2 — Le-Glue newest 1788888128000 is Eriks's own reply). Sent since
+2026/09/08: 1 thread (Le-Glue), Eriks's own messages carry no new
+commitment beyond "please refund … I'll try to find some suppliers in
+Europe" (conditional; no task). Buckets: Know 6, Noise 1, needs-owner 1
+(Supabase), movement 1 (Le-Glue). Dedupe reads: `find-tasks` project 27
+open (hasMore false), `find-completed-tasks` since 2026-09-03 7,
+`find-activity deleted` since 2026-07-11 0. Tasks created from sources: 0.
+`[Needs Eriks]` created: 2 — `6hRvw46QX46528XQ` Supabase (p4, Waiting /
+Blocked, default no task) and `6hRvwHmgrvg8jRHQ` vault `wiki:` vs
+`wiki_pages:` (p4, default `wiki:` for new files; read back). Comment on
+`6hRHJQwmr656PG6x` "Buy lego glue" (`6hRvw4JxmhJPQx5x`, marker + ref, prior
+comments checked: different evidence) — no move, already Waiting / Blocked,
+no parent. Second comment on the Supabase question (`mail:1a085390f0a4865a`
+arrived mid-run: "has been paused").
+Calendar: own calendar 9–16 Sep empty; wider control 10 Aug – 9 Oct → 14
+events (populated; "Q&A w/ Nate" ×3 advertising, all past). Family 9–16 Sep
+→ 10 events, listed in the brief; overlaps 0; needsAction 0; advertising 0;
+tasks 0 ("Взять камни" on Массаж not addressed to Eriks). Recurring series
+named in `config/routing-rules.md` § Calendar scope (line 162, assistant
+edit per § Source hints, read back).
+**§ 3b carve-out 5:** completed tasks with `Pay ` + `ref: mail:`: Bite
+(thread already handled 2026-09-08, not re-read) and Elektrum
+`6hRhm7h4x22gqRhx` (completed 2026-09-08T20:12:35Z). Elektrum thread
+1a080f5ae9698874 `get_thread METADATA_ONLY`: UNREAD, Needs-Payment, INBOX →
+in class. `label_thread Paid` → `{}`; read back: Paid, UNREAD,
+Needs-Payment, INBOX ✔. `unlabel_thread Needs-Payment` → `{}`; read back:
+Paid, UNREAD, INBOX ✔. `unlabel_thread INBOX` → `{}`; read back: Paid,
+UNREAD ✔. No permission refusal this time.
+
+**Step 3.** Vault `AGENTS.md` read. Nothing durable: SIA thread considered
+(one-line fact, no company name, no personal-admin pages in the vault) and
+declined. The `wiki_pages:` drift flagged in the procedure since 2026-09-07
+raised as a `[Needs Eriks]` question (above). No vault writes.
+
+**Step 4.** Brief written to `briefs/2026-09-09.md` and delivered in chat.
+
+**Anomaly.** Two threads (LitRes, Glassdoor) moved to TRASH mid-run by an
+actor other than this run (history ids inside the run window; the run made
+no trash-capable call). Reported in the brief; nothing done to them.
+Registry: `config/tools.md` gains the `get_thread`-on-TRASH fact (line
+140). `search_threads from:… newer_than:2d` also failed to return the
+trashed LitRes thread — the `in:anywhere`/`includeTrash` form did.
+
+**Close-out.** Watermarks: `mail.last_internaldate_ms` 1788848723000 →
+1788941177000 (Yoga cancelled, newest processed; the 3 mid-run arrivals are
+above it); `calendar.last_scanned_date` → 2026-09-09;
+`inbox.last_sweep_date` → 2026-09-09; vault and digest keys unchanged.
+Lessons: none appended (no correction from Eriks this run).

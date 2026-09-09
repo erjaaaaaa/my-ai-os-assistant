@@ -137,6 +137,15 @@ used by this instance, whatever it is.
   allows the tool and the connector still says "requires additional
   permissions", the fix is a reconnect with every Google consent checkbox
   ticked.**
+- **2026-09-09 — `get_thread` on a thread in TRASH returns "The caller does
+  not have permission".** Two inbox threads were moved to Trash mid-run by
+  something other than the run (no run call can trash); `get_thread` on
+  each failed three times with that error while `search_threads` with
+  `in:anywhere` and `includeTrash: true` returned them, `TRASH` in their
+  `label_ids`. → The error reads like a scope problem and is not one. →
+  **On "does not have permission" from `get_thread`, before calling it an
+  outage, run `search_threads in:anywhere <sender> after:<date>` with
+  `includeTrash: true` and read `label_ids`; a `TRASH` entry explains it.**
 - **2026-09-07 — Gmail labels are applied at thread level here** (`label_thread`),
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all

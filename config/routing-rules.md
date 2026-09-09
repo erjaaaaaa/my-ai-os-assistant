@@ -82,6 +82,14 @@ another.
   Decide.
 - **Ignore read/unread state entirely.** In a mailbox that is unread by
   default, read state carries no signal.
+- **A card "statement ready" notice carries no task.** ADDED 2026-09-09 by
+  Eriks, answering the `[Needs Eriks]` question on the American Express
+  "Your latest statement is ready" mail (ref mail:1a076a154d35a998): *"No
+  task, this is just notification. I don't use it for long time, but it just
+  keeps coming since the card itself is still active."* A statement notice
+  from any card issuer stays Know-only (Banking & Cards label, at most one
+  line in the brief); a task arises only when the mail itself states an
+  amount due or a due date, which then makes it Needs-Payment.
 
 ### Calendar
 
@@ -151,7 +159,15 @@ another.
 - Ignored: the two calendars named "Todoist" (task mirrors — sweeping them
   would count every task twice), the three holiday calendars, and any event
   calendar. Add a calendar here only when Eriks names it.
-- Routine recurring series: none named yet.
+- Routine recurring series — ADDED 2026-09-09 by the assistant, per § Source
+  hints › Calendar ("name them under Source-specific notes when they
+  appear"); Eriks may strike any. Seen recurring on the Family calendar:
+  🗑️ Sadzīves atkritumi (all-day, Wednesdays), Ljuba uborka (Thu 09:00),
+  Take out rubbish (Thu 22:00), Мусор (Fri 08:00), Ervins Futbols (Thu 17:00
+  and Tue 18:00, Mārupes Valsts ģimnāzijas stadions). Seen recurring on
+  Eriks's own calendar: Top up HSBC (all-day, seen 29 Aug and 29 Sep), Unsub
+  session (Fri 16:00, seen 4 Sep and 2 Oct). None generates a task; Family
+  ones are still listed in the brief's Family section.
 
 ### Standing reminders — carried in every brief until their end date
 
@@ -187,7 +203,7 @@ from Eriks's earlier automation on 2026-09-07.
 | **Professional Networking** (`Interests & Marketing/…`) | LinkedIn, AngelList and other professional-community notifications. | Label. Stays in inbox. |
 | **Promotions & Ads** (`Interests & Marketing/…`) | Marketing, retail offers, casino ads, sales campaigns, discounts. Includes fundraising appeals and NGO campaigns unless a specific bill is due. | Label + row in `ledgers/promotions.csv`, then archive. Digested weekly. |
 | **Social Media** (`Interests & Marketing/…`) | Facebook, Instagram, TikTok, X and similar notifications. | Label. Stays in inbox. |
-| **Loyalty** | Airline or hotel loyalty programmes: miles, points, tier status, bonus offers, statements. | Label. Stays in inbox. |
+| **Loyalty** | Any loyalty programme — airline, hotel or retail (Rimi, Decathlon and the like): miles, points, tier status, bonus offers, coupons, statements. WIDENED 2026-09-09 by Eriks, answering the `[Needs Eriks]` question of 2026-09-07 (ref mail:1a07c681b6c85794) with *"a)"*, where option (a) read *"Widen the description to 'any loyalty programme'"*. Superseded text: "Airline or hotel loyalty programmes: miles, points, tier status, bonus offers, statements." The tie-break Loyalty > Promotions is unchanged. | Label. Stays in inbox. |
 | **Security & Verification** | Verification codes, login alerts, password resets, suspicious sign-in notices. | Label. Stays in inbox. |
 | **Travel - Bookings & Iterinary** | Flight, hotel or car bookings with itineraries, boarding passes, check-in mail, travel confirmations. | Label. Stays in inbox. |
 
