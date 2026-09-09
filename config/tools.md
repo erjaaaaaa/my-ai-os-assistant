@@ -49,10 +49,10 @@ used by this instance, whatever it is.
   classes only; `create_draft`, `update_draft` — only when Eriks asks for a draft.
   WIDENED 2026-09-07 (carve-out 5): on a thread whose payment task Eriks
   completed, `label_thread` with `Paid` and `unlabel_thread` with
-  `Needs-Payment` then `INBOX` — see `config/sources/gmail.md` allowed-write 4.
+  `Needs-Payment` then `INBOX` — see `config/sources/gmail.md` allowed-write 4. WIDENED 2026-09-09 (carve-out 6): `trash_thread` on a Google Calendar notification thread only — allowed-write 5.
 - **Never used:** `send_message`, `reply`, `forward`, `label_message`,
   `unlabel_message`, `update_message_labels`, `create_label`, `update_label`,
-  `delete_label`, `trash_thread`, `trash_message`, `mark_thread_spam`,
+  `delete_label`, `trash_thread` (NARROWED 2026-09-09: used under carve-out 6 only), `trash_message`, `mark_thread_spam`,
   `mark_message_spam`, `apply_sensitive_*`, `unlabel_thread` with any other id.
 - **If broken:** outage; watermark does not move; brief names it.
 
@@ -65,7 +65,7 @@ used by this instance, whatever it is.
 - **Write, per item only:** `create_event` on `epetersons87@gmail.com`, no
   attendees, only after Eriks's yes naming a calendar proposal from the brief;
   read back and logged each time.
-- **Never used:** `create_event` with attendees or without a per-item yes,
+- **Never used:** `create_event` with attendees or without a per-item yes (NARROWED 2026-09-09: carve-out 7 creates without a per-item yes for an unmatched real invite),
   `update_event`, `delete_event`, `respond_to_event`, `suggest_time`.
 - **If broken:** outage; scanned-date key does not move; brief names it.
 

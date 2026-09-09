@@ -119,3 +119,24 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   reminders; the brief carries one line per active row (procedure
   `step-4-brief.md` § 6a) and drops it after the end date. Never a second
   task per day, never a completion by the assistant.
+- 2026-09-09 — **Google Calendar notification mail is trashed, not filed** —
+  the sweep labelled two "Yoga home" notifications (New event / Cancelled
+  event, Family calendar) Schedule Calendar and left them in the inbox because
+  no matching event existed. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."*
+  **Rule:** carve-out 6 — a Google Calendar notification thread (New/Updated/
+  Cancelled event, Invitation, Accepted/Declined, daily agenda) is trashed with
+  `trash_thread` after the existence check, read back via `search_threads
+  in:anywhere` + `includeTrash`; nothing else is ever trashed. Replaces the
+  daily-agenda → Promotions half of the Schedule sub-rule. Promoted the same
+  day into `AGENTS.md` § Phase gates, `config/routing-rules.md`,
+  `config/sources/gmail.md`, `config/tools.md` and `procedures/step-1-inbox.md`.
+- 2026-09-09 — **An unmatched real invite is created, not proposed** — the
+  brief used to carry calendar proposals awaiting a per-item yes. Eriks:
+  *"Same goes with calendar invites - check if those exist, if not, create one."* **Rule:** carve-out 7 — a Schedule Calendar thread that is a real
+  invitation or booking, with no match on either swept calendar and no
+  cancellation, gets `create_event` on Eriks's own calendar, no attendees,
+  `ref: mail:<thread_id>` in the description, read back and logged, then
+  archived; unsure → `[Needs Eriks]`, default not created. Promoted the same
+  day into `AGENTS.md` § Phase gates, `config/routing-rules.md`,
+  `config/sources/calendar.md`, `config/tools.md`, `procedures/step-1-inbox.md`
+  and `procedures/step-4-brief.md`.

@@ -105,9 +105,9 @@ rule below follows from it. Where the allowlist and the forbidden list appear to
 disagree, **the allowlist wins — it fails closed** — and the disagreement is a
 defect in this document to be fixed, not re-adjudicated per request.
 
-**Writes allowed:** Todoist, project Personal only — create tasks (in Backlog; NARROWED 2026-09-07 by Eriks: payment tasks from Needs-Payment mail are created in **This Week** instead — *"For any e-mail that are required payments - always put in THIS WEEK column in todoist"*; the rule is in `config/routing-rules.md` § The payment task; NARROWED again 2026-09-08 by Eriks: the daily review task also goes to **This Week** — *"same as with the payments"*, rule in `config/routing-rules.md` § The payment task), comment, apply labels under the full-label-set rule, move top-level tasks between sections on new evidence, and complete a task only when it is the assistant's own `[Needs Eriks]` task or Eriks has said yes naming that individual item. Gmail — apply exactly one of the thirteen labels in `state/state.json` to an unlabelled inbox thread; remove `INBOX` from a thread in one of the four carve-out classes in § Phase gates; under carve-out 5 there, apply `Paid`, remove `Needs-Payment` and remove `INBOX` on a thread whose payment task Eriks completed (WIDENED 2026-09-07, Eriks); a draft, only when Eriks asks for one. Google Calendar — `create_event` on Eriks's own calendar, without attendees, only on Eriks's per-item yes naming that event. The vault at `../My Brain/` — through the ingest workflow in `procedures/step-3-ingest.md` only. This folder's own files: state, logs, briefs, plans, ledgers, config.
+**Writes allowed:** Todoist, project Personal only — create tasks (in Backlog; NARROWED 2026-09-07 by Eriks: payment tasks from Needs-Payment mail are created in **This Week** instead — *"For any e-mail that are required payments - always put in THIS WEEK column in todoist"*; the rule is in `config/routing-rules.md` § The payment task; NARROWED again 2026-09-08 by Eriks: the daily review task also goes to **This Week** — *"same as with the payments"*, rule in `config/routing-rules.md` § The payment task), comment, apply labels under the full-label-set rule, move top-level tasks between sections on new evidence, and complete a task only when it is the assistant's own `[Needs Eriks]` task or Eriks has said yes naming that individual item. Gmail — apply exactly one of the thirteen labels in `state/state.json` to an unlabelled inbox thread; remove `INBOX` from a thread in one of the four carve-out classes in § Phase gates; under carve-out 5 there, apply `Paid`, remove `Needs-Payment` and remove `INBOX` on a thread whose payment task Eriks completed (WIDENED 2026-09-07, Eriks); under carve-out 6, `trash_thread` on a Google Calendar notification thread (WIDENED 2026-09-09, Eriks); a draft, only when Eriks asks for one. Google Calendar — `create_event` on Eriks's own calendar, without attendees, only on Eriks's per-item yes naming that event (WIDENED 2026-09-09 by Eriks into a standing rule, carve-out 7: also without a per-item yes when a Schedule Calendar thread's event exists on neither swept calendar and carries no cancellation — *"Same goes with calendar invites - check if those exist, if not, create one."*). The vault at `../My Brain/` — through the ingest workflow in `procedures/step-3-ingest.md` only. This folder's own files: state, logs, briefs, plans, ledgers, config.
 
-**Forbidden:** Gmail — sending, replying, forwarding, scheduling or sending a draft, trashing, marking spam or read, archiving any thread outside the four carve-out classes (NARROWED 2026-09-07: carve-out 5 adds the closed-payment class), removing or renaming any label (NARROWED 2026-09-07: except removing `Needs-Payment` under carve-out 5), creating a label, and applying any label outside the thirteen (NARROWED 2026-09-07: except `Paid`, under carve-out 5 only). Google Calendar — any event with attendees; `update_event`, `delete_event`, `respond_to_event`; any creation not answered by a per-item yes. Todoist — deleting anything; creating or renaming projects, sections or labels; editing or removing any of Eriks's own labels; completing a task on the assistant's own judgement; touching any project other than Personal. Anything outside this folder and the vault. Any message to any person on any channel.
+**Forbidden:** Gmail — sending, replying, forwarding, scheduling or sending a draft, trashing (NARROWED 2026-09-09: except a Google Calendar notification thread under carve-out 6), marking spam or read, archiving any thread outside the four carve-out classes (NARROWED 2026-09-07: carve-out 5 adds the closed-payment class), removing or renaming any label (NARROWED 2026-09-07: except removing `Needs-Payment` under carve-out 5), creating a label, and applying any label outside the thirteen (NARROWED 2026-09-07: except `Paid`, under carve-out 5 only). Google Calendar — any event with attendees; `update_event`, `delete_event`, `respond_to_event`; any creation not answered by a per-item yes (NARROWED 2026-09-09: except under carve-out 7). Todoist — deleting anything; creating or renaming projects, sections or labels; editing or removing any of Eriks's own labels; completing a task on the assistant's own judgement; touching any project other than Personal. Anything outside this folder and the vault. Any message to any person on any channel.
 
 Never write secrets — API keys, tokens, session strings — into any file in this
 instance. Credentials live in the OS keychain or a gitignored `.env`, and the
@@ -245,9 +245,7 @@ suggestion, a comment, or a task sitting in a column.
 section to say so:**
 
 - **Acting on the sweep's own dispositions** — archiving, trashing, moving
-  or deleting anything the sweep classified. The sweep applies a label and
-  stops. **The label is a proposal** — except for the four classes named in
-  carve-out 4 below, and nothing beyond them.
+  or deleting anything the sweep classified. The sweep applies a label and stops. **The label is a proposal** — except for the four classes named in carve-out 4 below, and nothing beyond them (NARROWED 2026-09-09: carve-outs 6 and 7 below add one trash class and one create class).
 - **Auto-completing a Todoist task on detected resolution.** Hard evidence
   that a commitment is discharged produces a comment and a move to **Done** —
   never a completion.
@@ -289,14 +287,12 @@ Four ship by default:
    labelled **Newsletters & Learning** or **Promotions & Ads**; or **Receipts
    & Subscriptions** after its ledger row was written and read back; or
    **Schedule Calendar** after a matching event was found on either swept
-   calendar, or an event was created on Eriks's per-item yes, or the thread
-   was re-routed to Promotions by the daily-agenda / webinar / ticket-vendor
+   calendar, or an event was created on Eriks's per-item yes (WIDENED 2026-09-09: or under carve-out 7), or the thread was re-routed to Promotions by the daily-agenda / webinar / ticket-vendor
    sub-rule. Archive means removing `INBOX` only. Both boundaries: **not** the
    other nine classes (Needs-Payment, Reply/Do, Family & Personal, Banking &
    Cards, Professional Networking, Social Media, Loyalty, Security &
    Verification, Travel), which stay in the inbox with their label; and
-   **never trash, spam or mark read** — archiving is the whole permission.
-   Authorising decision, Eriks, 2026-09-07, choosing among the options
+   **never trash, spam or mark read** — archiving is the whole permission (NARROWED 2026-09-09: carve-out 6 trashes exactly one class, Google Calendar notifications). Authorising decision, Eriks, 2026-09-07, choosing among the options
    offered: *"Carve-out: auto-archive exactly those four classes."* Recorded
    in `logs/run-log.md` with the alternatives he declined.
 5. **Closing the payment loop.** The class: an inbox thread that still
@@ -315,8 +311,45 @@ Four ship by default:
    "payment" task has been closed (DONE), change the label on the
    corresponding e-mail and archive it?"* and, on the cost being named:
    *"it's okay, I won't click by mistake. worst case, they (whoever that is)
-   will send a reminder later on."* Procedure in
-   `procedures/step-2-triage.md` § Closed payment tasks.
+   will send a reminder later on."* Procedure in `procedures/step-2-triage.md` § Closed payment tasks.
+6. **Trashing Google Calendar notification mail.** The class: an inbox
+   thread that is Google Calendar's own notification — its body carries
+   Google's notice text ("Invitation from Google Calendar" / "You are
+   receiving this email because you are subscribed to Calendar
+   notifications") or it is a Google Calendar daily agenda — and its subject
+   begins "New event:", "Updated event:", "Cancelled event:", "Invitation:",
+   "Updated invitation:", "Accepted:", "Declined:", "Tentatively accepted:"
+   or "Daily agenda". Trash means `trash_thread` only (recoverable from
+   Gmail's Trash for 30 days). Before trashing a creation or invitation
+   notice, the run checks the event exists on a swept calendar or has a
+   cancellation in the same sweep; if neither, carve-out 7 runs first, then
+   the trash. Both boundaries: **not** a booking or invitation from any
+   sender other than Google Calendar's notifier (a clinic, an airline, a
+   ticket vendor, a person's own `.ics`), which stays Schedule Calendar and
+   goes through carve-out 7; and it licenses no trashing of any other class,
+   no spam, no mark-read. Supersedes the daily-agenda half of the Schedule
+   Calendar sub-rule (daily agendas were re-routed to Promotions; now they
+   are trashed); the marketing-webinar and `bilesuserviss.lv` halves
+   survive. Authorising decision, Eriks, 2026-09-09, in chat: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."*
+7. **Creating the event for an unmatched invite.** The class: an inbox
+   thread the taxonomy labels Schedule Calendar as a real invitation,
+   booking confirmation or itinerary (not carve-out 6's Google notices, not
+   marketing) whose event — title roughly equal, times overlapping — exists
+   on neither swept calendar and which carries no cancellation. On it the
+   run calls `create_event` on Eriks's own calendar
+   (`epetersons87@gmail.com`) with the title, start, end (60 minutes when
+   the mail gives none) and location from the mail, **no attendees**, and a
+   description carrying `ref: mail:<thread_id>`; reads it back; logs it with
+   the event id; then archives the thread under carve-out 4. Both
+   boundaries: **not** the Family calendar or any other calendar (the write
+   surface stays Eriks's own), never attendees (an invite reaches another
+   person), never `update_event`, `delete_event` or `respond_to_event`; and
+   **not** an advertising event (webinar, Q&A, launch, summit), which still
+   goes to Promotions. Unsure whether the mail is a real booking → a
+   `[Needs Eriks]` question, default *not created*. Known cost, accepted:
+   a wrong creation is a stray event on Eriks's own calendar, named in the
+   brief. Supersedes "a calendar proposal in the brief, created on a
+   per-item yes". Authorising decision, Eriks, 2026-09-09, in chat: *"Same goes with calendar invites - check if those exist, if not, create one."*
 
 ### Lifting a gate
 

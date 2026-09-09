@@ -31,8 +31,7 @@ Scope, and anything excluded wholesale, is in `config/routing-rules.md`
 
 **Writes are narrow and listed below.** Step 1 adds one of thirteen labels to
 an unlabelled inbox thread and archives the four carve-out classes; a draft is
-written when Eriks asks for one. Never send, reply, forward, trash, or mark
-anything read or spam.
+written when Eriks asks for one. Never send, reply, forward, or mark anything read or spam; trash only under allowed-write 5 (NARROWED 2026-09-09; superseded text: "Never send, reply, forward, trash, or mark anything read or spam.").
 
 Before recording an absence, run the control query below. An unreadable
 mailbox is an **outage**, reported as one, and its watermark does not advance.
@@ -51,8 +50,8 @@ Match on the stable tool name. Connector instance ids appear in tool names as
 - `unlabel_thread` with `["INBOX"]` — archive, **only** for the four carve-out
   classes after their post-action was verified. **Write.** Never any other
   label id.
-- `create_draft`, `update_draft` — drafts only, only on Eriks's request.
-  Write, never sent.
+- `create_draft`, `update_draft` — drafts only, only on Eriks's request. Write, never sent.
+- `trash_thread` — **only** a Google Calendar notification thread under carve-out 6 (ADDED 2026-09-09). Write. Read back with `search_threads … in:anywhere` and `includeTrash: true` (`get_thread` refuses a trashed thread).
 
 ## Control query
 
@@ -97,8 +96,8 @@ actually processed.
    whose `Pay …` task with a `ref: mail:` line Eriks has completed —
    `label_thread` with `Paid` (id `paid_label_id` in state), then
    `unlabel_thread` with `Needs-Payment`, then `unlabel_thread` with `INBOX`.
-   Each read back. The only label removal and the only non-taxonomy label
-   this adapter ever writes.
+   Each read back. The only label removal and the only non-taxonomy label this adapter ever writes.
+5. **Trash, for exactly one class** (WIDENED 2026-09-09, Eriks; carve-out 6 in `AGENTS.md` § Phase gates): a Google Calendar notification thread — New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda — after the existence check, via `trash_thread`. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* Nothing else is ever trashed.
 
 ## Forbidden
 
@@ -107,8 +106,7 @@ actually processed.
 thread-level here), `create_label`, `update_label`, `delete_label`,
 `unlabel_thread` with any id other than `INBOX` or on any thread outside the
 four carve-out classes (NARROWED 2026-09-07: allowed-write 4 above is the one
-exception), `apply_sensitive_thread_label`, trashing, marking
-spam, marking read. Sending is Eriks's act and theirs alone.
+exception), `apply_sensitive_thread_label`, trashing (NARROWED 2026-09-09: allowed-write 5 is the one exception), marking spam, marking read. Sending is Eriks's act and theirs alone.
 
 ## Verified defects (carried from the system this adapter was generalised from)
 

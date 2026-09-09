@@ -14,7 +14,7 @@ nothing new except the tracker where a count is needed.
    skipped as already labelled; archived per class; threads left unlabelled,
    listed by subject; "ledger not migrated — N waiting" while that holds.
 3. **Payment tasks** — created this run, title and due date.
-4. **Calendar proposals** — bookings found in mail and on neither calendar:
+4. **Calendar events created** (CHANGED 2026-09-09, carve-out 7) — events the run created from mail, each with title, date, time, source thread and event id; and Google Calendar notifications trashed (carve-out 6), as a count with subjects. **Calendar proposals** survive only for the unsure case, asked as a `[Needs Eriks]` question. Superseded text: bookings found in mail and on neither calendar:
    title, date, time, source. "Say yes naming the item and I'll add it (no
    attendees)". Default: not created.
 5. **Receipts logged** — count and total per currency, if any.

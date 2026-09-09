@@ -37,9 +37,7 @@ client number from the body. Dedupe the ref against open tasks, completed
 the taxonomy's shape (`add-tasks`, then `fetch-object` to confirm the `ref:`
 line). The thread stays in the inbox.
 
-**Schedule Calendar.** Apply the sub-rule first (daily agenda, marketing
-webinar, `bilesuserviss.lv`): if it fires, label **Promotions & Ads** instead
-and treat as that class. Otherwise parse title, start, end (default 60
+**Schedule Calendar.** CHANGED 2026-09-09 by Eriks (carve-outs 6 and 7 in `AGENTS.md` § Phase gates; policy in `config/routing-rules.md` § Mail label taxonomy): (1) apply the sub-rule for marketing webinars and `bilesuserviss.lv` → **Promotions & Ads**; the daily-agenda half is withdrawn — a daily agenda is a Google notification, step 3. (2) Parse and run the existence check below on **both** calendars. (3) A **Google Calendar notification** (New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda): if the event exists, or a cancellation is in the same sweep, `trash_thread`; if it is a creation notice with no event and no cancellation, create under (4) first, then trash. Read back with `search_threads in:anywhere … includeTrash: true` and confirm `TRASH`. (4) A **real invite or booking** with no match and no cancellation: `create_event` on `epetersons87@gmail.com`, no attendees, description `ref: mail:<thread_id>`; `get_event` read-back; log the event id; then archive. Unsure it is a real booking → `[Needs Eriks]`, default not created, thread stays labelled in the inbox. Superseded text follows, kept for the match-check mechanics: Apply the sub-rule first (daily agenda, marketing webinar, `bilesuserviss.lv`): if it fires, label **Promotions & Ads** instead and treat as that class. Otherwise parse title, start, end (default 60
 minutes), attendee. `list_events` on **both** calendar ids in state over
 start − 5 min to end + 5 min, `fullText` = the title, `timeZone: Europe/Riga`.
 A match (title roughly equal, times overlapping) → **handled**: archive. No
@@ -82,8 +80,7 @@ N threads waiting" (see `ledgers/README.md`).
 
 Archive = `unlabel_thread(threadId, ["INBOX"])`, only for the four classes in
 the taxonomy, only after that class's post-action succeeded and was verified.
-Read back and confirm `INBOX` is absent. Never trash, never mark spam or read,
-never archive any other class.
+Read back and confirm `INBOX` is absent. Never trash (NARROWED 2026-09-09: except Google Calendar notifications under carve-out 6, § 3), never mark spam or read, never archive any other class.
 
 ## 5. The review task
 

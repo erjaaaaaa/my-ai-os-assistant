@@ -784,3 +784,46 @@ trashed LitRes thread — the `in:anywhere`/`includeTrash` form did.
 above it); `calendar.last_scanned_date` → 2026-09-09;
 `inbox.last_sweep_date` → 2026-09-09; vault and digest keys unchanged.
 Lessons: none appended (no correction from Eriks this run).
+
+## 2026-09-09 — Corrections from Eriks in chat (11:25–11:32 Europe/Riga)
+
+Eriks, three sentences: (1) *"Promotions should also be logged and archived."*
+— already the rule (taxonomy row: row + archive); today's LitRes thread was
+in Trash by another actor before the archive step. No change; explained in
+chat. (2) *"Same goes with calendar invites - check if those exist, if not,
+create one."* → **carve-out 7**: an unmatched, uncancelled real invite or
+booking is created with `create_event` on Eriks's own calendar, no
+attendees, `ref: mail:<thread_id>`, read back, logged, then archived;
+unsure → `[Needs Eriks]`, default not created. (3) *"The notifications from
+google should be ignored (those are usually about the event creation or
+deletion) so those can be deleted immediatlly."* → **carve-out 6**: Google
+Calendar notification threads (New/Updated/Cancelled event, Invitation,
+Accepted/Declined, daily agenda) are trashed with `trash_thread` after the
+existence check; nothing else is ever trashed. Assistant's reading, stated
+in chat for Eriks to correct: daily-agenda mails are included in the class
+(they are Google notifications), which withdraws the daily-agenda →
+Promotions half of the Schedule sub-rule.
+
+Files edited, each by exact-match replace and read back by grep:
+`AGENTS.md` (§ Security boundary allowed/forbidden ×3, § Phase gates
+disabled-list, carve-out 4, carve-outs 6 and 7 added at lines 315/334),
+`config/routing-rules.md` (Schedule Calendar row), `config/sources/gmail.md`
+(tools, allowed-write 5, forbidden, intro), `config/sources/calendar.md`
+(allowed writes ×2), `config/tools.md` (Gmail write/never-used, Calendar
+never-used), `procedures/step-1-inbox.md` (§ 3 Schedule Calendar, § 4),
+`procedures/step-4-brief.md` (§ 4), `lessons-learned.md` (+2 entries).
+Superseded text quoted in place throughout.
+
+Action on Eriks's words: `trash_thread` 1a08533da23e4a09 → `{}`,
+1a0853412c516cf2 → `{}`; read back via `search_threads in:anywhere
+from:margaritaeliya@gmail.com after:2026/09/08 includeTrash`: both carry
+Schedule Calendar + TRASH, no INBOX (history ids 14176544/14176547).
+Existence check had already run (empty on both calendars; event cancelled
+by its source). Review task `6hRvwQr3m62FCXHQ` description updated with the
+addendum (`update-tasks` returned the new text). Brief file addendum
+appended. No calendar write (nothing to create).
+
+Note for maintenance: `AGENTS.md` is 5,553 words against its stated
+3,000-word target (it was over before today); the carve-out text is the
+growth. Not trimmed now — a candidate to move § Phase gates carve-outs into
+a procedure file, on Eriks's yes.

@@ -83,12 +83,12 @@ populated control query.
 
 ## Allowed writes
 
-**None autonomously. This source is read-only in every sweep.** `create_event`,
+**None autonomously. This source is read-only in every sweep.** NARROWED 2026-09-09 by Eriks: carve-out 7 below makes one creation class autonomous; the sentence otherwise stands. `create_event`,
 `update_event`, `delete_event` and `respond_to_event` are never called by a run
 on its own judgement. A calendar write reaches other people — attendees are
 notified — so it sits squarely against the property the boundary protects.
 
-**The one exception, per item:** a calendar proposal from the inbox sweep (a
+**The one exception, per item** (WIDENED 2026-09-09 by Eriks into a standing rule — carve-out 7 in `AGENTS.md` § Phase gates: an unmatched, uncancelled real invite or booking is created without a per-item yes, on Eriks's own calendar, no attendees, description `ref: mail:<thread_id>`, read back and logged; Eriks: *"Same goes with calendar invites - check if those exist, if not, create one."* — the rest of this paragraph survives for the unsure case, which is asked as a `[Needs Eriks]` question): a calendar proposal from the inbox sweep (a
 confirmed booking found in mail and matched on neither calendar) that Eriks
 answers with a yes **naming that item** in chat is created with `create_event`
 on `epetersons87@gmail.com` — **never with attendees**, because an invite
