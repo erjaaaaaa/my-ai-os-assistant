@@ -1226,3 +1226,27 @@ through Bash — was refused by the desktop app's auto-mode classifier
 ("Blocked by classifier"). Per the 2026-09-08 lesson this is not an outage; the
 identical edits went through immediately via the Edit tool, and the Gmail write
 either side of it succeeded. No retry loop, no scope change.
+
+## 2026-09-10 — Ad-hoc: vault ingest of a Gitelman Telegram post
+
+Eriks pasted a Telegram post from Павел Гительман (potok_gitelman) in chat and
+asked for it to be saved to the vault. Ran the full ingest per
+`procedures/step-3-ingest.md` and the vault's own `AGENTS.md`, one source:
+snapshot written to `raw/Джон Тернус дал мне бесплатный урок по маркетингу.md`,
+a new *Sell The Behavior After Purchase — The Apple Keynote Pattern* section
+added to `wiki/Conversion Copy And Landing Pages.md` with a two-way cross-link,
+the `index.md` one-liner for that page extended, an entry appended to the
+vault's `log.md`, and the snapshot moved to `raw/processed/`. All five reads
+verified back: `raw/` root no longer holds it, `raw/processed/` does, the
+section and the source bullet are on the wiki page, the index line carries the
+new clause.
+
+**Post URL not captured.** Eriks gave the text and the channel, not a link to
+the individual post. The channel handle came from the vault's own two earlier
+Gitelman sources, not from this message. The snapshot says the post link is
+missing rather than constructing a plausible `t.me/potok_gitelman/<n>` — a
+fabricated permalink would be indistinguishable from a real one on later read.
+
+**Not touched:** the three unrelated files already sitting in the vault's
+`raw/` root (a backlog from Eriks's own clipping), left where they were.
+The vault is not a git repository, so its record is `log.md` alone.
