@@ -1156,3 +1156,36 @@ whose payload is a paid event or product).
 query defect; Skool classified Professional Networking rather than Social
 Media (it is a professional-community notifier, but the alternative is
 defensible and Eriks may re-label).
+
+### 2026-09-10 — addendum, after the brief (Eriks's answers in chat)
+
+Three follow-ups put to Eriks with the brief; two settled, one open.
+
+1. **Arlo €12.99 failed payment (`mail:1a064a1a38308887`)** — Eriks: *"If it's
+   taken from Telegram - no, no need."* The condition is **false**: the item
+   came from Gmail (`failed-payments@arlo.com`, 3 Sep, archived, still carrying
+   `Needs-Payment`), and this instance has **no Telegram source at all** —
+   Telegram belongs to the separate work instance. A conditional answer whose
+   condition does not hold is **not an answer**, so nothing was created and the
+   question was put back to Eriks with the provenance stated. **No task. Still
+   open.**
+2. **Google AI Studio billing, 14 Sep deadline (`mail:19ff87ae98e1ca85`)** —
+   Eriks: *"Ignore it."* No task created. The thread is in TRASH and below the
+   watermark, so no future sweep will re-surface it; no rule change needed.
+   Decision recorded here only.
+3. **18 Sep transrectal USG prep** — Eriks: *"Is that for the doctor
+   appointment? I'd wait to see if they contact me and then give them a call
+   next week if they don't."* Created `6hV6vFxQhGg9887Q` "Call Republikas
+   laukuma klīnika about the 18 Sep USG if they haven't been in touch" —
+   **This Month**, due **2026-09-14**, size/XS, p3,
+   `ref: chat:2026-09-10-usg-prep-call`, clinic tel. 28002363 in the body.
+   Section follows the 2026-09-09 precedent for a dated watch-then-act task
+   (the Le-Glue refund watch, `6hRxmG7HFGvq6Pwx`, which Eriks placed in This
+   Month himself). **The due date is the assistant's, not Eriks's** — his word
+   was "next week"; Monday was chosen because it leaves room to buy the
+   suppository before Friday, and the task description says so explicitly.
+   Verified by `find-tasks` on the This Month section: 5 tasks, the new one
+   present with `dueDate 2026-09-14` and `sectionId 6hJQ55cfhvj9Hq6Q`.
+   **No separate Microlax purchase task** — Eriks's answer covers the prep
+   through the call, and the detail already sits on calendar event
+   `vmenfco7t7tf96qr0fb2cl7vt0`.
