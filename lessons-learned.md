@@ -151,3 +151,16 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   quotes the line number; the review task's per-class count of "archived"
   must equal the count of ledger rows appended that run, and a mismatch is
   reported, not archived through.
+- 2026-09-10 — **A Gmail `label:<label_id>` query returns `{}` while the label
+  is plainly on the threads** — `search_threads` with
+  `query: label:Label_302269771500551203` returned an empty object, while the
+  same run's `in:inbox` read-back showed that exact id on two threads'
+  `label_ids`, and `label:"Action Required/Needs-Payment" in:anywhere`
+  returned four threads correctly. **Rule:** query Gmail labels by **display
+  name in quotes**, never by label id; a label-id query returning `{}` is a
+  query defect, not evidence of absence, and must never be used as the control
+  for "no thread carries this label". Label *ids* stay correct for
+  `label_thread` / `unlabel_thread` — this is a search-syntax defect only.
+  Extends the two `search_threads` defects in `config/sources/gmail.md`
+  § Verified defects; same trap, third instance: the tool answers, the answer
+  is silently incomplete.

@@ -46,10 +46,18 @@ Snapshot frontmatter uses only keys already in use in the vault (`title`,
 `source: "mail:<thread_id>"`, `tags: [mail]`, and `published` as the newest
 message's date. **Before adding any other key, check whether an existing key
 already covers the idea** — reuse or extend, never mint a synonym. Observed
-drift to raise, not fix: 15 files in `raw/processed/` use `wiki_pages:` where
-100 use `wiki:`. A key is condemned in the vault's own schema file or not at
-all, and that file is Eriks's — so this is a `[Needs Eriks]` question, with
-the default *use `wiki:`, leave existing files untouched*.
+drift, **SETTLED 2026-09-10**: 15 files in `raw/processed/` use `wiki_pages:`
+where 100 use `wiki:`. **`wiki:` is canonical for every file this instance
+writes; the 15 `wiki_pages:` files are left untouched, permanently.** Eriks,
+answering the `[Needs Eriks]` question (task `6hRvwHmgrvg8jRHQ`) on
+2026-09-09: *"I don't really mind. Do what you think is right. As long as it
+continues working and doesn't bite us in the future."* — the decision was
+delegated to the assistant, which chose the stated default over rewriting
+`raw/processed/`, because that folder is declared never-edited and no reader
+depends on the key. This is accepted drift, not a defect: do not re-raise it
+as a question. Superseded text: *"Observed drift to raise, not fix … so this
+is a `[Needs Eriks]` question, with the default use `wiki:`, leave existing
+files untouched."*
 
 ## The ingest workflow — in order, one source at a time
 

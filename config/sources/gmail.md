@@ -118,6 +118,13 @@ incompleteness is silent.
   id returned 9, newest that morning. No error, no truncation flag. **Call
   `get_thread` whenever the newest-message timestamp matters** — which is every
   watermark comparison.
+- **A `label:<label_id>` query returns `{}` even when the label is on the
+  threads.** ADDED 2026-09-10: `search_threads label:Label_302269771500551203`
+  came back empty while the same run's `in:inbox` read-back showed that id on
+  two threads, and `label:"Action Required/Needs-Payment" in:anywhere` returned
+  four. **Query labels by display name in quotes, never by id**; an empty
+  label-id query is a query defect, not an absence. Label ids remain correct
+  for `label_thread` / `unlabel_thread`.
 - **Negative label filters do not work at thread level.** `in:inbox -label:X`
   returns threads carrying X anyway, because the query matches a thread if
   *any* message in it lacks the label. Verify labels by reading each message's

@@ -1008,3 +1008,151 @@ Write: `add-comments` on `6hQF5pq7mJqHmXcQ` → `6hV26R5MPjPMjHWQ` (postedAt
 2026-09-09T15:14:22Z). Read back via `find-comments commentId`. No
 booking made (Phase 1: booking is Eriks's act), no section move, no due
 date, no completion. Watermarks unchanged.
+
+## 2026-09-10 — /start-day (full routine)
+
+**Step 0 — orient.** Gmail: **live**, `list_labels` returned 46 labels,
+`INBOX.threadsTotal` 22. Calendar: **live**, `list_calendars` returned 8
+calendars, both swept ids present (`epetersons87@gmail.com`,
+`family17271500024496324001@…`). Tracker: **live**, `user-info` returned
+`epetersons87@gmail.com` (user 22613842). Ids not re-resolved — `_verified`
+2026-09-07, 3 days old. Not a rerun: `calendar.last_scanned_date` and
+`inbox.last_sweep_date` both read 2026-09-09.
+
+Open questions read back: 2 open, **2 answered and closed**, 0 ambiguous.
+
+- `6hRvw46QX46528XQ` Supabase — Eriks, 2026-09-09: *"yes, keep it alive"* =
+  option (b). Created `6hV6j2wRWpW27hPQ` "Unpause the Supabase project
+  ChallengeFinds", Backlog, size/XS, p3 (the project had already been paused
+  on 9 Sep, so the title says unpause, per the assistant's own 9 Sep comment).
+  The other half of option (b) — labelling thread `1a07ff008d25cd60` Reply/Do
+  — was **not** performed: `get_thread` showed `label_ids` `["UNREAD"]` with
+  no `INBOX`, i.e. Eriks had archived it himself, and the sweep labels inbox
+  threads only. Recorded in a task comment.
+- `6hRvwHmgrvg8jRHQ` vault frontmatter key — Eriks, 2026-09-09: *"I don't
+  really mind. Do what you think is right. As long as it continues working and
+  doesn't bite us in the future."* Decision delegated; took the stated default
+  (option a): `wiki:` canonical for new files, the 15 `wiki_pages:` files in
+  `raw/processed/` left untouched permanently, because that folder is declared
+  never-edited and nothing reads the key. Recorded as **SETTLED 2026-09-10**
+  in `procedures/step-3-ingest.md` (read back, lines 48–61) so it is not
+  re-raised. Both tasks completed; `find-tasks` on `agent-waiting` in Personal
+  then returned 0 — verified.
+
+**Step 1 — inbox labelling.** Census: 22 threads read against
+`INBOX.threadsTotal` 22 — the sweep count does not exceed the containing
+total. 21 labelled, 1 skipped as already labelled (Revolut, Banking & Cards,
+`19ecbccd34e3286c`). Bulk classification delegated to three read-only
+subagents (5 threads each, no writes); the manager re-read every thread's
+`label_ids` before and after each write and read all seven action-class
+candidates itself in `PLAIN_TEXT`.
+
+Labelled per class: Promotions & Ads 8, Newsletters & Learning 3,
+Professional Networking 4, Receipts & Subscriptions 1, Needs-Payment 2,
+Schedule Calendar 2, Reply/Do 1. **All 21 read back** in one
+`search_threads in:inbox` (`THREAD_VIEW_METADATA_ONLY`) — each thread carried
+exactly one taxonomy label on every message.
+
+Ledger rows appended, then verified by grep with line numbers **before** any
+archive (the 2026-09-09 lesson): promotions.csv +8 (lines 10074–10081, total
+10072→10080), newsletters.csv +3 (lines 6213–6215, total 6211→6214),
+receipts.csv +1 (line 532, total 530→531). **Archived-per-class equals
+rows-appended per class**: Promotions 8 = 8, Newsletters 3 = 3, Receipts 1 = 1.
+
+Archived (INBOX removed) 14 = Promotions 8 + Newsletters 3 + Receipts 1 +
+Schedule Calendar 2. Read back with `search_threads in:inbox`: **8 threads
+remain**, 22 − 14 = 8 ✓. Trashed: **0** — no Google Calendar notification
+threads this run, so carve-out 6 did not fire.
+
+Payment tasks created 2, both **This Week**, both `size/S`, p3, **no due
+date** — neither body states one. Amounts are in PDF attachments
+(`9112-0826.pdf`, `RE35718-00EBVB6801.pdf`) which the connector cannot read;
+the descriptions say so rather than inventing a figure (2026-09-07 lesson).
+
+Carve-out 7 fired once. Thread `1a085a1af2a3db83` carries **two** confirmed
+Piearsta.lv bookings. The 18 Sep 10:30 transrectal USG already existed on
+Eriks's calendar (`vmenfco7t7tf96qr0fb2cl7vt0`, description carrying
+`ref: mail:1a085a1af2a3db83`) — matched, not duplicated. The 11 Sep 10:00
+thyroid USG matched **neither** calendar and carried no cancellation, so
+`create_event` on `epetersons87@gmail.com`, **no attendees**, description
+`ref: mail:1a085a1af2a3db83`; `get_event` read back id
+`srsprp6rp39gviuqrtuq54o7ig`, 2026-09-11 10:00–11:00 Europe/Riga, Neiromed
+Plaza. End time is a 60-minute default, stated in the description. Thread
+`1a08582e68045a8d` is the request-received notice for the same 11 Sep slot —
+labelled, handled by the same check, archived.
+
+Threads left unlabelled: **none**.
+
+**Step 2 — triage.** Mail watermark at run start `1788941177000`
+(2026-09-09 08:06:17Z). 20 of the 22 inbox threads were newer; the two older
+were Revolut (June, already labelled) and Le-Glue (newest message
+`1788888128000`, 2026-09-08 17:22). Sent sweep `in:sent after:2026/09/08`
+returned 1 thread, the same Le-Glue conversation, no message above the
+watermark — **no new commitments of Eriks's own**. Newest `internalDate`
+actually processed: `1789019103000` (Sales Gravy, 2026-09-10 05:45:03Z).
+
+`search_threads` truncation confirmed again on the Le-Glue thread: the
+`in:inbox` result listed 5 messages ending with Lee's 14:46 reply, while
+`get_thread` returned **8**, the last being Eriks's own 17:22 message. Per
+`config/routing-rules.md` § Source hints › Mail, a thread where Eriks sent
+last is waiting on the other side — no task, no move, no comment (the task
+`6hRHJQwmr656PG6x` already carries the 9 Sep comment).
+
+Calendar swept over 10–19 Sep on both ids (wider than the 7-day window, to
+cover the 18 Sep event's own date per `config/sources/calendar.md`). Eriks's
+own calendar: 1 event in the window. Family: 14. Advertising events: 0.
+Invitations with `needsAction`: 0. Two cross-calendar overlaps surfaced, not
+tasked.
+
+Tasks created this run: 4 (Supabase unpause; 2 payment; 1 `[Needs Eriks]`),
+plus the daily review task `6hV6p5RjmV4R736x` in This Week, due today.
+Board moves: **0** — no new source evidence since the watermark on any open
+task, so no section was touched.
+
+**§ 3b closed payment tasks (carve-out 5).** `find-completed-tasks` over the
+last 60 days returned 20; 4 begin `Pay `, of which 2 carry a `ref: mail:`
+line — Elektrum (`mail:1a080f5ae9698874`) and Bite (`mail:1a072afdab0b973b`).
+`search_threads label:"Action Required/Needs-Payment" in:anywhere` returned 4
+threads and **neither of those two** is among them, so both were already
+swapped on earlier runs. **In class this run: 0. Writes: 0.**
+
+**Registry/diagnostic note.** `search_threads` with `label:<label_id>` returned
+`{}` for `Label_302269771500551203` while the same threads plainly carried that
+id (verified in the `in:inbox` read-back), and `label:"Action Required/Needs-Payment"`
+returned them correctly. → **Query labels by display name, not by label id;
+a label-id query returning `{}` is not evidence of absence.** Added to
+`lessons-learned.md`.
+
+**Two Needs-Payment threads outside the sweep**, found by that same query and
+reported, not acted on (both below the watermark and neither in the inbox, so
+out of scope for this run): `1a064a1a38308887` Arlo, 3 Sep, "€12.99 payment …
+was unsuccessful again", carries Needs-Payment, archived, **no task exists**;
+and `19ff87ae98e1ca85` Google AI Studio billing change with a **14 Sep 2026**
+deadline, carries Needs-Payment, in **TRASH**.
+
+**Step 3 — vault ingest.** Nothing durable from this run's sources: promotions,
+newsletters, receipts and platform notifications are never snapshotted, the two
+utility invoices are bills, and the medical bookings are calendar items the
+calendar now holds. **0 snapshots written, 0 pages touched.**
+`vault.mail_snapshot.last_internaldate_ms` therefore does not move.
+
+`../My Brain/raw/` holds **3 pending clippings** of Eriks's own (created 6 and
+8 Sep), and the vault's `log.md` ends at 2026-09-04 — before this instance
+existed, so every ingest to date was Eriks's own vault session. Whether the
+daily run should work that backlog is genuinely undecided in
+`procedures/step-3-ingest.md`, so it is now `[Needs Eriks]` task
+`6hV6p3RqhfgHV5QQ`, default *the run ingests only its own snapshots and
+reports the count*.
+
+**Step 4 — brief.** Delivered in chat and archived to `briefs/2026-09-10.md`.
+
+**Defaults applied this run:** the 60-minute event end for the 11 Sep booking
+(mail states only a start); the vault-key default (option a) under Eriks's
+delegation; the Newsletters-vs-Promotions tie-break on 3 borderline threads
+(Substack/Omarchy, AI Automation Society, NEXT.io — all editorial-shaped mail
+whose payload is a paid event or product).
+
+**Anomalies:** the two out-of-scope Needs-Payment threads above; the label-id
+query defect; Skool classified Professional Networking rather than Social
+Media (it is a professional-community notifier, but the alternative is
+defensible and Eriks may re-label).
