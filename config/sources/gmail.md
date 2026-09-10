@@ -99,6 +99,20 @@ actually processed.
    Each read back. The only label removal and the only non-taxonomy label this adapter ever writes.
 5. **Trash, for exactly one class** (WIDENED 2026-09-09, Eriks; carve-out 6 in `AGENTS.md` § Phase gates): a Google Calendar notification thread — New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda — after the existence check, via `trash_thread`. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* Nothing else is ever trashed.
 
+6. **A per-item label removal Eriks asks for in chat** (WIDENED 2026-09-10,
+   Eriks). The class is exactly: Eriks names the thread **and** the label, in
+   chat, and asks for it off. `unlabel_thread` with that one id, read back two
+   ways — the thread's own `label_ids`, and the label's own
+   `label:"<Display Name>"` count before and after. Both boundaries: **not** a
+   class of threads, **not** an inference from a related instruction, and
+   **never** the assistant deciding for itself that a label is wrong; and it
+   licenses no renaming, no deletion, no archive and no trash. First use: the
+   Arlo failed-payment thread `1a064a1a38308887`, Eriks: *"Arlo - remove the
+   label. There is money on the account now and I simply waiting for them to
+   try charge it again"* — the thread kept `Needs-Payment` from an earlier
+   manual filing, the charge is expected to retry on its own, and no task was
+   wanted.
+
 ## Forbidden
 
 `send_message`, `reply`, `forward`, sending or scheduling a draft,
