@@ -1608,3 +1608,27 @@ above.
 **Registry drift fixed this run:** new defect entry added to `config/tools.md`
 § Verified facts and defects, and a lessons entry appended. No watermark moved;
 no state change.
+
+**CLOSED 2026-09-11 — Eriks did it himself.** *"nevermind, I've fixed
+everything myself"*. Verified by `fetch-object` (string-only parameters, still
+working while typed arguments were dead):
+
+- `6hRV8xr4fHJP3gQQ` "Book Transrectal ultrasound" — now `checked: false`,
+  `sectionId` `6hJQ57R2hvM9RQgQ` (Waiting / Blocked). Reopened **and** moved out
+  of This Week, which is exactly what was asked for. Awaiting the 18 Sep
+  appointment.
+- `6hRV8x989MhpQvjQ` "Book Thyroid ultrasound" — `checked: true`, but
+  `completedAt` has moved from **2026-09-09T14:56:52** to
+  **2026-09-11T07:52:19**. A task that was never reopened cannot acquire a new
+  completion timestamp, so this one was reopened and then completed again at
+  10:52 Europe/Riga — 52 minutes after the 10:00–11:00 appointment ended. The
+  intended workflow ran end to end on its first case.
+
+So the blocked entry above is superseded in outcome, not in diagnosis: the tool
+fault was real and is still recorded in `config/tools.md`; only the task work
+was completed by other means. **The permission question is now moot** —
+`uncomplete-tasks` was never called by this instance, so it stays on the
+**Never used** list and the § Security boundary allowlist is unchanged. Eriks's
+instruction of today authorised one specific act that the assistant did not
+perform; it is not carried forward as a standing permission and a future reopen
+needs its own instruction.
