@@ -173,6 +173,17 @@ another.
   iepakojums (Thursdays, every 4 weeks) and ♻️ Šķirotie atkritumi (Thursdays,
   every 2 weeks). Same treatment: no task, still listed in the Family section.
   Eriks may strike either.
+- Confirmed per-item ownership on the Family calendar — ADDED 2026-09-11.
+  **These are recorded facts, not a rule**: no general test has been agreed, and
+  the open question `[Needs Eriks]` (ref `calendar:family-event-ownership`) asks
+  for one, with the default *keep flagging every overlap and ask per item*.
+  Do not generalise from these two.
+  - **A KLINIKA** (Fri 18 Sep 10:00–13:00, created by margaritaeliya) is
+    Eriks's wife's. Eriks: *"A KLINIKA is my wife's appointment. USG is mine."*
+    Not a conflict with the 18 Sep Transrektālā USG.
+  - **Массаж** (Fri 11 Sep 10:30–11:30, created by margaritaeliya) is his
+    wife's. Eriks: *"massage is wife's"*. Not a conflict with the 11 Sep USG
+    vairogdziedzerim.
 
 ### Standing reminders — carried in every brief until their end date
 

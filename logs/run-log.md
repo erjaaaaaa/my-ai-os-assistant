@@ -1515,3 +1515,43 @@ folder's own `.claude/skills/plan`. Surfaced to Eriks as a question rather than
 fixed by analogy; *"never a class, never inferred"* applies to his
 instructions as much as to mail. No other global skill collides with this
 folder's four.
+
+### 2026-09-11 ad-hoc — three more answers from Eriks
+
+**1. Global `plan` skill moved, same treatment as `start-day`.** Eriks:
+*"yes, apply the same to /plan"* — a per-item instruction for the second skill,
+given after the collision was surfaced as a question rather than fixed by
+analogy. `mv ~/.claude/skills/plan` → `<work>/.claude/skills/plan`. Verified:
+absent at user scope; present in the work folder; **sha256 identical**
+(`38df02982873a42fda7ee8ffab295aebfc5ee836d55dbac64c31df7b8d223bc2`). Twelve
+global skills remain; the work instance now holds `plan` and `start-day`; this
+folder's four (`digest`, `inbox`, `plan`, `start-day`) are untouched and no
+longer shadowed by anything. Recorded, as with `start-day`, as a one-off on
+Eriks's instruction — **not** a standing permission to write outside this
+folder, and not added to the security boundary.
+
+**2. Both calendar conflicts withdrawn.** Eriks: *"massage is wife's"*, after
+*"A KLINIKA is my wife's appointment. USG is mine."* Neither 11 Sep nor 18 Sep
+is a real clash. Recorded in `config/routing-rules.md` § Calendar scope as
+**two per-item facts explicitly marked "not a rule"**, with a warning not to
+generalise from them, and an addendum appended to `briefs/2026-09-11.md`
+withdrawing both conflicts rather than editing the delivered text.
+
+**No general rule inferred.** Two same-direction answers from the same creator
+is exactly the shape that invites a silent generalisation, and the Family
+calendar is in scope precisely because some of what she puts there *is* Eriks's
+(kids, shared logistics). Raised instead as `[Needs Eriks]` task
+`6hVJGFj3r2MVj95x` (ref `calendar:family-event-ownership`), p4, Waiting /
+Blocked, no due date, three options, **default stated: keep flagging every
+overlap and ask per item**.
+
+**3. "Buy lego glue - Le glue" completed.** Eriks: *"lego glue - close it"* —
+a per-item yes naming the task. Comment `6hVJG9mQ4RMhG2RQ` posted first with
+the history (order #7334 refunded €105.15; replacement Block Lock order #1359,
+41.90 EUR, receipts ledger line 531; DHL thread archived earlier today), then
+`complete-tasks` returned `successCount: 1`. This is the second task Eriks
+named today; the first (`6hRxmG7HFGvq6Pwx`) was deliberately closed alone at
+the time, because one named task is not a class.
+
+**Open `[Needs Eriks]` count: 1** — `6hVJGFj3r2MVj95x` replaces
+`6hV6p3RqhfgHV5QQ`, closed earlier today.
