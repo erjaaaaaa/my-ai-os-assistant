@@ -216,3 +216,35 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   before any write — never run one instance's routine from inside the other's
   folder. The durable fix is Eriks's: rename the global skill (e.g.
   `start-day-work`) so the directory-scoped one wins.
+- 2026-09-11 — **The `raw/` backlog was always the run's work; the default was
+  wrong, not merely unchosen** — the open question asked whether `/start-day`
+  should ingest the YouTube clippings Eriks saves into the vault's `raw/`, with
+  the default *no, they stay yours*. Eriks: *"Ingest them. Isn't it part of the
+  process?"* The question mark matters: he was not picking between two
+  reasonable options, he was surprised the split existed. The defect was
+  reading `procedures/step-3-ingest.md`'s purpose sentence ("snapshotting
+  durable context from *this instance's* sources") as scoping the **ingest**
+  half too, when it only ever scoped the **snapshot** half. **Rule:** a step
+  with two mechanically different halves gets them named separately before any
+  scope sentence is applied to either — here, *snapshotting* is conservative
+  and source-scoped, *ingesting* is unconditional over the `raw/` root whatever
+  put a file there. More generally: when a `[Needs Eriks]` question comes back
+  answered **with a question**, treat the framing as the thing that was wrong
+  and say so in the governing file, rather than recording the answer as a
+  preference between the options offered. SETTLED into
+  `procedures/step-3-ingest.md` § Boundaries the same day.
+- 2026-09-11 — **A per-item chat instruction also authorises an archive, not
+  just a label removal** — Eriks: *"Le-Glue refund received, we can archive the
+  email and close the task"*, on a thread carrying **Reply/Do**, which is
+  outside carve-out 4's four archivable classes. Executed, on the same
+  reasoning the 2026-09-10 Arlo entry established: a per-item instruction from
+  Eriks naming the thread is the authorisation channel the design rests on, and
+  the act is inside his own mailbox, reversible, and reaches no other person.
+  **Rule:** the per-item chat channel covers **mailbox-internal, reversible**
+  acts on **one named thread** — currently one label removal (2026-09-10) and
+  one `INBOX` removal (2026-09-11). It has never covered and does not cover
+  trashing outside carve-out 6, spam, mark-read, renaming or deleting a label,
+  or anything that leaves the mailbox; sending stays forbidden in every phase.
+  Each use is read back and logged with Eriks's words. Promoted the same day
+  into `AGENTS.md` § Security boundary (writes-allowed and forbidden lines) and
+  `config/sources/gmail.md` allowed-write 7.

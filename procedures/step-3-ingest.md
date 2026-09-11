@@ -92,6 +92,34 @@ session rooted in the vault, for the sources they clip by hand; both paths
 follow the vault's `AGENTS.md`, and whichever reaches a snapshot first does
 the work.
 
+**SETTLED 2026-09-11 — the daily run clears the whole `raw/` root, not only
+what it snapshotted itself.** Eriks, in chat, answering the open
+`[Needs Eriks]` question (task `6hV6p3RqhfgHV5QQ`): *"Ingest them. Isn't it
+part of the process?"* Superseded default: *"the daily run ingests only what
+it snapshots from Gmail and Calendar. Your hand-clipped items stay in raw/ for
+your own vault session, and I count them in the brief each run so the backlog
+stays visible."* That default is now wrong and is never reapplied. **Every
+pending file in the `raw/` root is this step's work**, whatever put it there —
+a Gmail or Calendar snapshot this instance wrote, or an Obsidian Web Clipper
+save of Eriks's. The two halves of this step are therefore distinct and both
+mandatory: *snapshotting* stays conservative and is still limited to durable
+context from this instance's own sources (§ What gets snapshotted);
+*ingesting* is unconditional over the `raw/` root.
+
+**No per-run cap is set.** Eriks was offered one — *"say whether to cap it
+(e.g. one clipping per run)"* — and named no number, so the backlog is cleared
+oldest-clipped-first until `raw/` is empty. The cost is real and is reported
+rather than hidden: the first such batch, three YouTube clippings on
+2026-09-11, was the largest single piece of work in that run. **Never record
+the absent cap as a decision.** If a backlog is ever large enough that
+clearing it would dominate a run, say so in the brief and ask — with the
+default *clear it all* still in force until Eriks names a limit.
+
+Batch versus one-at-a-time: the vault's `AGENTS.md` says *"Prefer ingesting
+sources one at a time unless the user asks for the batch ingestion."* Eriks's
+*"Ingest them"* is that request, for a pending backlog; a single new snapshot
+is still handled on its own.
+
 ## Output
 
 Snapshots written (title, ref), pages created or updated (paths), or

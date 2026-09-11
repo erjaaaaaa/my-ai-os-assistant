@@ -1430,3 +1430,51 @@ triage — surfaced in the brief, possibly moot after the refund and the Block
 Lock replacement order); the global-skill shadowing; and the local skill file's
 stale "Gmail and Calendar are read-only" line, which predates carve-outs 4–7 —
 `AGENTS.md` § Security boundary was followed as authoritative.
+
+### 2026-09-11 follow-up, same session — Eriks's four answers
+
+Ad-hoc work after the brief, on Eriks's replies in chat.
+
+**1. The 18 Sep "conflict" was not one.** Eriks: *"A KLINIKA is my wife's
+appointment. USG is mine."* No write. The 11 Sep Массаж overlap was **not**
+resolved by this answer and was not treated as resolved — a conditional answer
+aimed at a different item is not an answer to this one (2026-09-10 lesson), so
+it was re-asked instead.
+
+**2. Le-Glue closed out.** Eriks: *"Le-Glue refund received, we can archive the
+email and close the task"*. Comment `6hVJ8vPx856wpRmx` posted recording his
+words, then `complete-tasks` on `6hRxmG7HFGvq6Pwx` ("Check Le-Glue refund of
+€105.15 has landed") — returned `successCount: 1`. Thread
+`1a0813348da28051` archived with `unlabel_thread ["INBOX"]`; verified absent
+from a fresh `in:inbox` read. The thread carries **Reply/Do**, so this sat
+outside carve-out 4; it was done on the per-item chat channel established on
+2026-09-10 for the Arlo label removal, and that widening is now written into
+`AGENTS.md` § Security boundary and `config/sources/gmail.md` allowed-write 7.
+The separate task `6hRHJQwmr656PG6x` "Buy lego glue - Le glue" was **not**
+touched — Eriks named one task, not a class.
+
+**3. Vault ingest — the open question answered and the backlog cleared.**
+Eriks: *"Ingest them. Isn't it part of the process?"* Applied to
+`procedures/step-3-ingest.md` § Boundaries as a SETTLED 2026-09-11 block
+(verified by read-back), comment `6hVJCM6x5hXJcJJx` posted, task
+`6hV6p3RqhfgHV5QQ` completed — the one task class the assistant closes itself.
+All three pending clippings ingested under the vault's own `AGENTS.md`: 2 new
+wiki pages, 2 existing pages extended, 1 Source Digest, `index.md` and
+`log.md` updated, `channel_name` + `wiki:` frontmatter added to each source,
+all three moved to `raw/processed/` (120 → 123 files; `raw/` root now empty).
+Full detail in the vault's own `log.md`. No per-run cap was named and none was
+set; the absence is recorded as *not a decision*.
+
+**4. Skill shadowing explained**, no write in this instance — the fix is
+Eriks's, in `~/.claude/skills/`.
+
+**Mid-run arrival, correctly deferred:** a Todoist notification thread
+`1a08f03dc1bc246f` landed at 05:49:49Z, after the Step 1 sweep. Its
+`internalDate` 1789105789000 is above the advanced watermark 1789103980000, so
+the next run sweeps it. Nothing half-processed. This is the watermark rule
+working as designed — had the watermark been set to the clock at close-out,
+this thread would have been skipped permanently.
+
+**Inbox at end of session: 6 threads** (2 Needs-Payment awaiting payment,
+2 Professional Networking, Revolut Banking & Cards, and the new Todoist
+notification).

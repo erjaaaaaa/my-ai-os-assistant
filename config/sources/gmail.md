@@ -113,6 +113,20 @@ actually processed.
    manual filing, the charge is expected to retry on its own, and no task was
    wanted.
 
+7. **A per-item archive Eriks asks for in chat** (WIDENED 2026-09-11, Eriks).
+   The class is exactly: Eriks names the thread, in chat, and asks for it
+   archived. `unlabel_thread` with `["INBOX"]` on that one thread, read back
+   via `in:inbox`. Both boundaries: **not** a class of threads and **not** an
+   inference from a related instruction (the thread's taxonomy label is
+   irrelevant — it stays on the thread untouched), and **never** the assistant
+   deciding for itself that a thread is finished; and it licenses no label
+   removal beyond `INBOX`, no trash, no spam and no mark-read. First use: the
+   Le-Glue conversation `1a0813348da28051`, which carried **Reply/Do** and so
+   fell outside carve-out 4 — Eriks: *"Le-Glue refund received, we can archive
+   the email and close the task"*. Same authorisation channel as allowed-write
+   6, and same reasoning: the act is inside Eriks's own mailbox, reversible,
+   and reaches no other person.
+
 ## Forbidden
 
 `send_message`, `reply`, `forward`, sending or scheduling a draft,
