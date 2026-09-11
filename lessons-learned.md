@@ -248,3 +248,21 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   Each use is read back and logged with Eriks's words. Promoted the same day
   into `AGENTS.md` § Security boundary (writes-allowed and forbidden lines) and
   `config/sources/gmail.md` allowed-write 7.
+- 2026-09-11 — **Todoist typed parameters can degrade mid-session** — Eriks
+  asked for two completed USG tasks to be reopened and moved to Waiting /
+  Blocked. `uncomplete-tasks` rejected `ids` with *"expected array, received
+  string"*; the 2026-09-09 rule was applied (reload with `ToolSearch select:`,
+  retry once) and the schema came back opaque `{type: object}` again. A control
+  proved it was not a connector outage and not specific to that tool:
+  `find-tasks` with `limit: 100` had **succeeded at 08:41 in the same session**
+  and failed identically at 09:2x, while `fetch-object` — string-only
+  parameters — kept working and confirmed both tasks were still `checked: true`
+  with nothing half-written. **Rule:** when a reload returns `{type: object}`,
+  stop immediately — the whole Todoist server is unusable for typed arguments
+  in that session, not just the one tool. Prove no partial write with a
+  string-only read, write nothing, advance no watermark, log it, and tell Eriks
+  a fresh session is needed. Do **not** substitute a different tool to achieve
+  the same effect, and do **not** report the request as done. The 2026-09-09
+  entry assumed the fault is present from session start; this one shows it can
+  appear part-way through, so **a successful earlier write is not evidence the
+  next one will serialise.**

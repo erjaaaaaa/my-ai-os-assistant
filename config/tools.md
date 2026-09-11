@@ -146,6 +146,27 @@ used by this instance, whatever it is.
   **On "does not have permission" from `get_thread`, before calling it an
   outage, run `search_threads in:anywhere <sender> after:<date>` with
   `includeTrash: true` and read `label_ids`; a `TRASH` entry explains it.**
+- **2026-09-11 — Todoist typed parameters degraded *mid-session*, after working
+  earlier in the same session.** `find-tasks` with `limit: 100` succeeded at
+  08:41 and failed at 09:2x with `limit: Invalid input: expected number,
+  received string`; `complete-tasks` and `add-comments` both accepted arrays at
+  06:14 and `uncomplete-tasks` was rejected with `ids: expected array, received
+  string` shortly after. Every Todoist schema in the session had loaded as an
+  opaque `{type: object}`, so the harness could no longer serialise a number or
+  an array for **any** tool on that server. `fetch-object`, whose parameters are
+  all strings, kept working throughout — which is what proves the **connector is
+  live and this is a schema-loading fault, not an outage**. Reloading with
+  `ToolSearch select:<tool>` returned the opaque shape again and did not fix it.
+  → A session can pass every health check, perform writes successfully, and then
+  silently lose the ability to send typed arguments. → **Rule: on `expected
+  number, received string` or `expected array, received string` from a Todoist
+  tool, reload once with `ToolSearch select:` (per the 2026-09-09 entry); if the
+  reload returns `{type: object}` again, stop — the session cannot perform any
+  typed-parameter Todoist write. Report it, write nothing, advance nothing, and
+  tell Eriks a fresh session is required.** String-only reads (`fetch-object`)
+  remain trustworthy and should be used to prove no partial write occurred.
+  Extends the 2026-09-09 array-input entry, which assumed the fault was present
+  from session start; it is not always.
 - **2026-09-07 — Gmail labels are applied at thread level here** (`label_thread`),
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all

@@ -1555,3 +1555,56 @@ the time, because one named task is not a class.
 
 **Open `[Needs Eriks]` count: 1** — `6hVJGFj3r2MVj95x` replaces
 `6hV6p3RqhfgHV5QQ`, closed earlier today.
+
+### 2026-09-11 ad-hoc — BLOCKED: reopen both USG tasks
+
+Eriks, in chat: *"please return both USG appointment to waiting column. I want
+to close them once those are finished so I can add results to them."*
+
+**Intent:** reopen the two completed booking tasks so they track *attending*
+the appointment and carry the results afterwards — `6hRV8x989MhpQvjQ` "Book
+Thyroid ultrasound — *Vairogdziedzera USG*" (completed 2026-09-09T14:56:52,
+already in Waiting / Blocked) and `6hRV8xr4fHJP3gQQ` "Book Transrectal
+ultrasound — *Transrektāla USG*" (completed 2026-09-09T10:21:53, in This Week,
+so it also needed a section move). Neither has a `parentId`, so the
+never-move-a-subtask rule does not bite.
+
+**NOT DONE — blocked by a tool fault. Nothing was written.**
+
+`uncomplete-tasks` rejected `ids` with *"expected array, received string"*.
+Applied the 2026-09-09 rule: reloaded with `ToolSearch select:` and retried
+once. The schema returned opaque `{type: object}` again and the retry failed
+identically.
+
+**Diagnosed rather than assumed.** This is **not** a connector outage:
+`fetch-object` (string-only parameters) answered correctly throughout. It is
+also **not** specific to `uncomplete-tasks`: a control on `find-tasks` with
+`limit: 100` — **the identical call that succeeded at 08:41 in this same
+session** — now fails with *"limit: expected number, received string"*. So
+every Todoist schema in this session has gone opaque and no typed argument can
+be serialised for any tool on that server. The degradation happened after the
+06:14 writes (`complete-tasks`, `add-comments` both accepted arrays then).
+
+**Verified no partial write:** `fetch-object` on both ids returns
+`checked: true` with their original `completedAt` and `sectionId` values
+unchanged. The failures were input-validation rejections that never reached the
+API.
+
+**Deliberately not worked around.** No substitute tool was used to achieve the
+same effect — an uncomplete performed by some other route would be exactly the
+kind of undocumented write this instance's registry exists to prevent, and the
+2026-09-09 precedent says reload-once-then-stop, not improvise.
+
+**Permission status, recorded for the session that finishes this:**
+`uncomplete-tasks` is on the **Never used** list in `config/tools.md`, and
+reopening a task is absent from the § Security boundary allowlist. Eriks
+instructed it directly, per item, naming both tasks, and the act is inside his
+own tracker and reversible — the same channel as the 2026-09-10 label removal
+and the 2026-09-11 archive. **The widening is deliberately NOT written into
+`AGENTS.md` or `config/tools.md` yet, because the act did not happen.** When it
+is performed, the executing session records it then, with his words quoted
+above.
+
+**Registry drift fixed this run:** new defect entry added to `config/tools.md`
+§ Verified facts and defects, and a lessons entry appended. No watermark moved;
+no state change.
