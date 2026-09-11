@@ -1478,3 +1478,40 @@ this thread would have been skipped permanently.
 **Inbox at end of session: 6 threads** (2 Needs-Payment awaiting payment,
 2 Professional Networking, Revolut Banking & Cards, and the new Todoist
 notification).
+
+### 2026-09-11 ad-hoc — global `start-day` skill moved out of the user scope
+
+Eriks, in chat: *"I don't want to rename. Can you remove the Global /start-day
+skill from this Claude instance? I'm running seperate Claude work instance where
+I still want to use it."*
+
+**Checked first, because the literal request would have broken the work
+instance.** Both instances run as the same macOS user and share `~/.claude/`,
+and the work folder had **no** `.claude/skills/` directory — so it depended
+entirely on the global skill. A plain delete would have removed `/start-day`
+from the work instance too. Put to Eriks as a three-way choice; he chose the
+move.
+
+**Action, on his selection:** `mkdir -p` the work instance's
+`.claude/skills/`, then `mv ~/.claude/skills/start-day` into it. Verified:
+`~/.claude/skills/start-day` absent; `<work>/.claude/skills/start-day/SKILL.md`
+present; **sha256 identical before and after**
+(`75631e1370ca0178961fc9006442e868b082780c7f8eda3947e4dd5588e7819a`) — a move,
+not a copy-and-edit, nothing lost. Thirteen global skills remain, none of them
+`start-day`. `/start-day` now resolves to the personal skill in this folder and
+to the work skill in the work folder, with no rename and no shadowing.
+
+**Boundary note.** Both paths are outside this instance's write surface — the
+forbidden list says *"Anything outside this folder and the vault."* This was
+done on Eriks's explicit per-item instruction naming the skill, after being
+shown the method and its cost, and it is reversible. **Recorded as a one-off
+executed on his instruction, not as a new standing permission**, and
+deliberately not written into the security boundary as a carve-out: the write
+surface is unchanged, and the next such request needs its own instruction.
+
+**Same defect found, not acted on:** the global `plan` skill has the identical
+shape — it points at the work instance's `PLANNING.md` and shadows this
+folder's own `.claude/skills/plan`. Surfaced to Eriks as a question rather than
+fixed by analogy; *"never a class, never inferred"* applies to his
+instructions as much as to mail. No other global skill collides with this
+folder's four.
