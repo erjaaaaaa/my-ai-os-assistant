@@ -1250,3 +1250,183 @@ fabricated permalink would be indistinguishable from a real one on later read.
 **Not touched:** the three unrelated files already sitting in the vault's
 `raw/` root (a backlog from Eriks's own clipping), left where they were.
 The vault is not a git repository, so its record is `log.md` alone.
+
+## 2026-09-10 — Ad-hoc: papilloma removal — service research
+
+Eriks asked for services for the Todoist task *Book popeloma removal
+appointment* (`6hV25Cf2HvhCQJRQ`, Personal / This Month, no due date, no
+description). Read as **papilloma**; the reading was flagged to Eriks in chat,
+who did not correct it. Tracker read first, per AGENTS.md § Todoist is the only
+source of truth.
+
+Round one, from the web: REVÙ Clinic (Elizabetes 15, €65 consult + €19 first
+papilloma + €3 each additional), Era Esthetic (Kr. Valdemāra 41, €70
+dermatoscopy + €10–80 by size), La Vie (G. Zemgala gatve 74, no prices), VCA,
+and Mārupes Doktorāts (Pededzes 10, €64 consult + €19 dermatoscopy, removal
+price unpublished).
+
+Round two: Eriks sent a **map screenshot** — untrusted data, read as data only —
+of a clinic marker at Sīpeles/Kalvenes, and asked what it was. Identified by
+geocoding the two streets through Nominatim and querying Overpass for
+healthcare POIs within 900 m: **Mārupes medicīnas centrs**, Tēriņu iela 79,
+Rīga, and inside it **Azaryan Medical Clinic** (`healthcare:speciality =
+dermatology;plastic_surgery`, level 2). Its full price list was read off
+`azaryan.lv/cenas`: first dermatologist consultation €70, dermatoscopy of skin
+growths incl. consultation €100, papilloma/keratoma laser removal €35–350,
+consultation *and* dermatoscopy mandatory before any removal.
+
+**Correction found and reported:** Mārupes Doktorāts and the Veselības centrs 4
+branch "Mārupe" are the same place — same address, same phone `20004039`. The
+first shortlist presented them as unrelated. That makes an NVD-funded route
+possible there with a GP referral, which the private clinics do not offer.
+
+Availability checked live on piearsta.lv (browser, cookie banner declined):
+Azaryan has five dermatologist calendars, earliest **Mon 14 Sep 11:30** with
+Zane Mediņa, then 15 Sep 10:00, 15 Sep 14:00, 21 Sep 10:00 (€90 consult),
+24 Sep 16:00. Mārupes Doktorāts lists **15 doctors and no dermatology
+calendar** — enumerated from the DOM after expanding "Vairāk", so booking there
+is by phone only. REVÙ slots not checked, and that was said rather than
+guessed.
+
+**Write:** one Todoist comment, `6hV9R84QXp4mM26x`, on the task — the three
+options, prices, the live slots, and "Not booked — Eriks books". Consent was
+Eriks's "yeah" to the offer to check slots and comment. Verified by reading the
+comment back by id. Nothing booked: booking is outward-facing and piearsta.lv
+needs eID/Smart-ID authentication, which the security boundary forbids.
+
+---
+
+## 2026-09-11 — `/start-day`, 08:41 Europe/Riga
+
+**Instance resolution.** `/start-day` loaded the global skill
+(`~/.claude/skills/start-day`), which points at the Libernetix work instance.
+The working directory and project `AGENTS.md` are the **personal** instance,
+which has its own `.claude/skills/start-day/SKILL.md`. Resolved to the personal
+routine before any read or write. Logged as a lesson; the fix is renaming the
+global skill.
+
+**Step 0 — orient.**
+- Gmail: **live**. Control `list_labels` → 46 labels. Containing total
+  `INBOX.threadsTotal` = 12.
+- Calendar: **live**. Control `list_calendars` → 8 calendars; both swept ids
+  (`epetersons87@gmail.com`, `family17271500024496324001@group.calendar.google.com`)
+  present.
+- Tracker: **live**, `user-info` → `epetersons87@gmail.com`, user 22613842.
+- Ids: tracker `_verified` 2026-09-07, 4 days old (< 30). No re-resolution.
+- Open questions: 1 open (`6hV6p3RqhfgHV5QQ`, vault raw/ ingest),
+  `find-comments` returned 0 comments → **0 answered, 0 ambiguous**. Default
+  stays in force; task left open.
+- Idempotency: `inbox.last_sweep_date` 2026-09-10 and
+  `calendar.last_scanned_date` 2026-09-10, both < today → a fresh run, not a
+  rerun.
+
+**Step 1 — inbox labelling.** 12 threads returned, census 12 ≤ 12. Read all 12
+with `get_thread`; 4 skipped as already carrying one of the thirteen (Eco
+Baltia + Mārupes komunālie = Needs-Payment; Le-Glue = Reply/Do; Revolut =
+Banking & Cards). 8 classified and labelled, each `label_thread` returning `{}`
+and each **read back** via `in:inbox` showing the id on every message:
+
+- Promotions & Ads (`Label_6413919896574930163`) ×3 — `1a08ee8403d70a4b`
+  StackBlitz/Bolt Lite; `1a08eddf7f1e0719` Audible; `1a08bbb75015c63e`
+  Mindvalley (Expert to Authority Summit 18–20 Sep — marketing webinar, the
+  advertising test in § Source hints › Calendar applied to mail).
+- Newsletters & Learning (`Label_6571319530419234897`) ×1 —
+  `1a08db37ff496511` Marina Mogilko / futureproof, beehiiv editorial.
+- Professional Networking (`Label_5437124985126992273`) ×2 —
+  `1a08eab081f53758` LinkedIn career digest; `1a08ace46134b7aa` LinkedIn
+  invitation (Marianna, Ecommpay).
+- Receipts & Subscriptions (`Label_8316160478815561067`) ×2 —
+  `1a08c761c0099c7f` Bolt rides; `1a08c3dbc7796080` Paddle/eRank.
+
+Left unlabelled: **none**.
+
+**Impossibility test.** `list_labels` re-run after the writes: Promotions
+2743→2746 (+3), Newsletters 1956→1957 (+1), Professional Networking 140→142
+(+2), Receipts 673→675 (+2). Sum +8 = threads labelled. `INBOX.threadsTotal`
+12→6, and `in:inbox` returned exactly 6 threads. No per-class count exceeds its
+global total.
+
+**Ledger rows: 7**, each verified by grepping its own `messageId` after the
+append — promotions lines 10082–10084, newsletters line 6216, receipts lines
+533–535. Receipts is **2 threads → 3 rows**: the Bolt thread carries two
+distinct ride receipt messages (`1a08c761c0099c7f` 14.00 EUR,
+`1a08cf49e1d3fdac` 14.90 EUR). Stated here rather than archived through: the
+2026-09-09 equality check does not survive a multi-receipt thread, and the
+invariant that actually protects the data — at least one verified row per
+archived thread — held for all six. New lessons entry appended.
+
+**Archived 6** (Promotions 3, Newsletters 1, Receipts 2), `unlabel_thread`
+with `["INBOX"]` only, each absent from `in:inbox` on read-back. **Trashed 0**
+(no Google Calendar notification mail). **Payment tasks 0**, **calendar events
+created 0** — neither class appeared.
+
+**Step 2 — triage.** Watermark `mail.last_internaldate_ms` = 1789019103000.
+8 of the 12 inbox threads were newer; all 8 classified **Noise/Know** (6
+archived, 2 LinkedIn notifications left in the inbox with their label). 0 Act,
+0 Decide, 0 Delegate, 0 low-confidence. **Tasks created from mail: 0.**
+
+Sent sweep: `in:sent after:2026/09/09` → `{}`. **Control run before believing
+it**: `in:sent after:2026/09/01` → 6 threads, newest SENT message
+`1a0816d8cb41fe94` at 1788877835000 (8 Sep 14:30). Genuine absence, not an
+outage — Eriks has sent nothing since 8 Sep.
+
+Calendar: `list_events` on both ids, 2026-09-11 → 2026-09-18, Europe/Riga.
+Own calendar 2 events, Family 10. Advertising events: **0**. Invitations with
+`needsAction`: **0**. Two cross-calendar overlaps recorded for the brief
+(11 Sep USG 10:00–11:00 vs Family Массаж 10:30–11:30; 18 Sep Transrektālā USG
+10:30–11:00 inside Family A KLINIKA 10:00–13:00). Neither tasked — a conflict
+is surfaced, not a commitment.
+
+Two Family recurring series not previously named appeared in the window —
+🍾 Stikla iepakojums, ♻️ Šķirotie atkritumi. Added to
+`config/routing-rules.md` § Calendar scope under the existing "name them when
+they appear" rule, verified by reading the block back.
+
+**Carve-out 5 (closed payment tasks): 0 in class.** `find-completed-tasks`
+over 60 days returned 20; two have `content` starting `Pay ` **and** a
+`ref: mail:` first line — Elektrum (`1a080f5ae9698874`) and Bite
+(`1a072afdab0b973b`). `get_thread METADATA_ONLY` on both: labels
+`Label_2307425248756940905` (Paid) + UNREAD, **no Needs-Payment, no INBOX** —
+already handled on 2026-09-09/07. Skipped and counted. Cross-check: the
+`Needs-Payment` label holds exactly 2 threads, matching the 2 open `Pay …`
+tasks. Zero writes.
+
+**Board movement: 0.** No new source evidence since the watermark touched any
+open task; no section moved, no comment posted, no "possibly done" flag.
+
+**Step 3 — vault ingest.** Nothing durable: the 8 new threads were promotions,
+one newsletter, receipts and platform notifications. **No snapshot written**,
+`vault.mail_snapshot.last_internaldate_ms` unchanged at 0. `raw/` still holds
+the 3 hand-clipped items predating this instance; the open question's default
+(the daily run ingests only what it snapshots) applied, counted, not acted on.
+
+**Step 4 — brief.** Written to `briefs/2026-09-11.md` (160 lines, 7384 bytes,
+verified by `ls`) and delivered as the closing chat message.
+
+**Writes this run, with verification:**
+
+| Write | Object | Verified by |
+|---|---|---|
+| 8 × `label_thread` | 8 threads | `in:inbox` read-back, label id on every message; plus label-count deltas summing to +8 |
+| 6 × `unlabel_thread ["INBOX"]` | 6 threads | absent from `in:inbox`; `INBOX.threadsTotal` 12→6 |
+| 7 ledger rows | promotions/newsletters/receipts CSV | grep of each `messageId`, line numbers quoted above |
+| 1 × `add-tasks` | `6hVJ7hh48Mm9fg7x` review task | returned object carries `sectionId` this_week, `dueDate` 2026-09-11, p3 |
+| `config/routing-rules.md` edit | 2 recurring series | block re-read after write |
+| `state/state.json` | 3 watermarks | file re-read, values printed |
+
+**Watermarks advanced:** `mail.last_internaldate_ms` → **1789103980000**
+(`1a08ee8403d70a4b`, 2026-09-11T05:19:40Z — the newest message actually
+processed, not the clock); `inbox.last_sweep_date` → 2026-09-11;
+`calendar.last_scanned_date` → 2026-09-11. `vault.mail_snapshot…` and
+`digest.last_run_date` untouched.
+
+**Registry drift:** none. Every tool used this run is listed in
+`config/tools.md`.
+
+**Anomalies:** the receipts 2→3 count (explained above); the two new Family
+series; the Le-Glue thread where Lee Phillips' 8 Sep question is still
+unanswered and carries no task (below the watermark, so not re-raised by
+triage — surfaced in the brief, possibly moot after the refund and the Block
+Lock replacement order); the global-skill shadowing; and the local skill file's
+stale "Gmail and Calendar are read-only" line, which predates carve-outs 4–7 —
+`AGENTS.md` § Security boundary was followed as authoritative.

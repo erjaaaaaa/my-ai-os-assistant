@@ -167,7 +167,12 @@ another.
   and Tue 18:00, Mārupes Valsts ģimnāzijas stadions). Seen recurring on
   Eriks's own calendar: Top up HSBC (all-day, seen 29 Aug and 29 Sep), Unsub
   session (Fri 16:00, seen 4 Sep and 2 Oct). None generates a task; Family
-  ones are still listed in the brief's Family section.
+  ones are still listed in the brief's Family section. WIDENED 2026-09-11 by
+  the assistant, under the same rule ("name them when they appear"): two more
+  Family all-day waste series seen in the 11–18 Sep window — 🍾 Stikla
+  iepakojums (Thursdays, every 4 weeks) and ♻️ Šķirotie atkritumi (Thursdays,
+  every 2 weeks). Same treatment: no task, still listed in the Family section.
+  Eriks may strike either.
 
 ### Standing reminders — carried in every brief until their end date
 

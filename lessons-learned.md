@@ -191,3 +191,28 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   judging a label wrong. Promoted the same day into `AGENTS.md` § Security
   boundary (writes-allowed and forbidden lines) and
   `config/sources/gmail.md` allowed-write 6.
+- 2026-09-11 — **One archived thread can owe more than one ledger row** — the
+  Bolt receipts thread `1a08c761c0099c7f` held two separate ride receipts
+  (14.00 EUR and 14.90 EUR, both 10 Sep), so 2 archived Receipts threads
+  produced 3 rows. The 2026-09-09 rule ("the review task's per-class count of
+  archived must equal the count of ledger rows appended that run, and a
+  mismatch is reported, not archived through") reads as an equality and would
+  have blocked a correct archive. **Rule:** the invariant is **at least one
+  verified row per archived thread**, checked per thread by grepping its own
+  `messageId` after the append — not equality of the two counts. A thread with
+  N receipt messages writes N rows, each deduped on its own `messageId`, and
+  the run log states both numbers with the reason they differ. Zero rows for an
+  archived thread remains a hard stop. Extends, does not replace, the
+  2026-09-09 entry: its purpose — never archive a Receipts thread whose row is
+  missing — is unchanged.
+- 2026-09-11 — **The global `/start-day` skill shadows this instance's own** —
+  `/start-day` resolved to `~/.claude/skills/start-day`, whose body says to
+  read the **Libernetix work** instance's `AGENTS.md`, while the correct skill
+  for this folder is `.claude/skills/start-day/SKILL.md`. The run checked the
+  working directory and project `AGENTS.md` before executing and ran the
+  personal routine. **Rule:** when a slash command's loaded body names an
+  instance path that is not the working directory, stop and resolve which
+  instance is meant from the working directory and its project `AGENTS.md`
+  before any write — never run one instance's routine from inside the other's
+  folder. The durable fix is Eriks's: rename the global skill (e.g.
+  `start-day-work`) so the directory-scoped one wins.
