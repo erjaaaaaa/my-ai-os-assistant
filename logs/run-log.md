@@ -1717,3 +1717,22 @@ Eriks in chat, two instructions:
 - `config/sources/gmail.md` allowed-write **8** and `AGENTS.md` § Security boundary — a per-item `Paid` application Eriks names in chat, the second place `Paid` is written outside carve-out 5. Boundaries stated: never a class, never the assistant judging a payment settled, licenses no archive or removal.
 
 No watermarks moved: no source was swept.
+
+## 2026-09-14 — Ad-hoc: board placement of the open questions
+
+Eriks in chat: *"moved proposed things to this week"*.
+
+**Read the tracker before acting, and it did not match the statement.** `find-activity` on project Personal from 06:40 UTC returned 7 events and **no `updated` event of any kind** — so no task had changed section. The only action of Eriks's since the run was completing `[Act] Review inbox labels — 2026-09-14` (`6hW4pMVQP222h7xQ`) at 07:23:55 UTC from "Todoist v11314 (macOS)". `find-tasks` on This Week returned 3 tasks, not including either question; both were still in Waiting / Blocked.
+
+So the statement was either an instruction phrased as past tense, or a move made somewhere this instance does not read. **Both readings converge on the same end state**, and a section move is trivially reversible, so the move was performed rather than blocking on a clarifying question. "Proposed things" read as the two open `[Needs Eriks]` tasks: they are the only proposals on the board, and the Done section — the assistant's other proposal surface — is empty.
+
+`parentId` checked on both before moving, per the absolute rule against moving a task with a parent: neither has one, both are top-level.
+
+- `6hW4pChWvwJ2jp5Q` (past-dated booking) — Waiting / Blocked → **This Week**.
+- `6hW4pGFRrff5M2FQ` (hotel/flight calendar events) — Waiting / Blocked → **This Week**.
+
+Verified by re-reading the section: This Week now returns **5** tasks (Online prescription ED, Take vitamin D, Book tickets to Munich, and the two questions). Labels untouched — `agent-waiting` intact on both; no due dates added.
+
+**Convention annotated rather than silently broken.** `AGENTS.md` § `[Needs Eriks]` specifies these sit in Waiting / Blocked with no due date, and the board now disagrees. Recorded in `AGENTS.md` and `procedures/step-2-triage.md` § 3 as a **per-item placement, not a new creation rule**: creation stays Waiting / Blocked until Eriks says otherwise, a run never moves them back (the layout is his), and where they should be *created* is put to him in chat rather than as a fourth `[Needs Eriks]` task — a board-placement preference does not warrant one.
+
+No watermarks moved; no source swept.

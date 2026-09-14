@@ -433,6 +433,17 @@ these are the one task class the assistant completes itself. The brief
 reports a count and a pointer, never the question bodies. The full rules are
 in `procedures/step-2-triage.md` and `procedures/step-0-orient.md`.
 
+**Placement — NARROWED-IN-PRACTICE 2026-09-14, Eriks, in chat:** *"moved
+proposed things to this week"*. Both open questions were moved to **This
+Week**. Recorded as a **per-item placement, not a new creation rule**: new
+`[Needs Eriks]` tasks are still created in Waiting / Blocked, with no due
+date, until Eriks says otherwise — where they should be *created* is an open
+question with him. The board layout is his to manage
+(`procedures/step-2-triage.md` § 4), so a move he asks for is executed and
+**never reverted by a later run**. Note the tracker showed no move of his own
+when he said this: the activity log for project Personal carried no `updated`
+event, so the move was performed by the assistant on his instruction.
+
 ## Voice and tone
 
 A guide to how Eriks actually writes lives at `config/voice-style-guide.md`.

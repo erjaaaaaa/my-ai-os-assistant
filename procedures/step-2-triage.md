@@ -69,7 +69,7 @@ back and confirm the ref line):
 **`[Needs Eriks]` tasks** (the agent-questions rules):
 
 - Title `[Needs Eriks] <the question>` — phrased as a question, not a chore.
-- Label `agent-waiting`; section Waiting / Blocked; **no due date**.
+- Label `agent-waiting`; section Waiting / Blocked; **no due date**. (2026-09-14: Eriks moved both open questions to **This Week** — *"moved proposed things to this week"*. A per-item placement he asked for, not a change to where these are created; creation stays Waiting / Blocked, and a run never moves them back. See `AGENTS.md` § `[Needs Eriks]`.)
 - Priority p2 when the run genuinely cannot proceed correctly without the
   answer; p4 when a safe documented default exists and this only seeks
   confirmation.
