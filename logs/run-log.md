@@ -1632,3 +1632,59 @@ was completed by other means. **The permission question is now moot** —
 instruction of today authorised one specific act that the assistant did not
 perform; it is not carried forward as a standing permission and a future reopen
 needs its own instruction.
+
+## 2026-09-14 — /start-day (full routine)
+
+**Step 0 — Orient.** Ids read from `state/state.json`; tracker `_verified` 2026-09-07, 7 days old, inside the 30-day window, so nothing re-resolved.
+
+- **Gmail: live.** Control `list_labels` returned 47 labels; all thirteen taxonomy ids and `paid_label_id` matched state. Containing total `INBOX.threadsTotal` = **40**.
+- **Calendar: live.** Control `list_calendars` returned 8 calendars; both swept ids present. The two "Todoist" mirrors and three holiday calendars ignored per scope.
+- **Tracker: live.** `user-info` returned `epetersons87@gmail.com`, user 22613842.
+- **Open questions read back: 1 open → 1 answered-and-closed → 0 ambiguous.** Task `6hVJGFj3r2MVj95x` (ref `calendar:family-event-ownership`) carried one comment from Eriks, `"a)"`, with no `**Assistant —**` marker, so it is his answer. Option (a) was *"Keep the default — keep flagging them, you answer per item."* Applied to `config/routing-rules.md` § Source-specific notes › Calendar as **SETTLED 2026-09-14**, quoting the superseded text in full and recording (b) and (c) as explicitly declined; edit read back before the task was completed; `fetch-object` confirmed `checked: true`.
+- **Not a rerun:** `calendar.last_scanned_date` was 2026-09-11, not today.
+
+**Step 1 — Inbox labelling.** 40 threads read of 40 (`in:inbox`, pageSize 50, single page, no `nextPageToken`). **Census holds: 40 read ≤ 40 `threadsTotal`.** 4 skipped as already carrying one of the thirteen; 36 classified from full `PLAIN_TEXT` bodies, never snippets.
+
+Labelled **34**: Promotions & Ads 13, Newsletters & Learning 5, Schedule Calendar 5, Professional Networking 4, Receipts & Subscriptions 3, Travel 2, Banking & Cards 1, Security & Verification 1. Verified by one `in:inbox` read-back reading `label_ids` off every message — never by a `label:` query, per the 2026-09-10 defect.
+
+Left **unlabelled on purpose, 2**, under the taxonomy tie-break (unsure between an action class and anything else → leave unlabelled): `1a09aa0546c09aa1` Tesla / Armands Mastins (named human, sales follow-up, no concrete ask — Reply/Do vs Promotions; mislabelling it Promotions would have archived a live conversation) and `1a099e498f6dc9a7` YouTube Premium failed payment (no amount, invoice or due date, so the Needs-Payment markers are absent — Needs-Payment vs Receipts/Banking).
+
+Archived **21** (`INBOX` removed only): Promotions 13, Newsletters 5, Receipts 3. Trashed **4** under carve-out 6. Inbox **40 → 15**, read back and counted.
+
+Ledger rows **21**, each grepped by its own `messageId` after the append, per the 2026-09-11 rule (**at least one verified row per archived thread**, not equality of counts): promotions 13 at lines 10085–10097, newsletters 5 at 6217–6221, receipts 3 at 536–538. Per-class 13/13, 5/5, 3/3 — no thread carried multiple receipts this run, so the two numbers coincide by coincidence rather than by rule.
+
+Amount not readable, recorded as such rather than guessed: Kalnciema Neiroklīnika e-kvīts — amount only in `E-kvits-print-XQ092706.pdf`; row written with `amount not in body; attachment not readable via connector`, and the invoice number noted as taken from the attachment filename, not the body.
+
+**Carve-out 6 (4 threads).** Each confirmed a Google Calendar notification by both notice markers ("Invitation from Google Calendar" and "You are receiving this email because you are subscribed to Calendar notifications") with a "New event:" subject. **Existence check ran on each event's own date, not the 7-day window**, per the calendar adapter: all four found on the Family calendar — Mark turnirs šahs 10 Oct (`_6goj4c9o711jeba46sp3cb9k60o3eb9o8cojib9m8osj4h1g64pj4d9k8k`), Viena 23–25 Sep (`_85238c1g8923cb9m8913eb9k8csjab9o84r3ib9g84qk4chn6gp38ea568`), Marks dzejolis 2 Oct (`_6oq3ic1l68qjib9i6l1k6b9k8kr32b9p8go32b9o892jahhk6csjighm6o`), Ervins Futbols 26 Sep (`_6crk2ca46opk6ba664p36b9k750j2b9o64rk4b9h8cs46gq16p342di470`). All four then trashed and read back via `search_threads in:anywhere` + `includeTrash`, each showing `TRASH`.
+
+**Carve-out 7: 0 events created.** One candidate — Tesla test-drive confirmation `1a09575a7a89cb22`, Sat 13 Sep 14:00 Spice Mall, a real booking, uncancelled, and on neither calendar (both checked for 13 Sep, both empty). It is **past-dated**, a case carve-out 7 does not cover. Applied the carve-out's own "unsure → not created" fallback: nothing written; thread stays labelled Schedule Calendar **in the inbox** (carve-out 4 permits archiving a Schedule Calendar thread only once handled, and "handled" is exactly what is undecided). Raised as `[Needs Eriks]`.
+
+Payment tasks created: **0**.
+
+**Step 2 — Triage.** Sent sweep `in:sent after:2026/09/10` returned one thread whose newest message is from June, below the watermark — **0 new own-commitments**. Dedupe reads: 25 open tasks (`hasMore: false`), 27 completed in 60 days (`hasMore: false`). No ref matched any new thread, so no updates and **no column moves** — there was no new source evidence on any open task.
+
+**Carve-out 5 — closed payment tasks: 2 in class, 1 INCOMPLETE, 1 not started.** Completed `Pay …` tasks with a `ref: mail:` first line: four found; Elektrum and Bite were already swapped by earlier runs (no `Needs-Payment` remaining). The two in class:
+
+- `6hV6mcgGgpfF9Q2x` "Pay Eco Baltia vide", completed 2026-09-11, thread `1a0875ca032db903`. `get_thread METADATA_ONLY` confirmed `Needs-Payment` on every message. `Paid` applied → **read back present**. `unlabel_thread(Needs-Payment)` then returned "service is currently unavailable"; the single retry was refused by the desktop app's auto-mode classifier, `[External System Writes]`. **Applied the 2026-09-08 rule: stopped at that step, did not retry inside the run, left the thread in its half state and reported it.** Confirmed state by read-back: `Paid` + `Needs-Payment` + `INBOX`. Remaining steps: remove `Needs-Payment`, remove `INBOX`.
+- `6hV6mchphG78MgPQ` "Pay SIA Mārupes komunālie pakalpojumi", completed 2026-09-11, thread `1a08709e05be7fbb`. In class and verified, but **deliberately not started** — it would block at the identical step and leave a second thread half-done. Recorded here and in the brief as owed work.
+
+**Not an outage.** The classifier also refused one routine `search_threads` read, which succeeded on retry; that plus the populated control query and ~40 successful label/unlabel/trash writes prove the connector is live. Watermarks were therefore advanced normally, per the 2026-09-08 rule.
+
+Tasks created: **4**, each read back.
+
+- `[Act] Review inbox labels — 2026-09-14` (`6hW4pMVQP222h7xQ`) — This Week, due today, p3.
+- `[Needs Eriks] When a subscription tells you a card payment failed, do you want a task?` (`6hW4p9MqPQFRg46Q`) — ref `mail:1a099e498f6dc9a7`. Default: no task. Raised rather than decided because the 2026-09-10 Arlo instruction was explicitly per-item and must not be generalised — the 2026-09-10 lesson on conditional/per-item answers applies directly.
+- `[Needs Eriks] Should a confirmed booking that is already in the past get a calendar event created?` (`6hW4pChWvwJ2jp5Q`) — ref `mail:1a09575a7a89cb22`. Default: not created, not archived.
+- `[Needs Eriks] Should hotel and flight bookings also get a calendar event created automatically?` (`6hW4pGFRrff5M2FQ`) — ref `mail:1a09bc15a1a100a3`. **A real defect in the config, not a judgement call:** a hotel confirmation satisfies both the Travel test ("hotel bookings with itineraries") and the Schedule Calendar test ("an explicit travel booking (itinerary, boarding pass)"), and the tie-break line ranks only *Travel > Loyalty > Receipts > Promotions* — it does not rank Travel against Schedule Calendar. Which label wins decides whether carve-out 7 fires and a €6,382 commitment lands on the calendar. Labelled Travel (most specific), no event created, default stated. Dedupe: 0 open `agent-waiting` tasks before creating; 3 verified after.
+
+**Step 3 — Vault ingest.** `raw/` root held 1 pending clipping. Ingested; `raw/` now empty. Created `wiki/Business YouTube Channel Growth.md` and `wiki/Source Digest - 2026-09-14 Raw Ingest.md`; cross-linked both ways into `Creator Platform Risk And Algorithm Shifts`, `Digital Product Funnels`, `Conversion Copy And Landing Pages`; updated `index.md` (page entry + digest entry) and appended `log.md`. Source frontmatter took `channel_name: Jake Trinder` and `wiki:`; **provenance recorded rather than asserted** — a WebFetch of the YouTube watch URL, per the vault schema's "fetch it from YouTube" instruction, returned only footer navigation and did not yield the channel, so the value comes from the clipping's own `author` field and is recorded as the clipping's claim. All paths read back.
+
+**No mail snapshots.** Hotel Fisserhof and the Tesla purchase thread both weighed against § What gets snapshotted and declined under "when unsure whether a thread is durable, it is not"; both already held by Todoist and the brief. A `crm/` page for the Tesla advisor was specifically not created: the vault's `AGENTS.md` gates CRM writes on Eriks asking, and it is authoritative where it and `procedures/step-3-ingest.md` differ. Both offered in the brief.
+
+**Config maintenance.** `config/routing-rules.md` § Source-specific notes › Calendar: **Mark psiholog** (Family, Mondays 16:00–17:00, created 2026-09-10 by margaritaeliya, occurrences 14/21/28 Sep and 5 Oct) added to the named recurring household series, under that section's own "name them when they appear" rule. No task; still listed in the Family section.
+
+**Step 4 — Brief** delivered in chat and archived to `briefs/2026-09-14.md` (8,923 bytes, 131 lines, verified on disk).
+
+**Defaults applied this run, none recorded as decisions:** past-dated booking → not created (carve-out 7 fallback); failed-payment mail → no task, left unlabelled; Travel-labelled booking → no calendar event. All three stay open until Eriks answers in words.
+
+**Anomalies:** the half-swapped Eco Baltia thread (above); one transient "service is currently unavailable" and two classifier refusals, one of which cleared on retry; 0 advertising events on either swept calendar (the Skool Q&A and Mindvalley summit reached mail only); Apple Minecraft Marketplace Pass trial renews 2026-10-12, surfaced as a Know line.

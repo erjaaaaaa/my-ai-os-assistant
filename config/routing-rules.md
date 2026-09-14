@@ -172,12 +172,28 @@ another.
   Family all-day waste series seen in the 11–18 Sep window — 🍾 Stikla
   iepakojums (Thursdays, every 4 weeks) and ♻️ Šķirotie atkritumi (Thursdays,
   every 2 weeks). Same treatment: no task, still listed in the Family section.
-  Eriks may strike either.
-- Confirmed per-item ownership on the Family calendar — ADDED 2026-09-11.
-  **These are recorded facts, not a rule**: no general test has been agreed, and
-  the open question `[Needs Eriks]` (ref `calendar:family-event-ownership`) asks
-  for one, with the default *keep flagging every overlap and ask per item*.
-  Do not generalise from these two.
+  Eriks may strike either. WIDENED 2026-09-14 by the assistant, under the same
+  rule: **Mark psiholog** (Family, Mondays 16:00–17:00, created 2026-09-10 by
+  margaritaeliya, occurrences seen 14, 21 and 28 Sep and 5 Oct) — a child's
+  recurring appointment. Same treatment: no task, listed in the Family section.
+  Eriks may strike it.
+- Confirmed per-item ownership on the Family calendar — ADDED 2026-09-11,
+  **SETTLED 2026-09-14 by Eriks**. Superseded text: *"**These are recorded
+  facts, not a rule**: no general test has been agreed, and the open question
+  `[Needs Eriks]` (ref `calendar:family-event-ownership`) asks for one, with
+  the default keep flagging every overlap and ask per item. Do not generalise
+  from these two."* The question is now answered: Eriks chose option (a) in the
+  task's comments with the single word *"a)"*, where (a) read *"Keep the
+  default — keep flagging them, you answer per item."* **Rule, and it is now a
+  decision rather than an unanswered default: every overlap between Eriks's own
+  calendar and the Family calendar is surfaced in the brief as a possible
+  conflict, and Eriks resolves it per item.** No ownership is ever inferred from
+  the creator of a Family event, from its title, or from the kind of appointment
+  it is — the two facts below stay per-item facts and license no general test.
+  Declined explicitly: (b) treating anything created by margaritaeliya as hers
+  unless it names Eriks or a child, and (c) a narrower personal-care-only
+  version of the same. The cost Eriks accepted is one line in the brief on the
+  days an overlap happens.
   - **A KLINIKA** (Fri 18 Sep 10:00–13:00, created by margaritaeliya) is
     Eriks's wife's. Eriks: *"A KLINIKA is my wife's appointment. USG is mine."*
     Not a conflict with the 18 Sep Transrektālā USG.

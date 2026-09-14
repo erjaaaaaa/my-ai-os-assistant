@@ -266,3 +266,46 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   entry assumed the fault is present from session start; this one shows it can
   appear part-way through, so **a successful earlier write is not evidence the
   next one will serialise.**
+- 2026-09-14 — **A hotel booking satisfies two taxonomy classes and the
+  tie-break does not separate them** — the Booking.com Hotel Fisserhof
+  confirmation (3–10 Jan 2027, €6,382.33) matched the **Travel - Bookings &
+  Iterinary** test ("hotel bookings with itineraries … travel confirmations")
+  and the **Schedule Calendar** test ("an explicit travel booking (itinerary,
+  boarding pass)") equally well, while the stated tie-break ranks only
+  *Travel > Loyalty > Receipts > Promotions* and is silent on Travel vs
+  Schedule. The choice is not cosmetic: Schedule Calendar fires carve-out 7
+  and would have created a seven-night event, Travel creates nothing.
+  **Rule:** when two taxonomy classes fit and the tie-break does not order
+  them, do not let the more specific-sounding label silently decide a
+  *carve-out action* — label conservatively (the class whose post-action
+  writes least), create nothing, and open a `[Needs Eriks]` question naming
+  both readings and the write each would cause. A tie-break written to order
+  *filing* must never be repurposed to authorise a *write*. Open as task
+  `6hW4pGFRrff5M2FQ`.
+- 2026-09-14 — **Carve-out 7 has no rule for a booking that is already in the
+  past** — Tesla's test-drive confirmation (Sat 13 Sep 14:00) was a real,
+  uncancelled booking on neither calendar, which is carve-out 7's literal
+  trigger, but the appointment had already happened and the sender's own
+  follow-up proved Eriks attended. Creating it would have put a stray past
+  event on his calendar; the carve-out exists so a *future* commitment is not
+  missed. **Rule:** a carve-out's trigger conditions are not its purpose —
+  when an item satisfies the letter but defeats the stated reason for the
+  permission, apply the carve-out's own documented fallback (here "unsure →
+  not created") rather than either writing or inventing an exception, and ask.
+  Note the second-order cost, which is why this needs answering: the thread
+  then cannot be archived either, because carve-out 4 only permits archiving a
+  Schedule Calendar thread "once handled", and handled is precisely what is
+  undecided — so a withheld write leaves the item parked in the inbox. Open as
+  task `6hW4pChWvwJ2jp5Q`.
+- 2026-09-14 — **A classifier refusal mid-swap should stop the whole class,
+  not just the one thread** — the 2026-09-08 rule says stop at the refused
+  step and leave that thread in its half state. Two threads qualified for
+  carve-out 5 this run; the first (Eco Baltia) was refused after `Paid` was
+  applied. Starting the second would have blocked at the identical step and
+  produced a *second* half-swapped thread, doubling the manual cleanup for no
+  gain. **Rule:** when a carve-out write is refused by the permission layer,
+  stop the remaining items in that same class for the run as well, and report
+  them as owed rather than attempting them. Extends the 2026-09-08 entry,
+  which addressed only the thread in hand; its own reasoning ("do not retry
+  inside the run") applies with more force to a sibling item known to need the
+  identical call.
