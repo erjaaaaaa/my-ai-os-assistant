@@ -127,6 +127,22 @@ actually processed.
    6, and same reasoning: the act is inside Eriks's own mailbox, reversible,
    and reaches no other person.
 
+8. **A per-item `Paid` application Eriks asks for in chat** (WIDENED
+   2026-09-14, Eriks). The class is exactly: Eriks names the thread, in chat,
+   and says to mark it paid. `label_thread` with `paid_label_id` on that one
+   thread, read back. Both boundaries: **not** a class of threads, **not** an
+   inference that a payment looks settled, and **never** the assistant deciding
+   a thread is paid — only Eriks knows that; and it licenses no archive, no
+   label removal and no trash, each of which needs its own instruction. First
+   use: the YouTube Premium failed-payment thread `1a099e498f6dc9a7`, after
+   Eriks fixed the card himself — *"I've already updated the payment details
+   and it went though all fine. Can mark is as Paid."* `Needs-Payment` was
+   deliberately **not** applied first, because the end state Eriks asked for is
+   `Paid` and the two labels must never rest together (`config/routing-rules.md`
+   § The payment task). Same authorisation channel as allowed-writes 6 and 7,
+   and safer than both: adding a label is additive, mailbox-internal,
+   reversible, and reaches no other person.
+
 ## Forbidden
 
 `send_message`, `reply`, `forward`, sending or scheduling a draft,

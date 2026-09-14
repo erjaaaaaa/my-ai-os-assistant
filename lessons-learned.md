@@ -309,3 +309,41 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   which addressed only the thread in hand; its own reasoning ("do not retry
   inside the run") applies with more force to a sibling item known to need the
   identical call.
+- 2026-09-14 — **A half-finished carve-out is a defect, not a neutral pause** —
+  the 2026-09-08 rule ("stop at the refused step, leave the thread in its half
+  state, report it") was followed correctly when the classifier refused the Eco
+  Baltia `unlabel_thread`, and the thread sat carrying **Paid + Needs-Payment +
+  INBOX** until Eriks was asked. His reaction named the real cost: *"E-mail
+  cannot sit at both Paid and Needs-Payment labels at the same time - it's
+  confusing."* The stopping rule is right — retrying blind is worse — but
+  reporting it as one bullet among fourteen brief sections undersold it.
+  **Rule:** when a carve-out leaves an object in a contradictory state,
+  report it as the **first** thing in the brief, state the exact remaining
+  calls, and ask for the one word that finishes it — do not file it under
+  Anomalies alongside cosmetic notes. The half state is a live defect in the
+  mailbox for as long as it stands. Recorded in `config/routing-rules.md`
+  § The payment task as a mutual-exclusion invariant.
+- 2026-09-14 — **When a class answer and a per-item instruction arrive in one
+  message, execute the end state, not the sequence** — Eriks wrote *"Youtube
+  premium should be marked as Needs-payment since my payment failed. I've
+  already updated the payment details … Can mark is as Paid."* Read literally
+  and in order that is: apply Needs-Payment, then apply Paid — which would have
+  produced, for two API calls, precisely the both-labels state he objected to in
+  the previous sentence. **Rule:** a message that states a general rule *and* a
+  disposition for the item in hand is setting policy for the future and an end
+  state for the present; apply the rule to the config and the end state to the
+  thread. Never perform an intermediate step whose only justification is the
+  literal order of the sentences, especially when the same message forbids that
+  intermediate state.
+- 2026-09-14 — **Reconcile a census discrepancy before reporting, even a
+  favourable-looking one** — after the swaps, `INBOX.threadsTotal` read 10 where
+  15 − 2 archives = 13. The gap was Eriks trashing three notifications himself
+  mid-conversation, confirmed by `in:anywhere` + `includeTrash` and corroborated
+  three ways (TRASH +3, Professional Networking 140 + 4 − 3 = 141, and the
+  Schedule Calendar count sitting at 275 rather than 279). **Rule:** a count
+  that does not reconcile is investigated and explained in the report, never
+  smoothed over or attributed to "the user probably did something" without a
+  read that proves it. The same check incidentally established a fact worth
+  keeping: **a trashed thread drops out of a user label's `threadsTotal`**, so
+  label counts cannot be used as a labelling audit without accounting for
+  trashes in the same window.

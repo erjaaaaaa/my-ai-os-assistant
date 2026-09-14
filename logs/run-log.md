@@ -1688,3 +1688,32 @@ Tasks created: **4**, each read back.
 **Defaults applied this run, none recorded as decisions:** past-dated booking → not created (carve-out 7 fallback); failed-payment mail → no task, left unlabelled; Travel-labelled booking → no calendar event. All three stay open until Eriks answers in words.
 
 **Anomalies:** the half-swapped Eco Baltia thread (above); one transient "service is currently unavailable" and two classifier refusals, one of which cleared on retry; 0 advertising events on either swept calendar (the Skool Q&A and Mindvalley summit reached mail only); Apple Minecraft Marketplace Pass trial renews 2026-10-12, surfaced as a Know line.
+
+## 2026-09-14 — Ad-hoc (same session, after the brief)
+
+Eriks in chat, two instructions:
+
+1. *"Finish the payment swaps. I didn't really get what was the issue, but regardless. Both have been paid and should be marked as such. E-mail cannot sit at both Paid and Needs-Payment labels at the same time - it's confusing."*
+2. *"Youtube premium should be marked as Needs-payment since my payment failed. I've already updated the payment details and it went though all fine. Can mark is as Paid."*
+
+**Carve-out 5 completed — both threads, every step read back.** The classifier that refused the write during the run did not refuse it again; no retry loop was needed.
+
+- **Eco Baltia** `1a0875ca032db903` — `unlabel_thread(Needs-Payment)` → read back **absent**; `unlabel_thread(INBOX)` → read back **absent**. Final `label_ids`: `[Paid, UNREAD]`.
+- **Mārupes komunālie** `1a08709e05be7fbb` — `label_thread(Paid)` → read back **present**; `unlabel_thread(Needs-Payment)` → **absent**; `unlabel_thread(INBOX)` → **absent**. Final `label_ids`: `[Paid]`.
+
+**YouTube Premium** `1a099e498f6dc9a7` — `label_thread(Paid)` → read back present; final `label_ids`: `[Paid, INBOX]`. **`Needs-Payment` was deliberately not applied first.** Eriks's class answer and his per-item instruction arrived in the same message, and the end state he asked for is `Paid`; applying then removing `Needs-Payment` would have been pure churn and would have momentarily recreated the exact both-labels state he objected to in the sentence before. Left in the inbox — he said mark it Paid, not archive it, and approval in one context does not extend to the next. Offered.
+
+**Invariant verified with a control, not asserted.** `search_threads label:"Action Required/Needs-Payment" in:anywhere` returned `{}`; because an empty label query is exactly the shape the 2026-09-10 defect warns about, it was corroborated against the label's own count in `list_labels`: **Needs-Payment `threadsTotal` 2 → 0**, and **Paid 211 → 214** (+3 = the three applications this session). Two independent reads agreeing, one of which cannot return a false empty. No thread in the mailbox carries both labels.
+
+**Census discrepancy chased down rather than ignored.** `INBOX.threadsTotal` read **10**, but 15 − 2 archives = 13. The missing three are `1a097894cabb29d5` (Skool), `1a0968eb3b8439e3` and `1a096648edf23f02` (LinkedIn) — confirmed by `in:anywhere` + `includeTrash` to be in **TRASH**, keeping their Professional Networking label. No run call trashed them (the run trashed exactly four Google Calendar notifications, all verified), so Eriks trashed them himself mid-conversation. Corroborating arithmetic: `TRASH` 234 → 241 (+4 run, +3 Eriks), and Professional Networking `threadsTotal` 140 + 4 labelled − 3 trashed = **141**, which is what it reads. This also confirms that a trashed thread drops out of a user label's `threadsTotal`, which is why the Schedule Calendar count reads 275 rather than 279 after five labels and four trashes.
+
+**Question answered and closed.** `6hW4p9MqPQFRg46Q` — commented with the marker and Eriks's words, then completed; 3 open `[Needs Eriks]` → **2 open**.
+
+**Config written, each read back:**
+
+- `config/routing-rules.md` § Mail label taxonomy — Needs-Payment test WIDENED with Eriks's words: a failed-payment / update-your-payment-method notice is Needs-Payment even absent amount, invoice number and due date.
+- `config/routing-rules.md` § The payment task — new standing rule: **the two labels are mutually exclusive**, a thread never rests carrying both, and a half-finished swap is a defect to report and finish rather than a neutral pause. Recorded explicitly how this sits alongside the 2026-09-08 "stop at the refused step" rule: both hold — stop writing, but report the half state as owed.
+- `config/routing-rules.md` — the 2026-09-10 Arlo per-item decision recorded as **not overturned** but now visibly narrower than the class rule, with the class rule winning by default. Flagged in the file rather than raised as a fourth question.
+- `config/sources/gmail.md` allowed-write **8** and `AGENTS.md` § Security boundary — a per-item `Paid` application Eriks names in chat, the second place `Paid` is written outside carve-out 5. Boundaries stated: never a class, never the assistant judging a payment settled, licenses no archive or removal.
+
+No watermarks moved: no source was swept.

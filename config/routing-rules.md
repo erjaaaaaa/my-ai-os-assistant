@@ -225,7 +225,7 @@ from Eriks's earlier automation on 2026-09-07.
 
 | Class (Eriks's label) | Test | Then |
 |---|---|---|
-| **Needs-Payment** (`Action Required/Needs-Payment`) | A request to pay a specific invoice or bill, or approve a payment due: invoice/receipt numbers, due dates, amounts, bank details, "pay invoice", "payment due", "outstanding balance". **Not** fundraising or charity ("donate", "give now", "support our mission"), marketing, newsletters, or anything with an unsubscribe cue. | Label + **payment task** (shape below). Stays in inbox. |
+| **Needs-Payment** (`Action Required/Needs-Payment`) | A request to pay a specific invoice or bill, or approve a payment due: invoice/receipt numbers, due dates, amounts, bank details, "pay invoice", "payment due", "outstanding balance". **Not** fundraising or charity ("donate", "give now", "support our mission"), marketing, newsletters, or anything with an unsubscribe cue. WIDENED 2026-09-14 by Eriks, answering the `[Needs Eriks]` question of the same day (ref `mail:1a099e498f6dc9a7`, task `6hW4p9MqPQFRg46Q`): **a failed-payment or update-your-payment-method notice from a subscription or service is Needs-Payment**, even with no amount, invoice number or due date — the markers this test otherwise keys on. Eriks: *"Youtube premium should be marked as Needs-payment since my payment failed."* The payment task follows per § The payment task, titled from the vendor with no amount. | Label + **payment task** (shape below). Stays in inbox. |
 | **Reply/Do** (`Action Required/Reply/Do`) | A direct ask needing Eriks's reply or a small action: "Can you confirm?", "Please send me the file", "Can you do X?" | Label. Feeds Step 2 triage (Act / Decide). Stays in inbox. |
 | **Schedule Calendar** (`Action Required/Schedule Calendar`) | **Only** real invites, updates or confirmed bookings: must contain invitation / accepted / declined / rescheduled / canceled, or an `.ics`, or an explicit travel booking (itinerary, boarding pass). Newsletter cues (unsubscribe, manage preferences) mean it is **not** Schedule. | Sub-rule first: a Google Calendar daily agenda or "no events scheduled" mail, a marketing webinar / live session / register / sign up / subscribe / YouTube event, or anything from `bilesuserviss.lv` → label **Promotions & Ads** instead and archive (WIDENED 2026-09-08: also a Google Calendar notification or reminder for an event that § Source hints › Calendar classes as advertising; unsure → ask, per that rule). Otherwise: label, then the calendar match check and, if unmatched, a **calendar proposal** in the brief. Archived once handled. CHANGED 2026-09-09 by Eriks, two ways: (i) a **Google Calendar notification** (New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda) → label, existence check, then **trash** under carve-out 6 — this supersedes the daily-agenda half of the sub-rule ("a Google Calendar daily agenda … → Promotions & Ads"); the marketing-webinar and `bilesuserviss.lv` halves survive. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* (ii) an unmatched, uncancelled **real invite or booking** → **create the event** on Eriks's own calendar under carve-out 7, read back, then archive — supersedes "a calendar proposal in the brief"; the proposal survives only for the unsure case, as a `[Needs Eriks]` question. Eriks: *"Same goes with calendar invites - check if those exist, if not, create one."* |
 | **Family & Personal** | Personal or family messages: school, kids, health, family updates. | Label. Stays in inbox. |
@@ -268,6 +268,27 @@ change the label on the corresponding e-mail and archive it"*. Carve-out 5 in
 `AGENTS.md` § Phase gates; steps in `procedures/step-2-triage.md` § Closed
 payment tasks. Idempotent by thread state: a thread already carrying `Paid`
 and not `Needs-Payment` is never touched again.
+
+**The two labels are mutually exclusive — ADDED 2026-09-14 by Eriks**, after a
+classifier refusal left the Eco Baltia thread carrying both for several hours:
+*"E-mail cannot sit at both Paid and Needs-Payment labels at the same time -
+it's confusing."* **Rule: no thread ever rests carrying both `Paid` and
+`Needs-Payment`.** The swap passes through that state for the duration of two
+API calls and no longer. If any step of the swap fails or is refused, the
+half state is a **defect to report immediately and finish as soon as Eriks
+says so** — it is never left standing as an acceptable outcome, and never
+carried across runs. Where this and the "stop at the refused step" rule
+(`lessons-learned.md`, 2026-09-08) appear to pull against each other, both
+hold: stop writing, but report the half state as needing a fix rather than as
+a neutral pause.
+
+**The Arlo per-item decision is not overturned by the widening above.** On
+2026-09-10 Eriks had the `Needs-Payment` label *removed* from the Arlo
+failed-payment thread with no task, because the money was already on the
+account and he was waiting for the vendor to retry. That remains a per-item
+instruction about one thread. It now sits visibly narrower than the class
+rule, and the class rule wins by default: a failed-payment notice is labelled
+Needs-Payment and gets a task unless Eriks says otherwise for that item.
 
 **The auto-archive classes** — Newsletters & Learning, Promotions & Ads,
 Receipts & Subscriptions (after the ledger row is written and verified), and
