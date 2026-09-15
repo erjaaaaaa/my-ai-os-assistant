@@ -1736,3 +1736,64 @@ Verified by re-reading the section: This Week now returns **5** tasks (Online pr
 **Convention annotated rather than silently broken.** `AGENTS.md` § `[Needs Eriks]` specifies these sit in Waiting / Blocked with no due date, and the board now disagrees. Recorded in `AGENTS.md` and `procedures/step-2-triage.md` § 3 as a **per-item placement, not a new creation rule**: creation stays Waiting / Blocked until Eriks says otherwise, a run never moves them back (the layout is his), and where they should be *created* is put to him in chat rather than as a fourth `[Needs Eriks]` task — a board-placement preference does not warrant one.
 
 No watermarks moved; no source swept.
+
+---
+
+## 2026-09-15 — `/start-day`, full routine (10:06–10:20 Europe/Riga)
+
+**Step 0 — orient.**
+- **Gmail: live.** Control `list_labels` returned 45 labels; all thirteen taxonomy ids and `paid_label_id` matched `state/state.json`. Containing total `INBOX.threadsTotal` = **8**. Notable at open: `Action Required/Needs-Payment` `threadsTotal` = **0**, which is the global proof that no thread was still carrying it — i.e. the 14 Sep Eco Baltia half-swap was resolved before this run.
+- **Calendar: live.** `list_calendars` returned **8** calendars; both swept ids present (`epetersons87@gmail.com`, `family17271500024496324001@group.calendar.google.com`).
+- **Tracker: live.** `user-info` → epetersons87@gmail.com, user id 22613842, matching state.
+- **Ids not re-resolved.** `tracker._verified` 2026-09-07, 8 days old, inside the 30-day rule. Every id used this run came from state and every call against one succeeded.
+- **Open questions: 2 open, 0 answered, 0 ambiguous.** `find-tasks` (project Personal, label `agent-waiting`, limit 100, `hasMore: false`) returned `6hW4pChWvwJ2jp5Q` and `6hW4pGFRrff5M2FQ`; `find-comments` on **each** returned `totalCount: 0`. Silence → both stated defaults stay in force, both tasks stay open, nothing recorded as a decision. Both sit in This Week, where Eriks moved them on 14 Sep; not moved back, per `AGENTS.md` § `[Needs Eriks]`.
+- **Not a rerun.** `calendar.last_scanned_date` = 2026-09-14 ≠ today, and mail newer than the watermark existed.
+
+**Step 1 — inbox.** `search_threads in:inbox`, pageSize 50 → **8 threads, 8 ≤ 8** (containing total 8; the sweep count does not exceed it). `get_thread` PLAIN_TEXT on the four unlabelled ones; labels read off every message.
+
+- Skipped, already labelled (**4**): `1a09bc15a1a100a3` + `1a09bcf9d7a110da` (Travel), `19ea59934e9545fd` (Reply/Do + Paid), `19ecbccd34e3286c` (Banking & Cards).
+- Labelled (**4**), each read back on every message of its thread via `in:inbox` METADATA_ONLY:
+  | Thread | Label written | Read-back |
+  |---|---|---|
+  | `1a0a14b3b28de68a` Hotel Fisserhof, "Your new Booking confirmation" | `Label_302269771500551203` Needs-Payment | present on both messages |
+  | `1a0a0fd65be15ad7` Hotel Fisserhof, "Offer for your Holiday" | `Label_219377032455978970` Travel | present on both messages |
+  | `1a09ead690f71b83` Apple, "Your Subscription is Confirmed" | `Label_8316160478815561067` Receipts | present |
+  | `1a0a1727ac7e2d62` Tesla feedback survey | `Label_6413919896574930163` Promotions | present |
+- **Ledger rows (2):** `ledgers/receipts.csv` line **539** (Apple / TP-Link Deco; amount blank — nothing charged, free year, note records the 149.99 EUR renewal from 13 Sep 2027) and `ledgers/promotions.csv` line **10098** (Tesla survey). Both grepped back by `messageId` **after** the append, per the 2026-09-09 rule as amended 2026-09-11 (at least one verified row per archived thread, not equality of counts).
+- **Archived (2):** `unlabel_thread ["INBOX"]` on `1a09ead690f71b83` and `1a0a1727ac7e2d62`, after their rows verified. Read back: `in:inbox` returned **6** threads, neither id present. Per class: Receipts 1/1, Promotions 1/1.
+- **Trashed: 0.** No Google Calendar notification threads this run.
+- **Left unlabelled: 0.**
+- **Review task upserted:** `find-tasks searchText "Review inbox labels"` → none open; created `6hWGX6V4wpcRMgjQ` "[Act] Review inbox labels — 2026-09-15", This Week (`6hJQ557XXQ7fRjVQ`), due 2026-09-15, p3. Verified in the create response.
+
+**Taxonomy collision recorded, not smoothed.** `1a0a14b3b28de68a` satisfies **Needs-Payment** (€1,910.00 down payment, due 21/09/2026, IBAN, reference 113551) and **Travel - Bookings & Iterinary** (hotel booking with itinerary) equally, and the written tie-break (*Travel > Loyalty > Receipts > Promotions*) does not order them. The 2026-09-14 lesson on the Travel-vs-Schedule collision says to label conservatively — *the class whose post-action writes least* — and open a question when a **carve-out action** hangs on the choice. Applied here: Needs-Payment's post-action is a task plus a label with the thread left in the inbox; **no archive, no trash, no calendar write**, so no carve-out fires either way and the conservative-writes test selects the action class rather than against it. A €1,910 obligation six days out is also exactly Eriks's standing scope decision of 2026-09-07 ("financial, and whatever admin obligations … all created as tasks"). No new `[Needs Eriks]` opened; the reasoning is stated in the review task and the brief, with the invitation to correct the label in Gmail.
+
+**Step 2 — triage.**
+- Mail: 8 inbox threads read, **4 new** by `internalDate` > 1789365268000 — Apple 1789368559000, Fisserhof offer 1789407355000, Fisserhof confirmation 1789412456000 (thread newest 1789455902000, Eriks's own reply), Tesla survey 1789415028000. Sent sweep `in:sent after:2026/09/13` → 4 threads, one additional (`1a0a0f0f581ac2f0`, Eriks's outgoing direct-booking request, superseded by the confirmation — no task).
+- Buckets: **Act 1** (the payment), **Know 3**, **Noise 0** withheld as low-confidence.
+- Calendar: own calendar **1** event (Transrektālā USG, Fri 18 Sep 10:30–11:00); Family **9**. Advertising events **0**. Invitations needing a response **0**. One new Family one-off — **Manikur**, Thu 17 Sep 10:30–11:30, created by margaritaeliya, overlapping nothing of Eriks's; recorded in the brief's Family section, no ownership inferred (per the SETTLED 2026-09-14 rule).
+- **Task created:** `6hWGWgpG6FW2ch4Q` "Pay Hotel Fisserhof 1910.00 EUR (down payment)", This Week, due 2026-09-21, p2, `size/S`. Verified with `fetch-object`: `ref: mail:1a0a14b3b28de68a` present as line 1, sectionId `6hJQ557XXQ7fRjVQ`, dueDate 2026-09-21. Dedupe run first against 28 open tasks and 29 completed tasks (60 days) — no ref match.
+- **§ 3b closed payment tasks (carve-out 5):** 4 completed tasks in the last 60 days start `Pay ` **and** carry a `ref: mail:` line (Mārupes, Eco Baltia, Elektrum, Bite); the two Margosik WhatsApp payments have no ref line and are out of class. `get_thread` METADATA_ONLY on the two most recent: `1a0875ca032db903` reads `["Label_2307425248756940905","UNREAD"]` and `1a08709e05be7fbb` reads `["Label_2307425248756940905"]` — **Paid only, no Needs-Payment, no INBOX**. Corroborated globally by `Needs-Payment threadsTotal = 0` at Step 0. **0 threads in class, 0 swaps.** The 14 Sep half state is cleared, by Eriks.
+- **Board movement (§ 4):** `parentId` checked on both before any move; both top-level.
+  - `6hW625m7vj3f9WgQ` "Book Austria hotel directly via Caxap whatsapp message" → **Done** (`6hJQ588WWq4VFX8Q`). Comment `6hWGX36QRFFmxPPx` posted first (`find-comments` → 0 beforehand, so not a repeat). Verified with `fetch-object`: sectionId `6hJQ588WWq4VFX8Q`, `checked: false` — a proposal, not a completion. Evidence: the 14 Sep outgoing request, the offer, Eriks accepting the Junior Suite, the binding confirmation, and his 15 Sep "the booking.com reservation has been cancelled".
+  - `6hVxc8cMWmvpqp2Q` "Book tickets to Munich 3 - 10 january + bambooHR" → comment `6hWGX35pp7q99g8x`, **no move**: hotel side locked, flights and bambooHR outstanding.
+  - `6hW4pChWvwJ2jp5Q` (open question) → comment `6hWGcCPwCqmhfQ7x` recording that Eriks archived the Tesla test-drive thread himself. **Explicitly marked as a fact, not an answer**; default restated; task left open.
+
+**Step 3 — vault ingest.** `raw/` root held one pending clipping (Eriks's Obsidian Web Clipper save, 14 Sep 23:27): the Jack Neel Podcast ep. 106 with Roy Lee (Cluely), 75 KB full transcript, read in full by the manager rather than delegated.
+- **Created:** `wiki/AI Video Ad Agency Playbook.md` and `wiki/Source Digest - 2026-09-15 Raw Ingest.md`.
+- **Updated (5):** Faceless AI Content Businesses, Creator Platform Risk And Algorithm Shifts, Side Hustle Playbooks, Getting Hired In The AI Era, AI Safety And Existential Risk — each got a Related/Cross-References bullet and a Sources line; all ten edits grepped back by line number.
+- `index.md` — new page entry (line 38) and digest entry (line 105), both verified. `log.md` — one appended entry, verified.
+- **Frontmatter:** `channel_name: Jack Neel` and `wiki:` added to the clipping. **No WebFetch this run**: the schema makes the fetch conditional on the channel not being determinable from the file, and two independent fields inside the clipping agree (`author: [[Jack Neel]]`, and the body's "This is the 106th episode of the Jack Neel Podcast"). Contrast 2026-09-14, where the author field stood alone.
+- **Moved** to `raw/processed/` (125 files); `find raw -maxdepth 1 -type f` → only `.DS_Store`. **`raw/` root empty.**
+- **Mail snapshots: 0.** The Fisserhof booking declined as not clearly durable, on the same reasoning as the 14 Sep Booking.com decision; offered to Eriks in the brief.
+
+**Census reconciliation, chased rather than smoothed** (per the 2026-09-14 rule). The 14 Sep run closed at `INBOX.threadsTotal` **10**; four new threads arrived since; today opened at **8**. 10 + 4 − 8 = **6 threads left the inbox between runs, none by any run call** (today's run archived exactly 2 and trashed 0, all verified). Five identified by direct read via `in:anywhere … includeTrash` and `get_thread`: `1a0875ca032db903` Eco Baltia and `1a08709e05be7fbb` Mārupes (Paid only — Eriks finished the swaps), `1a099e498f6dc9a7` YouTube Premium (Paid, archived), `1a09aa0546c09aa1` Tesla/Armands (no labels, archived), `1a09575a7a89cb22` Tesla test-drive (Schedule Calendar, no INBOX). **The sixth was not enumerated and is not guessed at** — the `in:anywhere` page was truncated at 50 of ~66 and a second page was not fetched.
+
+**Observed and reported, not acted on:** a large share of new mail never reaches the inbox at all — Eriks's own Gmail filters file Revolut notices, an e-klase grade for Marks, a TP-Link/Norton welcome and Booking.com's cancellation confirmation straight past it. `config/routing-rules.md` § Mail scope defines the sweep as the inbox plus sent mail, so these are **out of scope by design**, not missed. Named in the brief with the question of whether any class should be swept where it lands.
+
+**Also observed:** a new message landed on `1a0a14b3b28de68a` at 07:17 UTC, **after** the sweep read the mailbox (the hotel will confirm receipt once the deposit arrives). Not processed, so the watermark stops short of it and the next run sweeps it — which is exactly what advancing to the newest message *actually processed* is for.
+
+**Watermarks advanced (Step 5).** `mail.last_internaldate_ms` → **1789455902000** (Eriks's 07:05 UTC reply on the Fisserhof thread — the newest message actually processed, not the clock, and deliberately below the 07:17 arrival). `calendar.last_scanned_date` → 2026-09-15. `sources.gmail.inbox.last_sweep_date` → 2026-09-15. `vault.mail_snapshot.last_internaldate_ms` unchanged at 0 (no mail snapshot written). `digest.last_run_date` unchanged (no digest).
+
+**Registry drift: none.** Every tool used this run is listed in `config/tools.md`; WebFetch was not used.
+
+**Brief** delivered in chat and archived to `briefs/2026-09-15.md` (9,565 bytes, verified).
