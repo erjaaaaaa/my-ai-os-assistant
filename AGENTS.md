@@ -351,6 +351,43 @@ Four ship by default:
    brief. Supersedes "a calendar proposal in the brief, created on a
    per-item yes". Authorising decision, Eriks, 2026-09-09, in chat: *"Same goes with calendar invites - check if those exist, if not, create one."*
 
+   **NARROWED 2026-09-15 by Eriks (applied 2026-09-17) — a booking whose
+   date has already passed is never created, and its thread is archived
+   anyway.** The appointment is over, so it counts as *handled* for
+   carve-out 4's purposes even though nothing was written to the calendar.
+   This closes the gap the 2026-09-14 Tesla test-drive case opened, where
+   the letter of the trigger (real, uncancelled, on neither calendar) was
+   satisfied but the purpose of the permission — not missing a **future**
+   commitment — was defeated. Authorising decision, Eriks, 2026-09-15,
+   answering `[Needs Eriks]` task `6hW4pChWvwJ2jp5Q` with *"a)"*, where
+   option (a) read *"Never create a past-dated event, and **do** archive the
+   thread anyway once the date has passed — the appointment is over, so
+   treat it as handled."* Superseded default: *not created, not archived.*
+
+   **WIDENED 2026-09-15 by Eriks (applied 2026-09-17) — the class now
+   includes Travel - Bookings & Iterinary.** A confirmed, **future**,
+   uncancelled hotel, flight or car booking labelled Travel gets the same
+   treatment as a Schedule Calendar invite: `create_event` on Eriks's own
+   calendar, no attendees, `ref: mail:<thread_id>` in the description, read
+   back and logged. The thread keeps its **Travel** label and is **not**
+   archived by this — carve-out 4's archivable classes are unchanged.
+   Authorising decision, Eriks, 2026-09-15, answering `[Needs Eriks]` task
+   `6hW4pGFRrff5M2FQ` with *"b)"*, where option (b) read *"Extend carve-out
+   7 to Travel: a confirmed, future, uncancelled hotel/flight/car booking
+   gets an event on your own calendar (no attendees, `ref: mail:` in the
+   description), read back and logged."* This also settles the 2026-09-14
+   Travel-vs-Schedule tie-break defect: the two classes no longer differ in
+   what they cause the run to write, so the label choice is filing again.
+
+   **STILL OPEN, and it blocks the multi-day half of that widening:** option
+   (b) also asked *"Say whether you want one all-day span for a stay (3–10
+   Jan) or separate check-in/check-out entries."* Eriks did not say, and
+   silence is never an answer. **Until he answers, a multi-day stay creates
+   nothing** and is named in the brief; a booking with a single stated start
+   time (a flight departure, a car pick-up) is unaffected and is created as
+   a normal timed event. Tracked on task `6hW4pGFRrff5M2FQ`, which stays
+   open with the question narrowed to that one point.
+
 ### Lifting a gate
 
 **A gate is lifted only by Eriks saying so in writing, and by this section

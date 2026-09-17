@@ -347,3 +347,31 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   keeping: **a trashed thread drops out of a user label's `threadsTotal`**, so
   label counts cannot be used as a labelling audit without accounting for
   trashes in the same window.
+- 2026-09-17 — **The "already labelled → skip" check was run against a
+  truncated message list** — `procedures/step-1-inbox.md` § 1.2 says to read
+  `label_ids` off a thread's messages and skip the thread if any message
+  carries one of the thirteen. The run read them off the `search_threads
+  in:inbox` result, which returned **5 of the Luminor thread's 16 messages**
+  with no truncation flag; ten of the eleven it hid already carried
+  **Reply/Do** (and `Paid`) from Eriks's own June filing. The thread was
+  therefore relabelled when it should have been skipped. No harm landed —
+  the label applied was the same class the thread already held, so nothing
+  is misfiled and nothing was archived on the strength of it — but the check
+  was unsound, and a thread already sitting in a *different* class would have
+  been silently given a second taxonomy label. The label census is what
+  caught it: **Reply/Do's `threadsTotal` stayed at 97 while its
+  `messagesTotal` rose 118 → 132**, which is only possible if the thread was
+  already counted. **Rule:** the skip test is run against `get_thread`, never
+  against a `search_threads` result — the search result decides *which*
+  threads to look at and nothing else. Where reading every thread in full is
+  the cost, that cost is the price of the test being sound. Second check,
+  cheap and independent: after labelling, compare each label's `threadsTotal`
+  before and after; **the sum of the per-label thread deltas must equal the
+  number of `label_thread` calls made**, and any label showing +0 is a thread
+  that was already in that class. This run: 21 calls, 20 net-new
+  associations, one +0 — which is exactly how the defect surfaced. Fourth
+  instance of the silent-truncation trap in `config/sources/gmail.md`
+  § Verified defects, and the first where a *rule* rather than a *timestamp*
+  was decided on the short list — the existing entry warns only that
+  "`get_thread` matters for every watermark comparison", which reads as
+  narrower than it is.

@@ -237,7 +237,28 @@ from Eriks's earlier automation on 2026-09-07.
 | **Social Media** (`Interests & Marketing/…`) | Facebook, Instagram, TikTok, X and similar notifications. | Label. Stays in inbox. |
 | **Loyalty** | Any loyalty programme — airline, hotel or retail (Rimi, Decathlon and the like): miles, points, tier status, bonus offers, coupons, statements. WIDENED 2026-09-09 by Eriks, answering the `[Needs Eriks]` question of 2026-09-07 (ref mail:1a07c681b6c85794) with *"a)"*, where option (a) read *"Widen the description to 'any loyalty programme'"*. Superseded text: "Airline or hotel loyalty programmes: miles, points, tier status, bonus offers, statements." The tie-break Loyalty > Promotions is unchanged. | Label. Stays in inbox. |
 | **Security & Verification** | Verification codes, login alerts, password resets, suspicious sign-in notices. | Label. Stays in inbox. |
-| **Travel - Bookings & Iterinary** | Flight, hotel or car bookings with itineraries, boarding passes, check-in mail, travel confirmations. | Label. Stays in inbox. |
+| **Travel - Bookings & Iterinary** | Flight, hotel or car bookings with itineraries, boarding passes, check-in mail, travel confirmations. | Label, **then the carve-out 7 calendar check** (WIDENED 2026-09-15 by Eriks, applied 2026-09-17; superseded text: "Label. Stays in inbox."). Stays in inbox either way — Travel is **not** an archivable class. |
+
+**Carve-out 7 now covers Travel as well as Schedule Calendar** — WIDENED
+2026-09-15 by Eriks, answering the `[Needs Eriks]` question of 2026-09-14
+(task `6hW4pGFRrff5M2FQ`, ref `mail:1a09bc15a1a100a3`) with *"b)"*, where
+option (b) read *"Extend carve-out 7 to Travel: a confirmed, future,
+uncancelled hotel/flight/car booking gets an event on your own calendar (no
+attendees, `ref: mail:` in the description), read back and logged."* The
+thread keeps **Travel** and stays in the inbox; only the calendar write is
+added. **The multi-day form is still unanswered** — option (b) also asked
+whether a stay should be one all-day span or separate check-in/check-out
+entries, and Eriks did not say. Until he does: **a multi-day stay creates
+nothing** and is named in the brief; a booking with one stated start time (a
+flight departure, a car pick-up) is created as a normal timed event.
+
+**Past-dated bookings are never created but are archived anyway** — NARROWED
+2026-09-15 by Eriks, answering task `6hW4pChWvwJ2jp5Q` (ref
+`mail:1a09575a7a89cb22`) with *"a)"*: *"Never create a past-dated event, and
+**do** archive the thread anyway once the date has passed — the appointment
+is over, so treat it as handled."* Superseded default: *not created, not
+archived.* Applies to a **Schedule Calendar** thread, which carve-out 4 may
+archive; a Travel thread is still never archived.
 
 **Tie-breaks.** If a thread fits several, pick the most specific: **Travel >
 Loyalty > Receipts > Promotions.** Unsure between Newsletters and Promotions →

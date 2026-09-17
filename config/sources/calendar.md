@@ -83,6 +83,16 @@ populated control query.
 
 ## Allowed writes
 
+**Carve-out 7 changed twice on 2026-09-15 (Eriks, applied 2026-09-17); the
+full text is in `AGENTS.md` § Phase gates and is authoritative.** In short:
+(i) a booking whose date has **already passed** is never created — its thread
+is archived anyway if it is Schedule Calendar; (ii) the class now also covers
+**Travel - Bookings & Iterinary** for a confirmed, **future**, uncancelled
+hotel/flight/car booking, with the Travel thread keeping its label and staying
+in the inbox. **Still unanswered:** whether a multi-day stay is one all-day
+span or separate check-in/check-out entries — until Eriks says, a multi-day
+stay creates **nothing**.
+
 **None autonomously. This source is read-only in every sweep.** NARROWED 2026-09-09 by Eriks: carve-out 7 below makes one creation class autonomous; the sentence otherwise stands. `create_event`,
 `update_event`, `delete_event` and `respond_to_event` are never called by a run
 on its own judgement. A calendar write reaches other people — attendees are
