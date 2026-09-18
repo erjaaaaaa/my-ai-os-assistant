@@ -1961,3 +1961,21 @@ Dedupe reads: `find-tasks` 35 open, `find-completed-tasks` 32 over 60 days, `fin
 **Registry drift:** none. Every tool used this run is listed in `config/tools.md`.
 
 **Delegation:** two read-only subagents classified 21 bulk-noise threads in parallel and returned compact proposals with per-thread evidence quotes; the manager read the 10 consequential threads itself and performed every write. Both subagents reported full counts (9/9 and 12/12, neither exceeding what was given) and zero read failures. Two classification judgement calls they flagged (Litres digest-with-discount → Promotions via the tie-break; Substack flash-sale-in-editorial → Newsletters) were accepted; the Gaming Operations Academy thread was checked specifically for one-to-one-versus-blast and came back blast, on an ActiveCampaign unsubscribe footer and a merge-field greeting.
+
+## 2026-09-18 — ad-hoc: testicular USG and December cyst recheck
+
+Eriks in chat after today's appointment: the doctor said a testicular ultrasound was **mandatory** alongside the booked prostate scan and performed it in the same visit, found a **small cyst**, and wants a repeat scan in **December** to check whether it has grown.
+
+**Task created:** `6hX3wrq4F9gqv2mQ` "Book repeat testicular USG — December cyst recheck", Backlog, p3, `book` + `health`, due 2026-12-01. Read back with `fetch-object`: section `6hJQ54c82gGF4fWQ`, dueDate 2026-12-01, `ref: chat:2026-09-18-testicular-usg-cyst` on line 1. **Due date is the assistant's, not Eriks's** — he said "December" and named no date; stated as such in the description, per the routing rule that a due date is only the source's when the source states one.
+
+**Comment added** to `6hRV8xr4fHJP3gQQ` (comment `6hX3wvqGPPmX67hx`) amending the record: the visit covered two scans, not the one it was booked for. The task stays in Done and uncompleted.
+
+**A name is a claim, recorded as one in both places.** Eriks's words were "eggs USG"; read as a testicular / scrotal ultrasound (*sēklinieku USG*). The organ is the assistant's inference from context, flagged for correction in the task description, in the comment, and in chat — not handed downstream as a premise.
+
+**Gaps named rather than filled:** the cyst's size, which side, whether a specific December week was given, and whether the recheck should be the same clinic and doctor. None of these were stated; none invented.
+
+**Not merged with** `6hX3MxR28jg92Cjx` "Book urologist appointment — Dr Kaufman", created from this morning's handwritten-note session and described there as a follow-up referral after the prostate scan at the same clinic. A urologist consultation and a repeat scan are different bookings, so they stay separate, with the possible overlap flagged in the new task for Eriks to collapse if it is one visit.
+
+**No vault write.** The finding is durable personal context, but `procedures/step-3-ingest.md` § What gets snapshotted scopes snapshotting to this instance's own sources (Gmail, Calendar); chat is not a snapshot channel and inventing one is not the assistant's call. Offered to Eriks instead.
+
+**No calendar write** — nothing is booked, and carve-out 7 covers mail-derived bookings only.
