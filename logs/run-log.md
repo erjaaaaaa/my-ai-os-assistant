@@ -1846,3 +1846,118 @@ Two events rather than one because each leg has its own stated start **and** end
 **Defaults applied this run:** (i) multi-day stay creates nothing, pending Eriks's word; (ii) a "Notification:" Google reminder is archived, not trashed; (iii) the Luminor snapshot not written. None recorded as a decision.
 
 **Registry drift: none.** Every tool used is listed in `config/tools.md`. WebFetch not used.
+
+## 2026-09-18 — Ad-hoc: doctor's handwritten note read, one task created
+
+Eriks photographed a handwritten note from the doctor after today's transrectal
+USG (the 10:30 appointment on his own calendar, prep task `6hV6vFxQhGg9887Q`).
+Four numbered follow-ups. He asked for the reading, and for a Todoist task on
+item 4 only — *"just add the todoist task for this please"*.
+
+**Reading, with confidence stated rather than smoothed over.** (1) `velo…` —
+almost certainly **veloergometrija** (exercise ECG on a bike); the prefix is
+legible, the full word is not, and veloergometrija is the only common Latvian
+test starting `velo-`. Read as a hypothesis, not a fact. (2) **Ehogrāfija sirds**
+— echocardiogram; legible and independently read the same way by Eriks. (3)
+**Duplex** of the neck and head vessels; the first word is clear, the qualifier
+underneath is only partly legible and was reconciled against Eriks's own reading
+(*"kakls un galva"*). (4) **Kaufman** — the ink reads closer to *Kaufmanis*, the
+Latvian nominative form; the task uses Eriks's spelling and the ambiguity was
+named to him in chat rather than resolved silently. A name is a claim.
+
+**One Todoist write.** `6hX3MxR28jg92Cjx` **Book urologist appointment — Dr
+Kaufman**, project Personal, **Backlog** (the default creation section; not This
+Week — the 2026-09-14 move of the open questions was recorded as a per-item
+placement, never a new creation rule), p3, labels `book` + `health` to match the
+existing health cluster. Both labels already exist on Backlog tasks
+(`6hQF5phF5q49f94Q` and others), so nothing was created. Description carries the
+source, the same-clinic detail, and items 1–3 as context so the note survives the
+photo. **Verified** with `fetch-object`, not with the tool's success return:
+`sectionId: 6hJQ54c82gGF4fWQ`, `labels: ["book","health"]`, `checked: false`.
+
+**Duplicate check was inconclusive and is recorded as such.** `find-tasks` with
+`searchText` returned `totalCount: 0` **with `hasMore: true` and a cursor** on
+three separate queries (`urolog`, `Kaufman`, and `urologist` after the create,
+which should have matched the task that demonstrably exists). The searchText
+filter is unreliable in this deployment. The real evidence for "no duplicate" is
+the unfiltered Backlog listing — 17 tasks, all read, none a urologist booking —
+which is a populated control. Worth remembering before any future absence claim
+is built on `searchText` alone.
+
+**Items 1–3 were not created.** Eriks scoped the request to item 4. Offered in
+chat, not assumed. Noted to him that `6hQF5phF5q49f94Q` "Book blood pressure
+consultation" already sits in Backlog and overlaps the cardiac half.
+
+**No other writes.** No mail touched, no calendar event, no vault write, no
+commit (none asked for).
+
+## 2026-09-18 — Ad-hoc (same session): items 1–3 of the doctor's note
+
+Eriks, in chat: *"Yes, please add 1-2 as one. Also the Duplex scan is probably
+different from blood pressure consultation."*
+
+**Two Todoist creates, both Backlog, p3, `book` + `health`, verified with
+`fetch-object` rather than the create call's own return.**
+
+- `6hX3Q2HR84F9gWVQ` **Book heart tests — veloergometrija + sirds ehogrāfija** —
+  items 1 and 2 folded into one booking, exactly as asked. Description carries
+  the caveat that item 1's full word is a reading, not a fact.
+- `6hX3Q2Mmqvmx9wMQ` **Book duplex scan — kakla un galvas asinsvadi** — item 3.
+
+**The item-3 task is an inference, and is flagged as one.** Eriks's literal
+instruction covered items 1–2. He then said the duplex is *probably different
+from* the blood pressure consultation — a distinction that only does work if
+item 3 is being tracked somewhere, and my preceding question had offered items
+1–3. So it was created and **named plainly as an inference in chat**, cheap to
+undo, rather than left out and re-asked for. If this reading was wrong, the
+correction is his to make.
+
+**`6hQF5phF5q49f94Q` "Book blood pressure consultation" was not touched** — not
+completed, not moved, not commented, not merged. Eriks separated it from the
+duplex; he did not say anything about its relationship to the cardiac pair,
+which is where I had originally raised the overlap. **That question stays open
+and was re-put to him in chat**, not silently resolved either way. No default was
+recorded as a decision.
+
+**No other writes.** No mail, no calendar, no vault, no commit.
+
+## 2026-09-18 — /start-day, full routine
+
+**Step 0 — orient.** Gmail **live** (`list_labels` 46 labels; `INBOX.threadsTotal` 43). Calendar **live** (`list_calendars` 8 calendars, both swept ids present). Tracker **live** (`user-info` → epetersons87@gmail.com, user 22613842). Ids not re-resolved: `tracker._verified` 2026-09-07, 11 days old, inside the 30-day rule. Not a rerun — `calendar.last_scanned_date` was 2026-09-17. Open questions: **2 open, 0 answered, 0 ambiguous** — `6hW4pGFRrff5M2FQ` (multi-day stay shape; last comment is the assistant's 2026-09-17 narrowing, no reply since) and `6hWmrXJ7Cg6hF9Wx` (zero comments). Both defaults stay in force.
+
+**Step 1 — inbox.** 43 threads returned against `INBOX.threadsTotal` 43 (census holds; no pagination gap). Skip test run against **`get_thread` METADATA_ONLY on all 31 unlabelled candidates**, per the 2026-09-17 lesson — every one was a single-message thread, none carried a hidden taxonomy label, so the defect did not recur. 12 skipped as already labelled.
+
+Labelled **30** (`label_thread`, one id each): Promotions & Ads 10, Newsletters & Learning 8, Schedule Calendar 4, Professional Networking 4, Loyalty 2, Receipts & Subscriptions 1, Social Media 1.
+
+*Verification, two independent ways.* (i) Label census `list_labels` before → after: Schedule Calendar 276→280, Newsletters 1966→1974, Promotions 2767→2777, Loyalty 32→34, Professional Networking 141→145, Social Media 12→13, Receipts 681→682. **Sum of per-label thread deltas = 30 = the number of `label_thread` calls, with no label at +0.** (ii) `search_threads in:inbox` read-back showed the expected id on every remaining thread. Needs-Payment, Reply/Do, Banking, Travel, Family, Security and Paid all unchanged.
+
+Ledger rows appended and each grepped back by its own `messageId`: receipts line 542, newsletters 6226–6233, promotions 10107–10116. Per-class archived vs rows — receipts 1/1, newsletters 8/8, promotions 10/10; at least one verified row per archived thread.
+
+Archived **22** (carve-out 4): 10 Promotions, 8 Newsletters, 1 Receipts (after its row was verified), 3 Schedule Calendar (each event confirmed on a swept calendar first). Trashed **1** (carve-out 6): `1a0af345acb02fc4`, Google "New event: Ervins Futbols @ Sat 19 Sept 12:30 (Family)" — event confirmed on the Family calendar first, then read back via `in:anywhere` + `includeTrash` showing `TRASH` and no `INBOX`.
+
+**Census reconciliation:** 12 at the close of the 2026-09-17 run + 31 new overnight = 43 read; 43 − 22 − 1 = **20**, matching the post-write `in:inbox` count exactly. No unexplained gap, so no repeat of the 2026-09-14 investigation.
+
+**Left unlabelled on purpose (1):** Bluehost "Domain Privacy has expired for CHALLENGEFINDS.COM" (`mail:1a0b32766a32b7bf`). A lapsed free trial — no amount, no invoice, no failed charge — so not Needs-Payment under the 2026-09-14 widening; but the consequence is Eriks's name, Malta address and phone becoming public in WHOIS, which is a genuine account-owner decision. Unsure between an action class and Promotions → taxonomy tie-break applied: unlabelled, listed in the brief, stays in the inbox. **No `[Needs Eriks]` task raised** — the taxonomy already prescribes a documented path, and two questions are already open unanswered.
+
+**Step 2 — triage.** Sent sweep `in:sent after:2026/09/16` returned 1 thread (Fisserhof), newest sent message 1789581208000, below the watermark — no new commitments of Eriks's own. 31 inbox threads new since `mail.last_internaldate_ms` 1789632312000. Newest `internalDate` actually processed: **1789718321000** (getguru, 2026-09-18T07:58:41Z).
+
+Dedupe reads: `find-tasks` 35 open, `find-completed-tasks` 32 over 60 days, `find-activity` deleted → **0 events**. Tasks created **1** (the review task). Payment tasks **0**. `[Needs Eriks]` created **0**.
+
+**Carve-out 5 — 0 in class, stated as zero.** Four completed `Pay …` tasks carry a `ref: mail:` line (Mārupes komunālie, Eco Baltia, Elektrum, Bite). Impossibility test rather than four `get_thread` calls: Needs-Payment's global `threadsTotal` is **4**, and the post-write `in:inbox` read shows exactly those 4 threads carrying the label (Google Cloud ×2, NIC.LV, Fisserhof), each with a live open task. Per-container count equals the global total, so no thread outside the inbox can still carry it, so none of the four completed tasks' threads is in class. **Pay Hotel Fisserhof** (`6hWGWgpG6FW2ch4Q`) sits in the Done *section* with `checked: false` — not in class per § 3b.4, and correctly not swapped.
+
+**Board movement — 2 moves, both to Done as proposals, neither completed.** `parentId` checked absent on both before moving; labels verified intact in the update read-back (`size/XS` survived on the second).
+- `6hRV8xr4fHJP3gQQ` "Book Transrectal ultrasound" → Done. Evidence: the appointment was today and the event was read off the calendar this run; the Piearsta.lv reschedule mail (`1a0aedd613a41f7f`, internalDate 1789640138000, above the watermark) is new evidence since the watermark. Comment `6hX3W8VHCGQQRpfQ`.
+- `6hV6vFxQhGg9887Q` "Call Republikas laukuma klīnika…" → Done. Evidence: Eriks's own 15 Sep comment that he called, plus the clinic being in touch on 17 Sep and the appointment passing. Comment `6hX3W8VqPq3Rf3Cx`.
+- **Withheld:** `6hVxc8cMWmvpqp2Q` (Munich tickets) — already commented on the airBaltic booking on 2026-09-17, no new evidence, no repeat comment, no move. `6hWGWgpG6FW2ch4Q` and `6hW625m7vj3f9WgQ` already in Done by others' hands — flagged as possibly-done in the brief, not touched.
+
+**Defect found, not fixed, reported instead.** Piearsta.lv moved the 18 Sep scan to **10:00**; the calendar event `vmenfco7t7tf96qr0fb2cl7vt0` still reads **10:30–11:00**. Carve-out 7 permits `create_event` only — `update_event` is forbidden in every phase — and the appointment had already passed when the run read the mail, so nothing was written. Recorded on the task and named in the brief. Open with Eriks: whether a booking-mail/calendar disagreement should raise a task.
+
+**Step 3 — vault.** `raw/` root held 1 pending clipping (Nate Herk, Higgsfield API, clipped 08:58 today); ingested under the 2026-09-11 rule that the daily run clears the whole root. No new page — split across `wiki/Codex Workflows.md`, `wiki/AI Model Orchestrators And Routers.md`, `wiki/Faceless AI Content Businesses.md`, plus `wiki/Source Digest - 2026-09-18 Raw Ingest.md`. `index.md` 105 → 106 lines; `log.md` appended. `channel_name: "Nate Herk | AI Automation"` added — **no fetch made, and that is schema-compliant**: the clipping's own `author` field carries the channel name verbatim (2026-09-15 Jack Neel precedent). Source moved; `raw/` root now empty, `raw/processed/` 125 → 126. Verified by reading frontmatter back and grepping each new section heading. **No mail snapshots** — nothing in the sweep met § What gets snapshotted; the Piearsta.lv change was considered and declined as transient logistics for a past appointment.
+
+**Step 4 — brief.** Delivered in chat and archived to `briefs/2026-09-18.md` (7,523 bytes, 112 lines), verified present.
+
+**Anomaly carried to the brief.** `config/routing-rules.md` § Calendar scope records the 18 Sep "A KLINIKA" event as created by margaritaeliya; `list_events` reports `creator.email: daisyqdesign@gmail.com`, and the event was updated 2026-09-18T06:44:32Z. Same date, time and title, so it is the same event and Eriks's settled per-item ruling stands. The recorded creator field is wrong; **not corrected in this run** — it is a fact Eriks recorded in his own words and the ownership ruling does not depend on it. Raised in the brief for him to confirm before the file is edited.
+
+**Registry drift:** none. Every tool used this run is listed in `config/tools.md`.
+
+**Delegation:** two read-only subagents classified 21 bulk-noise threads in parallel and returned compact proposals with per-thread evidence quotes; the manager read the 10 consequential threads itself and performed every write. Both subagents reported full counts (9/9 and 12/12, neither exceeding what was given) and zero read failures. Two classification judgement calls they flagged (Litres digest-with-discount → Promotions via the tie-break; Substack flash-sale-in-editorial → Newsletters) were accepted; the Gaming Operations Academy thread was checked specifically for one-to-one-versus-blast and came back blast, on an ActiveCampaign unsubscribe footer and a merge-field greeting.
