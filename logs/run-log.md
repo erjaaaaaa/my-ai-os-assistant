@@ -2127,6 +2127,48 @@ untouched.
 **Registry drift: none.** Every tool used this run is listed in
 `config/tools.md`.
 
+**PUSH FAILED — the run's record did not reach origin.** `git push origin
+main` returned **403**: *"Claude doesn't have GitHub access to
+erjaaaaaa/my-ai-os-assistant for your organization."* One retry was made after
+`git pull --rebase origin main` (which succeeded and reported "up to date", so
+this is not a divergence); the second push failed identically. **Not forced.**
+
+Read access is fine — the Step 0 `git pull --ff-only` succeeded and a GitHub
+MCP read returned `CLAUDE.md` at `aa9e2da`. It is write access that is
+missing. Fix: install the Claude GitHub App on the repository at
+https://github.com/apps/claude/installations/select_target (an org admin may
+need to), or reconnect GitHub from claude.ai settings.
+
+**Deliberately not worked around.** Pushing through the GitHub Contents API
+was considered and rejected: `ledgers/promotions.csv` (1.8 MB) and
+`ledgers/newsletters.csv` (1.3 MB) are over that API's 1 MB per-file limit, so
+it could not carry a complete state, and a partial push would land
+`state/state.json`'s advanced watermarks without the ledger rows they account
+for — strictly worse than not pushing.
+
+**What is real regardless:** every external write this run landed and was
+verified — 33 Gmail labels, 26 archives, 3 Todoist tasks. Those are in Gmail
+and Todoist, not in this commit.
+
+**What is lost when this container is reclaimed:** local commit `a6a2d72` —
+this log entry, `briefs/2026-09-20.md`, the two `lessons-learned.md` entries,
+the advanced watermarks, and **25 ledger rows** (4 receipts, 4 newsletters,
+17 promotions).
+
+**Recovery for the next run that can push.** The watermarks at origin still
+read `mail.last_internaldate_ms: 1789718321000` and sweep date 2026-09-18, so
+the next run re-sweeps this window. That is safe by design for labels and
+tasks — Step 1 only labels unlabelled threads and Step 2 dedupes on
+`ref: mail:` — but it will **not** regenerate the ledger rows, because the 26
+threads were archived and no longer appear in `in:inbox`. To rebuild them,
+query by label and date instead: `label:"Interests & Marketing/Promotions &
+Ads" after:2026/09/18`, the same for `Newsletters & Learning`, and
+`label:"Finance & Accounts/Receipts & Subscriptions" after:2026/09/18`, then
+append with the usual `messageId` dedupe. The four receipts, for
+reconciliation: getguru 8.99 EUR (INV-092026-57274, 19 Sep, one row not two —
+tip re-send), Bolt 16.60 EUR (19 Sep), getguru 6.79 EUR (INV-092026-53715,
+18 Sep), getguru 2.77 EUR (INV-092026-52516, 18 Sep).
+
 ## 2026-09-20 — ad-hoc: first cloud run fired; routine ran, push failed
 
 **Fired by hand** after enabling routine `trig_01U69oWX9gmDUCgn5F5i4g22`: session `cse_01WLbEPgazXGPVFJdavv5kNW`, 21:22–21:38 UTC, 166 turns, ended `success`. Read here through the run log, which quotes the tool results.
