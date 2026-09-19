@@ -11,6 +11,17 @@ diverged: stop, report it, never force. Then decide the run context — chat
 or cloud — per `procedures/cloud-run.md` § 1, read that file if the run is
 unattended, and record the context in the orient block.
 
+**NARROWED 2026-09-20 — prove write access before any external write.**
+After the pull, run `git push --dry-run origin main`. If it is refused, the
+run **stops here**: it records the refusal in the run log and ends with the
+refusal as the first line of its final message, and Steps 1–5 do not run.
+Reason, from the first cloud run (session
+`cse_01WLbEPgazXGPVFJdavv5kNW`): the routine labelled 33 threads, archived
+26 and wrote 25 ledger rows, then `git push` returned 403 because the Claude
+GitHub App had read but not write access. The archived threads never
+re-enter the sweep, so their ledger rows were lost with the container. A
+run that cannot record what it did must not do it.
+
 ## 1. Read the governing files
 
 `config/routing-rules.md`, `config/tools.md`, `config/methods.md`, every file

@@ -375,3 +375,16 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   was decided on the short list — the existing entry warns only that
   "`get_thread` matters for every watermark comparison", which reads as
   narrower than it is.
+- 2026-09-20 — **Read access is not write access, and a run that cannot
+  record itself must not act** — the first cloud run (session
+  `cse_01WLbEPgazXGPVFJdavv5kNW`) passed the routine's creation-time
+  repository check, cloned and pulled fine, then labelled 33 threads,
+  archived 26, wrote 25 ledger rows and created 3 tasks — and `git push`
+  returned 403 because the Claude GitHub App had read but not write access.
+  The archived threads leave the sweep for good, so their ledger rows and the
+  advanced watermarks died with the container. The assistant had marked "app
+  access granted" as done on the strength of a check that only proved reads.
+  **Rule:** at Step 0 of every run with an `origin` remote, `git push
+  --dry-run origin main` must succeed before any external write; if it is
+  refused, the run stops and reports. And a permission is verified by
+  exercising the exact operation the run needs (a write), never a weaker one.

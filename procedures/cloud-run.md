@@ -61,6 +61,16 @@ the orient block at Step 0 and in the run-log entry at Step 5.
    run starts from the last pushed watermarks and re-reads the same items —
    safe because Step 1 labels only unlabelled threads and Step 2 dedupes on
    `ref: mail:<thread_id>` — and it notes the gap in its log.
+   **CORRECTED 2026-09-20 — "safe" was wrong for ledger rows.** Threads
+   archived under carve-out 4 leave the inbox sweep for good, so the ledger
+   rows written for them in a run whose push failed are lost with the
+   container; the first cloud run (`cse_01WLbEPgazXGPVFJdavv5kNW`) lost 25
+   this way. Two things follow. Step 0 § 0 now proves write access with
+   `git push --dry-run origin main` before any external write and stops the
+   run if refused. And when a push does fail after that gate, recovery is:
+   grant access, open the run session and tell it to push; if the container
+   is gone, reconstruct the ledger rows from the thread ids the run log
+   quotes, then advance the watermarks to what the run recorded.
 
 ## 3. Registration
 
@@ -69,8 +79,17 @@ the orient block at Step 0 and in the run-log entry at Step 5.
   `claude-opus-5`, cron `0 4 * * *` UTC — 07:00 Riga in summer, 06:00 in
   winter (cron does not follow DST; retune in late October if it matters).
 - **Connectors attached to the routine:** Gmail, Google Calendar, Todoist —
-  the same three claude.ai connectors `config/tools.md` names. Attached in
-  the routines UI, since this desktop session cannot list connector ids.
+  the same three claude.ai connectors `config/tools.md` names, each with a
+  permitted-tool list mirroring that registry. CORRECTED 2026-09-20: set by
+  API, not in the UI — creation attached every claude.ai connector by
+  default (24), and the update narrowed it to three; re-check the list
+  whenever the routine is edited, because that default may reapply.
+- **Also present in the cloud environment, not attached by us:** a GitHub
+  MCP (`mcp__github__*`) and a `PushNotification` tool that sends a note to
+  Eriks's own Claude mobile app. Neither is in `config/tools.md`. The GitHub
+  MCP is not used. The push is a message to Eriks himself, not to another
+  person, so it does not touch the property the security boundary protects
+  — but it is not adopted as delivery until Eriks says so in writing.
 - **Routine id** is recorded in `state/state.json` under `cloud.routine_id`
   with a `_verified` date, like every other id.
 - **Debugging a run:** the routine's run list and run log, read through
