@@ -23,6 +23,13 @@ Read at the start of this step.
    this includes `ledgers/`.
    Backups are commits, not copies. The vault is not a git repository and is
    not committed from here.
+   **ADDED 2026-09-19 — then push.** When an `origin` remote exists:
+   `git push origin main`. If the push is rejected, `git pull --rebase
+   origin main` once and push again. If it still fails, append the failure
+   to the run-log entry, commit that, and end the run with the failure as
+   the first line of the final message — never force-push, never retry in a
+   loop. The pushed repository is the source of truth from this date
+   (`procedures/cloud-run.md` § 2.2).
 4. **Registry drift.** If any tool used this run is missing from
    `config/tools.md`, or a listed one was gone, fix the registry now and say
    so in the log entry.

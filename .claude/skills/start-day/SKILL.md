@@ -2,7 +2,11 @@
 name: start-day
 description: Run Eriks's personal-assistant routine — sweep the personal Gmail inbox and the personal + Family calendars into the Todoist "Personal" project, ingest durable context into the My Brain vault, and deliver the Personal brief in chat. Use when Eriks says "start my day", "/start-day", "run my personal routine", "what's on my plate at home", or wants the personal brief. This skill is scoped to the personal instance folder; the work instance has its own.
 ---
-INSTANCE_ROOT: /Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant
+INSTANCE_ROOT: the folder that holds `AGENTS.md` — the repository root. On
+Eriks's laptop that is
+`/Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant`;
+in a cloud routine it is the working directory of the clone. (CHANGED
+2026-09-19 from the fixed laptop path so the same skill runs unattended.)
 
 Read `AGENTS.md` under INSTANCE_ROOT and execute its routine steps in order —
 read each step's procedure file at the start of that step, not before.

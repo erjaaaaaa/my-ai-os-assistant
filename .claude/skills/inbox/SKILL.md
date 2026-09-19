@@ -2,7 +2,11 @@
 name: inbox
 description: Run only the personal Gmail labelling sweep — label every unlabelled inbox thread into Eriks's own label tree, create payment tasks in the Todoist "Personal" project, log receipts, newsletters and promotions to the ledgers, archive the four carve-out classes, and report counts. Use when Eriks says "/inbox", "label my inbox", "sort my personal mail", or "run the labelling". Scoped to the personal instance folder.
 ---
-INSTANCE_ROOT: /Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant
+INSTANCE_ROOT: the folder that holds `AGENTS.md` — the repository root. On
+Eriks's laptop that is
+`/Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant`;
+in a cloud routine it is the working directory of the clone. (CHANGED
+2026-09-19 from the fixed laptop path so the same skill runs unattended.)
 
 Read `AGENTS.md` under INSTANCE_ROOT, then run Step 0 (orient and
 health-check) and Step 1 (`procedures/step-1-inbox.md`) only, and close out

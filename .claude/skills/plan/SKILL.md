@@ -2,7 +2,11 @@
 name: plan
 description: Run Eriks's personal planner — size the Todoist "Personal" board, fit tasks to the declared daily budget, and write an accepted plan back as section moves and due dates, one consent at a time. Use when Eriks says "plan my week", "plan my day", "plan the month", "/plan", "replan", "what should I work on at home", or "help me plan". Scoped to the personal instance folder; the work instance has its own.
 ---
-INSTANCE_ROOT: /Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant
+INSTANCE_ROOT: the folder that holds `AGENTS.md` — the repository root. On
+Eriks's laptop that is
+`/Users/erik.peterson/Library/Mobile Documents/com~apple~CloudDocs/My AI OS/Assistant`;
+in a cloud routine it is the working directory of the clone. (CHANGED
+2026-09-19 from the fixed laptop path so the same skill runs unattended.)
 
 Read `PLANNING.md` under INSTANCE_ROOT and execute its steps in order for the
 horizon Eriks named (`month`, `week` or `day`). An ambiguous horizon is a

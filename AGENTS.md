@@ -552,12 +552,27 @@ or after Friday 16:00". The on-demand half survives; the Friday hand-off
 inside the daily routine is withdrawn. A fixed weekly trigger, if Eriks
 wants one, is a scheduled `/digest`, set up only on their yes.
 
+**ADDED 2026-09-19 — the routine also runs unattended, as a Claude Code
+cloud routine.** Eriks, in chat, choosing option 1 of ten offered: *"let's
+go with the option 1. Make the whole step by step plan and let's implement
+it."* The instance is mirrored to the private repository
+`erjaaaaaa/my-ai-os-assistant`; the routine clones it daily at 04:00 UTC
+and runs the same skill under `procedures/cloud-run.md`, which is read at
+Step 0 of every unattended run. The brief is delivered by commit to
+`briefs/` and pushed — no message on any channel. Superseded text above:
+"nothing is scheduled" — the cloud routine is scheduled; the laptop stays
+on demand. `/digest` is unchanged and stays on demand. The pushed
+repository is the source of truth for state from this date; every run,
+laptop or cloud, pulls at Step 0 and pushes at Step 5.
+
 ## Maintenance
 
 Kept current, and by whom:
 
 - `state/state.json` — ids re-verified by name when `_verified` is older than
   30 days; watermarks advanced only at Step 5. The assistant.
+- `procedures/cloud-run.md` and the cloud routine's registration (schedule,
+  model, connectors) — Eriks, with the assistant. ADDED 2026-09-19.
 - `config/tools.md` — fixed in the run that finds drift. The assistant.
 - `config/sources/*.md` — `configured:` flipped only after a populated
   control query, per `config/sources/README.md`. Eriks, with the assistant.

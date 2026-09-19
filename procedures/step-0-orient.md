@@ -3,6 +3,14 @@
 Read at the start of every run. Nothing is written to any external system in
 this step.
 
+## 0. Git sync and run context — ADDED 2026-09-19
+
+If the instance has an `origin` remote, run `git pull --ff-only origin main`
+before reading anything. A pull that cannot fast-forward means two runs
+diverged: stop, report it, never force. Then decide the run context — chat
+or cloud — per `procedures/cloud-run.md` § 1, read that file if the run is
+unattended, and record the context in the orient block.
+
 ## 1. Read the governing files
 
 `config/routing-rules.md`, `config/tools.md`, `config/methods.md`, every file
@@ -63,6 +71,13 @@ Record the count: open, answered-and-closed, ambiguous.
 If `calendar.last_scanned_date` already equals today and the mail sweep
 finds nothing newer than `mail.last_internaldate_ms`, the run is a rerun:
 Steps 2 and 3 no-op and the brief says so.
+
+**NARROWED 2026-09-19 — Step 3 is exempt from the rerun no-op** when the
+vault is reachable and there is pending work: the `raw/` root is not empty,
+or mail newer than `vault.mail_snapshot.last_internaldate_ms` exists. A
+cloud run defers Step 3 (`procedures/cloud-run.md` § 2.3), so the next
+laptop run on the same day must catch it up. Superseded text: "Steps 2 and
+3 no-op" — Step 2 still no-ops; Step 3 no-ops only when nothing is pending.
 
 ## Output of this step
 

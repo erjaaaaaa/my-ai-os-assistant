@@ -1979,3 +1979,15 @@ Eriks in chat after today's appointment: the doctor said a testicular ultrasound
 **No vault write.** The finding is durable personal context, but `procedures/step-3-ingest.md` § What gets snapshotted scopes snapshotting to this instance's own sources (Gmail, Calendar); chat is not a snapshot channel and inventing one is not the assistant's call. Offered to Eriks instead.
 
 **No calendar write** — nothing is booked, and carve-out 7 covers mail-derived bookings only.
+
+## 2026-09-19 — ad-hoc: cloud routine, option 1 chosen and prepared
+
+Eriks asked for ten ways to run `/start-day` and the vault ingest without the laptop, then chose option 1 — a Claude Code cloud routine — in chat: *"let's go with the option 1. Make the whole step by step plan and let's implement it."* Plan with per-step status: `plans/2026-09-19-cloud-routine.md`.
+
+**Written:** `procedures/cloud-run.md` (unattended-run rules; Step 3 deferred by default because the vault is not in the clone; delivery is the pushed commit; no message on any channel). **Edited, each with a dated marker:** `procedures/step-0-orient.md` § 0 git pull and run context, § 5 Step 3 exempt from the same-day no-op when work is pending; `procedures/step-5-close-out.md` § 3 push after commit, rebase once, never force; `AGENTS.md` § The routine (cloud routine recorded, "nothing is scheduled" superseded) and § Maintenance; all four skills' `INSTANCE_ROOT` now resolves to the repository root instead of the laptop path; `.gitignore` ignores `.claude/settings.local.json`. Every edit verified by grep for its marker.
+
+**Blocked, handed to Eriks:** `git remote add origin` was refused by the desktop app's permission classifier (data-exfiltration class), so the remote, the repository creation on GitHub (`erjaaaaaa/my-ai-os-assistant`, private; the laptop's SSH key already authenticates as `erjaaaaaa`) and the first push are his steps. Routine creation via the remote-trigger API returned HTTP 403 — repository access is checked at creation — so it waits on the repository and on the Claude GitHub app being granted access. Connectors (Gmail, Google Calendar, Todoist) cannot be listed from this session and are attached in the routines UI.
+
+**Open with Eriks, defaults in force:** the vault stays on the laptop and Step 3 runs there (alternative: vault in a private repo, Step 3 in the cloud); delivery stays the commit (a push channel would widen the security boundary in writing). Secret scan before the future push: no credentials in the tree; the newsletter ledger holds mailing-list unsubscribe tokens only.
+
+**No external write** this session: nothing in Gmail, Calendar or Todoist was touched.
