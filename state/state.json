@@ -71,6 +71,14 @@
   "flags": {
     "inbox_sweep": true
   },
+  "cloud": {
+    "routine_id": "trig_01U69oWX9gmDUCgn5F5i4g22",
+    "environment_id": "env_01R58b6REYPi93JQtDE7H24d",
+    "repo": "erjaaaaaa/my-ai-os-assistant",
+    "cron_utc": "0 4 * * *",
+    "model": "claude-opus-5",
+    "_verified": "2026-09-20"
+  },
   "superseded": [],
   "digest": {
     "last_run_date": "2026-09-07"

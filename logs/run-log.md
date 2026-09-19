@@ -1991,3 +1991,13 @@ Eriks asked for ten ways to run `/start-day` and the vault ingest without the la
 **Open with Eriks, defaults in force:** the vault stays on the laptop and Step 3 runs there (alternative: vault in a private repo, Step 3 in the cloud); delivery stays the commit (a push channel would widen the security boundary in writing). Secret scan before the future push: no credentials in the tree; the newsletter ledger holds mailing-list unsubscribe tokens only.
 
 **No external write** this session: nothing in Gmail, Calendar or Todoist was touched.
+
+## 2026-09-20 — ad-hoc: cloud routine created and narrowed
+
+Eriks created the private repository `erjaaaaaa/my-ai-os-assistant`, added the origin remote and pushed `main` (`git ls-remote origin` returned `main` at `541ae2c`; local tracks `origin/main`).
+
+**Routine created** through the remote-trigger API: id `trig_01U69oWX9gmDUCgn5F5i4g22`, environment `env_01R58b6REYPi93JQtDE7H24d`, model `claude-opus-5`, cron `0 4 * * *` UTC, created **disabled**, repository access check passed. Recorded in `state/state.json` under `cloud` with `_verified: 2026-09-20`.
+
+**Defect found and fixed before enabling:** creation attached **every** claude.ai connector by default — 24, including Slack, Resend, Notion, Google Drive, n8n, Trello — which the security boundary forbids (*"Any connector or tool the session has loaded that is not listed here is not used by this instance"* in `config/tools.md`, and no message on any channel). Narrowed by an update to exactly three connections with permitted-tool lists mirroring `config/tools.md`: Gmail (`search_threads`, `get_thread`, `get_message`, `list_labels`, `label_thread`, `unlabel_thread`, `trash_thread` — no send, reply, forward, spam, draft, label create/edit); Google Calendar (`list_calendars`, `list_events`, `get_event`, `search_events`, `create_event` — no update, delete, respond); Todoist (`user-info`, the `find-*` reads, `fetch-object`, `add-tasks`, `add-comments`, `update-tasks`, `update-comments`, `complete-tasks` — no delete, no project/section/label writes, no reschedule outside a plan). Verified: the update response lists exactly those three connections with those tool lists.
+
+Draft creation is deliberately absent from the cloud runner: a draft is written only when Eriks asks in chat, and there is no chat in an unattended run.
