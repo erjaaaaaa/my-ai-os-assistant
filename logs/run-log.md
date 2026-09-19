@@ -2002,6 +2002,131 @@ Eriks created the private repository `erjaaaaaa/my-ai-os-assistant`, added the o
 
 Draft creation is deliberately absent from the cloud runner: a draft is written only when Eriks asks in chat, and there is no chat in an unattended run.
 
+---
+
+## 2026-09-20 — cloud run 00:22–01:0x Europe/Riga (first unattended run)
+
+**Run context: cloud.** Working directory is a git clone with an `origin`
+remote and no `../My Brain/` beside it, and the routine prompt said so.
+`procedures/cloud-run.md` read at Step 0. Eriks not present; nothing asked in
+session output; no message sent on any channel.
+
+**Timing note.** `state/state.json` records `cloud.cron_utc: 0 4 * * *`
+(07:00 Riga in summer). This run started **21:22 UTC on 2026-09-19** =
+00:22 Riga on 09-20. Either the registered schedule differs from the recorded
+one or this firing was not the cron one. Nothing was changed; it is named in
+the brief's Anomalies for Eriks to check on the routine's settings page.
+
+**Step 0 — orient.** `git pull --ff-only origin main` → "Already up to date"
+(HEAD aa9e2da). Governing files, state and `lessons-learned.md` read.
+Tracker ids `_verified: 2026-09-07`, 13 days old, inside the 30-day window —
+no re-resolution needed.
+
+- **Gmail — live.** `list_labels` returned 45 labels; `INBOX.threadsTotal` 44.
+- **Google Calendar — live.** `list_calendars` returned 8 calendars, both
+  swept ids present.
+- **Todoist — live.** `user-info` → epetersons87@gmail.com, 37 open tasks.
+- **Open questions: 2 open, 0 answered, 0 ambiguous.** `find-tasks`
+  (`agent-waiting`, limit 100) returned 2; `find-comments` on each.
+  `6hW4pGFRrff5M2FQ` — last comment is the assistant's own (`**Assistant —**`
+  marker); Eriks's "b)" was applied on 09-17 and the narrowed multi-day
+  question is still unanswered. `6hWmrXJ7Cg6hF9Wx` — zero comments. Both
+  defaults stayed in force; neither recorded as a decision.
+- **Idempotency:** `calendar.last_scanned_date` 2026-09-18 ≠ today, and mail
+  newer than the watermark exists. Not a rerun. (No run on 09-19.)
+
+**Step 1 — inbox.** 44 threads read against `INBOX.threadsTotal` 44 (count
+does not exceed the containing total). 10 skipped as already carrying one of
+the thirteen; 34 classified. The skip test was run against `get_thread` for
+all 34 candidates, per the 2026-09-17 rule — never against the
+`search_threads` result. Two oversized bulk-marketing threads (Xbox NBA
+229 KB, Biļešu Serviss 262 KB) were classified from `get_thread` metadata plus
+sender and subject rather than the full body; one is named verbatim in the
+taxonomy sub-rule (`bilesuserviss.lv`) and the other is the same campaign as a
+sibling read in full. Recorded here as a deviation from "classify from the
+full text", not hidden.
+
+- **Labelled: 33 calls.** Promotions 17, Newsletters 4, Security &
+  Verification 4, Receipts 4, Professional Networking 2, Needs-Payment 1,
+  Schedule Calendar 1.
+- **Label census (`list_labels` before → after):** Security 218→222, Receipts
+  682→686, Needs-Payment 4→5, Schedule 279→280, Professional Networking
+  140→142, Newsletters 1974→1978, Promotions 2777→2794. **Sum of deltas = 33
+  = the number of `label_thread` calls, no label at +0.** Message-count
+  deltas agree (Receipts +5 for 4 threads — the getguru thread holds two
+  messages).
+- **Ledger rows:** receipts 4 (lines 543–546), newsletters 4 (6234–6237),
+  promotions 17 (10117–10133). Every thread due for archive was grepped by
+  its own id after the append: 26/26 have ≥1 row. Per class: receipts 4
+  threads/4 rows, newsletters 4/4, promotions 17/17.
+- **One deliberate departure from the 2026-09-11 ledger rule.** Thread
+  `1a0bb2f2a12eac0a` carries two messages for the *same* invoice
+  INV-092026-57274 — 6.99 EUR, then 8.99 EUR after a 2.00 tip. That rule
+  ("N receipt messages → N rows") was written for a thread holding two
+  *different* Bolt rides; applied literally here it would book one 8.99 EUR
+  trip as 15.98 EUR. One row written, for the final amount, with the
+  supersede in its notes. A corrected re-send is not a second receipt.
+- **Charge-date correction:** the INV-092026-53715 row first took the Riga
+  date of its 02:35 email (09-19); the body states the trip date 18.09.2026,
+  so it was corrected to 2026-09-18 and read back.
+- **Archived: 26** (carve-out 4 only) — 17 Promotions, 4 Newsletters, 4
+  Receipts, 1 Schedule Calendar (Ervins Futbols confirmed on the Family
+  calendar 19 Sep 12:30–13:30 via `list_events` before the archive).
+  Read-back: `in:inbox` returns **18** threads, none of them the 26.
+  44 − 26 = 18, reconciles exactly.
+- **Trashed: 0.** `TRASH.threadsTotal` unchanged at 276. The Google notice
+  this run was a `Notification:` reminder, which fails carve-out 6's
+  subject-prefix test; the open question `6hWmrXJ7Cg6hF9Wx` default (archive,
+  do not trash) was applied.
+- **Left unlabelled: 1** — Bluehost WHOIS privacy expiry
+  (`mail:1a0b32766a32b7bf`), second run running. Promoted from a repeated
+  brief caveat to an open question rather than parked a third time.
+- **Tasks:** payment task `6hXM3Q8R4vV444WQ` created (This Week, p3, size/S,
+  no amount — PDF attachment unreadable), verified by `fetch-object`; review
+  task `6hXM3WFgxrC82HXQ`; `[Needs Eriks]` `6hXM3WGgqj8QqGRQ`.
+
+**Step 2 — triage.** Mail: 34 new threads, all of them the ones labelled in
+Step 1; buckets — Act 1 (the Montessori invoice), Know 7, Noise 26. Sent mail
+since 2026/09/17: **none**; control `in:sent after:2026/09/10` returned 4
+threads, so the absence is real and not a read failure. Calendar: Eriks's own
+calendar **empty** for 20–27 Sep; the adapter's second control (21 Aug –
+20 Oct) returned 14 events, so the empty week is genuine. Family calendar: 7
+events, 5 of them already-named recurring series, plus "Ervin+Mark swimming"
+(20 Sep 14:00) and the all-day "Viena" 23–25 Sep created by
+daisyqdesign@gmail.com with no description — listed, not tasked, and its
+meaning explicitly not guessed. Advertising events: 0. Cross-calendar
+conflicts: 0. Invitations at `needsAction`: 0.
+
+- **Tasks created by triage: 0** beyond Step 1's. **Moves/comments: 0** — no
+  new source evidence since the watermark on any open task.
+- **Dedupe reads:** `find-tasks` 37 open, `find-completed-tasks` 32 since
+  2026-07-21, `find-activity` deleted → 0 events.
+- **Carve-out 5 — 4 candidates, 0 in class.** Completed `Pay …` tasks with a
+  `ref: mail:` line: Mārupes komunālie (`1a08709e05be7fbb`), Eco Baltia
+  (`1a0875ca032db903`), Elektrum (`1a080f5ae9698874`), Bite
+  (`1a072afdab0b973b`). `get_thread METADATA_ONLY` on each: every one carries
+  `Label_2307425248756940905` (Paid) alone — no Needs-Payment, no INBOX.
+  Impossibility check: Needs-Payment's global `threadsTotal` is 5 and all five
+  are inbox threads with live open tasks (Google Cloud ×2, NIC.LV, Fisserhof,
+  Montessori), so no completed task's thread can still carry it.
+
+**Step 3 — deferred: vault not reachable from this runner.** `../My Brain/`
+is absent from the clone. Nothing snapshotted;
+`vault.mail_snapshot.last_internaldate_ms` left at 0. Named in the brief.
+
+**Step 4 — brief** written to `briefs/2026-09-20.md` (Europe/Riga date) and
+delivered as the session's closing message.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` → **1789849414000**, the
+`internalDate` of the newest message actually processed
+(`1a0bb56ac68f802e`, 19 Sep 20:23:34 UTC), not the clock.
+`calendar.last_scanned_date` → 2026-09-20 (control populated).
+`sources.gmail.inbox.last_sweep_date` → 2026-09-20. Vault and digest keys
+untouched.
+
+**Registry drift: none.** Every tool used this run is listed in
+`config/tools.md`.
+
 ## 2026-09-20 — ad-hoc: first cloud run fired; routine ran, push failed
 
 **Fired by hand** after enabling routine `trig_01U69oWX9gmDUCgn5F5i4g22`: session `cse_01WLbEPgazXGPVFJdavv5kNW`, 21:22–21:38 UTC, 166 turns, ended `success`. Read here through the run log, which quotes the tool results.
@@ -2015,3 +2140,4 @@ Draft creation is deliberately absent from the cloud runner: a draft is written 
 **Defect fixed:** Step 0 § 0 now requires `git push --dry-run origin main` to succeed before any external write, stopping the run otherwise (NARROWED 2026-09-20). Lessons entry appended. Plan step 9 reopened — the assistant had marked write access done on the strength of a read-only check.
 
 **Registry drift observed in the cloud environment:** it exposes a GitHub MCP (`mcp__github__*`, used once by the run for a read-only diagnostic) and a `PushNotification` tool, which the run used once to send a routine summary to Eriks's own Claude mobile app. Neither is in `config/tools.md`. The push is a message to Eriks himself, not to another person — but it is not authorised in writing, so it is raised with him rather than adopted.
+

@@ -375,6 +375,39 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   was decided on the short list — the existing entry warns only that
   "`get_thread` matters for every watermark comparison", which reads as
   narrower than it is.
+- 2026-09-20 — **A corrected re-send of the same invoice is one receipt, not
+  two** — the getguru thread `1a0bb2f2a12eac0a` held two messages for invoice
+  INV-092026-57274: 6.99 EUR, then 8.99 EUR once a 2.00 tip was added. The
+  2026-09-11 rule ("a thread with N receipt messages writes N rows, each
+  deduped on its own `messageId`") was written for a Bolt thread holding two
+  *different* rides; applied literally here it would have booked one 8.99 EUR
+  trip as 15.98 EUR in the ledger the digest and any spend question read from.
+  **Rule:** before writing N rows for N receipt messages, compare their
+  invoice numbers and the transaction they describe. Same invoice and same
+  transaction → the later message **supersedes** the earlier one: write one
+  row, for the final amount, and record the superseded messageId and figure in
+  `notes`. Different transactions → N rows, as before. The hard invariant is
+  unchanged and is what both branches protect: **at least one verified row per
+  archived thread**, grepped by the thread's own id after the append. Extends,
+  does not replace, the 2026-09-11 entry.
+- 2026-09-20 — **Two oversized threads were classified without their bodies,
+  and that needs saying out loud rather than quietly** — `procedures/step-1-inbox.md`
+  § 1.3 says classify from the full thread text, not the snippet. Two bulk
+  marketing threads this run (Xbox 229 KB, Biļešu Serviss 262 KB) were
+  classified from `get_thread` metadata plus sender and subject: one because
+  `bilesuserviss.lv` is named verbatim in the taxonomy's own sub-rule, the
+  other because a sibling message from the identical Xbox campaign had been
+  read in full minutes earlier. Both landed in Promotions & Ads, which is
+  almost certainly right — but "almost certainly right" is how a skipped check
+  always looks, and the 2026-09-17 truncation defect was exactly that shape.
+  **Rule:** read the body by default; the cost of reading is the price of the
+  check being sound. When a body is genuinely skipped, the run log must name
+  the thread, say the body was not read, and state what carried the decision
+  instead — never let a metadata-only classification be reported as if it were
+  a full read. Whether the sender-named sub-rule cases should be a standing
+  exemption is for the promotion review, not for the run that wants the
+  shortcut.
+
 - 2026-09-20 — **Read access is not write access, and a run that cannot
   record itself must not act** — the first cloud run (session
   `cse_01WLbEPgazXGPVFJdavv5kNW`) passed the routine's creation-time
@@ -388,3 +421,4 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   --dry-run origin main` must succeed before any external write; if it is
   refused, the run stops and reports. And a permission is verified by
   exercising the exact operation the run needs (a write), never a weaker one.
+
