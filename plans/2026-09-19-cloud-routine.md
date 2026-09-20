@@ -29,7 +29,7 @@ Status legend: **done** (verified by a read), **waiting on Eriks**, **open**.
 | 16 | Late October: retune the cron if 06:00 Riga in winter is too early | Eriks or assistant | open — now reads: after 2026-10-25 the daily fires 08:00 Riga; move to `0 7 * * *` UTC if 09:00 is what matters |
 | 17 | Daily routine moved to 09:00 Riga — cron `0 6 * * *` UTC. Eriks 2026-09-20: *"The daily brief can then be delivered once a day at 9 am (moved from 7 am right now)."* Prompt also now names `PushNotification` and the GitHub MCP as forbidden, after the 04:08 UTC run used the former | assistant | done 2026-09-20 — routine read back: `cron_expression` `0 6 * * *`, `next_run_at` 2026-09-21T06:07Z |
 | 18 | Hourly `/inbox` routine `trig_01X5cu18Ba6kNcWbaAABCGR8`, cron `0 0-5,7-23 * * *` UTC, same environment, model and three connectors, created **disabled**; procedure in `procedures/cloud-run.md` § 4. Eriks 2026-09-20: *"I want the e-mail sweep labelling to run every hour."* | assistant | done 2026-09-20 — create response lists exactly the three connections |
-| 19 | Fire one hourly run by hand, read its log, then enable | assistant | open |
+| 19 | Fire one hourly run by hand, read its log, then enable | assistant | done 2026-09-20 — manual run `cse_01HLutQJeb1r4EQpTfUzHFCW` 10:02–10:06 UTC: gate passed, three connectors live, 21 inbox threads, 20 already labelled, 1 held by open question `6hXM3WGgqj8QqGRQ`, no external write, one-line log entry pushed as `f67ff41`; routine enabled, `next_run_at` 2026-09-20T11:07Z |
 | 20 | Model for the hourly sweep: Opus (current, parity with the daily) or a cheaper model — up to 23 extra Opus runs a day | **Eriks** | open — default Opus |
 
 ## Vault online — design for step 14 (proposed 2026-09-20, not yet in force)
