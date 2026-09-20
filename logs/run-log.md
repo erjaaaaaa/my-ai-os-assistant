@@ -2780,3 +2780,6 @@ runs, against 46 at 10:06 and the 55 recorded in `config/sources/gmail.md` on
 recorded rather than acted on, and the adapter's `labels_verified: 2026-09-07`
 line keeps drifting from observation. Now three consecutive runs at 45 — worth
 the promotion review's attention.
+## 2026-09-20 — ad-hoc: hourly model decided
+
+Eriks, in chat: *"Opus is fine for now."* Hourly routine stays on `claude-opus-5`; plan step 20 closed. He then asked for a step-by-step explanation of the git and cloud setup — explained in chat, no files or vault touched.
