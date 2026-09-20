@@ -33,7 +33,7 @@
     "gmail": {
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
-      "mail.last_internaldate_ms": 1789934328000,
+      "mail.last_internaldate_ms": 1789943698000,
       "_verified": "2026-09-07",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
@@ -51,7 +51,7 @@
         "Travel - Bookings & Iterinary": "Label_219377032455978970"
       },
       "labels_verified": "2026-09-07",
-      "inbox.last_sweep_date": "2026-09-20",
+      "inbox.last_sweep_date": "2026-09-21",
       "paid_label_id": "Label_2307425248756940905"
     },
     "calendar": {
