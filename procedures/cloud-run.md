@@ -50,12 +50,24 @@ the orient block at Step 0 and in the run-log entry at Step 5.
    `plans/2026-09-19-cloud-routine.md` § Vault online (steps 14a–14g). The
    deferral above stays in force until the vault repository exists, the
    Claude GitHub App can write to it, and § 5 below is marked in force.
+   **DECIDED 2026-09-20 by Eriks — the vault stays local:** *"Ok, let's
+   keep the vault local."* The proposal above is parked, not withdrawn (the
+   design stays in the plan). Step 3 runs only on the laptop, in a
+   `/start-day` Eriks starts themself, from `vault.mail_snapshot.
+   last_internaldate_ms`; the search it runs is now written down in
+   `procedures/step-3-ingest.md` § Finding mail to snapshot.
 4. **Consent, phase gates and the security boundary are unchanged.** The
    cloud runner has the write permissions of `AGENTS.md` § Security
    boundary and nothing more. Running unattended widens nothing.
 5. **Delivery is the commit.** The brief is archived to `briefs/` and
    pushed; the routine's run page at `https://claude.ai/code/routines`
-   shows the same text as the session's final message. **No message is
+   shows the same text as the session's final message.
+   **WITHDRAWN IN PRACTICE 2026-09-20 by Eriks — no cloud brief.** *"remove
+   the daily brief from the cloud run. I will just run /start-day myself
+   here on the laptop whenever I'm ready."* The daily routine is
+   **disabled**, not deleted; the brief is a laptop deliverable again, in
+   chat and in `briefs/`. This paragraph and § 2.3 describe what a cloud
+   `/start-day` does *if the routine is ever re-enabled*. **No message is
    sent on any channel** — Telegram, Slack or mail delivery would be a
    widening of the security boundary that Eriks has not written.
    **Observed 2026-09-20:** the scheduled 04:08 UTC run
@@ -100,12 +112,20 @@ the orient block at Step 0 and in the run-log entry at Step 5.
   `0 6 * * *` UTC — 09:00 Riga in summer, **08:00 in winter** after the
   clocks change on 2026-10-25; retune to `0 7 * * *` then if 09:00 is what
   matters. Superseded text: `0 4 * * *`.
+  **DISABLED 2026-09-20 by Eriks:** *"remove the daily brief from the
+  cloud run. I will just run /start-day myself here on the laptop whenever
+  I'm ready."* Read back `enabled: false`; the cron and connectors are left
+  in place so it can be re-enabled by one update if he changes his mind.
+  `/start-day` is a laptop, on-demand command from this date.
 - **Routine (hourly):** ADDED 2026-09-20 by Eriks: *"I want the e-mail
   sweep labelling to run every hour."* A second routine,
   `trig_01X5cu18Ba6kNcWbaAABCGR8`, same environment, model and three
   connectors, cron `0 0-5,7-23 * * *` UTC — every hour **except 06:00 UTC**,
   when the daily run does Step 1 itself. It runs the `/inbox` skill in the
-  hourly form of § 4 below. Id in `state/state.json` under
+  hourly form of § 4 below. **CHANGED 2026-09-20, same decision as above:**
+  with the daily routine disabled there is no hour to skip; requested as
+  `0 * * * *`, which the server stored and read back as `59 * * * *` (fires
+  at :59 every hour). Superseded text: "except 06:00 UTC". Id in `state/state.json` under
   `cloud.hourly_routine_id`.
 - **Connectors attached to the routine:** Gmail, Google Calendar, Todoist —
   the same three claude.ai connectors `config/tools.md` names, each with a
@@ -153,6 +173,10 @@ Everything in §§ 1–2 applies; these are the differences:
    the daily run's start; a run that overruns into the next hour meets the
    next one only at the push, where the rebase-once rule applies. A laptop
    `/inbox` or `/start-day` pulls first like any clone.
+   **CHANGED 2026-09-20:** the daily cloud run is disabled, so the only
+   overlap left is with a laptop `/start-day`, which pulls at Step 0 and
+   rebases once at Step 5 like any clone; a laptop run's Step 1 will
+   usually find nothing unlabelled, which is the hourly sweep working.
 5. **Same-day idempotency is by watermark and by label, not by date.**
    Step 0 § 5's date check is for Steps 2–3; Step 1 never no-ops on the
    date alone — it reads the inbox and skips threads already labelled.

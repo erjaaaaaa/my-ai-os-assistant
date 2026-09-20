@@ -570,6 +570,14 @@ a day at 9 am (moved from 7 am right now)"* — and a **second cloud routine
 runs `/inbox` every hour** except 06:00 UTC — *"I want the e-mail sweep
 labelling to run every hour."* Superseded text: "daily at 04:00 UTC". The
 hourly form is `procedures/cloud-run.md` § 4.
+**CHANGED AGAIN 2026-09-20 by Eriks, later the same day:** *"Let there be
+inbox sweeps every hour, but remove the daily brief from the cloud run. I
+will just run /start-day myself here on the laptop whenever I'm ready."*
+The daily cloud routine is **disabled** (kept, not deleted); the hourly
+`/inbox` sweep runs every hour with no exception; `/start-day`, and with it
+Steps 2–4 and the brief, is a laptop, on-demand command again. Also
+decided: *"Ok, let's keep the vault local."* — Step 3 stays on the laptop
+and the vault-online design is parked in `plans/2026-09-19-cloud-routine.md`.
 
 ## Maintenance
 

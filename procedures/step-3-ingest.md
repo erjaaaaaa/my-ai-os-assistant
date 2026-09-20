@@ -59,6 +59,21 @@ as a question. Superseded text: *"Observed drift to raise, not fix … so this
 is a `[Needs Eriks]` question, with the default use `wiki:`, leave existing
 files untouched."*
 
+## Finding mail to snapshot — ADDED 2026-09-20
+
+The candidate set is **all mail newer than the Step 3 watermark, wherever
+it now sits** — not the inbox. Hourly cloud sweeps archive four classes and
+trash Google Calendar notices before a laptop run looks, so an inbox-scoped
+search would miss anything they moved. Query: `search_threads` with
+`in:anywhere after:<watermark date>` (the connector takes a date; filter
+the result on `internalDate` > `vault.mail_snapshot.last_internaldate_ms`
+in milliseconds), `pageSize: 50`, paginated to exhaustion, against a
+control that must populate (`list_labels`). Threads carrying only the four
+carve-out-4 labels or `TRASH` are out of scope by § What gets snapshotted
+and are counted, not read. Written down because Eriks asked on 2026-09-20
+how mail handled in the cloud would be caught up on the laptop; the
+watermark was still `0` and no mail snapshot had ever been written.
+
 ## The ingest workflow — in order, one source at a time
 
 1. Read the pending snapshot from `raw/`.
