@@ -463,3 +463,25 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   set; until he does, classify the individual mail on its content and name the
   split. Sibling of the 2026-09-14 Travel-vs-Schedule entry, but about
   *consistency across runs* rather than one thread's tie-break.
+
+- 2026-09-20 — **The "same campaign sent twice" case has a rule for receipts
+  and none for promotions** — the Value Hunter thread `1a0bf527d2081c22` held
+  two messages 1m44s apart, identical but for their sendfox tracking tokens:
+  one marketing campaign, sent twice. `procedures/step-1-inbox.md` § 3 says
+  for Newsletters/Promotions only "Dedupe on messageId", which yields two
+  rows; the 2026-09-20 getguru entry, which would collapse them, is written
+  for *Receipts* ("compare their invoice numbers and the transaction they
+  describe") and a carve-out is never extended by analogy. Two rows were
+  written, per the literal rule. The cost is real but small and cosmetic —
+  the weekly digest shows that campaign twice — where the receipts version of
+  the same mistake doubled a stated money amount, which is why that half got
+  a rule first. The 17 Sep run hit this with the same sender and resolved it
+  identically, so it is a twice-seen pattern, not a one-off. **Rule:** for
+  Newsletters and Promotions, keep writing one row per messageId, and when
+  two rows in one thread are the same campaign, say so in the run log and in
+  the review-task comment so the digest's double-count is visible rather than
+  silent. Whether § 3 should gain a same-campaign clause for these two classes
+  is for the promotion review to settle — do not re-adjudicate it per run.
+  Sibling of the 2026-09-20 getguru entry; neither replaces the other, and the
+  hard invariant both protect is unchanged: at least one verified row per
+  archived thread.
