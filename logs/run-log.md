@@ -2628,3 +2628,155 @@ has now been stable at 45 across two consecutive runs. The control is populated
 either way so the source is live; still recorded rather than acted on, but the
 adapter's `labels_verified: 2026-09-07` line is drifting from observation and
 is worth the promotion review's attention.
+
+## 2026-09-20 — hourly /inbox (13:05 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Working
+directory is a git clone with an `origin` remote and no `../My Brain/` beside
+it, and the routine prompt names it as the hourly sweep. Steps 0, 1 and 5
+only — no Step 2, 3 or 4, and no brief; the daily 06:00 UTC run owns those.
+
+**Step 0 § 0 — git sync and write-access gate.** Clone arrived on a detached
+HEAD at `2da3523`; checked out `main` and `git pull --ff-only origin main`
+fast-forwarded cleanly. `git push --dry-run origin main` returned
+*"Everything up-to-date"* — not refused, so the gate passes and Steps 1–5 may
+run. Corroborated by the 12:10 UTC run's own commit `2da3523` being present on
+`origin/main`, which is a completed write by this app.
+
+**Orient block.**
+- **Gmail — live.** Control query `list_labels` populated: 45 labels
+  (9 system + 36 user). Containing total `INBOX.threadsTotal` = **24**
+  (`messagesTotal` 28).
+- **Google Calendar — live.** Control query `list_calendars` populated: 8
+  calendars, and **both** swept ids present — `epetersons87@gmail.com` and
+  `family17271500024496324001@group.calendar.google.com`. Read but not swept
+  this run: the hourly form runs no calendar sweep.
+- **Todoist — live.** `user-info` returned `epetersons87@gmail.com`
+  (userId 22613842, Europe/Riga, 16:09 local).
+- **Ids:** every one of the thirteen taxonomy label ids in `state/state.json`,
+  plus `paid_label_id`, matched a label returned by `list_labels`. Tracker
+  `_verified` 2026-09-07 is 13 days old, inside the 30-day re-resolve window.
+  Nothing re-resolved.
+
+**Step 0 § 4 — open questions: 3 open, 0 answered, 0 ambiguous.**
+`find-tasks` on project Personal with `labels: ["agent-waiting"]`,
+`limit: 100`, `hasMore: false`, `totalCount: 3` — `6hW4pGFRrff5M2FQ`
+(multi-day stay form), `6hWmrXJ7Cg6hF9Wx` ("Notification:" prefix),
+`6hXM3WGgqj8QqGRQ` (vendor notices with a consequence but no payment).
+`find-comments` run on **each** of the three. Every comment found is either
+the assistant's own (opens `**Assistant —**`) or Eriks's already-applied
+*"b)"* of 2026-09-15. **No new answer from Eriks**, so all three defaults stay
+in force and all three tasks stay open. Nothing completed, no governing file
+edited.
+
+**Step 1 — census.** `search_threads in:inbox`, `pageSize: 50`, returned 24
+threads against `INBOX.threadsTotal` 24 — the sweep count does not exceed its
+containing total. **24 read, 20 skipped as already labelled, 2 labelled,
+2 left unlabelled on purpose.** The skip test was run against `get_thread`
+(`METADATA_ONLY` for the 20 that showed a taxonomy label, `PLAIN_TEXT` for
+every candidate classified), never against the `search_threads` result, per
+the 2026-09-17 truncation rule. The Luminor thread `19ea59934e9545fd` again
+returned 5 messages in the search preview and **16** under `get_thread`, all
+16 carrying Reply/Do — the same defect that rule was written for, correctly
+skipped this time.
+
+**Labelled — 3 `label_thread` calls, 3 net-new associations, each read back:**
+- **Newsletters & Learning** 2 — Starter Story *"How this app replaced his
+  9-5"* (`1a0beea2ac4f40ac`), Sleep Doctor *"Tired and sleepy are not the
+  same"* (`1a0bee8111e8f55c`). Both bodies read in full; both are recurring
+  Sunday editorial editions ("Sunday Breakfast", "The Sunday Sleeper") with
+  unsubscribe cues. Ledger precedent checked before classifying, per the
+  2026-09-20 sender-split rule: Starter Story 89 newsletters / 12 promotions,
+  Sleep Doctor 92 / 34 — both dominant for the class chosen, so no split to
+  flag on either.
+- **Professional Networking** 1 — Skool *"3 new notifications since 3:59 pm"*
+  (`1a0beeff7fe4a20b`), the mid-run arrival. Body read in full.
+
+**Archived — 2, carve-out 4 only.** Both Newsletters threads, each only after
+its ledger row was appended and grepped back by its own thread id. Read back:
+`INBOX` absent, Newsletters label present on both. Professional Networking is
+**not** an archivable class, so the Skool thread stays in the inbox.
+
+**Nothing trashed.** No Google Calendar notification mail this run;
+`TRASH.threadsTotal` unchanged at **279**.
+
+**Ledger rows written and verified:** `ledgers/newsletters.csv` lines
+**6239–6240** (file 6238 → 6240 rows), neither messageId previously present.
+Per-class archived vs rows: newsletters **2 archived / 2 rows** — the
+at-least-one-verified-row-per-archived-thread invariant holds. No Receipts and
+no Promotions threads this run.
+
+**Tasks created: 0. Payment tasks: 0. Calendar events created: 0.** No new
+Needs-Payment, Schedule Calendar or Travel thread. **Carve-out 5: 0 in class**
+— `Needs-Payment` `threadsTotal` is 6 and every one of those threads is still
+open in the inbox with a live task, so no completed `Pay …` task has a thread
+still carrying the label.
+
+**Anomaly investigated, not smoothed over — the inbox count did not reconcile
+at first.** The post-write audit read `INBOX.threadsTotal` **23** where
+24 − 2 archived = 22. Per the 2026-09-14 rule a count that does not reconcile
+is investigated, never attributed to "the user probably did something". Cause:
+**one thread arrived mid-run** — Skool `1a0beeff7fe4a20b`, internalDate
+1789909791000 (2026-09-20T13:09:51Z), after the `in:inbox` sweep and before
+the audit. 24 − 2 + 1 = **23**, exact. Corroborated two further ways:
+`messagesTotal` 28 → 27 (−2 archived, +1 arrival) and UNREAD `threadsTotal`
+9648 → 9649 (+1). The arrival was then read and labelled rather than left for
+the next hour, so this run's counts include it.
+
+**Label census cross-check (`list_labels` before → after):** Newsletters &
+Learning 1979 → **1981** (+2), Professional Networking 142 → **143** (+1).
+Sum of per-label thread deltas = **3** = the number of `label_thread` calls,
+with **no label at +0**. No other taxonomy label moved.
+
+**A fourth Skool classification, flagged rather than decided** (the
+2026-09-20 sender-split rule). `noreply@skool.com` has now been filed
+Professional Networking (17 Sep), Promotions & Ads (20 Sep run 1) and
+Newsletters & Learning (20 Sep run 2). This one was classified **on its
+content**: a bare community-notification digest — "3 new notifications",
+"View Group", "Don't want daily notifications email for this group? Turn them
+off" — carrying no editorial article and no offer, which is exactly
+Professional Networking's test ("other professional-community
+notifications"). Ledger precedent points the other way for this *subject
+shape*: 6 of 6 Skool "notifications since" mails sit in `newsletters.csv`,
+0 in `promotions.csv`. The content reading was taken over the precedent, and
+the post-action is the conservative one — Professional Networking keeps the
+thread in the inbox, Newsletters would have archived it out. **A per-sender
+rule is Eriks's to set**; the split is named in the review-task comment, not
+resolved here.
+
+**Left unlabelled on purpose (2), unchanged:** Bluehost WHOIS expiry
+`1a0b32766a32b7bf` and Google AI Studio *"billing account moved to a lower
+tier"* `1a0be726fb266eaf`. Both are the subject of open question
+`6hXM3WGgqj8QqGRQ`, whose stated default keeps them unlabelled and in the
+inbox. Applying a default, not deciding anything. Neither carries a new
+message since the question was asked.
+
+**Step 1 § 5 — the review task.** This run labelled something, and
+`[Act] Review inbox labels — 2026-09-20` (`6hXM3WFgxrC82HXQ`) already exists,
+so one comment with this run's counts was posted — comment id
+`6hXVw75f5q57x6hQ`, read back via `find-comments` (4 comments on the task, the
+new one last). No description edit: the write allowlist has none, per the
+2026-09-20 defect still awaiting the promotion review.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789905662000 →
+**1789909791000**, the `internalDate` of the newest message **actually
+processed** (`1a0beeff7fe4a20b`, 2026-09-20T13:09:51Z) — not the clock. Safe:
+the only inbox messages newer than the old watermark were the three this run
+handled (1789909272000, 1789909409000, 1789909791000), so nothing unprocessed
+is skipped. `sources.gmail.inbox.last_sweep_date` already 2026-09-20,
+unchanged. `calendar.last_scanned_date` left at 2026-09-20 — the hourly form
+runs no calendar sweep and § 4.3 names only the two mail keys. Step 3 not run,
+so `vault.mail_snapshot.last_internaldate_ms` untouched at 0.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, all listed in `config/tools.md`. The GitHub MCP and `PushNotification`
+are present in this environment and were **not used**; the routine prompt
+forbids both by name.
+
+**Label-count observation, fourth run running:** `list_labels` returned **45**
+labels (9 system + 36 user) — stable across the 11:09, 12:10 and 13:05 UTC
+runs, against 46 at 10:06 and the 55 recorded in `config/sources/gmail.md` on
+2026-09-07. The control is populated either way, so the source is live; still
+recorded rather than acted on, and the adapter's `labels_verified: 2026-09-07`
+line keeps drifting from observation. Now three consecutive runs at 45 — worth
+the promotion review's attention.
