@@ -3404,3 +3404,177 @@ called, every one listed in `config/tools.md` (`list_labels`,
 `PushNotification` are present in this environment and were **not used**; the
 routine prompt forbids both by name, and the 2026-09-20 anomaly in
 `procedures/cloud-run.md` § 2.5 is not treated as precedent.
+
+## 2026-09-20 — hourly /inbox (20:00 UTC)
+
+**Run context: cloud** (the routine prompt says so; the working directory is
+a git clone with an `origin` remote and no `../My Brain/` beside it).
+Unattended, hourly form of `procedures/cloud-run.md` § 4 — Step 0 and Step 1
+only, then this close-out. Steps 2, 3 and 4 not run and no brief written:
+`/start-day` is Eriks's laptop command since his 2026-09-20 decision.
+
+**Step 0 § 0 — git sync, and a gate refusal that was NOT an access refusal.**
+`git pull --ff-only origin main` reported *Already up to date* after fetching
+`aa9e2da..4afd263`. Then `git push --dry-run origin main` was **rejected**:
+*"! [rejected] main -> main (non-fast-forward) … a pushed branch tip is behind
+its remote counterpart"*. Read literally, Step 0's NARROWED 2026-09-20 rule
+says the run stops there. It was not stopped, and the reason is worth
+recording precisely, because the next cloud run will meet the same condition:
+
+- `git branch -vv` showed **`* (HEAD detached from refs/heads/main) 4afd263`**
+  with the local branch ref `main` at `aa9e2da [origin/main: behind 19]`.
+- `git rev-parse HEAD` and `git rev-parse origin/main` both returned
+  `4afd263d96113d23465c2dead73e9abaf8a0ceac` — the working tree was already
+  exactly the remote tip. The stale object was the **local `main` ref**, which
+  `git push origin main` pushes, not `HEAD`.
+- So the refusal was a ref-bookkeeping artefact of how the container clones,
+  not GitHub declining a write. The gate exists (first cloud run,
+  `cse_01WLbEPgazXGPVFJdavv5kNW`) to catch *"the Claude GitHub App had read but
+  not write access"* — a 403. A non-fast-forward is a different finding and
+  proves nothing either way about write access.
+- Repair, local only and lossless: `git checkout main` then
+  `git merge --ff-only origin/main` — a pure fast-forward over 19 commits
+  (`aa9e2da` is an ancestor of `4afd263`), nothing discarded, no force, no
+  rewrite of anyone's history. Working tree was clean throughout
+  (`git status --short` empty).
+- Gate re-run: `git push --dry-run origin main` → **`Everything up-to-date`**.
+  Because "up-to-date" could in principle be answered without contacting the
+  remote, it was corroborated with `GIT_TRACE=1`, which showed
+  `run_command: git-remote-https origin https://github.com/erjaaaaaa/my-ai-os-assistant`
+  — the receive-pack advertisement was fetched and returned no 403. **Write
+  access proven by exercising the operation the run needs.** Only then did any
+  external write happen.
+
+**Step 0 § 1–3 — health checks, all three live.**
+- **Gmail: live.** Control `list_labels` returned **46 labels**, including all
+  thirteen taxonomy ids in state plus `paid_label_id` — each id spot-checked
+  against its display name. Containing total: `INBOX.threadsTotal` **10**,
+  `messagesTotal` 13.
+- **Google Calendar: live.** Control `list_calendars` returned **8 calendars**,
+  and **both** swept ids are present: `epetersons87@gmail.com` and
+  `family17271500024496324001@group.calendar.google.com`. No calendar sweep
+  runs in the hourly form; the control was run so the absence of calendar work
+  is a choice rather than an unexamined gap.
+- **Todoist: live.** `user-info` returned `epetersons87@gmail.com`, userId
+  22613842, Europe/Riga, local time 23:00.
+- **Ids not re-resolved.** `tracker._verified` and
+  `sources.gmail.labels_verified` both read 2026-09-07 — 13 days old, inside
+  the 30-day rule. Every id used this run was read from `state/state.json`,
+  never from spec text.
+
+**Step 0 § 4 — open questions: 3 open, 0 answered, 0 ambiguous.**
+`find-tasks` (projectId from state, `labels:["agent-waiting"]`, `limit:100`)
+returned **3**, `hasMore:false`. `find-comments` was run on **each one**, not a
+sample:
+- `6hW4pGFRrff5M2FQ` (Travel bookings → calendar) — 2 comments: Eriks's *"b)"*
+  of 2026-09-15, already applied on 2026-09-17, and the assistant's own
+  narrowing reply. **No new answer**; the multi-day-stay question stays open
+  and its default (a multi-day stay creates nothing) stays in force.
+- `6hWmrXJ7Cg6hF9Wx` ("Notification:" reminders → trash?) — **0 comments**.
+  Default holds: archive, don't trash.
+- `6hXM3WGgqj8QqGRQ` (Bluehost WHOIS / vendor notices with a consequence) — 1
+  comment, the assistant's own of 11:13 UTC adding the AI Studio mail. **No
+  answer from Eriks.** Default holds: both threads stay unlabelled.
+Every comment on these tasks opened with `**Assistant —**` and carried a
+`ref:` line except Eriks's already-applied *"b)"*, so nothing was read as a new
+answer. Silence was recorded as silence, never as a decision.
+
+**Step 1 — inbox labelling.**
+
+**Census.** `search_threads in:inbox`, `pageSize:50`, one page, 10 threads
+returned against `INBOX.threadsTotal` **10** — the sweep count does not exceed
+the containing total, and no per-class count below exceeds it either.
+
+**Skip test run against `get_thread` on all 10**, per the 2026-09-17 rule —
+never against the search result. **7 skipped as already labelled:** four
+Needs-Payment (`1a0bdf3129dc1537`, `1a0ba39b0b25eeb3`, `1a0a959aacb42044`,
+`1a0a959a8d63bc7f`), one Travel (`1a09bc15a1a100a3`), one Reply/Do
+(`19ea59934e9545fd`), one Banking & Cards (`19ecbccd34e3286c`).
+
+**The truncation defect recurred and the sound test caught it again.**
+`search_threads` returned **5 of the Luminor thread's 16 messages** with no
+truncation flag; `get_thread` returned all 16, every one carrying Reply/Do
+(the older ten also carry `Paid` and `Banking & Cards` from Eriks's own June
+filing). Fifth instance of the silent-truncation trap in
+`config/sources/gmail.md` § Verified defects. Had the skip test been run on
+the preview, the thread would have been relabelled.
+
+**Labelled: 1 call, 1 net-new association.**
+- **Professional Networking 1** — LinkedIn "You have 10+ new invitations"
+  (`mail:1a0c0665c6adc8c6`, `notifications-noreply@linkedin.com`, 19:58:48
+  UTC — it arrived *after* the 18:59 sweep, which is why it is new).
+  Classified from the **full plain-text body**, not the snippet: a
+  notification digest of invitations, a job change, a birthday and a work
+  anniversary, with LinkedIn's own footer and unsubscribe. The taxonomy names
+  LinkedIn verbatim under Professional Networking. Not Social Media (that test
+  names Facebook, Instagram, TikTok, X), not Promotions (no offer).
+- **Sender-split check, per the 2026-09-20 rule:** the ledgers were grepped
+  before classifying. `notifications-noreply@linkedin.com` has **no** ledger
+  row in any of the three files; the two `linkedin.com` rows in promotions.csv
+  are InMail sales pitches from `hit-reply@` / `inmail-hit-reply@`, migrated
+  from Eriks's own pre-instance filing — a different address and a different
+  kind of mail. The run log shows this instance filing LinkedIn notification
+  mail as Professional Networking on 17, 18 and 20 Sep. **No split to flag.**
+
+**Write and its read-back, two independent ways:**
+1. `get_thread` on `1a0c0665c6adc8c6` → `label_ids` now
+   `["UNREAD","Label_5437124985126992273","INBOX"]`.
+2. `list_labels` before → after: Professional Networking `threadsTotal`
+   **140 → 141**, `messagesTotal` 196 → 197. **Sum of per-label thread deltas
+   = 1 = the number of `label_thread` calls, with no label at +0.** Every other
+   taxonomy label unchanged: Needs-Payment 6, Reply/Do 97, Schedule Calendar
+   281, Family & Personal 90, Banking & Cards 86, Receipts 686, Newsletters
+   1982, Promotions 2804, Social Media 11, Loyalty 32, Security 223, Travel 76,
+   Paid 214.
+
+**Archived: 0.** Professional Networking is not one of carve-out 4's four
+classes, so the thread keeps its label and stays in the inbox —
+`INBOX.threadsTotal` still **10**, which reconciles: 10 read, 1 labelled in
+place, 0 removed. **Trashed: 0** — `TRASH.threadsTotal` unchanged at **284**;
+no Google Calendar notification mail was in the inbox, so carve-out 6 had
+nothing in class. **Ledger rows: 0** — none of the three ledger classes
+(Receipts, Newsletters, Promotions) fired, so the "at least one verified row
+per archived thread" invariant is satisfied vacuously with 0 archives and 0
+rows. **Payment tasks: 0** — no new Needs-Payment mail; the four
+Needs-Payment threads in the inbox are unchanged and already carry live tasks.
+**Calendar events created: 0** — carve-out 7 had nothing in class. The one
+Travel thread in the inbox (Hotel Fisserhof, `1a09bc15a1a100a3`) was **skipped
+as already labelled**, and independently is a multi-day stay, which under the
+STILL-OPEN half of the 2026-09-15 widening creates nothing until Eriks answers
+task `6hW4pGFRrff5M2FQ`. **New `[Needs Eriks]` tasks: 0** — nothing this run
+needed a decision that an existing question did not already cover.
+**Closed-payment loop (carve-out 5): not run** — it belongs to Step 2, which
+the hourly form does not run.
+
+**Left unlabelled on purpose — 2, held by an open question's stated default.**
+Bluehost `mail:1a0b32766a32b7bf` and Google AI Studio `mail:1a0be726fb266eaf`,
+both named on task `6hXM3WGgqj8QqGRQ`. `get_thread` confirms each still holds
+one message carrying no taxonomy label. Their bodies were not re-read: the
+classification is *held by a standing default*, not open, and re-deciding it
+per run is exactly what the question exists to stop. No second question
+opened — the existing one already names both.
+
+**Review task.** `6hXM3WFgxrC82HXQ` ("[Act] Review inbox labels — 2026-09-20")
+already existed, so per `procedures/cloud-run.md` § 4.2 this run posted **one**
+comment with its counts rather than creating a second task — comment
+`6hXc4MxHGfWRM7hQ`, verified independently with `fetch-object` (type comment),
+which returned the stored body with the `**Assistant —**` marker and the
+`ref:` line. The description was not edited: the write allowlist still has no
+description edit, and it fails closed.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789930856000 →
+**1789934328000**, the `internalDate` of the newest message **actually
+processed** (`1a0c0665c6adc8c6`, 2026-09-20T19:58:48Z) — read off the message,
+not derived from the ISO string, and not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-20, unchanged.
+`calendar.last_scanned_date` left at 2026-09-20 — the hourly form runs no
+calendar sweep. Step 3 not run, so `vault.mail_snapshot.last_internaldate_ms`
+stays 0.
+
+**Registry drift: none.** Tools called this run: `list_labels`,
+`search_threads`, `get_thread`, `label_thread` (Gmail); `list_calendars`
+(Calendar); `user-info`, `find-tasks`, `find-comments`, `add-comments`,
+`fetch-object` (Todoist) — every one listed in `config/tools.md`. The GitHub
+MCP and `PushNotification` are present in this environment and were **not
+used**; the routine prompt forbids both by name, and the 2026-09-20 anomaly in
+`procedures/cloud-run.md` § 2.5 is not treated as precedent.

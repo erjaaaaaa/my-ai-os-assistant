@@ -485,3 +485,31 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   Sibling of the 2026-09-20 getguru entry; neither replaces the other, and the
   hard invariant both protect is unchanged: at least one verified row per
   archived thread.
+
+- 2026-09-20 — **The write-access gate can refuse for a reason that has
+  nothing to do with write access** — the 20:00 UTC hourly cloud run found the
+  clone on a **detached HEAD** at `4afd263` (exactly `origin/main`) with the
+  local branch ref `main` still at `aa9e2da`, 19 commits behind. `git push
+  --dry-run origin main` pushes the *branch ref*, not `HEAD`, so it was
+  rejected **non-fast-forward** — and Step 0's NARROWED 2026-09-20 rule reads
+  "if it is refused, the run stops here". Stopping would have been wrong: the
+  gate was written for the first cloud run's **403**, where the GitHub App had
+  read but not write access, and a non-fast-forward proves nothing either way
+  about permission. The repair was local and lossless (`git checkout main` +
+  `git merge --ff-only origin/main`, a pure fast-forward, nothing discarded,
+  no force), after which the gate returned `Everything up-to-date`.
+  **Rule:** distinguish the two refusals before applying the stop rule. A
+  **403 / "permission denied" / "repository not found"** is the access failure
+  the gate exists for — stop, report, write nothing. A **non-fast-forward or
+  "behind its remote counterpart"** is local ref bookkeeping: check
+  `git branch -vv` and `git rev-parse HEAD origin/main`, and if `HEAD` already
+  equals `origin/main` and the tree is clean, fast-forward the local branch
+  (never force, never rewrite someone else's history) and **re-run the gate**;
+  only a second refusal stops the run. And because "Everything up-to-date"
+  could in principle be answered locally, corroborate it once with
+  `GIT_TRACE=1` showing `git-remote-https` was actually invoked — the point of
+  the gate is that the permission is proven by exercising it, which a purely
+  local answer would not do. Extends, does not replace, the 2026-09-20 entry
+  above ("a run that cannot record itself must not act"): its purpose — never
+  act before proving the run can be recorded — is unchanged; this narrows
+  *which* refusals mean that.
