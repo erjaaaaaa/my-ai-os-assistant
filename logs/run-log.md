@@ -3265,3 +3265,142 @@ called, every one listed in `config/tools.md`. The GitHub MCP and
 `PushNotification` are present in this environment and were **not used**; the
 routine prompt forbids both by name, and the 2026-09-20 anomaly in
 `procedures/cloud-run.md` § 2.5 is not treated as precedent.
+
+## 2026-09-20 — hourly /inbox (18:59 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Steps 0
+and 1 only; Steps 2–4 not run and no brief — the daily cloud routine is
+disabled and `/start-day` is Eriks's on the laptop.
+
+**Step 0 § 0 — git sync, and one thing worth recording.** `git pull --ff-only
+origin main` reported *Already up to date* at `1d85554`, but `git push
+--dry-run origin main` came back **rejected (non-fast-forward)**. The cause
+was local, not a permission refusal: the container had checked out a
+**detached HEAD** at `origin/main` while the local `main` ref was stale at
+`aa9e2da`, 18 commits behind, so `push origin main` was offering the old ref.
+Confirmed `aa9e2da` is a strict ancestor of `1d85554` with `git merge-base
+--is-ancestor`, then `git checkout -B main origin/main` — a pure
+fast-forward of the local branch, no history rewritten, nothing forced. The
+dry-run then returned *Everything up-to-date*. **Named honestly:** with
+nothing to push, that reply authenticates but does not exercise a ref update,
+so the gate is weaker than the 2026-09-20 lesson intends; the real proof is
+the push at § 3 below, and write access was demonstrated by the 17:59 run an
+hour earlier. Worth the promotion review's attention: the gate should push a
+real ref or be described as what it is.
+
+**Orient block.** Gmail **live** — `list_labels` returned 47 labels,
+`INBOX.threadsTotal` **24**, `messagesTotal` 28. Google Calendar **live** —
+`list_calendars` returned 8 calendars, **both** swept ids present
+(`epetersons87@gmail.com`, `family17271500024496324001@group.calendar.google.com`).
+Todoist **live** — `user-info` returned `epetersons87@gmail.com`, user
+22613842. No ids re-resolved: tracker `_verified` 2026-09-07 and Gmail
+`labels_verified` 2026-09-07 are both 13 days old, inside the 30-day rule.
+
+**Step 0 § 4 — open questions: 3 open, 0 answered, 0 ambiguous.**
+`find-tasks` (project Personal, `agent-waiting`, `limit: 100`) returned 3,
+`hasMore: false`; `find-comments` on **each**. `6hW4pGFRrff5M2FQ` holds
+Eriks's *"b)"* of 2026-09-15 (already applied on 09-17) and the assistant's
+narrowing comment — the multi-day-stay point is still unanswered, so the
+default *a multi-day stay creates nothing* stays in force.
+`6hWmrXJ7Cg6hF9Wx` has **no** comments. `6hXM3WGgqj8QqGRQ` carries only the
+assistant's own comment of 11:13 UTC. Nothing to apply, nothing to close.
+
+**Step 1 — census, and a gap that was checked rather than smoothed over.**
+`search_threads in:inbox` (pageSize 50, one page, `resultCountEstimate` 25)
+returned **25** threads against the `INBOX.threadsTotal` of **24** read at
+Step 0 — a contained count *above* its containing total, which the
+impossibility test exists to catch. The explanation is real and was proved,
+not assumed: thread `1a0c03167e9d0e3d` has `internalDate` **1789930856000**
+(2026-09-20T19:00:56Z) and the control query ran at 19:00:41Z, so the mail
+landed **15 seconds after** the total was read. The post-run `list_labels`
+reads `INBOX.threadsTotal` **24** = 25 − 1 archived, which closes it.
+
+**Threads read 25, skipped as already labelled 22, classified 1, left
+unlabelled on purpose 2.** The skip test: 22 threads showed one of the
+thirteen ids on a message in the search result — positive evidence a label
+exists, which truncation cannot manufacture, so the 2026-09-17 defect (a
+*missing* label inferred from a short list) does not apply to them. The 3
+threads showing no taxonomy label were the ones that mattered and each was
+read in full with `get_thread`. Note `1a0ba39b0b25eeb3` (Montessori invoice,
+forwarded by Margarita): its newer message carries no user label but the
+thread carries **Needs-Payment** from the 00:22 run, so it is skipped — the
+rule is *any* message, and the label is thread-level here.
+
+**Labelled — 1 call.** `1a0c03167e9d0e3d`, nate@aiautomationsociety.ai,
+*"the guarantee makes AIS Live free to try"* → **Promotions & Ads**
+(`Label_6413919896574930163`). Body read in full: a ticket sales push for the
+paid AIS Live event, refund guarantee, *"prices still go up tonight"*. Not
+Newsletters — and where the two are arguable the taxonomy's own tie-break
+sends it to Promotions anyway. Precedent checked before classifying, per the
+2026-09-20 split-sender rule: `grep` of the ledgers shows 25 promotions rows
+and 8 newsletters rows for this address, but every newsletters row is
+`migrated-sent` (Eriks's own historical filing); all three runs since
+2026-09-09 filed it Promotions, including this morning's
+`1a0bf20714dad7b3` — the same AIS Live campaign, third push today. No split
+to report. **Read-back:** `get_thread` METADATA_ONLY shows
+`["UNREAD","Label_6413919896574930163","INBOX"]`.
+
+**Ledger row — 1, verified.** `ledgers/promotions.csv` line **10144**
+(10143 → 10144 lines), grepped back by the thread's own messageId
+`1a0c03167e9d0e3d`. `list_unsubscribe` empty — the body carries no
+unsubscribe or manage-preferences cue, only a plain-text-version link.
+**`from_name` written empty, deliberately:** `search_threads`, `get_thread`
+and `get_message` all returned the bare address `nate@aiautomationsociety.ai`
+with no display name for this message. Copying *"AI Automation Society"* from
+a sibling row would be handing an inferred identity downstream as a premise,
+which `AGENTS.md` § Verification forbids; `from_address` and `source_domain`
+carry the identity unambiguously. One row for one archived thread — the hard
+invariant holds.
+
+**Archived — 1 (carve-out 4, Promotions & Ads).** `unlabel_thread` with
+`["INBOX"]` on `1a0c03167e9d0e3d` after the ledger row was written and read
+back. **Read-back:** `["UNREAD","Label_6413919896574930163"]` — `INBOX`
+absent, label present. **Nothing trashed** (`TRASH.threadsTotal` 279 before
+and after), nothing marked read or spam, no other class touched.
+
+**Label census cross-check (`list_labels` before → after).** Promotions & Ads
+`threadsTotal` **2803 → 2804**; every other user label unchanged. Sum of
+per-label thread deltas = **1** = the number of `label_thread` calls, with no
+label at +0 — so the one call created a genuinely new label→thread
+association, per the 2026-09-17 second check.
+
+**Payment tasks created: 0** — no new Needs-Payment mail; the six
+Needs-Payment threads in the inbox are unchanged and already carry live
+tasks. **Calendar events created: 0** — carve-out 7 had nothing in class, no
+new Schedule Calendar or Travel thread (the airBaltic ticket
+`1a0abb1db458f502` already got its two events on 2026-09-17).
+**New `[Needs Eriks]` tasks: 0. Closed-payment loop (carve-out 5): not run**
+— it belongs to Step 2, which the hourly form does not run.
+
+**Review task.** `6hXM3WFgxrC82HXQ` ("[Act] Review inbox labels —
+2026-09-20") already existed, so per `procedures/cloud-run.md` § 4.2 this run
+posted **one** comment with its counts rather than creating a second task —
+comment `6hXXjQcFHJ6jX9gQ`, verified independently with `fetch-object`
+(type comment), which returned the stored body with the `**Assistant —**`
+marker and the `ref:` line. The description was not edited: the write
+allowlist still has no description edit, and it fails closed.
+
+**Left unlabelled on purpose — 2, held by an open question's stated default.**
+Bluehost "Domain Privacy has expired for CHALLENGEFINDS.COM"
+(`mail:1a0b32766a32b7bf`) and Google AI Studio "Important: Your billing
+account has been moved to a lower tier" (`mail:1a0be726fb266eaf`), both named
+on task `6hXM3WGgqj8QqGRQ`, whose default reads *stays unlabelled, in your
+inbox, named in each brief*. Each still reads `["UNREAD","INBOX"]` alone. No
+second question opened — the existing one already names both.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789921507000 →
+**1789930856000**, the `internalDate` of the newest message **actually
+processed** (`1a0c03167e9d0e3d`, 2026-09-20T19:00:56Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-20, unchanged.
+`calendar.last_scanned_date` left at 2026-09-20 — the hourly form runs no
+calendar sweep. Step 3 not run, so
+`vault.mail_snapshot.last_internaldate_ms` stays 0.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, every one listed in `config/tools.md` (`list_labels`,
+`search_threads`, `get_thread`, `get_message`, `label_thread`,
+`unlabel_thread`; `list_calendars`; `user-info`, `find-tasks`,
+`find-comments`, `add-comments`, `fetch-object`). The GitHub MCP and
+`PushNotification` are present in this environment and were **not used**; the
+routine prompt forbids both by name, and the 2026-09-20 anomaly in
+`procedures/cloud-run.md` § 2.5 is not treated as precedent.
