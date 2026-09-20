@@ -2199,3 +2199,139 @@ need them.
 
 **Registry drift observed in the cloud environment:** it exposes a GitHub MCP (`mcp__github__*`, used once by the run for a read-only diagnostic) and a `PushNotification` tool, which the run used once to send a routine summary to Eriks's own Claude mobile app. Neither is in `config/tools.md`. The push is a message to Eriks himself, not to another person — but it is not authorised in writing, so it is raised with him rather than adopted.
 
+
+## 2026-09-20 — /start-day, second cloud run (12:33–12:4x Europe/Riga)
+
+**Run context: cloud.** Unattended, fired by the scheduler at 09:33 UTC —
+a second firing on a day the 04:00-cron run had already completed. Eriks not
+present; nothing asked in session.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` → already up to date at
+`53f6a2c`. The clone arrived on a **detached HEAD** at `53f6a2c` with the local
+`main` ref stale at `aa9e2da`, five commits behind origin; the first
+`git push --dry-run origin main` therefore pushed the stale ref and was
+rejected *non-fast-forward*. Not a permission refusal. `git checkout -B main
+53f6a2c` fast-forwarded the local ref onto origin's tip (nothing lost — main
+was strictly behind both HEAD and origin/main), and the dry-run then returned
+**"Everything up-to-date"** with no 403. Write-access gate passed; the
+receive-pack advertisement is what a read-only token 403s on, and it did not.
+
+**Orient block.** Gmail live — `list_labels` 45 labels, `INBOX.threadsTotal`
+**24**. Calendar live — `list_calendars` 8 calendars, both swept ids present.
+Todoist live — `user-info` `epetersons87@gmail.com`, user 22613842. All
+thirteen taxonomy label ids plus `paid_label_id` confirmed present in the
+`list_labels` result. Tracker `_verified` 2026-09-07, 13 days old, inside the
+30-day window, so no re-resolution. Open questions: **3 open, 0 answered, 0
+ambiguous** — `find-comments` run on each of the three; the only comments
+present are Eriks's 15 Sep *"b)"* and the assistant's own reply on
+`6hW4pGFRrff5M2FQ`, both already applied on 17 Sep. Every stated default
+stayed in force; none recorded as a decision.
+
+**Step 1 — inbox.** 24 threads returned by `in:inbox` against
+`INBOX.threadsTotal` 24 (sweep ≤ containing total). 17 skipped as already
+labelled; the skip test ran against `get_thread` on every candidate, per the
+2026-09-17 rule, never against the `search_threads` result. 6 labelled, each
+read back on the thread's `label_ids`:
+
+- `1a0be141061288e9` GitHub sudo code → Security & Verification
+- `1a0bdf3129dc1537` Google Cloud billing **suspended** → Needs-Payment
+- `1a0bdef1e1e19a49` Value Hunter betting pass → Promotions & Ads
+- `1a0bd9bb0392d76f` Revolut Business supplier payments → Promotions & Ads
+- `1a0bd1e268c869ac` Skool / RoboNuggets weekly digest → Newsletters & Learning
+- `1a0bd2edf698f642` Facebook, Margarita posted → Social Media
+
+Every body was read in full via `get_thread PLAIN_TEXT`; no metadata-only
+classification this run.
+
+**Ledger rows (written, then grepped back by thread id):** promotions.csv
+10134–10135, newsletters.csv 6238. Dedupe grep before the append returned 0 for
+all three ids. Per class, archived vs rows: promotions 2/2, newsletters 1/1 —
+at least one verified row per archived thread.
+
+**Archives (3, carve-out 4):** `1a0bdef1e1e19a49`, `1a0bd9bb0392d76f`,
+`1a0bd1e268c869ac`, each `unlabel_thread ["INBOX"]`, read back absent from
+`in:inbox`. Nothing trashed, nothing spammed, nothing marked read.
+
+**Census cross-check (`list_labels` before → after):** Security & Verification
+222→223, Needs-Payment 5→6, Promotions 2794→2796, Newsletters 1978→1979,
+Social Media 11→12; sum of deltas **6** = the 6 `label_thread` calls, no label
+at +0. Reply/Do 97, Schedule Calendar 280, Family & Personal 90, Banking &
+Cards 86, Receipts 686, Professional Networking 142, Loyalty 32, Travel 76,
+Paid 214 all unchanged. INBOX 24→21 = 24 − 3. TRASH 279 unchanged, SPAM 8
+unchanged.
+
+**Left unlabelled on purpose (1):** `1a0b32766a32b7bf` Bluehost WHOIS privacy,
+under the default on open question `6hXM3WGgqj8QqGRQ`.
+
+**Step 2 — triage.** Mail watermark at Step 0: `1789849414000`
+(2026-09-19 20:23:34 UTC). Seven messages newer: the six above plus
+`1a0bdfd6dabf07ce` (20 Sep 08:44, Margarita forwarding the Montessori invoice
+into the existing `1a0ba39b0b25eeb3` thread, which is skipped for labelling
+because an older message already carries Needs-Payment). Newest processed:
+`1789895381000`. Sent sweep `in:sent after:2026/09/18` returned `{}`; control
+`in:sent after:2026/09/10` returned 4 threads, newest 16 Sep 17:53 — the
+absence is genuine, not an outage.
+
+Calendar: `epetersons87@gmail.com` 20–27 Sep returned **no events**; the
+adapter's second control (21 Aug – 20 Oct, same calendar) returned 14, so the
+empty week is a real finding. Family calendar 20–27 Sep returned 7 events, of
+which 4 are recurring series already named in `config/routing-rules.md`. No
+advertising events in the window, no `needsAction` invitations, no overlaps
+(Eriks's own calendar is empty). No calendar task created — "attend" is not a
+task and no preparation is non-trivial.
+
+**Tasks created: 0.** **`[Needs Eriks]` created: 0.** **Section moves: 0.**
+
+**Comments posted (3), each read back:**
+- `6hWmrRH3wQW6PH3Q` "Pay Google Cloud" ← comment `6hXRpPxFC79W7wJx`, the
+  suspension escalation and the 30-day termination clock (~20 Oct).
+- `6hXM3Q8R4vV444WQ` "Pay Mazulītis Rū" ← comment `6hXRpPx8cjcpfWMx`, the
+  forward from Margarita.
+- `6hXM3WFgxrC82HXQ` "[Act] Review inbox labels — 2026-09-20" ← comment
+  `6hXRpVgw3hV4q92x`, this run's counts.
+All three with `notifyUsers: ["me"]`; the returned `notifiedUserIds` is
+`["22613842"]` in each case, so nothing reached another person.
+
+**Why the Google Cloud thread got a comment and not a task.** Its ref is new,
+so the literal dedupe rule would create a second task — but it is the *same
+billing account* as the two 16 Sep threads already on `6hWmrRH3wQW6PH3Q`, and
+the standing bias is against a wrong task. Known cost, stated in the comment
+and the brief: carve-out 5 reads the task **description** for `ref: mail:`
+lines, and the description cannot be edited under the write allowlist, so
+completing that task will swap and archive the two 16 Sep threads and leave
+`1a0bdf3129dc1537` in the inbox carrying Needs-Payment.
+
+**Carve-out 5 — 0 in class, established by reading, not inferred.** Four
+completed `Pay …` tasks in the last 60 days carry a `ref: mail:` first line:
+`1a08709e05be7fbb` (Mārupes komunālie), `1a0875ca032db903` (Eco Baltia),
+`1a080f5ae9698874` (Elektrum), `1a072afdab0b973b` (Bite). `get_thread
+METADATA_ONLY` on each returned `Label_2307425248756940905` (Paid) alone on
+every message — no `Needs-Payment`, no `INBOX`. The two Margosik WhatsApp
+"Pay …" tasks carry no ref line and are out of class.
+
+**Step 3 — deferred: vault not reachable from this runner.** `../My Brain/`
+absent from the clone; `vault.mail_snapshot.last_internaldate_ms` left at 0.
+
+**Step 4 — brief.** `briefs/2026-09-20.md` already held the 00:22 run's brief.
+Appended below it under a second heading rather than overwritten, on
+"supersede, never erase". File verified at 22,751 bytes.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789849414000 →
+1789895381000 (the newest message actually processed, not the clock);
+`inbox.last_sweep_date` and `calendar.last_scanned_date` stay 2026-09-20;
+`vault.mail_snapshot.last_internaldate_ms` unchanged at 0.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, all of them listed in `config/tools.md`. The GitHub MCP and
+`PushNotification` are present in the environment and were **not used**;
+`PushNotification` stays unadopted until Eriks says so in writing
+(`procedures/cloud-run.md` § Registration).
+
+**Observation, not an outage:** `list_labels` returned **45** labels where
+`config/sources/gmail.md` records 55 on 2026-09-07. Both of today's runs saw
+45. The control is populated either way; recorded here rather than acted on.
+
+**Defects raised this run, all three appended to `lessons-learned.md`:** the
+review-task upsert colliding with the write allowlist; the same-date brief
+having no stated rule; Skool mail landing in three different taxonomy classes
+across four runs.

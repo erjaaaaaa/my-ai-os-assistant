@@ -422,3 +422,44 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   refused, the run stops and reports. And a permission is verified by
   exercising the exact operation the run needs (a write), never a weaker one.
 
+
+- 2026-09-20 — **The review task cannot be updated, because the write
+  allowlist has no description edit** — `procedures/step-1-inbox.md` § 5 says
+  to upsert the day's `[Act] Review inbox labels` task, "search by title
+  first; update rather than duplicate". The day's second cloud run found
+  `6hXM3WFgxrC82HXQ` already created by the 00:22 run, and the only way to
+  "update" it is to rewrite its description — which `AGENTS.md` § Security
+  boundary does not list among the permitted Todoist writes (create, comment,
+  apply labels, move sections, complete narrowly). The allowlist fails closed,
+  so the second sweep's counts went in as a **comment**. **Rule:** a second
+  run on the same date comments its counts onto the existing review task and
+  never edits a description; and this disagreement between two governing files
+  is a defect for the promotion review to settle — either the allowlist names
+  description edits on the assistant's own tasks, or § 5 says "comment". Do
+  not re-adjudicate it per run.
+- 2026-09-20 — **A second run on the same date appends to the day's brief,
+  never overwrites it** — `procedures/step-4-brief.md` says the brief is
+  archived to `briefs/YYYY-MM-DD.md` and assumes one run per date. The 09:33
+  UTC run found `briefs/2026-09-20.md` already holding the 00:22 run's brief,
+  including its push-failure notice and the correction on top of it — all of
+  which is record. **Rule:** when the file for today already exists, append
+  the new brief below the old one under its own dated heading with a "(second
+  run)" marker, on "supersede, never erase". Never truncate or rewrite a brief
+  a previous run delivered, even one from the same day and the same routine.
+- 2026-09-20 — **The same sender has been filed under three different
+  taxonomy classes in four runs** — Skool (`noreply@skool.com`) went to
+  Professional Networking on 17 Sep, Promotions & Ads on 20 Sep (first run),
+  and Newsletters & Learning on 20 Sep (second run, a "Weekly digest for Sun,
+  Sep 13 2026" from The RoboNuggets Network). Each reading is defensible on
+  its own — a community notification, a promotional post, recurring editorial
+  content — and the taxonomy's tie-breaks order only *Travel > Loyalty >
+  Receipts > Promotions* and *Newsletters vs Promotions → Promotions*, neither
+  of which reaches Professional Networking. The choice is not cosmetic:
+  Newsletters and Promotions are archived with a ledger row, Professional
+  Networking stays in the inbox. **Rule:** where a *sender* has been split
+  across classes by previous runs, say so in the brief's Anomalies rather than
+  quietly picking a third class, and grep the ledgers for that sender before
+  classifying so the precedent is visible. A per-sender rule is Eriks's to
+  set; until he does, classify the individual mail on its content and name the
+  split. Sibling of the 2026-09-14 Travel-vs-Schedule entry, but about
+  *consistency across runs* rather than one thread's tie-break.
