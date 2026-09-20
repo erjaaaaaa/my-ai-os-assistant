@@ -40,6 +40,16 @@ the orient block at Step 0 and in the run-log entry at Step 5.
    Step 3 in the cloud, and let Obsidian pull it through the Git plugin.
    The cost is a copy of the vault — family, health, money — on GitHub's
    disks. Not chosen yet; silence keeps the deferral.
+   **PROPOSED 2026-09-20 — Eriks asked for the alternative in chat:** *"I'm
+   still not clear how the vault ingest should work. Can we move it online
+   and then the local obsidian catches up with whatever was advanced
+   online?"* Read as a request for the design and a yes in principle, **not
+   yet as the per-item yes to copying the vault to GitHub** — that cost was
+   named to him as the thing only he can choose, and the question form
+   leaves it open. The design and its steps are in
+   `plans/2026-09-19-cloud-routine.md` § Vault online (steps 14a–14g). The
+   deferral above stays in force until the vault repository exists, the
+   Claude GitHub App can write to it, and § 5 below is marked in force.
 4. **Consent, phase gates and the security boundary are unchanged.** The
    cloud runner has the write permissions of `AGENTS.md` § Security
    boundary and nothing more. Running unattended widens nothing.
@@ -48,6 +58,13 @@ the orient block at Step 0 and in the run-log entry at Step 5.
    shows the same text as the session's final message. **No message is
    sent on any channel** — Telegram, Slack or mail delivery would be a
    widening of the security boundary that Eriks has not written.
+   **Observed 2026-09-20:** the scheduled 04:08 UTC run
+   (`cse_01DAek8HnkjSoCwLFd5SGMx6`), which stopped at the write-access
+   gate, nevertheless called `PushNotification` with its summary. That is
+   a message to Eriks's own device, not to another person, but it is a
+   tool outside `config/tools.md` used without a written yes. Both routine
+   prompts now name it as forbidden explicitly; the run is recorded in the
+   run log as an anomaly, not adopted as precedent.
 6. **Overlap.** A laptop `/start-day` on a day the cloud run already
    completed is a rerun: Steps 1 and 2 no-op from the watermarks, Step 3
    catches up, the brief says so. A laptop run must pull before Step 0 § 1
@@ -75,9 +92,21 @@ the orient block at Step 0 and in the run-log entry at Step 5.
 ## 3. Registration
 
 - **Repository:** `git@github.com:erjaaaaaa/my-ai-os-assistant` (private).
-- **Routine:** Claude Code cloud routine, environment Default, model
-  `claude-opus-5`, cron `0 4 * * *` UTC — 07:00 Riga in summer, 06:00 in
-  winter (cron does not follow DST; retune in late October if it matters).
+- **Routine (daily):** Claude Code cloud routine, environment Default,
+  model `claude-opus-5`, cron `0 4 * * *` UTC — 07:00 Riga in summer, 06:00
+  in winter (cron does not follow DST; retune in late October if it
+  matters). **CHANGED 2026-09-20 by Eriks:** *"The daily brief can then be
+  delivered once a day at 9 am (moved from 7 am right now)."* Cron is now
+  `0 6 * * *` UTC — 09:00 Riga in summer, **08:00 in winter** after the
+  clocks change on 2026-10-25; retune to `0 7 * * *` then if 09:00 is what
+  matters. Superseded text: `0 4 * * *`.
+- **Routine (hourly):** ADDED 2026-09-20 by Eriks: *"I want the e-mail
+  sweep labelling to run every hour."* A second routine,
+  `trig_01X5cu18Ba6kNcWbaAABCGR8`, same environment, model and three
+  connectors, cron `0 0-5,7-23 * * *` UTC — every hour **except 06:00 UTC**,
+  when the daily run does Step 1 itself. It runs the `/inbox` skill in the
+  hourly form of § 4 below. Id in `state/state.json` under
+  `cloud.hourly_routine_id`.
 - **Connectors attached to the routine:** Gmail, Google Calendar, Todoist —
   the same three claude.ai connectors `config/tools.md` names, each with a
   permitted-tool list mirroring that registry. CORRECTED 2026-09-20: set by
@@ -90,8 +119,45 @@ the orient block at Step 0 and in the run-log entry at Step 5.
   MCP is not used. The push is a message to Eriks himself, not to another
   person, so it does not touch the property the security boundary protects
   — but it is not adopted as delivery until Eriks says so in writing.
-- **Routine id** is recorded in `state/state.json` under `cloud.routine_id`
-  with a `_verified` date, like every other id.
+- **Routine ids** are recorded in `state/state.json` under
+  `cloud.routine_id` (daily) and `cloud.hourly_routine_id` (hourly) with a
+  `_verified` date, like every other id.
 - **Debugging a run:** the routine's run list and run log, read through
   the desktop session's `RemoteTrigger` tool (`list_runs`, `get_run_log`),
   or the run page in the browser.
+
+## 4. The hourly form — `/inbox` every hour
+
+ADDED 2026-09-20 by Eriks: *"I want the e-mail sweep labelling to run every
+hour."* The hourly routine runs Step 0 and Step 1 only, then closes out.
+Everything in §§ 1–2 applies; these are the differences:
+
+1. **Scope.** Step 0 in full (pull, write-access gate, governing files,
+   state, health checks, open-question answers — § 4 of Step 0 runs every
+   hour, so an answer Eriks posts is applied within the hour). Then Step 1
+   in full, including its post-actions: payment tasks, ledger rows,
+   carve-out 4 archives, carve-out 6 trashes, carve-out 7 event creation.
+   **Not** Step 2, 3 or 4, and no brief; the daily run owns those.
+2. **The review task** (`procedures/step-1-inbox.md` § 5): an hourly run
+   that labelled nothing leaves it alone. One that labelled something
+   creates the day's task if it does not exist, otherwise posts **one**
+   comment with that run's counts. Twenty-four comments a day is the
+   ceiling, not the norm.
+3. **Close-out** (`procedures/step-5-close-out.md` § 1 hourly form): a run
+   that labelled nothing appends **one line** to the run log; a run that
+   wrote anything appends a full entry. Watermarks advance as usual
+   (`mail.last_internaldate_ms`, `sources.gmail.inbox.last_sweep_date`).
+   Commit message `inbox YYYY-MM-DD HH:MM UTC`. Push, rebase once, never
+   force.
+4. **Overlap.** The hourly cron skips 06:00 UTC so it cannot collide with
+   the daily run's start; a run that overruns into the next hour meets the
+   next one only at the push, where the rebase-once rule applies. A laptop
+   `/inbox` or `/start-day` pulls first like any clone.
+5. **Same-day idempotency is by watermark and by label, not by date.**
+   Step 0 § 5's date check is for Steps 2–3; Step 1 never no-ops on the
+   date alone — it reads the inbox and skips threads already labelled.
+6. **Cost, named not hidden:** up to 23 Opus runs a day on top of the
+   daily one. A cheaper model for the hourly sweep is Eriks's lever, not
+   the assistant's — the label decides whether a thread leaves the inbox,
+   so the model choice is a quality decision. Recorded as an open point in
+   the plan.

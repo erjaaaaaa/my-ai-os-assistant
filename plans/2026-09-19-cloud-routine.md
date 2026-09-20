@@ -24,9 +24,48 @@ Status legend: **done** (verified by a read), **waiting on Eriks**, **open**.
 | 12b | Recover the stranded record: after step 9, open the run session (`https://claude.ai/code/session_01WLbEPgazXGPVFJdavv5kNW`) and tell it to push; if the container is gone, the assistant reconstructs the 25 ledger rows from the archived thread ids in the run log, advances the watermarks to what the run recorded, and re-archives the brief from the run's final message | **Eriks**, then assistant | open |
 | 12c | Step 0 now proves write access with `git push --dry-run` before any external write, and stops if refused (procedure edited 2026-09-20) | assistant | done |
 | 13 | First laptop run after the cloud run: pull, confirm Steps 1–2 no-op and Step 3 catches up | assistant | open |
-| 14 | Decide the vault: keep Step 3 on the laptop (default) or push the vault to a private repo and run Step 3 in the cloud | **Eriks** | open — default in force |
+| 14 | Decide the vault: keep Step 3 on the laptop (default) or push the vault to a private repo and run Step 3 in the cloud | **Eriks** | **asked for 2026-09-20** — *"Can we move it online and then the local obsidian catches up with whatever was advanced online?"* Design in § Vault online below; the deferral stays until 14a–14d are done |
 | 15 | Decide delivery: commit only (current) or a push channel, which needs a written widening of the security boundary | **Eriks** | open — default in force |
-| 16 | Late October: retune the cron if 06:00 Riga in winter is too early | Eriks or assistant | open |
+| 16 | Late October: retune the cron if 06:00 Riga in winter is too early | Eriks or assistant | open — now reads: after 2026-10-25 the daily fires 08:00 Riga; move to `0 7 * * *` UTC if 09:00 is what matters |
+| 17 | Daily routine moved to 09:00 Riga — cron `0 6 * * *` UTC. Eriks 2026-09-20: *"The daily brief can then be delivered once a day at 9 am (moved from 7 am right now)."* Prompt also now names `PushNotification` and the GitHub MCP as forbidden, after the 04:08 UTC run used the former | assistant | done 2026-09-20 — routine read back: `cron_expression` `0 6 * * *`, `next_run_at` 2026-09-21T06:07Z |
+| 18 | Hourly `/inbox` routine `trig_01X5cu18Ba6kNcWbaAABCGR8`, cron `0 0-5,7-23 * * *` UTC, same environment, model and three connectors, created **disabled**; procedure in `procedures/cloud-run.md` § 4. Eriks 2026-09-20: *"I want the e-mail sweep labelling to run every hour."* | assistant | done 2026-09-20 — create response lists exactly the three connections |
+| 19 | Fire one hourly run by hand, read its log, then enable | assistant | open |
+| 20 | Model for the hourly sweep: Opus (current, parity with the daily) or a cheaper model — up to 23 extra Opus runs a day | **Eriks** | open — default Opus |
+
+## Vault online — design for step 14 (proposed 2026-09-20, not yet in force)
+
+**Goal, in Eriks's words:** *"move it online and then the local obsidian
+catches up with whatever was advanced online."* Mechanism: the vault becomes
+a private git repository; the cloud routine clones it as a second source,
+runs Step 3 there and pushes; the laptop's Obsidian pulls it back through the
+community **Git** plugin (obsidian-git), so Eriks sees the ingested pages
+without running anything. Web-clipper saves on the laptop go the other way by
+the same plugin's auto-commit-and-push.
+
+| # | Step | Owner | Status |
+|---|---|---|---|
+| 14a | Say yes in writing to the cost: a copy of the vault — family, health, money — in a private GitHub repository. Also say whether the vault stays in iCloud Drive (default — nothing moves, Obsidian on other Apple devices keeps working) or moves out of it (git becomes the only sync; avoids iCloud syncing `.git` internals, the one known trouble spot) | **Eriks** | open |
+| 14b | Create the empty private repository `erjaaaaaa/my-brain` on GitHub | **Eriks** | open |
+| 14c | `git init` in `../My Brain/`, `.gitignore` for `.obsidian/workspace*.json`, `.DS_Store`, `.trash/`; first commit; add `origin`; push `main`. The remote-add and push were blocked by the desktop app's classifier for the assistant repo, so these may again be Eriks's steps; the assistant prepares the tree and verifies with `git ls-remote` | assistant, then **Eriks** if blocked | open |
+| 14d | Grant the Claude GitHub App write access to `my-brain` (same installation page as step 9); a cloud probe run proves it with `git push --dry-run` | **Eriks** | open |
+| 14e | Add `https://github.com/erjaaaaaa/my-brain` as a second `git_repository` source of the daily routine; a probe run reports where the clone lands (expected beside the instance, `/home/user/my-brain`); record the candidates in `state/state.json` `vault.paths` and make Step 3 resolve the vault by finding a folder among them that holds `AGENTS.md`, `raw/` and `wiki/` | assistant | open |
+| 14f | Procedures: `cloud-run.md` § 1 drops the "no `../My Brain/`" heuristic (the prompt alone says cloud); § 2.3 deferral WITHDRAWN; Step 0 § 0 pulls and dry-run-pushes the vault too; Step 5 § 3 commits and pushes the vault (supersedes "the vault is not a git repository"); Step 0 § 5's Step 3 exemption narrows to "when the last cloud run recorded a Step 3 failure". The vault's own `AGENTS.md` is unchanged — git is transport, not schema | assistant | open |
+| 14g | Obsidian on the laptop: install the community plugin **Git**, set auto-pull every 10 min, auto commit-and-sync every 30 min with "pull before push", `pull.rebase` on; `git config user.name/email` in the vault | **Eriks**, with the assistant | open |
+
+**Known costs, to accept or not at 14a:** the vault leaves the laptop; git
+metadata inside iCloud Drive can be corrupted by iCloud's own sync if a
+second Apple device also opens the vault with the plugin (mitigation: the
+plugin on one device only, or move the vault out of iCloud); a same-minute
+edit to `index.md` or `log.md` on both sides is a merge conflict — the cloud
+run rebases once and otherwise stops with the conflict named, and the laptop
+resolves it in Obsidian; `raw/` snapshots of mail written by the cloud run
+carry mail text into the repository, which is the same class of content the
+instance's ledgers already carry.
+
+**What does not change:** the vault's schema (`../My Brain/AGENTS.md`), the
+ingest workflow in `procedures/step-3-ingest.md`, the rule that only that
+workflow writes there, and the security boundary — a clone is a read surface
+plus the same single write surface.
 
 ## Known costs, accepted by choosing this option
 

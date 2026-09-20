@@ -11,6 +11,9 @@ in a cloud routine it is the working directory of the clone. (CHANGED
 Read `AGENTS.md` under INSTANCE_ROOT, then run Step 0 (orient and
 health-check) and Step 1 (`procedures/step-1-inbox.md`) only, and close out
 per `procedures/step-5-close-out.md` (run log, inbox flag, commit).
+ADDED 2026-09-20: this skill also runs unattended every hour as a cloud
+routine; the differences are in `procedures/cloud-run.md` § 4, read at
+Step 0 when the run is a cloud run.
 
 Constraints that are never improvised around:
 
@@ -20,6 +23,11 @@ Constraints that are never improvised around:
 - Only the four carve-out classes are ever archived; nothing is trashed.
 - A missing ledger means no row and no archive for that class — report it.
 - Calendar events are **proposed**, never created in the sweep.
+  **CORRECTED 2026-09-20:** stale since carve-out 7 (2026-09-09). Step 1
+  creates an event on Eriks's own calendar for an unmatched real invite,
+  and trashes Google Calendar notifications under carve-out 6, exactly as
+  `AGENTS.md` § Phase gates and `procedures/step-1-inbox.md` § 3 say.
+  Where this list and `AGENTS.md` disagree, `AGENTS.md` wins.
 - An outage is not an empty inbox: no control query, no writes.
 
 Report counts per label, archived per class, tasks created, proposals, and

@@ -564,6 +564,12 @@ Step 0 of every unattended run. The brief is delivered by commit to
 on demand. `/digest` is unchanged and stays on demand. The pushed
 repository is the source of truth for state from this date; every run,
 laptop or cloud, pulls at Step 0 and pushes at Step 5.
+**CHANGED 2026-09-20 by Eriks:** the daily routine now fires at **06:00
+UTC** (09:00 Riga in summer) — *"The daily brief can then be delivered once
+a day at 9 am (moved from 7 am right now)"* — and a **second cloud routine
+runs `/inbox` every hour** except 06:00 UTC — *"I want the e-mail sweep
+labelling to run every hour."* Superseded text: "daily at 04:00 UTC". The
+hourly form is `procedures/cloud-run.md` § 4.
 
 ## Maintenance
 

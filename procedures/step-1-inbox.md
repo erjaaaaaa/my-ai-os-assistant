@@ -93,6 +93,14 @@ per class, payment tasks created (titles), calendar proposals (titles), threads
 left unlabelled (subjects). Search by title first; update rather than
 duplicate.
 
+**Hourly runs — ADDED 2026-09-20** (`procedures/cloud-run.md` § 4): a run
+that labelled nothing does not touch this task. A run that labelled
+something creates the day's task if none exists, otherwise posts one comment
+with its counts (opening `**Assistant —**`, per Step 0 § 4's convention).
+The description-update half of "update rather than duplicate" is still
+blocked by the write allowlist — the defect logged on 2026-09-20 — so until
+that is settled, a comment is the update.
+
 ## 6. Weekly digest hand-off — WITHDRAWN 2026-09-07
 
 Withdrawn by Eriks after the first `/start-day` produced the digest:

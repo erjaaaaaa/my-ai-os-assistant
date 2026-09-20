@@ -2335,3 +2335,21 @@ called, all of them listed in `config/tools.md`. The GitHub MCP and
 review-task upsert colliding with the write allowlist; the same-date brief
 having no stated rule; Skool mail landing in three different taxonomy classes
 across four runs.
+
+## 2026-09-20 — ad-hoc: hourly /inbox routine, daily moved to 09:00 Riga, vault design
+
+**Run context: chat.** Pulled `origin/main` first (fast-forward to `e43b542`, five commits from the two cloud runs).
+
+**Eriks's three requests, verbatim:** *"I want the e-mail sweep labelling to run every hour"*; *"The daily brief can then be delivered once a day at 9 am (moved from 7 am right now)"*; *"I'm still not clear how the vault ingest should work. Can we move it online and then the local obsidian catches up with whatever was advanced online?"*
+
+**Daily routine `trig_01U69oWX9gmDUCgn5F5i4g22` updated:** `cron_expression` `0 4 * * *` → `0 6 * * *` UTC (09:00 Riga until 2026-10-25, then 08:00). Read back: `next_run_at` `2026-09-21T06:07:50Z`. Prompt updated in the same session to name `PushNotification` and the GitHub MCP as forbidden and to say the hourly routine makes an empty Step 1 normal; connectors unchanged (Gmail, Google Calendar, Todoist with the same permitted-tool lists — verified in the update response).
+
+**Hourly routine created:** `trig_01X5cu18Ba6kNcWbaAABCGR8`, name "Personal assistant — hourly /inbox", cron `0 0-5,7-23 * * *` UTC (skips 06:00 so it never starts alongside the daily run), environment `env_01R58b6REYPi93JQtDE7H24d`, model `claude-opus-5`, created **disabled**, `mcp_connections` passed in the create body so the every-connector default never applied — the response lists exactly three. Prompt runs Step 0 + Step 1 + the hourly close-out, no Steps 2–4, no brief, no PushNotification.
+
+**Files:** `procedures/cloud-run.md` § 3 registration updated and § 4 hourly form added; § 2.3 carries the PROPOSED vault note; § 2.5 records the anomaly below. `procedures/step-5-close-out.md` § 1 and § 3 hourly form. `procedures/step-1-inbox.md` § 5 hourly rule. `.claude/skills/inbox/SKILL.md`: the stale "never created in the sweep" line CORRECTED to carve-out 7, hourly note added. `AGENTS.md` § The routine: CHANGED paragraph. `state/state.json` `cloud`: `cron_utc` `0 6 * * *`, `hourly_routine_id`, `hourly_cron_utc`, `_verified` 2026-09-20; old cron in `superseded`. `plans/2026-09-19-cloud-routine.md`: steps 14, 16 updated, 17–20 added, § Vault online design (14a–14g).
+
+**Anomaly:** the scheduled 04:08 UTC run `cse_01DAek8HnkjSoCwLFd5SGMx6` stopped correctly at the write-access gate (403) and wrote no external data, but called `PushNotification` with its summary — a tool outside `config/tools.md`, not adopted in writing. Both prompts now forbid it by name. Raised with Eriks in chat, not adopted.
+
+**Vault:** nothing done to `../My Brain/` this session. It is not a git repository (verified: `git status` → "not a git repository"), 235 files, 9.2 MB, 2 pending clippings in `raw/`, no community plugins installed. The design is written up as a proposal; the copy-to-GitHub cost needs Eriks's yes (plan 14a) before anything moves.
+
+**No external write** to Gmail, Calendar or Todoist this session.

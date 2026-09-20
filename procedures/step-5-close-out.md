@@ -7,6 +7,12 @@ Read at the start of this step.
    (read / new / per bucket / low-confidence); every write with its
    verification result; open-question counts; vault snapshots and pages; any
    default applied; any anomaly. Narrative goes here, never into state.
+   **Hourly form — ADDED 2026-09-20** (`procedures/cloud-run.md` § 4): an
+   hourly `/inbox` run that labelled nothing appends one line —
+   `- YYYY-MM-DD HH:MM UTC — hourly /inbox: inbox N, unlabelled 0, nothing
+   done` — under a single `## YYYY-MM-DD — hourly /inbox` heading for the
+   day (create it on the day's first hourly run). A run that wrote anything
+   appends a full entry in the usual order.
 2. **Advance watermarks in `state/state.json`** — only now, and only these:
    - `mail.last_internaldate_ms` → the `internalDate` of the newest message
      **actually processed**. Never the clock. **Never if Gmail's control query
@@ -20,7 +26,8 @@ Read at the start of this step.
    - `digest.last_run_date` → today, only if the digest was produced.
    Re-read the file after writing and confirm the values.
 3. **Commit.** `git add -A && git commit -m "run YYYY-MM-DD"` in the instance —
-   this includes `ledgers/`.
+   this includes `ledgers/`. An hourly run commits as
+   `inbox YYYY-MM-DD HH:MM UTC` (ADDED 2026-09-20).
    Backups are commits, not copies. The vault is not a git repository and is
    not committed from here.
    **ADDED 2026-09-19 — then push.** When an `origin` remote exists:

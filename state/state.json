@@ -75,11 +75,20 @@
     "routine_id": "trig_01U69oWX9gmDUCgn5F5i4g22",
     "environment_id": "env_01R58b6REYPi93JQtDE7H24d",
     "repo": "erjaaaaaa/my-ai-os-assistant",
-    "cron_utc": "0 4 * * *",
+    "cron_utc": "0 6 * * *",
     "model": "claude-opus-5",
-    "_verified": "2026-09-20"
+    "_verified": "2026-09-20",
+    "hourly_routine_id": "trig_01X5cu18Ba6kNcWbaAABCGR8",
+    "hourly_cron_utc": "0 0-5,7-23 * * *"
   },
-  "superseded": [],
+  "superseded": [
+    {
+      "key": "cloud.cron_utc",
+      "value": "0 4 * * *",
+      "superseded": "2026-09-20",
+      "by": "0 6 * * *"
+    }
+  ],
   "digest": {
     "last_run_date": "2026-09-07"
   },
