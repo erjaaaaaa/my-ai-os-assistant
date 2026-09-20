@@ -2169,6 +2169,22 @@ reconciliation: getguru 8.99 EUR (INV-092026-57274, 19 Sep, one row not two —
 tip re-send), Bolt 16.60 EUR (19 Sep), getguru 6.79 EUR (INV-092026-53715,
 18 Sep), getguru 2.77 EUR (INV-092026-52516, 18 Sep).
 
+**CORRECTED 2026-09-20, same day — the push succeeded and nothing was lost.**
+Eriks granted the Claude GitHub App write access and asked for
+`pull --rebase` + `push` in the same session. Origin had moved to `fc8dc50`
+(his own ad-hoc entry on this failure, plus the Step 0 `git push --dry-run`
+gate). The rebase conflicted in the two append-only files, `logs/run-log.md`
+and `lessons-learned.md`, because both sides had appended to the same tail.
+**Both sides were kept and neither was reworded**: the run's own entry sits
+first, his ad-hoc review after it; all three of the day's lessons entries
+survive. Pushed as `fc8dc50..be37603`. Verified on origin afterwards:
+receipts.csv 546 lines, newsletters.csv 6237, promotions.csv 10133 (the 25
+rows are there), `mail.last_internaldate_ms` 1789849414000, both date keys
+2026-09-20, `briefs/2026-09-20.md` present, and his Step 0 dry-run gate intact
+at `procedures/step-0-orient.md:15`. The recovery queries above were therefore
+never needed — kept, unedited, because the next run that cannot push will
+need them.
+
 ## 2026-09-20 — ad-hoc: first cloud run fired; routine ran, push failed
 
 **Fired by hand** after enabling routine `trig_01U69oWX9gmDUCgn5F5i4g22`: session `cse_01WLbEPgazXGPVFJdavv5kNW`, 21:22–21:38 UTC, 166 turns, ended `success`. Read here through the run log, which quotes the tool results.
