@@ -2505,3 +2505,126 @@ unadopted until Eriks says so in writing.
 `config/sources/gmail.md` records 55 on 2026-09-07 and the 10:06 run
 recorded 46. The control is populated either way, so the source is live;
 noted here across a third run rather than acted on.
+
+## 2026-09-20 — hourly /inbox (12:10 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4), routine
+`trig_01X5cu18Ba6kNcWbaAABCGR8`. Step 0 + Step 1 + hourly close-out only;
+Steps 2, 3 and 4 not run and no brief written — the daily 06:00 UTC run owns
+those (§ 4.1).
+
+**Git bookends.** `git pull --ff-only origin main` → already up to date at
+`74801ca`. The clone came up on a **detached HEAD** at `origin/main` with the
+local branch `main` stale at `aa9e2da` (10 behind), so the first
+`git push --dry-run origin main` was rejected non-fast-forward — a stale
+local ref, not a divergence and not a permissions refusal. `git merge-base
+--is-ancestor main HEAD` confirmed the stale ref was an ancestor of HEAD, so
+`git checkout -B main 74801ca` fast-forwarded it losing nothing, upstream was
+re-set to `origin/main`, and the write-access gate re-ran clean
+(`Everything up-to-date`, not refused). Noted because the 10:06 UTC run hit
+the same detached-HEAD clone and recorded `git checkout -B main` as *refused
+by the permission layer*, working around it with a `HEAD:main` refspec; this
+run's checkout was allowed. Either route is sound; the difference is worth a
+line rather than a silent divergence in method between runs.
+
+**Orient block.** Gmail **live** — `list_labels` populated, `INBOX.threadsTotal`
+**24**. Google Calendar **live** — `list_calendars` returned 8 calendars with
+both swept ids present (`epetersons87@gmail.com`,
+`family17271500024496324001@group.calendar.google.com`). Todoist **live** —
+`user-info` → `epetersons87@gmail.com`. No id re-resolution needed: tracker
+`_verified` 2026-09-07 is 13 days old, inside the 30-day rule.
+
+**Open questions: 3 open, 0 newly answered, 0 ambiguous, 0 closed.**
+`find-comments` was run on each of the three, not a sample. The only comment
+from Eriks anywhere in the set is the *"b)"* of 2026-09-15 on
+`6hW4pGFRrff5M2FQ`, already applied on 2026-09-17; `6hWmrXJ7Cg6hF9Wx` has no
+comments at all and `6hXM3WGgqj8QqGRQ` carries only this instance's own
+`**Assistant —**` note of 11:13 UTC. All three defaults stay in force and
+nothing was recorded as decided.
+
+**Step 1 — inbox.** `search_threads in:inbox` returned **24** threads against a
+containing `INBOX.threadsTotal` of **24** (24 ≤ 24). **22 skipped** as already
+carrying one of the thirteen; **2** carried none and were classified from their
+full bodies.
+
+**Writes, each read back:**
+
+1. `label_thread` `1a0beb0f3af8c39d` (CityBee, *"Don't miss out – use your
+   discount"*, 12:01:02 UTC) → **Promotions & Ads**
+   (`Label_6413919896574930163`). Read back with `get_thread`
+   `METADATA_ONLY`: `label_ids` = `["UNREAD","Label_6413919896574930163","INBOX"]`.
+2. `label_thread` `1a0bea69f37da84a` (Spotify, *"Set the mood for your day"*,
+   11:49:43 UTC) → **Promotions & Ads**. Read back: `label_ids` =
+   `["UNREAD","Label_6413919896574930163","INBOX"]`.
+3. Ledger: two rows appended to `ledgers/promotions.csv`, **lines 10136–10137**,
+   one per thread. Neither `messageId` was present before the append
+   (`grep -c` = 0 on both, in promotions.csv and newsletters.csv); after it,
+   `grep -c` = 1 on each. At least one verified row per archived thread, the
+   2026-09-11 invariant, satisfied per thread.
+4. `unlabel_thread` `1a0beb0f3af8c39d` `["INBOX"]` → read back `label_ids` =
+   `["UNREAD","Label_6413919896574930163"]`, `INBOX` absent.
+5. `unlabel_thread` `1a0bea69f37da84a` `["INBOX"]` → read back `label_ids` =
+   `["UNREAD","Label_6413919896574930163"]`, `INBOX` absent.
+6. Todoist `add-comments` on the day's review task `6hXM3WFgxrC82HXQ` (it
+   already existed, created by the 00:22 run) → comment id
+   `6hXVc3rgpHw2JWRx`, read back with `fetch-object`. Per
+   `procedures/cloud-run.md` § 4.2 and the 2026-09-20 lesson, a second run on
+   the same date **comments** its counts and never edits a description.
+   `notifyUsers: ["none"]` — the comment is the record, not a message.
+
+**Classification note (2026-09-20 body-reading rule).** Both bodies were read
+in full with `get_thread` `PLAIN_TEXT` before classifying; neither was decided
+on metadata. Both carry explicit unsubscribe / manage-preferences text, so
+`list_unsubscribe` is `body-cue` on each. Spotify is a mood-playlist marketing
+push rather than recurring editorial content, so the Newsletters-vs-Promotions
+tie-break sends it to **Promotions**. Per the 2026-09-20 sender-split rule the
+ledgers were grepped for precedent before classifying: CityBee has 32
+Promotions rows (including the *identically titled* mail as
+`1a04d650c3995b8a`) and Spotify 2 — both dominant and consistent, so there is
+no cross-run split to name.
+
+**Skip test.** The 22 skips each rest on a taxonomy label being **present** in
+the `search_threads` result, which truncation can hide but never invent; the
+four threads showing no taxonomy label were re-read in full with `get_thread`
+before any conclusion, per the 2026-09-17 rule. Two of those four proved to be
+the parked pair below, confirmed still carrying `["UNREAD","INBOX"]` only.
+
+**Census, three ways and reconciling.** Promotions & Ads `threadsTotal`
+2796 → **2798**, a delta of **+2** equal to the two `label_thread` calls, with
+no label at +0 and no other taxonomy label moving. `INBOX.threadsTotal`
+24 → **22** = 24 − 2 archived, exactly. `TRASH.threadsTotal` 279 → **279** —
+nothing trashed. No per-class count exceeds its containing total: 2 labelled
+and 2 archived against 24 read against a containing 24, and 2 new Promotions
+rows against that label's 2798.
+
+**Nothing else written.** No payment task (no new Needs-Payment mail), no
+calendar event (no new Schedule Calendar or Travel thread; the airBaltic
+ticket `1a0abb1db458f502` already got its two carve-out 7 events on
+2026-09-17, so no repeat), no trash, 0 threads in carve-out 5's class.
+
+**Left unlabelled on purpose (2), unchanged:** Bluehost WHOIS expiry
+`1a0b32766a32b7bf` and Google AI Studio *"billing account moved to a lower
+tier"* `1a0be726fb266eaf`. Both are the subject of open question
+`6hXM3WGgqj8QqGRQ`, whose stated default keeps them unlabelled and in the
+inbox. Applying a default, not deciding anything.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789901565000 →
+**1789905662000**, the `internalDate` of the newest message actually processed
+(`1a0beb0f3af8c39d`, 2026-09-20T12:01:02Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-20, unchanged.
+`calendar.last_scanned_date` left at 2026-09-20: the hourly form runs no
+calendar sweep and § 4.3 names only the two mail keys. Step 3 not run, so
+`vault.mail_snapshot.last_internaldate_ms` untouched at 0.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, all listed in `config/tools.md`. The GitHub MCP and `PushNotification`
+are present in this environment and were **not used**; the routine prompt
+forbids both by name.
+
+**Label-count observation, third run running:** `list_labels` returned **45**
+labels (9 system + 36 user) — the same 45 the 11:09 UTC run saw, against 46 at
+10:06 and the 55 recorded in `config/sources/gmail.md` on 2026-09-07. The count
+has now been stable at 45 across two consecutive runs. The control is populated
+either way so the source is live; still recorded rather than acted on, but the
+adapter's `labels_verified: 2026-09-07` line is drifting from observation and
+is worth the promotion review's attention.
