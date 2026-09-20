@@ -2361,3 +2361,147 @@ across four runs.
 ## 2026-09-20 — ad-hoc: hourly routine enabled after its manual run
 
 Manual run `cse_01HLutQJeb1r4EQpTfUzHFCW` (10:02–10:06 UTC) did what § 4 says: Step 0 in full, one unlabelled thread correctly held by its open question, no external write, one log line, commit `f67ff41` pushed. One mechanical detail worth knowing: the cloud clone checks out a detached HEAD and the permission layer refused `git checkout -B main`, so the run pushed with the `HEAD:main` refspec — same commit, same remote branch. Routine `trig_01X5cu18Ba6kNcWbaAABCGR8` enabled at 10:07 UTC; read back `enabled: true`, `next_run_at` 2026-09-20T11:07:41Z. Plan step 19 done.
+
+## 2026-09-20 — hourly /inbox (11:09 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4), routine
+`trig_01X5cu18Ba6kNcWbaAABCGR8`. Second firing of the hourly routine; the
+10:06 UTC entry above was its manual predecessor.
+
+**Step 0 § 0 — git.** The clone came up on a **detached HEAD at `983dece`**
+while local `main` and the stale `origin/main` both pointed at `aa9e2da`.
+`git fetch origin main` advanced `origin/main` to `983dece`, `git checkout
+main` succeeded this time (the 10:06 run recorded it being refused by the
+permission layer — no refusal here, so the `HEAD:main` refspec workaround
+was not needed), and `git pull --ff-only origin main` fast-forwarded main 9
+commits to `983dece`. Working tree clean. Write-access gate: `git push
+--dry-run origin main` → "Everything up-to-date", exit 0. Gate passed before
+any external write.
+
+**Health checks.** Gmail **live** — `list_labels` returned 45 labels,
+`INBOX.threadsTotal` **23**, `messagesTotal` 27. Calendar **live** —
+`list_calendars` returned 8 calendars with both swept ids present
+(`epetersons87@gmail.com`, `family17271500024496324001@group.calendar.google.com`).
+Todoist **live** — `user-info` → `epetersons87@gmail.com`, local time
+14:09 Riga. Tracker ids `_verified` 2026-09-07, 13 days old, inside the 30-day
+window, so nothing re-resolved.
+
+**Open questions: 3 open, 0 answered, 0 ambiguous, 0 closed.** `find-tasks`
+with `labels: ["agent-waiting"]`, `limit: 100`, `totalCount` 3, `hasMore`
+false. `find-comments` run on each of the three. `6hW4pGFRrff5M2FQ` carries
+two comments, the later one the assistant's own (`**Assistant —**` marker) —
+Eriks's `"b)"` was applied on 2026-09-17 and the narrowed multi-day question
+is still unanswered. `6hWmrXJ7Cg6hF9Wx` and `6hXM3WGgqj8QqGRQ` carry zero
+comments. All three defaults stay in force.
+
+**Step 1 — inbox.** `search_threads in:inbox`, `pageSize: 50`, one page,
+`resultCountEstimate` 23, **23 threads returned ≤ `INBOX.threadsTotal` 23**.
+**20 skipped as already labelled**; **3 carried none of the thirteen** and
+were re-read in full with `get_thread` / `PLAIN_TEXT` per the 2026-09-17
+rule. Bodies read in full for all three — no metadata-only classification
+this run.
+
+**Labelled (1 `label_thread` call, 1 net-new association):**
+- Schedule Calendar 1 — `1a0be6fecf16bd46`, Google Calendar "Notification:
+  Ervin+Mark swimming @ Sun 20 Sept 2026 14:00 - 15:00 (GMT+3) (Family)",
+  `calendar-notification@google.com`, 10:50 UTC. Read back with `get_thread`:
+  `label_ids` = `["UNREAD","Label_2686036584998218020","INBOX"]`.
+
+**Existence check (carve-out 7 gate).** `list_events` on **both** swept
+calendars over 2026-09-20T13:55+03:00 → T15:05+03:00, `timeZone`
+Europe/Riga. Family calendar returned the match — summary "Ervin+Mark
+swimming", start `2026-09-20T14:00:00+03:00`, end `15:00:00+03:00`, id
+`6tt9debn2faul7odldm6bqemml`, `status: confirmed`, creator
+`epetersons87@gmail.com`. Eriks's own calendar returned no events in the
+window. Event exists → **nothing created**; carve-out 7 did not fire.
+
+**Archived (1, carve-out 4 only):** `1a0be6fecf16bd46`, a Schedule Calendar
+thread whose event was matched. `unlabel_thread(["INBOX"])`, read back with
+`get_thread`: `label_ids` = `["UNREAD","Label_2686036584998218020"]` —
+`INBOX` absent, the taxonomy label still present.
+
+**Nothing trashed.** The subject begins "Notification:", which is **not** on
+carve-out 6's prefix list, and that is exactly the open question
+`6hWmrXJ7Cg6hF9Wx` — whose stated default is *labelled, matched, archived,
+not trashed*. Default applied as written; the carve-out was not extended by
+analogy. `TRASH.threadsTotal` unchanged at 279.
+
+**Ledger rows: 0.** No Receipts & Subscriptions, Newsletters & Learning or
+Promotions & Ads thread this run, so no ledger file was opened and the
+at-least-one-row-per-archived-thread invariant has nothing to check —
+the one archive was a Schedule Calendar thread, which owes no row.
+
+**Payment tasks created: 0. Calendar events created: 0.**
+
+**Left unlabelled on purpose (2), both under the taxonomy tie-break
+"unsure between an action class and anything else → leave unlabelled and
+list it":**
+1. `1a0b32766a32b7bf` — Bluehost "Domain Privacy has expired for
+   CHALLENGEFINDS.COM", 18 Sep. Re-read in full; `label_ids` =
+   `["UNREAD","INBOX"]`. This is the third sweep it has been held through,
+   and it is the subject of open question `6hXM3WGgqj8QqGRQ`, default
+   *unlabelled, in the inbox, named in the brief*.
+2. `1a0be726fb266eaf` — **new this run**, Google AI Studio "Important: Your
+   billing account has been moved to a lower tier", 10:52 UTC,
+   `googleaistudio-noreply@google.com`. Read in full. The Gemini API billing
+   account is now on the Suspended Service Tier; Google's own words on the
+   cause are *"changes to your billing account status, payment failures, or
+   … automated fraud protection measures"*, and the only action offered is
+   an appeal form. **Not labelled Needs-Payment**, for two reasons stated
+   rather than assumed: the mail requests no payment, states no amount,
+   invoice or due date, and does not ask for a payment method update (the
+   2026-09-14 widening's trigger); and the underlying non-payment on billing
+   account `0120FA-84C9BC-6B6C27` is already tracked on task
+   `6hWmrRH3wQW6PH3Q`, which covers three threads, so a Needs-Payment label
+   here would have produced a duplicate obligation. It is a **plan
+   downgrade** — the second example named in the general form of open
+   question `6hXM3WGgqj8QqGRQ` ("trial expiries, policy changes, plan
+   downgrades … have no home among the thirteen"), so it was parked under
+   that same open question rather than given a third reading.
+
+**Writes this run, each with its read-back (4 total):**
+1. Gmail `label_thread(1a0be6fecf16bd46, Label_2686036584998218020)` →
+   verified present via `get_thread`.
+2. Gmail `unlabel_thread(1a0be6fecf16bd46, ["INBOX"])` → verified absent via
+   `get_thread`.
+3. Todoist `add-comments` on review task `6hXM3WFgxrC82HXQ` → comment id
+   `6hXVG7RGcPXP5m7x`, content returned by the API matches what was sent.
+   Per `procedures/step-1-inbox.md` § 5 hourly rule the day's task already
+   existed (created by the 00:22 run) and a run that labelled something
+   comments rather than duplicating; the description-edit half stays blocked
+   by the write allowlist, as logged on 2026-09-20.
+4. Todoist `add-comments` on open question `6hXM3WGgqj8QqGRQ` → comment id
+   `6hXVG8mphFgRrh4Q`, recording the Google AI Studio mail as the second
+   instance of the gap that question names. The question stays **open** and
+   its default stays in force — nothing was recorded as decided.
+
+**Census, all three reconciling:** Schedule Calendar `threadsTotal` 280 →
+**281**, a delta of **+1** equal to the single `label_thread` call, with no
+label at +0 (the 2026-09-17 cross-check). `INBOX.threadsTotal` 23 → **22** =
+23 − 1 archived, exactly. `TRASH.threadsTotal` 279 → 279. No per-class count
+exceeds its containing total: 1 labelled and 1 archived against 23 read
+against a containing 23.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789895381000 →
+**1789901565000**, the `internalDate` of the newest message actually
+processed (`1a0be726fb266eaf`, 2026-09-20T10:52:45Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-20, unchanged.
+`calendar.last_scanned_date` left at 2026-09-20 — the hourly form runs no
+calendar sweep, and `procedures/cloud-run.md` § 4.3 names only the two mail
+keys. Step 3 not run (hourly form), so
+`vault.mail_snapshot.last_internaldate_ms` untouched at 0.
+
+**Steps 2, 3 and 4 not run, and no brief written** — the hourly form's
+scope, per `procedures/cloud-run.md` § 4.1. The daily 06:00 UTC run owns
+them.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, all listed in `config/tools.md`. The GitHub MCP and
+`PushNotification` are present in this environment and were **not used**;
+the routine prompt forbids both by name and `PushNotification` stays
+unadopted until Eriks says so in writing.
+
+**Observation, not an outage:** `list_labels` returned **45** labels where
+`config/sources/gmail.md` records 55 on 2026-09-07 and the 10:06 run
+recorded 46. The control is populated either way, so the source is live;
+noted here across a third run rather than acted on.
