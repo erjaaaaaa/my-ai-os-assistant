@@ -3107,3 +3107,161 @@ _The day's `## 2026-09-20 — hourly /inbox` heading is at line 2357; the runs t
 **Fact surfaced while explaining the catch-up:** `vault.mail_snapshot.last_internaldate_ms` is still `0` and the vault holds no page with a `mail:` source — in two weeks no mail has met § What gets snapshotted. The catch-up backlog is empty today.
 
 **No external write** to Gmail, Calendar or Todoist this session.
+
+## 2026-09-20 — hourly /inbox (17:59 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4), routine
+`trig_01X5cu18Ba6kNcWbaAABCGR8`, cron `59 * * * *`. Step 0 and Step 1 only;
+Steps 2, 3 and 4 not run and no brief written — `/start-day` is a laptop,
+on-demand command since Eriks's decision earlier today. Eighth run of the day
+against this inbox (00:22, 09:39, 11:09, 12:10, 13:05, 14:10, 15:09, 16:11,
+this one).
+
+**Step 0 § 0 — git sync and the write-access gate.** `git pull --ff-only
+origin main` → `Already up to date` at `14280ae`. The clone again arrived on a
+**detached HEAD** with local `main` stale at `aa9e2da`, 17 commits behind, so
+the first `git push --dry-run origin main` was rejected *non-fast-forward* —
+which reads exactly like the 403 the gate exists to catch and is not one.
+Before touching the branch, `git merge-base --is-ancestor aa9e2da 14280ae`
+confirmed local `main` was strictly behind with nothing of its own to lose;
+then `git checkout -B main 14280ae` reattached HEAD and the dry-run returned
+`Everything up-to-date`. **Third consecutive hourly run to hit this** (10:06
+worked around it with a `HEAD:main` refspec, 16:11 used `checkout main &&
+merge --ff-only`). Recorded as a standing property of the cloud clone, not a
+per-run surprise: the gate's refusal message does not distinguish "no write
+permission" from "local branch pointer is stale", and only the second is
+true here. Noted for the promotion review — Step 0 § 0 could say to reattach
+and re-test before treating a non-fast-forward rejection as a refusal.
+Caveat on what the gate proved: `Everything up-to-date` exercises no write.
+The evidence that write access is real is the day's own pushed commits
+(`8da4470` at 16:11, `5d4c29a` at 15:09), not this dry-run.
+
+**Orient block.**
+- **Gmail — live.** Control `list_labels` populated: **45** labels (9 system +
+  36 user), the sixth consecutive run at 45 against 46 at 10:06 and the 55
+  recorded in `config/sources/gmail.md` on 2026-09-07. Containing total
+  `INBOX.threadsTotal` **25**, `messagesTotal` 29. All thirteen taxonomy label
+  ids in `state/state.json` plus `paid_label_id` were confirmed present in the
+  returned list.
+- **Google Calendar — live.** `list_calendars` returned **8** calendars, both
+  swept ids present (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`). No calendar sweep
+  runs in the hourly form; the control is run because Step 0 § 3 requires one
+  per configured source.
+- **Todoist — live.** `user-info` → `epetersons87@gmail.com`, user 22613842.
+  Schemas loaded typed, not opaque `{type: object}` — the 2026-09-11 mid-session
+  degradation did not appear.
+- **Ids:** tracker `_verified` 2026-09-07, 13 days old, inside the 30-day
+  window; nothing re-resolved.
+
+**Step 0 § 4 — open questions: 3 open, 0 answered, 0 ambiguous, 0 closed.**
+`find-tasks` (project Personal by id, label `agent-waiting`, `limit: 100`)
+returned 3, `hasMore: false`. `find-comments` on **each**: `6hW4pGFRrff5M2FQ`
+2 comments, newest the assistant's 2026-09-17 narrowing (Eriks's `"b)"`
+predates it and is already applied); `6hWmrXJ7Cg6hF9Wx` **0 comments**;
+`6hXM3WGgqj8QqGRQ` 1 comment, the assistant's own 11:13Z today. Nothing from
+Eriks since the last run, so every stated default stays in force and no task
+was completed.
+
+**Step 1 — census.** `search_threads in:inbox`, `pageSize: 50`, one page,
+`resultCountEstimate` 25, **25** threads returned — 25 ≤ `INBOX.threadsTotal`
+25, and no per-class count below exceeds that total. **21** skipped because a
+message carried one of the thirteen; **4** showed none and were each read in
+full with `get_thread`, `messageFormat: PLAIN_TEXT`. Per the 2026-09-17 rule
+the skip test is unsound against a `search_threads` result — the direction
+that rule protects is *absence*, which truncation can hide; a label the
+search *shows* is positive evidence truncation cannot invent, and labels are
+thread-level here, so the 21 were skipped on that positive evidence and only
+the 4 candidates were read in full. Stated explicitly rather than left as a
+silent shortcut, per the 2026-09-20 metadata-only rule.
+
+**Labelled — 2 calls, 2 net-new label→thread associations. Each read back
+with `get_thread`.**
+- **Promotions & Ads** 1 — Simply Piano, "🎹 New song in Simply Piano!"
+  (`mail:1a0bfa2baa727b09`, `play@piano.hellosimply.com`, 16:25:07Z). Body
+  read in full: a weekly in-app content push with a "Play new song" CTA and an
+  unsubscribe cue. Newsletters-vs-Promotions is the taxonomy's own tie-break
+  and resolves to Promotions. Sender precedent checked before classifying per
+  the 2026-09-20 sender-split rule: `play@piano.hellosimply.com` has 20+ rows
+  in `ledgers/promotions.csv`, one of them the identical subject "New song in
+  Simply Piano" (row 45991 of the migrated export). No cross-run split to
+  flag. Read-back `label_ids`: `["UNREAD","Label_6413919896574930163","INBOX"]`.
+- **Professional Networking** 1 — LinkedIn connection invitation "I want to
+  connect", NeoBiz MGT (`mail:1a0bf977143ccff7`, `invitations@linkedin.com`,
+  16:12:47Z). Body read in full: a single-invite notification with a Premium
+  upsell footer — the taxonomy's Professional Networking test verbatim
+  ("LinkedIn … and other professional-community notifications"). Not an
+  action class: no named human is asking Eriks anything, and an unanswered
+  invitation produces no task. Read-back `label_ids`:
+  `["UNREAD","Label_5437124985126992273","INBOX"]`.
+
+**Label census cross-check (`list_labels` before → after).** Promotions & Ads
+`threadsTotal` 2802 → **2803**; Professional Networking 143 → **144**. Sum of
+per-label thread deltas = **2** = the number of `label_thread` calls, with no
+label at +0. Every other taxonomy label unchanged: Needs-Payment 6, Reply/Do
+97, Schedule Calendar 281, Family & Personal 90, Banking & Cards 86, Receipts
+686, Newsletters 1982, Social Media 12, Loyalty 32, Security 223, Travel 76,
+Paid 214. `INBOX.threadsTotal` 25 → **24** = 25 − 1 archived, which reconciles
+exactly. `TRASH.threadsTotal` **279 → 279** — nothing trashed.
+
+**Ledger rows — 1 written, 1 verified.** `ledgers/promotions.csv` line
+**10143**, `messageId` `1a0bfa2baa727b09`, `list_unsubscribe: body-cue`
+(the body carries "Want out of the loop? Unsubscribe"), `list_id` and
+`digested` empty, `threadUrl` in the `?authuser=` form. Dedupe ran before the
+append (`grep -c` → 0) and the read-back after it is `grep -n` on the thread's
+own id → exactly **1** row. Per-thread invariant holds: promotions 1 row / 1
+archived thread.
+
+**Archived — 1, carve-out 4 only.** `unlabel_thread(1a0bfa2baa727b09,
+["INBOX"])` after its ledger row was written and grepped back. Read-back
+`label_ids`: `["UNREAD","Label_6413919896574930163"]` — `INBOX` absent, the
+taxonomy label retained. The LinkedIn thread stays in the inbox: Professional
+Networking is not one of carve-out 4's four archivable classes.
+
+**Trashed: 0** (carve-out 6 had nothing in class — no Google Calendar
+notification mail this hour). **Payment tasks created: 0** — no new
+Needs-Payment mail; the six Needs-Payment threads in the inbox are unchanged
+and already carry live tasks. **Calendar events created: 0** — carve-out 7
+had nothing in class, no new Schedule Calendar or Travel thread.
+**Closed-payment loop (carve-out 5): not run** — it belongs to Step 2, which
+the hourly form does not run.
+
+**Review task.** `6hXM3WFgxrC82HXQ` ("[Act] Review inbox labels — 2026-09-20")
+already existed, so per `procedures/cloud-run.md` § 4.2 this run posted **one**
+comment with its counts rather than creating a second task — comment
+`6hXXPJJ5M59m254Q`, verified by `find-comments` (7 comments on the task, the
+new one present with the `**Assistant —**` marker and a `ref:` line). The
+description was not edited: the write allowlist has no description edit, the
+defect logged this morning, and it still fails closed.
+**Note on `find-tasks` pagination:** the first page returned `tasks: []`,
+`totalCount: 0` **and** `hasMore: true` with a cursor; following the cursor
+returned all 3 matching tasks. A caller that trusted the first page's zero
+would have created a duplicate review task. New shape of the
+always-paginate rule in `config/tools.md` — worth the promotion review's
+attention, because here the truncation reports itself as an *empty* result
+rather than a short one.
+
+**Left unlabelled on purpose — 2, both held by an open question's stated
+default, not re-classified this run.** Bluehost "Domain Privacy has expired
+for CHALLENGEFINDS.COM" (`mail:1a0b32766a32b7bf`) and Google AI Studio
+"Important: Your billing account has been moved to a lower tier"
+(`mail:1a0be726fb266eaf`), both named on task `6hXM3WGgqj8QqGRQ`, whose
+default reads *stays unlabelled, in your inbox, named in each brief*. Both
+were re-read in full with `get_thread` this run and each still carries
+`["UNREAD","INBOX"]` alone. No new `[Needs Eriks]` task was opened: the
+existing question already names both, and a second one would be the same
+question twice.
+
+**Watermarks advanced:** `mail.last_internaldate_ms` 1789916652000 →
+**1789921507000**, the `internalDate` of the newest message **actually
+processed** (`1a0bfa2baa727b09`, 2026-09-20T16:25:07Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-20, unchanged.
+`calendar.last_scanned_date` left at 2026-09-20 — the hourly form runs no
+calendar sweep and § 4.3 names only the two mail keys. Step 3 not run, so
+`vault.mail_snapshot.last_internaldate_ms` stays 0.
+
+**Registry drift: none.** Only Gmail, Google Calendar and Todoist tools were
+called, every one listed in `config/tools.md`. The GitHub MCP and
+`PushNotification` are present in this environment and were **not used**; the
+routine prompt forbids both by name, and the 2026-09-20 anomaly in
+`procedures/cloud-run.md` § 2.5 is not treated as precedent.
