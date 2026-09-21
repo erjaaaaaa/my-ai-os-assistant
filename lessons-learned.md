@@ -513,3 +513,23 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   above ("a run that cannot record itself must not act"): its purpose — never
   act before proving the run can be recorded — is unchanged; this narrows
   *which* refusals mean that.
+- 2026-09-21 — **A Step 3 watermark of `0` read literally means "snapshot the
+  whole mailbox"** — `procedures/step-3-ingest.md` § Finding mail to snapshot
+  says the candidate set is *all mail newer than the Step 3 watermark*, and
+  `vault.mail_snapshot.last_internaldate_ms` was still `0` because no mail
+  snapshot had ever been written. Applied literally that is every thread in a
+  ten-thousand-message mailbox. The run bounded the scan at the instance's own
+  first run (`after:2026/09/07`) and named the bound in the brief as a default
+  applied, not a decision. **Rule:** when a watermark is at its initial `0`, the
+  first scan starts at the instance's first-run date, stated in the run log; and
+  the Step 3 watermark advances to the newest thread the scan *returned and
+  judged*, not only the newest one snapshotted — a thread excluded by label was
+  processed, and re-reading it tomorrow is not the rule's purpose. Both halves
+  belong in `procedures/step-3-ingest.md` via the promotion review.
+- 2026-09-21 — **Gmail's `resultCountEstimate` is an estimate and can be off
+  by nearly half** — `search_threads in:anywhere after:2026/09/07` reported
+  `resultCountEstimate: 201` and then returned **380** threads across eight
+  pages. **Rule:** never use `resultCountEstimate` as a containing total for the
+  impossibility test; count the threads actually returned, paginated to
+  exhaustion, and pair them with `list_labels` totals. Added to
+  `config/sources/gmail.md` § Verified defects.

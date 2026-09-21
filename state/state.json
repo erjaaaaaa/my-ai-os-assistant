@@ -60,13 +60,13 @@
         "epetersons87@gmail.com",
         "family17271500024496324001@group.calendar.google.com"
       ],
-      "calendar.last_scanned_date": "2026-09-20",
+      "calendar.last_scanned_date": "2026-09-21",
       "_verified": "2026-09-07"
     }
   },
   "vault": {
     "path": "../My Brain",
-    "mail_snapshot.last_internaldate_ms": 0
+    "mail_snapshot.last_internaldate_ms": 1789963966000
   },
   "flags": {
     "inbox_sweep": true

@@ -173,3 +173,7 @@ incompleteness is silent.
   returns threads carrying X anyway, because the query matches a thread if
   *any* message in it lacks the label. Verify labels by reading each message's
   `label_ids`, never by filtering them out in the query.
+- **`resultCountEstimate` is not a count.** ADDED 2026-09-21: `search_threads
+  in:anywhere after:2026/09/07` reported `resultCountEstimate: 201` and
+  returned 380 threads over eight pages. **Paginate to exhaustion and count
+  what came back; the estimate is never a containing total.**

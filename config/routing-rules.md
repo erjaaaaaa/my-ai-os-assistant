@@ -176,7 +176,11 @@ another.
   rule: **Mark psiholog** (Family, Mondays 16:00–17:00, created 2026-09-10 by
   margaritaeliya, occurrences seen 14, 21 and 28 Sep and 5 Oct) — a child's
   recurring appointment. Same treatment: no task, listed in the Family section.
-  Eriks may strike it.
+  Eriks may strike it. WIDENED 2026-09-21 by the assistant, under the same rule: **Снять
+  счетчики** (Family, monthly, created 2024-05-30 by margaritaeliya,
+  occurrence seen Mon 28 Sep 20:15–21:15) — a household meter-reading
+  chore. Same treatment: no task, listed in the Family section. Eriks may
+  strike it.
 - Confirmed per-item ownership on the Family calendar — ADDED 2026-09-11,
   **SETTLED 2026-09-14 by Eriks**. Superseded text: *"**These are recorded
   facts, not a rule**: no general test has been agreed, and the open question
