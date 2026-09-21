@@ -3970,3 +3970,174 @@ None is an action class, so the "unsure between an action class and anything els
 2. **Observation for the promotion review, not acted on:** the hourly sweep advances `mail.last_internaldate_ms`, which is also the watermark `procedures/step-2-triage.md` sweeps from, so mail that arrives between two laptop `/start-day` runs has its watermark moved past by an hourly run that never triaged it. `procedures/cloud-run.md` § 4.3 names this advance explicitly and `procedures/step-5-close-out.md` § 2 agrees, so the two governing files do **not** disagree and this is not a per-run judgement call — it is followed as written and flagged here. Whether Step 1 and Step 2 should keep separate mail watermarks is for the review.
 3. **Detached HEAD on arrival, fourth consecutive run.** Repaired silently by the Step 0 § 0 rule; the runner's normal shape rather than a fault.
 4. **`PushNotification` not called** — outside `config/tools.md` and named as forbidden in this routine's stored prompt. No GitHub MCP call, no message on any channel, no web browsing, no force-push.
+
+## 2026-09-21 — hourly /inbox (continued, 14:02 Europe/Riga = 11:02 UTC)
+
+**Run context: cloud** (unattended hourly routine, `procedures/cloud-run.md` § 4;
+stored prompt says so, and the working directory is a git clone with an `origin`
+remote and no `../My Brain/` beside it). Steps 0 and 1 only; Steps 2, 3 and 4 not
+run and no brief written — `/start-day` on the laptop owns those.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` → `Already up to date`
+(origin/main moved `aa9e2da..141c0ba` on the fetch). Arrived on a **detached HEAD**
+at `141c0ba`, tree clean, `HEAD` == `origin/main` — the fifth consecutive run to
+find this shape. Repaired under the Step 0 § 0 rule added 2026-09-21 (Eriks, `"a)"`
+on task `6hXfGMC78cv6vHpQ`): `git checkout main` (local `main` was 40 commits
+behind at `aa9e2da`) + `git merge --ff-only origin/main` → pure fast-forward, 19
+files changed, nothing discarded, no force. **Write-access gate** then run as the
+rule requires: `git push --dry-run origin main` → `Everything up-to-date`, exit 0.
+Gate passed before any external write.
+
+**Orient block.**
+- **Gmail — live.** Control `list_labels` populated: 46 labels. Containing totals
+  at Step 0: `INBOX.threadsTotal` **12**, `messagesTotal` 15. All thirteen taxonomy
+  label ids in state verified present in the returned list, plus `paid_label_id`.
+- **Google Calendar — live.** Control `list_calendars` populated: 8 calendars, and
+  **both** swept ids present (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`).
+- **Todoist — live.** `user-info` returned `epetersons87@gmail.com`, userId 22613842.
+  **This clears the 10:04 UTC run's outage** (that run found every `mcp__Todoist__*`
+  tool absent from the session while the connector reported connected). Tools loaded
+  normally here via `ToolSearch select:`, and typed parameters serialised correctly
+  (`limit: 100` as a number, `ids`/`comments` as arrays). Recorded as **transient,
+  one run**, not a standing defect — but it is the second distinct Todoist fault
+  shape in this instance's history, so if it recurs it is Eriks's to know about.
+- `tracker._verified` 2026-09-07 is 14 days old, inside the 30-day window; no id
+  re-resolution needed. No id failed.
+
+**Step 0 § 4 — open questions.** `find-tasks` scoped to project Personal by id with
+`labels: ["agent-waiting"]`, `limit: 100` → **1 open**, `hasMore: false`:
+`6hXhRP46QrG7hPQQ` (where later hourly sweeps should report once the day's review
+task is completed). `find-comments` on it → **0 comments**. Silence is not an answer:
+the stated default — *keep commenting on the completed task* — stays in force and the
+question stays open. **Open 1, answered-and-closed 0, ambiguous 0.**
+
+**Step 1 — the sweep.** `search_threads in:inbox`, `pageSize: 50`, one page,
+`resultCountEstimate` 12 (not used as a total — the 2026-09-21 rule). **12 threads
+returned = `INBOX.threadsTotal` 12**; the sweep count does not exceed the containing
+total. 12 read, **2** carried none of the thirteen, **10** skipped as already
+labelled.
+
+**Skip test.** Run against `get_thread` for both unlabelled candidates, per the
+2026-09-17 rule — both came back single-message with `labelIds: ["UNREAD","INBOX"]`,
+confirming no hidden taxonomy label. The other ten were skipped on a taxonomy label
+**visible in the search result**: truncation can hide a label but cannot invent one,
+so a label seen is sound evidence for a skip, and no write was made against those ten.
+
+**Classified from the full body — 2, both read in full:**
+- `1a0c394fe4c20aaf` — Litres (`info@nsl.litres.ru`), "Письмо для книголюбов",
+  2026-09-21T10:48:36Z. A retail book-recommendation campaign: nav bar (Новинки /
+  Популярное / Аудиокниги / Подборки), 16 product cards each linking to a purchase
+  page with `utm_source=Mindbox&utm_medium=email_reco_mb&utm_campaign=Reco`, and an
+  unsubscribe cue (*"отписаться здесь"*). A retailer pushing products, which is the
+  **Promotions & Ads** test, not recurring editorial content. The
+  Newsletters-vs-Promotions tie-break lands the same way.
+- `1a0c388f84d29bde` — Bolt Food (`latvia-food@bolt.eu`), "Delivery from Bolt Food",
+  2026-09-21T10:35:28Z. A charged receipt: 1 × Soup + vegetarian main course 12.90 +
+  delivery fee 3.09 + service fee 1.03 = **Total charged 17.02€**, Apple Pay, from
+  Tower Cafe to Ojāra Vācieša iela 31. **Receipts & Subscriptions.**
+
+Neither is an action class, so the "unsure between an action class and anything else
+→ leave unlabelled" tie-break was not reached.
+
+**Sender precedent checked before classifying** (the 2026-09-20 split-sender rule).
+`info@nsl.litres.ru` is **a genuine split: 242 rows in promotions.csv against 29 in
+newsletters.csv.** Named here rather than quietly resolved. Promotions was chosen on
+this mail's content — a dated retail push, not editorial — and is also where the
+majority precedent and the taxonomy's tie-break land. The exact subject "Письмо для
+книголюбов" has **no** prior row in either ledger. A per-sender rule is Eriks's to set.
+`latvia-food@bolt.eu` — no split: every Bolt Food row is in receipts.csv, and the
+precedent there is that **the vendor field carries the restaurant, not "Bolt"**
+(Gan Bei Spice, Rimi), which this row follows with `Tower Cafe`.
+
+**Writes, each with its read-back.**
+- `label_thread` ×2 → `{}` each. **The first call failed once** with *"The service is
+  currently unavailable."* and succeeded on the single retry the `config/tools.md`
+  diagnostic allows; not an outage — the control query and the neighbouring writes
+  all populated. Read back with `get_thread METADATA_ONLY`: `1a0c394fe4c20aaf` carries
+  `Label_6413919896574930163`, `1a0c388f84d29bde` carries `Label_8316160478815561067`.
+- **Ledger rows ×2**, neither previously present (both greps returned 0 beforehand,
+  across both candidate ledgers). Read back by grepping each thread's **own** id:
+  `ledgers/receipts.csv` line **547** (`1a0c388f84d29bde` — Tower Cafe, 17.02, EUR,
+  charge_date 2026-09-21) and `ledgers/promotions.csv` line **10152**
+  (`1a0c394fe4c20aaf`). 1 row per archived thread; both threads are single-message,
+  so the 2026-09-11 "N receipt messages → N rows" branch and the 2026-09-20
+  same-invoice-supersedes branch were both inapplicable. Files 546 → 547 and
+  10151 → 10152 lines.
+- **`invoice_no` provenance, stated rather than implied:** the Bolt Food body carries
+  no invoice number in prose. The value `9334383-LV1426-736` is the document id from
+  the "Download cost document" link, and the row's `notes` says so. Consistent with
+  the two prior Bolt Food rows that carry an `LV…` id from the same link.
+- **Archived ×2 (carve-out 4)**, each only after its row was verified.
+  `unlabel_thread ["INBOX"]` → `{}` each; read back — `INBOX` absent on both, the
+  taxonomy label retained on both.
+- **Todoist: 1 comment**, `6hXjjJ9V7WfqV93Q`, on the day's review task
+  `6hXf2pQ7qQ5pRHRQ`. Read back via `find-comments`: present, 6th of 6, content
+  matches, `postedAt` 2026-09-21T11:03:15.472Z.
+
+**The review task — the default in action.** `6hXf2pQ7qQ5pRHRQ` was **completed by
+Eriks at 06:29:30Z**, confirmed by `fetch-object` (`checked: true`,
+`completedAt` quoted). It therefore does not appear in an open-task search. Under the
+unanswered default of `6hXhRP46QrG7hPQQ` this run commented on the completed task
+rather than creating a second task for the same date (which § 5's "update rather than
+duplicate" still forbids) and rather than reopening it (outside the write allowlist).
+**The cost the question names is now real for the fourth sweep running: these counts
+do not show on Eriks's board.**
+
+**Trashed 0** — carve-out 6 had nothing in class (no Google Calendar notification
+thread in the inbox). **Calendar events created 0** — carve-out 7 had nothing in
+class: no new Schedule Calendar or Travel thread, and the Hotel Fisserhof Travel
+thread was already labelled with its three events created earlier today.
+**Payment tasks created 0** — no new Needs-Payment mail; the four Needs-Payment
+threads in the inbox are unchanged and already carry live tasks. **New `[Needs Eriks]`
+questions 0.** **Threads left unlabelled after the run: 0.**
+
+**Census cross-check (`list_labels` before → after).** `INBOX.threadsTotal` 12 →
+**10** = 12 − 2 archived, reconciles exactly (`messagesTotal` 15 → 13). Promotions &
+Ads 2811 → **2812** (`messagesTotal` 2834 → 2835); Receipts & Subscriptions 686 →
+**687** (`messagesTotal` 757 → 758). Every other taxonomy label identical to Step 0:
+Needs-Payment 6, Reply/Do 99, Schedule Calendar 281, Family & Personal 90, Banking &
+Cards 86, Newsletters 1983, Professional Networking 140, Social Media 11, Loyalty 32,
+Security & Verification 224, Travel 76; Paid 214. `TRASH.threadsTotal` unchanged at
+**273** — nothing trashed. **Sum of per-label thread deltas = 2 = the number of
+`label_thread` calls, no label at +0**, so neither thread was already in its class
+(the 2026-09-17 soundness check). Impossibility test: threads read 12 ≤
+`INBOX.threadsTotal` 12; labelled 2 ≤ read 12; archived 2 ≤ labelled 2; ledger rows
+2 ≥ archived 2, at least one verified row per archived thread.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` 1789982237000 →
+**1789987716000**, the `internalDate` of the newest message **actually processed**
+(`1a0c394fe4c20aaf`, Litres, 2026-09-21T10:48:36Z) — read off the message in
+milliseconds, not derived from the ISO string and not the clock.
+`sources.gmail.inbox.last_sweep_date` stays **2026-09-21** (Step 1 ran against a
+populated control). `calendar.last_scanned_date` stays **2026-09-21**
+(`list_calendars` populated). `vault.mail_snapshot.last_internaldate_ms` untouched at
+1789963966000 — Step 3 deferred: vault not reachable from this runner
+(`procedures/cloud-run.md` § 2.3). No Todoist id or flag touched. Re-read and confirmed.
+
+**Registry drift:** none. Tools used — Gmail `list_labels`, `search_threads`,
+`get_thread`, `label_thread`, `unlabel_thread`; Calendar `list_calendars`; Todoist
+`user-info`, `find-tasks`, `find-comments`, `fetch-object`, `add-comments` — all
+listed in `config/tools.md`.
+
+**Anomalies.**
+1. **Todoist recovered.** The 10:04 UTC run recorded a hard outage (tools absent
+   entirely); this run found the connector normal. Transient across one hour. Logged
+   so the pair is greppable if it becomes a pattern.
+2. **One transient Gmail `label_thread` failure** ("service is currently
+   unavailable"), cleared on the single permitted retry. Same shape as the
+   classifier-refusal entries: a first-attempt transient, not a standing block.
+3. **Detached HEAD on arrival, fifth consecutive run.** Repaired by the Step 0 § 0
+   rule Eriks authorised on 2026-09-21. Still the runner's normal shape rather than
+   a fault, and now handled without asking.
+4. **The split-sender question keeps recurring.** `info@nsl.litres.ru` is the fourth
+   distinct sender this week found split across Promotions and Newsletters (after
+   Skool, sendfox/Value Hunter and Revolut). Flagged, not resolved — a per-sender
+   rule is Eriks's to set, and the 2026-09-20 rule says to name it rather than
+   quietly pick a third class.
+5. **The review-task default is costing visibility for the fourth sweep running.**
+   Question `6hXhRP46QrG7hPQQ` is still unanswered at 0 comments; every sweep since
+   06:29 has reported into a completed task.
+6. **`PushNotification` not called** — outside `config/tools.md` and named as
+   forbidden in this routine's stored prompt. No GitHub MCP call, no message on any
+   channel, no web browsing, no force-push.
