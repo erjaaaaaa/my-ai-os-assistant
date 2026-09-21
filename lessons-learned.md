@@ -571,3 +571,30 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   proving the run can be recorded — is unchanged; this is about the repair that
   precedes the proof, not the proof. Open as task `6hXqrrHRVQHjvg9Q`, default *keep
   repairing and restore on failure*.
+- 2026-09-21 — **A safety rule read at Step 0 § 1 cannot govern a mutation performed at
+  Step 0 § 0** — the 23:04 UTC run met the three preconditions of Eriks's *"a)"* on
+  `6hXfGMC78cv6vHpQ` (detached `HEAD`, `HEAD` == `origin/main` == `c0fc576`, clean tree)
+  and ran the repair, and `git checkout main` landed on the same unrelated `aa9e2da`
+  history the 21:01 run hit — 44 and 50 commits diverged, no merge base — so
+  `git merge --ff-only` failed with *refusing to merge unrelated histories* and the
+  worktree sat on the stale tree until `git checkout --detach origin/main` restored it.
+  The 2026-09-21 lesson written after the 21:01 incident states the precondition that
+  prevents this (`git merge-base --is-ancestor main origin/main`), and the 22:02 run
+  applied it and stayed detached. **Why this run did not:** `procedures/step-0-orient.md`
+  performs the git repair in **§ 0** and reads `lessons-learned.md` in **§ 1**. The rule
+  that governs the mutation lives in a file the procedure does not open until after the
+  mutation. The 22:02 run's compliance was therefore lucky ordering, not a property of
+  the procedure — which is precisely the shape of defect that looks like normal
+  operation until it doesn't. **Rule:** when a lesson constrains a step, check where in
+  the run that step executes relative to where the lesson is read; a rule that cannot be
+  read before the action it governs is not in force, however correctly it is written, and
+  saying "the lesson covers it" is then false. Either the precondition is promoted into
+  the procedure file at the point of use, or the read moves ahead of the action. Concretely
+  here: `git merge-base --is-ancestor main origin/main` belongs **in** § 0 beside the
+  checkout, not only in this file — which is option (a) of open task `6hXqrrHRVQHjvg9Q`,
+  unanswered, so no run has edited § 0. Second-order note, for that task: option (b)'s
+  `git checkout -B main origin/main` was attempted once this run and **refused by the
+  session's own permission layer** as *[Irreversible Local Destruction]*, so (b) may not be
+  executable from an unattended run even with Eriks's yes. Extends the 2026-09-21
+  unrelated-history entry above; its rule is unchanged and correct, and this is about
+  **where that rule has to live** to actually bind.
