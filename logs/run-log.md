@@ -4609,3 +4609,143 @@ hourly form). Step 3 not run — vault not reachable from this runner, so
 4. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
    browsing, no force-push. All three connectors used are the ones `config/tools.md`
    names.
+
+## 2026-09-21 — hourly /inbox (continued, 19:00 Europe/Riga = 16:00 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Working
+directory is a git clone with an `origin` remote and no `../My Brain/` beside it.
+Steps 0 and 1 only; Steps 2–4 not run and no brief — the daily cloud routine stays
+disabled and `/start-day` is Eriks's laptop command.
+
+**Git bookends.** `git pull --ff-only origin main` → `Already up to date`
+(`origin/main` moved `aa9e2da..80bf49d` on the fetch). HEAD was **detached** at
+`80bf49d`, exactly `origin/main`, tree clean — repaired under the rule Eriks
+authorised on 2026-09-21 (task `6hXfGMC78cv6vHpQ`, *"a)"*): `git checkout main`
+(reported `behind 'origin/main' by 45 commits, can be fast-forwarded`) then
+`git merge --ff-only origin/main`, a pure fast-forward, nothing discarded, no force.
+Write-access gate then run **after** the repair, per that same rule:
+`git push --dry-run origin main` → `Everything up-to-date`. Not a 403, so Steps 1–5
+proceeded.
+
+**Orient block**
+- **Gmail — live.** Control `list_labels` populated. Containing totals:
+  `INBOX.threadsTotal` **15**, `messagesTotal` **18**.
+- **Google Calendar — live.** Control `list_calendars` populated, **8** calendars,
+  both swept ids present (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`).
+- **Todoist — live.** `user-info` → `epetersons87@gmail.com`, userId 22613842,
+  local time 19:00:26 Europe/Riga.
+- **Ids: not re-resolved.** Tracker `_verified` 2026-09-07 is 14 days old, inside the
+  30-day rule. All thirteen taxonomy label ids plus `paid_label_id` were confirmed by
+  name against this run's own `list_labels`.
+- **Open questions: 0 open, 0 answered, 0 ambiguous.** `find-tasks` with
+  `projectId` + `labels: ["agent-waiting"]`, `limit: 100` returned `totalCount: 0`,
+  `hasMore: false`. **Control against emptiness:** the same call without the label
+  filter returned **29** open tasks, so the empty result is a genuine absence and not
+  an outage. The six questions Eriks answered earlier today are closed and their
+  answers are already consolidated into the governing files.
+
+**Step 1 — inbox labelling**
+- `search_threads in:inbox`, `pageSize: 50`, no `nextPageToken` → **15 threads
+  returned**. Census: 15 read ≤ `INBOX.threadsTotal` **15**; no per-class count
+  exceeds its global total. (`resultCountEstimate` read 15 and was ignored as a
+  count, per the 2026-09-21 rule.)
+- **13 skipped as already labelled.** Includes the Mazulītis Rū thread
+  `1a0ba39b0b25eeb3`, where the **forwarded** second message carries only
+  `[UNREAD, INBOX]` but the first carries `Needs-Payment` — skipped on the
+  any-message test, correctly.
+- **2 carried none of the thirteen.** Both confirmed unlabelled by `get_thread`
+  (`PLAIN_TEXT`), not by the search result, per the 2026-09-17 truncation rule; both
+  read in full, no metadata-only classification.
+
+**Writes, each with its read-back**
+1. `label_thread(1a0c4a5298d8edd8, [Label_1359182492550918712])` — **Reply/Do**, on
+   Apple's *"You're invited to join a development team"* (Happy 360 SIA, 15:45:52Z).
+   Returned `{}`. **Read back** with `get_thread` `METADATA_ONLY`:
+   `labelIds: ["Label_1359182492550918712","INBOX"]` — label present, `INBOX` retained
+   (Reply/Do is not an archivable class).
+2. `add-tasks` — `[Needs Eriks] Apple Developer Program welcome mail — which of the
+   thirteen labels?`, id **`6hXpGPJ3PXGJQFJQ`**. **Read back** with `fetch-object`:
+   `sectionId 6hJQ57R2hvM9RQgQ` (Waiting / Blocked), `labels ["agent-waiting"]`,
+   no due date, `checked: false`, description opens `ref: mail:1a0c4a61238b986c`.
+3. `add-comments` on the day's review task `6hXf2pQ7qQ5pRHRQ` — comment id
+   **`6hXpGRGfQ4gvP4qx`**, returned in the write's own response, `postedAt`
+   2026-09-21T16:04:16.835Z. The task exists and is **completed** (06:29:30Z), so per
+   Eriks's 2026-09-21 answer on `6hXhRP46QrG7hPQQ` (*"c)"* — *"If it's just the label
+   counts - it can keep commenting even on the completed tasks"*) the counts go as a
+   comment and **no continuation task is created**. No description edited.
+
+**Counts.** Labelled 1 (Reply/Do 1). Archived **0**. Trashed **0**. Ledger rows
+**0**. Payment tasks **0**. Calendar events created **0** — nothing in class for
+carve-outs 4, 6 or 7. New `[Needs Eriks]` questions **1**.
+
+**Label census cross-check (`list_labels` before → after).** Reply/Do
+`threadsTotal` 100→**101**, `messagesTotal` 135→**136**. Sum of per-label thread
+deltas = **1** = the number of `label_thread` calls, **no label at +0**, so the one
+call was a net-new association and not a thread already in that class. Every other
+taxonomy label unchanged. `INBOX.threadsTotal` **15 → 15** and `messagesTotal`
+**18 → 18** (nothing archived); `TRASH.threadsTotal` **273 → 273** (nothing trashed).
+Both reconcile exactly; nothing unexplained.
+
+**Classification reasoning, recorded because both threads were judgement calls**
+
+Two Apple mails arrived 59 seconds apart and were handled differently on purpose.
+
+1. **`1a0c4a5298d8edd8` → Reply/Do.** *"Please accept this invitation within three
+   days"* with an *Accept invitation* action is the Reply/Do test's own shape (a
+   direct ask needing a small action), and it sits close to the class Eriks widened
+   **this morning** for vendor account notices carrying a consequence. **The competing
+   reading, named not buried:** the body contains *"invitation"*, a literal trigger in
+   the Schedule Calendar test. Not used — there is no date, time, location or event,
+   so carve-out 7 would have had nothing to parse, and firing it would have satisfied
+   the letter of a trigger while defeating its purpose (the 2026-09-14 rule). Reply/Do
+   is also the minimum-write reading: label only, stays in the inbox, no task, no
+   archive.
+2. **`1a0c4a61238b986c` → left unlabelled, question opened.** *"Welcome to the Apple
+   Developer Program"* — a membership state-change notice with no amount, no charge,
+   no ask and no unsubscribe cue. **No class of the thirteen fits it cleanly**, and
+   the sender is split four ways in Eriks's **own** filing, verified by
+   `search_threads from:email.apple.com in:anywhere` this run: `1a02390dd888e2f8`
+   ("Agreement signed: Apple Developer Program License Agreement", 21 Aug) →
+   **Receipts & Subscriptions**, while `19fd6c6a343fa044` — the *identical subject*,
+   6 Aug — is **unlabelled**; TestFlight invites → **Promotions & Ads**; Apple
+   Developer editorial → **Newsletters & Learning**; App Store Connect build notices →
+   **unlabelled**. Per the 2026-09-20 split-sender rule the split is named rather than
+   resolved by quietly picking a third class. Receipts or Promotions would each have
+   written a ledger row **and archived the thread**, and a Receipts row would be a
+   moneyless row in the ledger the digest and spend questions read from. A label is
+   the one thing a run can never take back, so the fail-closed answer was to write
+   nothing and ask. Default in force: unlabelled, stays in the inbox.
+
+**Watermarks.** `mail.last_internaldate_ms` → **1790005611000**, the `internalDate`
+of the newest message **actually processed** (the Apple welcome mail,
+2026-09-21T15:46:51Z), read off the message rather than derived from the ISO string
+or the clock. It advances even though that thread was left unlabelled: the thread was
+read and **judged**, and re-reading it next hour is not what the watermark is for —
+the open question, not the watermark, carries it forward.
+`sources.gmail.inbox.last_sweep_date` → 2026-09-21. `calendar.last_scanned_date` left
+at 2026-09-21 (`list_calendars` populated, but the hourly form runs no calendar
+sweep). Step 3 not run — vault not reachable from this runner, so
+`vault.mail_snapshot.last_internaldate_ms` is untouched.
+
+**Registry drift: none.** Every tool used is in `config/tools.md`.
+
+**Anomalies and notes**
+1. **Eighth split sender in a fortnight** — `email.apple.com`, joining Skool,
+   sendfox/Value Hunter, Revolut, Litres, acro.police.uk, Sleep Doctor and Simply
+   Piano. Unlike the others this one could not be resolved on content *or* majority
+   precedent, because the same subject line appears under two different dispositions
+   in Eriks's own filing. Opened as `6hXpGPJ3PXGJQFJQ` rather than guessed. The ACRO
+   case settled this morning shows the channel works.
+2. **Detached HEAD, thirteenth consecutive run** — but the **first** repaired under
+   Eriks's own written rule rather than under the 2026-09-20 lesson, after he answered
+   `6hXfGMC78cv6vHpQ` with *"a)"* this morning. Step 0 § 0 now does the repair before
+   the gate, so this is no longer an anomaly in the procedure, only a standing fact
+   about the runner: it still hands over a detached HEAD 100% of the time, and the
+   durable fix (cloning onto `main`) remains outside this instance's reach.
+3. **A run that labelled nothing archivable is a normal outcome**, not a shortfall.
+   The inbox is now mostly action classes and a Travel booking that Travel's own rule
+   keeps in place; carve-out 4 had nothing in class.
+4. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
+   browsing, no force-push. All three connectors used are the ones `config/tools.md`
+   names.
