@@ -97,7 +97,7 @@ actually processed.
    `label_thread` with `Paid` (id `paid_label_id` in state), then
    `unlabel_thread` with `Needs-Payment`, then `unlabel_thread` with `INBOX`.
    Each read back. The only label removal and the only non-taxonomy label this adapter ever writes.
-5. **Trash, for exactly one class** (WIDENED 2026-09-09, Eriks; carve-out 6 in `AGENTS.md` § Phase gates): a Google Calendar notification thread — New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda — after the existence check, via `trash_thread`. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* Nothing else is ever trashed.
+5. **Trash, for exactly one class** (WIDENED 2026-09-09, Eriks; carve-out 6 in `AGENTS.md` § Phase gates): a Google Calendar notification thread — New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda, and (WIDENED 2026-09-21, Eriks, *"a)"* on task `6hWmrXJ7Cg6hF9Wx`) "Notification:" reminders — after the existence check, via `trash_thread`. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* Nothing else is ever trashed.
 
 6. **A per-item label removal Eriks asks for in chat** (WIDENED 2026-09-10,
    Eriks). The class is exactly: Eriks names the thread **and** the label, in

@@ -533,3 +533,15 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   impossibility test; count the threads actually returned, paginated to
   exhaustion, and pair them with `list_labels` totals. Added to
   `config/sources/gmail.md` § Verified defects.
+- 2026-09-21 — **The calendar connector dates an all-day event by the UTC
+  day of its timestamps** — the first Hotel Fisserhof span was created from
+  `2027-01-03T00:00:00+01:00` → `2027-01-11T00:00:00+01:00` and read back as
+  `start.date 2027-01-02`, `end.date 2027-01-10`: one day early, and with
+  `update_event` / `delete_event` forbidden the only remedy was a second,
+  correct creation (`…T00:00:00Z` for the first day and the day after the
+  last) plus a stray for Eriks to delete. **Rule:** for `allDay: true`, pass
+  UTC-midnight timestamps for the first day and the day after the last day,
+  and treat `start.date` / `end.date` on the read-back — never the request —
+  as what was created. Recorded in `config/sources/calendar.md` § Verified
+  defects. A carve-out 7 write that cannot be undone by the run deserves the
+  read-back *before* the next dependent write, not after the batch.

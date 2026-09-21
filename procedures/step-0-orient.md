@@ -11,6 +11,20 @@ diverged: stop, report it, never force. Then decide the run context — chat
 or cloud — per `procedures/cloud-run.md` § 1, read that file if the run is
 unattended, and record the context in the orient block.
 
+**ADDED 2026-09-21 — repair a detached HEAD before the gate.** Eriks,
+answering `[Needs Eriks]` task `6hXfGMC78cv6vHpQ` with *"a)"*, where (a)
+read *"Let Step 0 § 0 do the repair itself, before the gate — check out
+`main` and fast-forward it to `origin/main` when `HEAD` already equals
+`origin/main` and the tree is clean, then run the gate."* So, after the
+pull and before the dry-run: if `git symbolic-ref -q HEAD` fails (detached)
+and `git rev-parse HEAD` equals `git rev-parse origin/main` and `git status
+--porcelain` is empty, run `git checkout main && git merge --ff-only
+origin/main`; log one line. Never force, never rewrite history; any other
+state is reported, not repaired. The gate then tests access and nothing
+else, and its stop rule below applies to a **403 / permission / not-found**
+refusal — a non-fast-forward after this repair is reported as an anomaly.
+Superseded default: repair per run under the 2026-09-20 lesson.
+
 **NARROWED 2026-09-20 — prove write access before any external write.**
 After the pull, run `git push --dry-run origin main`. If it is refused, the
 run **stops here**: it records the refusal in the run log and ends with the

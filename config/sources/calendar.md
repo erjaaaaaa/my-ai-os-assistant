@@ -81,6 +81,21 @@ calendar is read forward over the fixed window each run, and the key records
 the date last scanned so a same-day rerun no-ops. It advances only after a
 populated control query.
 
+## Verified defects
+
+- **`create_event` with `allDay: true` takes the UTC date of the timestamps,
+  not the local date.** ADDED 2026-09-21: `startTime 2027-01-03T00:00:00+01:00`,
+  `endTime 2027-01-11T00:00:00+01:00` produced `start.date 2027-01-02`,
+  `end.date 2027-01-10` — a stay shifted one day early. Passing the same
+  dates as UTC midnight (`2027-01-03T00:00:00Z`, `2027-01-11T00:00:00Z`)
+  produced `2027-01-03` / `2027-01-11`, which Google renders as 3–10 Jan
+  (end date exclusive). **Rule: for an all-day event pass `…T00:00:00Z` for
+  the first day and for the day *after* the last day, and read back
+  `start.date` / `end.date` before reporting.** Because `update_event` and
+  `delete_event` are forbidden, a wrong all-day creation is a stray event
+  Eriks deletes by hand — which is what happened on the first attempt
+  (event `l1luc53m35e6mkhfuiv50681fs`).
+
 ## Allowed writes
 
 **Carve-out 7 changed twice on 2026-09-15 (Eriks, applied 2026-09-17); the
@@ -89,9 +104,11 @@ full text is in `AGENTS.md` § Phase gates and is authoritative.** In short:
 is archived anyway if it is Schedule Calendar; (ii) the class now also covers
 **Travel - Bookings & Iterinary** for a confirmed, **future**, uncancelled
 hotel/flight/car booking, with the Travel thread keeping its label and staying
-in the inbox. **Still unanswered:** whether a multi-day stay is one all-day
-span or separate check-in/check-out entries — until Eriks says, a multi-day
-stay creates **nothing**.
+in the inbox. **ANSWERED 2026-09-21** (Eriks, task `6hW4pGFRrff5M2FQ`: *"Seperate check-in
+/ check-out events + full day for the stay."*): a multi-day stay creates
+**three** events — an all-day span plus timed check-in and check-out
+entries — see `AGENTS.md` § Phase gates. Superseded text: *"Still
+unanswered … a multi-day stay creates nothing."*
 
 **None autonomously. This source is read-only in every sweep.** NARROWED 2026-09-09 by Eriks: carve-out 7 below makes one creation class autonomous; the sentence otherwise stands. `create_event`,
 `update_event`, `delete_event` and `respond_to_event` are never called by a run

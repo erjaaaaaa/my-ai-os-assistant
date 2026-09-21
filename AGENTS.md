@@ -319,7 +319,12 @@ Four ship by default:
    notifications") or it is a Google Calendar daily agenda — and its subject
    begins "New event:", "Updated event:", "Cancelled event:", "Invitation:",
    "Updated invitation:", "Accepted:", "Declined:", "Tentatively accepted:"
-   or "Daily agenda". Trash means `trash_thread` only (recoverable from
+   or "Daily agenda" (WIDENED 2026-09-21 by Eriks, answering `[Needs Eriks]`
+   task `6hWmrXJ7Cg6hF9Wx` with *"a)"*, where option (a) read *"Add
+   "Notification:" to carve-out 6's prefix list — reminder mails get trashed
+   like the rest"*: the prefix **"Notification:"** — Google's upcoming-event
+   reminder — is now in the list. Superseded default: reminders were
+   labelled Schedule Calendar, matched and archived under carve-out 4). Trash means `trash_thread` only (recoverable from
    Gmail's Trash for 30 days). Before trashing a creation or invitation
    notice, the run checks the event exists on a swept calendar or has a
    cancellation in the same sweep; if neither, carve-out 7 runs first, then
@@ -379,7 +384,19 @@ Four ship by default:
    Travel-vs-Schedule tie-break defect: the two classes no longer differ in
    what they cause the run to write, so the label choice is filing again.
 
-   **STILL OPEN, and it blocks the multi-day half of that widening:** option
+   **ANSWERED 2026-09-21 by Eriks, in the task's comments:** *"Seperate
+   check-in / check-out events + full day for the stay."* A multi-day stay
+   now creates **three** events on Eriks's own calendar: one all-day span
+   over the stay (arrival date to departure date inclusive), a timed
+   check-in entry on the arrival day (the mail's stated check-in time, else
+   a 60-minute default at 16:00) and a timed check-out entry on the
+   departure day (ending at the mail's stated check-out deadline, else a
+   60-minute default ending 11:00). No attendees, `ref: mail:<thread_id>` on
+   each, each read back and logged. The Hotel Fisserhof stay, 3–10 Jan 2027,
+   was created this way the same day. Superseded default: *a multi-day stay
+   creates nothing.* The paragraph below is kept as the record of the gap.
+
+   **WAS OPEN, and blocked the multi-day half of that widening:** option
    (b) also asked *"Say whether you want one all-day span for a stay (3–10
    Jan) or separate check-in/check-out entries."* Eriks did not say, and
    silence is never an answer. **Until he answers, a multi-day stay creates
