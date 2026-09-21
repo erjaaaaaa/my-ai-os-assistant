@@ -5030,3 +5030,125 @@ step and did not run. State re-read after writing and the value confirmed.
 ## 2026-09-21 — hourly /inbox (continued, 23:02 Europe/Riga = 20:02 UTC)
 
 - 2026-09-21 20:02 UTC — hourly /inbox: inbox **16** (= `INBOX.threadsTotal` 16, `messagesTotal` 19; no per-container count exceeds the global total), read 16, skipped **15** (already labelled — the fifteen carry a taxonomy label on at least one message in the `in:inbox` result, which is positive evidence and not the absence the 2026-09-17 rule warns about), unlabelled **1** held by the stated default on open question `6hXpGPJ3PXGJQFJQ` (Apple Developer welcome `mail:1a0c4a61238b986c`, re-read with `get_thread` `MINIMAL` → `labelIds: ["INBOX"]` only, single message; `find-comments` returned 0, so *"it stays unlabelled in your inbox"* carried), nothing done — 0 labelled, 0 archived, 0 trashed, 0 ledger rows, 0 tasks, 0 calendar events, 0 new `[Needs Eriks]` tasks, **no Gmail write call made**; review task untouched per `procedures/cloud-run.md` § 4.2 (a run that labelled nothing leaves it alone). Run context **cloud**, hourly form. Sources all live: Gmail `list_labels` populated (46 labels, all thirteen taxonomy ids plus `paid_label_id` present by name and id), Calendar `list_calendars` 8 calendars with both swept ids present (`epetersons87@gmail.com`, `family17271500024496324001@group.calendar.google.com`), Todoist `user-info` `epetersons87@gmail.com`, Europe/Riga, local time 2026-09-21 23:01:39. Open questions **1 open / 0 answered / 0 ambiguous / 0 closed**. Watermarks unadvanced and `state/state.json` unchanged: the newest message actually processed is `1790014367000` (LinkedIn `1a0c52ba9dbfcb8c`, 18:12:47Z), **equal to** the stored `mail.last_internaldate_ms`, so nothing to advance; `inbox.last_sweep_date` already 2026-09-21; `calendar.last_scanned_date` already 2026-09-21, no `list_events` call made. Tracker ids `_verified` 2026-09-07 (14 days, inside the 30-day rule), not re-resolved. Detached-HEAD repair applied again per Step 0 § 0 (HEAD == `origin/main` == `1fbeac4`, tree clean, local `main` 49 behind, `git checkout main` + `git merge --ff-only origin/main`, no force, nothing discarded); gate then returned `Everything up-to-date`, corroborated with `GIT_TRACE=1` showing `git-remote-https` was invoked. Registry drift none. GitHub MCP and `PushNotification` present and **not used**; no message on any channel, no web browsing, no force-push.
+
+## 2026-09-21 — hourly /inbox (continued, 00:01 Europe/Riga 22 Sep = 21:01 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4) — Step 0 and Step 1
+only, then close-out. No Step 2, 3 or 4, no brief.
+
+**Orient block.** Gmail **live**: `list_labels` populated, 46 labels, all thirteen
+taxonomy ids present plus `paid_label_id`; containing total `INBOX.threadsTotal`
+**18** (`messagesTotal` 21). Calendar **live**: `list_calendars` returned 8 calendars
+with both swept ids present (`epetersons87@gmail.com`,
+`family17271500024496324001@group.calendar.google.com`); no `list_events` call made —
+Step 2 did not run. Todoist **live**: `user-info` → `epetersons87@gmail.com`,
+Europe/Riga, local time 2026-09-22 00:01:49. Open questions **1 open / 0 answered /
+0 ambiguous / 0 closed** before Step 1 (`6hXpGPJ3PXGJQFJQ`, Apple Developer welcome;
+`find-comments` returned 0 comments, so its stated default carried). Tracker ids
+`_verified` 2026-09-07 (14 days, inside the 30-day rule), not re-resolved.
+
+**Step 1 counts.** `search_threads in:inbox` returned **18** threads = the containing
+total 18; no per-container count exceeds its global total. Read 18, **skipped 15**
+(already carrying one of the thirteen), **3** carried none. Of those three: **2
+labelled**, **1 left unlabelled on purpose**.
+
+**Writes, each with its read-back:**
+1. `label_thread` `1a0c5bf7bb42d826` → `Label_5437124985126992273` (Professional
+   Networking). Read back with `get_thread` `METADATA_ONLY`: `labelIds` =
+   `["UNREAD","Label_5437124985126992273","INBOX"]`. LinkedIn network-conversations
+   digest, arrived 20:54:15Z. Not an archivable class — stays in the inbox.
+2. `label_thread` `1a0c5bd3f167fd37` → `Label_6413919896574930163` (Promotions & Ads).
+   Read back: `labelIds` = `["UNREAD","Label_6413919896574930163","INBOX"]`. TestFlight
+   "Happy 360 SIA has invited you to test ChallengeFinds: 30 Day Fitness.", 20:51:48Z.
+3. `ledgers/promotions.csv` line **10158** appended, grepped back verbatim by threadId;
+   file 10157 → 10158 rows; preceding row (10157, Simply Piano) re-read intact. Dedupe
+   run before the append: 0 prior matches on `1a0c5bd3f167fd37`.
+4. `unlabel_thread` `1a0c5bd3f167fd37` `["INBOX"]` — carve-out 4, after (3) was
+   verified. Read back: `labelIds` = `["UNREAD","Label_6413919896574930163"]`, `INBOX`
+   absent, taxonomy label retained.
+5. `add-comments` on the day's review task `6hXf2pQ7qQ5pRHRQ` (completed at 06:29 UTC;
+   the § 5 ANSWERED 2026-09-21 rule says counts still go there) → comment
+   `6hXqrgfP2xcMhv7Q`, read back independently with `fetch-object`.
+6. `add-tasks` → `[Needs Eriks]` task **`6hXqrrHRVQHjvg9Q`**, Waiting / Blocked,
+   `agent-waiting`, no due date, p4, default stated. Read back with `fetch-object`:
+   `sectionId` `6hJQ57R2hvM9RQgQ`, `checked: false`. See Anomaly 1.
+
+**Census cross-checks.** `list_labels` before → after: Professional Networking
+142→143, Promotions & Ads 2817→2818. Sum of per-label thread deltas = **2** = the
+number of `label_thread` calls, no label at +0 (the 2026-09-17 second check).
+`INBOX.threadsTotal` 18 → **17** = 18 − 1 archived, reconciles exactly.
+`TRASH.threadsTotal` **273 → 273**, unchanged — nothing trashed.
+
+**Sender-precedent check** (2026-09-20 split-sender rule). The TestFlight class was
+not a third reading: Eriks's own filing of the identical sender and message type,
+thread `1a029ec1df8475f2` (22 Aug, pre-dating this instance), carries
+`Label_6413919896574930163` and no `INBOX`. Read off that thread's own `label_ids`
+via `get_thread`, not taken from a previous run's notes.
+
+**Defaults applied, not decisions recorded.** `1a0c4a61238b986c` (Apple "Welcome to
+the Apple Developer Program") stays unlabelled under the stated default of open
+question `6hXpGPJ3PXGJQFJQ`; `get_thread` `METADATA_ONLY` confirmed `labelIds:
+["INBOX"]` only, and `find-comments` on the task returned 0. Its body was not
+re-read — the classification is held by a standing default, not open.
+
+**Not done, and owed to the next `/start-day`.** Carve-out 5 is **in class for two
+threads**: `Pay Google Cloud — billing account 0120FA-84C9BC-6B6C27 past due`
+(`6hWmrRH3wQW6PH3Q`) was completed 2026-09-21 06:30 UTC carrying
+`ref: mail:1a0a959a8d63bc7f` and `ref: mail:1a0a959aacb42044`, and both threads still
+sit in the inbox carrying `Needs-Payment`. The swap is `procedures/step-2-triage.md`
+§ Closed payment tasks, and the hourly form (`cloud-run.md` § 4.1) enumerates Step 1's
+post-actions without it — so it was reported, not performed. Named in the review-task
+comment too.
+
+**Watermarks advanced** (Step 5 § 2): `mail.last_internaldate_ms`
+**1790014367000 → 1790024055000**, the `internalDate` of the newest message actually
+processed (LinkedIn `1a0c5bf7bb42d826`, 2026-09-21T20:54:15Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-21, unchanged;
+`calendar.last_scanned_date` already 2026-09-21, unchanged (control populated, no
+sweep run). `vault.mail_snapshot.last_internaldate_ms` untouched — Step 3 is a laptop
+step and did not run. State re-read after writing and the value confirmed.
+
+**Registry drift: none.** Every tool used this run is in `config/tools.md`:
+`list_labels`, `search_threads`, `get_thread`, `label_thread`, `unlabel_thread`;
+`list_calendars`; `user-info`, `find-tasks`, `find-comments`, `find-completed-tasks`,
+`add-comments`, `add-tasks`, `fetch-object`.
+
+**Anomalies and notes**
+1. **The Step 0 § 0 repair moved the worktree to an unrelated history, and this is
+   new.** `git fetch` reported `+ aa9e2da...f565383 main -> origin/main (forced
+   update)`: this container's cached clone carried a remote-tracking ref from a
+   different lineage. `HEAD` == `origin/main` == `f565383` and the tree was clean, so
+   the repair's conditions held and it ran — `git checkout main` succeeded onto local
+   `main` at `aa9e2da` (**44 and 50 commits diverged, not 49 behind**), then
+   `git merge --ff-only origin/main` failed with `fatal: refusing to merge unrelated
+   histories`. Between those two calls the working tree **was the wrong tree**: the
+   harness flagged `procedures/step-0-orient.md` and `.claude/skills/inbox/SKILL.md` as
+   changed on disk, both having lost their recent edits — including Eriks's own *"a)"*
+   answer that created this repair rule. **Recovery, before any external write:**
+   `git checkout --detach origin/main` back to `f565383`, tree clean, nothing
+   discarded, no force, local `main` left untouched at `aa9e2da`. Every file read for
+   policy this run was re-read after that point or read before the checkout and
+   unaffected. Opened as `[Needs Eriks]` task `6hXqrrHRVQHjvg9Q`, default *keep
+   repairing and restore on failure*.
+2. **The write-access gate passed, run as `HEAD:main`.** `git push --dry-run origin
+   main` pushes the stale *branch ref* and was rejected non-fast-forward — which the
+   2026-09-20 lesson names as local ref bookkeeping, not the 403 the gate exists for.
+   `git push --dry-run origin HEAD:main` returned `Everything up-to-date`, corroborated
+   with `GIT_TRACE=1` showing `git-remote-https` was actually invoked, so the
+   permission was proven against the real remote and not answered locally. Close-out
+   pushes as `HEAD:main` for the same reason; no force at any point.
+3. **The review task's day boundary is ambiguous and nobody has settled it.** This run
+   is 21:01 UTC = 00:01 Riga on the 22nd. The 23:05 UTC run last night rolled over to a
+   new Riga-day task, but the 21:01 and 22:02 UTC runs that same night (Riga 00:01 and
+   01:02) reported onto the previous UTC day's task. This run commented on
+   `6hXf2pQ7qQ5pRHRQ` (2026-09-21), matching the UTC date the routine otherwise uses
+   for its log headings and commit messages, and created no second task. **Not raised
+   as a question:** Eriks has said of these counts *"I don't really look or care"*, so
+   asking him where they land would be noise. For the promotion review to settle.
+4. **A quiet hour.** Two arrivals, two labels, one archive. The fifteen skipped threads
+   are the standing set — four Needs-Payment, five Reply/Do, two Professional
+   Networking, and one each of Family & Personal, Security & Verification, Travel and
+   Banking & Cards.
+5. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
+   browsing, no force-push. All three connectors used are the ones `config/tools.md`
+   names, and only the writes they permit.
