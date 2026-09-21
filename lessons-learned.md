@@ -647,3 +647,4 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   this run at `ledgers/newsletters.csv:6247`, verified by grep, exactly one occurrence. Extends the
   2026-09-20 write-access-gate entry: the gate proves *this* run can record itself and says nothing
   about whether the *last* one did.
+- 2026-09-21 — **Replacement order tracked only as a comment on the superseded task** — The 9 Sep Block Lock reorder (replacing the refunded Le-Glue order) was recorded as a comment on "Buy lego glue - Le glue"; when Eriks closed that task on 11 Sep the live commitment vanished from the board, and on 21 Sep he asked where it went. **Rule:** when a source shows a replacement order, booking or purchase that supersedes an existing task's item, create a new task for the replacement (its own `ref: mail:` line) and comment on the old one pointing to it — never carry the new commitment as a comment on the old task.

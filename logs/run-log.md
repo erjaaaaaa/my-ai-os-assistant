@@ -5289,3 +5289,37 @@ step and did not run. State re-read after writing and the value confirmed.
   - **Note for the next laptop `/start-day`:** the RoboNuggets thread `1a0c7b46dad73851` sits at the advanced watermark and is archived, so Step 3's snapshot scan will not see it; its ledger row at `newsletters.csv:6248` is the only record and it exists.
   - **Registry drift: none.** Every tool used this run is in `config/tools.md`: `list_labels`, `search_threads`, `get_thread`, `label_thread`, `unlabel_thread` (Gmail); `list_calendars` (Calendar); `user-info`, `find-tasks`, `find-comments`, `add-comments`, `fetch-object` (Todoist); git and the filesystem.
   - **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web browsing, no force-push. GitHub MCP and `PushNotification` are present in the environment and were not used, as this routine's prompt and `procedures/cloud-run.md` § 3 require.
+## 2026-09-21 — ad-hoc: Block Lock glue task "gone" (chat)
+
+Eriks, in chat: *"Le Glue didn't manage to post and they refunded it
+eventually. But then I ordered other glue (we researched it together) and I
+don't see a task for it. It should be in blocked / waiting, but is gone. Can
+you find it? I want to e-mail them why it hasn't been posted yet."*
+
+Todoist read first: `find-tasks` searchText "glue" in `6hJQ53x8Pjpr9rJQ` →
+0 open tasks; Waiting / Blocked → 2 tasks, both `[Needs Eriks]`;
+`find-completed-tasks` 2026-09-07..21 → 42 tasks, two glue-related:
+`6hRHJQwmr656PG6x` "Buy lego glue - Le glue" (completed 2026-09-11T06:14:49Z,
+Eriks: *"lego glue - close it"*) and `6hRxmG7HFGvq6Pwx` refund watch
+(completed 2026-09-11T05:54:55Z). **Finding: no Block Lock task ever
+existed.** The 9 Sep reorder was recorded as comment `6hRxPP8xfXqV24vQ` on
+the Le-Glue task, which Eriks then closed. Nothing was deleted.
+
+Gmail: `search_threads` Block Lock / #1359 after 2026/09/08, includeTrash →
+1 thread only, `1a0863ff623d94e1` "Order #1359 confirmed" (9 Sep, Receipts,
+archived). No dispatch or tracking mail. Order text: standard shipping "up
+to 10 working days" → window ends 23 Sep; contact hello@blocklockglue.com.
+
+Writes, each read back:
+1. `add-tasks` → `6hXmrpp78CXv9xcQ` "Chase Block Lock Toy Glue order #1359
+   - not dispatched yet", Waiting / Blocked (`6hJQ57R2hvM9RQgQ`) on Eriks's
+   stated placement, p4, no due date, description first line
+   `ref: mail:1a0863ff623d94e1`. `fetch-object` read back: section and
+   description match.
+2. `create_draft` — reply on `1a0863ff623d94e1` to hello@blocklockglue.com,
+   draft `r-8107800798870944632`, drafted on request (voice guide § 7
+   external register). Unsent; sending is Eriks's act. `get_draft` read back.
+
+Lesson: a reorder that replaces a refunded order needs its own task, not a
+comment on the old one — closing the old task otherwise takes the new
+commitment with it. Appended to lessons-learned.md.
