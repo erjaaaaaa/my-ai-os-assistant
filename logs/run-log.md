@@ -4320,3 +4320,160 @@ one listed in `config/tools.md` under a permitted read or write.
 4. **`PushNotification` not called** — outside `config/tools.md` and named as
    forbidden in this routine's stored prompt. No GitHub MCP call, no message on any
    channel, no web browsing, no force-push.
+
+## 2026-09-21 — hourly /inbox (continued, 17:00 Europe/Riga = 14:00 UTC)
+
+**Run context: cloud** — unattended hourly routine (`trig_01X5cu18Ba6kNcWbaAABCGR8`),
+working directory a git clone with an `origin` remote and no `../My Brain/` beside
+it. `procedures/cloud-run.md` § 4 read at Step 0. Eriks not present; nothing asked
+in the session.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` fetched `aa9e2da..ed851ad`.
+Clone was on a **detached HEAD** at `ed851ad`, exactly `origin/main`, tree clean —
+repaired under the authorised rule (Eriks, *"a)"* on task `6hXfGMC78cv6vHpQ`):
+`git checkout main && git merge --ff-only origin/main`, a pure fast-forward of 43
+commits, nothing discarded, no force. Eleventh consecutive run to need it.
+Write-access gate then `git push --dry-run origin main` → **`Everything
+up-to-date`**. Gate passed before any external write.
+
+**Step 0 — orient block.**
+- **Gmail: live.** Control `list_labels` returned 46 labels. Containing total
+  `INBOX.threadsTotal` **15**, `messagesTotal` **18**.
+- **Google Calendar: live.** Control `list_calendars` returned 8 calendars,
+  including **both** swept ids (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`). No sweep — hourly form.
+- **Todoist: live.** `user-info` → `epetersons87@gmail.com`, user 22613842.
+- **Ids:** read from `state/state.json`. `tracker._verified` 2026-09-07 and
+  `sources.gmail.labels_verified` 2026-09-07 are both inside 30 days; no
+  re-resolution needed, none performed.
+- **Open questions: 2 open, 0 answered, 0 ambiguous.** `find-tasks` scoped to
+  project Personal by id with `labels: ["agent-waiting"]`, `limit: 100`,
+  `hasMore: false`. `find-comments` run on **each**: `6hXhRP46QrG7hPQQ` 0 comments,
+  `6hXmJ9JJ9W6wJJ5x` 0 comments. Both defaults stay in force; neither task touched.
+
+**Step 1 — inbox labelling.**
+`search_threads in:inbox`, `pageSize: 50`, returned **15** threads against a
+containing total of **15** — equal, so the sweep read the whole inbox and the sweep
+count does not exceed the total. All **15** read with `get_thread`; the skip test was
+run against `get_thread` and never against the search result, per the 2026-09-17
+truncation rule. The Luminor thread `19ea59934e9545fd` again returned **16** messages
+where `search_threads` previewed 5 — the twelfth sighting of that trap.
+**11 skipped** as already carrying one of the thirteen; **4** carried none.
+One `get_thread` (`19ecbccd34e3286c`, Revolut) returned *"The service is currently
+unavailable"* on the first attempt and succeeded on one retry — transient, not an
+outage; the control query was populated before and after.
+
+**Classified and labelled — 4 calls, 4 net-new associations, each read back:**
+- **Newsletters & Learning 1** — Onfolio, *"Fit the strategy to the asset"*
+  (`mail:1a0c41898f16ea3b`, `dom@onfolio.com`, 13:03:17Z). Body read in full: an
+  editorial essay on acquisition strategy, unsubscribe cue, no offer or discount.
+  Read-back `label_ids` = `["UNREAD","Label_6571319530419234897"]`.
+- **Promotions & Ads 3**, all bodies read in full:
+  - MyHeritage, *"Offer extended: upgrade now and get 70% off"*
+    (`mail:1a0c4356769203e5`, `announce2@myheritage.com`, 13:43:47Z) — 70%-off
+    subscription upsell with an expiry date and an unsubscribe link.
+  - Sleep Doctor, *"Heart, brain, energy — sleep apnea's toll"*
+    (`mail:1a0c429f3aa61f5c`, `info@send.sleepdoctor.com`, 13:31:12Z) — a product
+    pitch for the home sleep-apnea test with patient testimonials and
+    Shop / "Start Your Sleep Journey" CTAs.
+  - Bilešu Serviss, *"Boris Brejcha atgriežas Rīgā: €10 atlaide 48 stundas"*
+    (`mail:1a0c437a89a72aa6`, `ipasts@bilesuserviss.lv`, 13:44:46Z) — a 48-hour
+    discount code (RIGA10) for a 23 Oct concert. `bilesuserviss.lv` is named
+    verbatim in the Schedule Calendar sub-rule, and the body confirms it
+    independently rather than the sender name carrying the decision alone
+    (2026-09-20 metadata-only rule).
+
+**Ledger rows — 4 written, 4 verified by grep after the append:**
+`ledgers/newsletters.csv` line **6243** (Onfolio); `ledgers/promotions.csv` lines
+**10153**, **10154**, **10155**. Line counts 6242→6243 and 10152→10155. One row per
+archived thread — every thread single-message, so no same-invoice or same-campaign
+collapse applied (2026-09-20 getguru / Value Hunter entries). Deduped on threadId
+before writing: **0** prior matches for any of the four across both files.
+
+**Archived — 4, carve-out 4**, each only after its ledger row was written and
+grepped back. `unlabel_thread(["INBOX"])` on all four; read-back confirms `INBOX`
+**absent** and the taxonomy label **present** on each.
+
+**Payment tasks created: 0** — no new Needs-Payment mail. The four Needs-Payment
+threads in the inbox are unchanged and already carry live tasks.
+**Calendar events created: 0** — carve-out 7 had nothing in class; no `create_event`
+call was made. **Trashed: 0** — carve-out 6 had nothing in class;
+`TRASH.threadsTotal` unchanged at **273** before and after.
+**New `[Needs Eriks]` questions: 0. Threads left unlabelled: 0** of the 4 swept.
+
+**Step 1 § 5 — the review task.** The day's task `6hXf2pQ7qQ5pRHRQ` exists but was
+**completed by Eriks at 06:29:30Z**. Under the stated default of open question
+`6hXhRP46QrG7hPQQ` (option (a), still 0 comments), this run posted **one comment**
+with its counts rather than creating a second task for the same date — comment
+`6hXmgVV6FmWqCXGQ`, postedAt 14:04:24Z, read back via `find-comments` (8 comments
+on the task). Seventh sweep to pay this cost.
+
+**Census and the impossibility test.**
+Sweep read 15 threads against `INBOX.threadsTotal` **15** — the contained count does
+not exceed the containing total. Label census, `list_labels` before → after:
+**Newsletters & Learning 1983 → 1984** (+1), **Promotions & Ads 2812 → 2815** (+3).
+Sum of per-label thread deltas = **4** = the number of `label_thread` calls, with
+**no label at +0** — so no thread was silently already in the class it was given.
+Every other taxonomy label unchanged; `Paid` unchanged at 214.
+
+**A count that did not reconcile on the first pass, investigated rather than
+smoothed over (2026-09-14 rule).** `INBOX.threadsTotal` read **12** after the run
+where 15 − 4 archived = **11**. Cause: one thread arrived mid-run —
+**Mindvalley, `mail:1a0c447135331a0a`, `info@hello.mindvalley.com`, 14:03:06Z** —
+after the sweep's `search_threads` read. Confirmed by a second `in:inbox` read that
+returned 12 threads including it, and corroborated two further ways:
+`INBOX.messagesTotal` 18 → 15 (−4 archived, +1 arrival) and `UNREAD` 10264 → 10265
+messages / 9666 → 9667 threads. **It was deliberately not swept**: it arrived after
+the read the census was computed against, and Step 1 selects on the label, not on a
+watermark, so the next hourly run picks it up. Named in the review-task comment.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` 1789993842000 →
+**1789998286000**, the `internalDate` of the newest message **actually processed**
+(`1a0c437a89a72aa6`, Bilešu Serviss, 2026-09-21T13:44:46Z) — read off the message's
+own millisecond field, not derived from the ISO string, and deliberately **not**
+advanced to the 14:03:06Z Mindvalley arrival, which this run did not process.
+`sources.gmail.inbox.last_sweep_date` stays **2026-09-21** (Step 1 ran against a
+populated control). `calendar.last_scanned_date` left at **2026-09-21** — the hourly
+form runs no calendar sweep and no `list_events` call was made.
+`vault.mail_snapshot.last_internaldate_ms` untouched at 1789963966000 — **Step 3
+deferred: vault not reachable from this runner** (`procedures/cloud-run.md` § 2.3).
+No Todoist id or flag touched. Re-read and confirmed.
+
+**Registry drift: none.** Tools called — Gmail `list_labels`, `search_threads`,
+`get_thread`, `label_thread`, `unlabel_thread`; Calendar `list_calendars`; Todoist
+`user-info`, `find-tasks`, `find-comments`, `fetch-object`, `add-comments` — every
+one listed in `config/tools.md` under a permitted read or write.
+
+**Anomalies.**
+1. **Sleep Doctor is now a genuine cross-run split, and this run made it one.**
+   `info@send.sleepdoctor.com` was filed **Newsletters & Learning** by this instance
+   yesterday (2026-09-20, *"Tired and sleepy are not the same"*, newsletters.csv) and
+   **Promotions & Ads** today. Per the 2026-09-20 split-sender rule the ledgers were
+   grepped before classifying and the individual mail was classified on its content:
+   today's has no editorial body at all, only a product pitch with testimonials and
+   purchase CTAs, and the Newsletters-vs-Promotions tie-break independently lands on
+   Promotions. Named here and in the review-task comment rather than picked quietly.
+   Sixth split sender in a fortnight (Skool, sendfox/Value Hunter, Revolut, Litres,
+   acro.police.uk, now Sleep Doctor). A per-sender rule is Eriks's to set.
+   The other two Promotions senders this run are **not** splits: `announce2@myheritage.com`
+   is unanimous in promotions.csv (the newsletters rows belong to `news@` and
+   `discover2@`), and `dom@onfolio.com`'s 33/10 split is entirely migrated rows from
+   Eriks's own Sheets export, with Newsletters most recent — which is what this run
+   followed.
+2. **Detached HEAD, eleventh consecutive run** — repaired by the authorised rule; no
+   longer an open question, but the frequency is now 100% of cloud runs and the
+   durable fix (the runner cloning onto `main` rather than a detached `HEAD`) is
+   still outside this instance's reach.
+3. **A new thread arrived mid-run** and was left for the next sweep — see the census
+   paragraph above. Not a defect; recorded so the next run's arithmetic starts from
+   12, not 11.
+4. **The review-task visibility question is unanswered for a seventh sweep**
+   (`6hXhRP46QrG7hPQQ`, still 0 comments). Cost paid again: four labels, four
+   archives and four ledger rows reported into a task Eriks completed at 06:29 and is
+   unlikely to reopen.
+5. **One transient Gmail `get_thread` failure** (*"The service is currently
+   unavailable"*), cleared on one retry. Not an outage — the control query was
+   populated before and after, and the retry returned the thread.
+6. **`PushNotification` not called** — outside `config/tools.md` and named as
+   forbidden in this routine's stored prompt. No GitHub MCP call, no message on any
+   channel, no web browsing, no force-push.
