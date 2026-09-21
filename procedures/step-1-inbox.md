@@ -101,6 +101,27 @@ The description-update half of "update rather than duplicate" is still
 blocked by the write allowlist — the defect logged on 2026-09-20 — so until
 that is settled, a comment is the update.
 
+**ANSWERED 2026-09-21 by Eriks** — task `6hXhRP46QrG7hPQQ`, which asked
+where a sweep should report once the day's review task is already
+**completed**, in his own words:
+
+> c)
+> I'm not sure what it's commenting. If it's just the label counts - it can
+> keep commenting even on the completed tasks. I don't really look or care
+> about these counts.
+>
+> If it's a new task like payment that needs to be made and there's no such
+> task on the board already - create new.
+
+He chose option (c) and then tested its premise in the same
+breath: the comment carries only counts, which he does not read, so **no
+continuation task is created at all**. The rule: a sweep's counts go as a
+comment on the day's review task **even when that task is completed**, and
+a genuinely actionable item — a payment task and its kind — still gets its
+own task when the board holds none, which §§ 3 and the taxonomy already do.
+Superseded option (c) text, offered and now moot: *"Only create the
+continuation task when something was labelled or archived."*
+
 ## 6. Weekly digest hand-off — WITHDRAWN 2026-09-07
 
 Withdrawn by Eriks after the first `/start-day` produced the digest:

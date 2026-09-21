@@ -4477,3 +4477,135 @@ one listed in `config/tools.md` under a permitted read or write.
 6. **`PushNotification` not called** — outside `config/tools.md` and named as
    forbidden in this routine's stored prompt. No GitHub MCP call, no message on any
    channel, no web browsing, no force-push.
+
+## 2026-09-21 — hourly /inbox (continued, 18:00 Europe/Riga = 15:00 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Steps 0 and 1
+only; Steps 2–4 not run and no brief, per the routine's stored prompt and the
+2026-09-20 decision that `/start-day` is a laptop command.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` → `Already up to date`
+(origin/main had moved `aa9e2da..cf3a0a9`; the clone's `HEAD` already held it).
+**Detached HEAD again — twelfth consecutive run**, repaired by the authorised rule
+(ADDED 2026-09-21, Eriks, *"a)"* on `6hXfGMC78cv6vHpQ`): `HEAD` = `origin/main` =
+`cf3a0a9`, tree clean, so `git checkout main && git merge --ff-only origin/main`
+(44 commits fast-forwarded, nothing discarded, no force). Gate then run:
+`git push --dry-run origin main` → `Everything up-to-date`. No 403, no
+non-fast-forward.
+
+**Orient block.**
+- **Gmail — live.** Control `list_labels` populated (46 labels).
+  `INBOX.threadsTotal` **15**, `messagesTotal` **18**.
+- **Google Calendar — live.** Control `list_calendars` populated: 8 calendars,
+  both swept ids present (`epetersons87@gmail.com`, `family1727…@group.calendar.google.com`).
+- **Todoist — live.** `user-info` → `epetersons87@gmail.com`, user 22613842.
+- **Ids:** not re-resolved; `tracker._verified` 2026-09-07 is 14 days old, inside 30.
+
+**Step 0 § 4 — open questions: 2 open, 2 answered-and-closed, 0 ambiguous.** Both
+answered by Eriks at 14:38 and 14:39 UTC (no `**Assistant —**` marker, so his).
+
+1. **`6hXhRP46QrG7hPQQ` — where later sweeps report once the day's review task is
+   completed.** Eriks: *"c) I'm not sure what it's commenting. If it's just the label
+   counts - it can keep commenting even on the completed tasks. I don't really look or
+   care about these counts. If it's a new task like payment that needs to be made and
+   there's no such task on the board already - create new."* He picked (c) and then
+   tested its premise: the comment is only counts, so **no continuation task is created
+   at all** — counts go as a comment on the day's task even when completed, and an
+   actionable item still gets its own task when the board holds none. Applied to
+   `procedures/step-1-inbox.md` § 5 (new **ANSWERED 2026-09-21** paragraph, quoted
+   verbatim as a blockquote); read back before completing. Task completed, `checked:
+   true`, `completedAt` 2026-09-21T15:01:27Z. **This closes the anomaly carried in the
+   last seven entries** as "the review-task visibility question is unanswered".
+2. **`6hXmJ9JJ9W6wJJ5x` — ACRO police-certificate mail, Family & Personal or Receipts
+   & Subscriptions.** Eriks: *"- **Family & Personal**"* = option (a), keep the
+   default. Applied to `config/routing-rules.md` § Mail label taxonomy, Family &
+   Personal row (WIDENED 2026-09-21): ACRO correspondence about a police-certificate
+   application — acknowledgements, reference notices, status mail with no charge — is
+   Family & Personal, not Receipts, and stays in the inbox with no ledger row. Read
+   back; task completed, `checked: true`, `completedAt` 2026-09-21T15:01:28Z.
+
+**Step 1 — inbox.** `search_threads in:inbox` returned **15** threads against
+`INBOX.threadsTotal` **15** — the sweep count does not exceed the containing total.
+**11 skipped** as already carrying one of the thirteen (positive label evidence, which
+truncation cannot fake); **4 read in full** with `get_thread`, `PLAIN_TEXT`, and
+classified from the body — no metadata-only classification this run.
+
+**Labelled — 5 calls, 5 net-new associations, each read back:**
+| Thread | Class | Evidence |
+|---|---|---|
+| `1a0c46d12e31a9b3` London Gatwick, drop-off / AutoPay T&C update | **Reply/Do** | Eriks's 2026-09-21 widening: a service notice needing no payment but carrying a consequence (new liability terms, parking charges). Policy change is named verbatim in that class. No task. |
+| `1a0c4532c84a3588` Ideabrowser "Idea of the Day" | **Newsletters & Learning** | Recurring editorial from a subscribed publisher. |
+| `1a0c44fe7f0c8e42` LinkedIn invite, Kostiantyn Romanov (COO, Code&Care) | **Professional Networking** | LinkedIn notification. Stays in inbox. The sender names 28–30 Oct in London; that is content, not a commitment — no task, Step 1 creates none outside payments. |
+| `1a0c447135331a0a` Mindvalley "Expert to Authority Mastery" enrollment | **Promotions & Ads** | Sales campaign: discount, expiring bonuses, "get your seat now". |
+| `1a0c47d050482bd0` Simply Piano "New week, new streak" | **Promotions & Ads** | Engagement/streak nudge with unsubscribe cue. Arrived **15:02:01Z mid-run**; processed in this run rather than deferred. |
+
+**Ledger rows — 3 written, 3 grepped back after the append:** `newsletters.csv:6244`
+(Ideabrowser), `promotions.csv:10156` (Mindvalley), `promotions.csv:10157` (Simply
+Piano). Each deduped on threadId first, 0 prior matches. Three rows for three archived
+threads — the at-least-one-row-per-archived-thread invariant holds, all three single-
+message threads so no same-campaign or superseded-invoice case arose.
+
+**Archived — 3, carve-out 4, each read back:** `1a0c4532c84a3588`,
+`1a0c447135331a0a`, `1a0c47d050482bd0`. `INBOX` absent on each, taxonomy label
+retained. Nothing trashed (carve-out 6 had nothing in class); `TRASH.threadsTotal`
+unchanged at **273**.
+
+**Payment tasks created: 0** — no new Needs-Payment mail; the four Needs-Payment
+threads in the inbox are unchanged and already carry live tasks.
+**Calendar events created: 0** — carve-out 7 had nothing in class: no new Schedule
+Calendar and no new Travel thread.
+**Threads left unlabelled: 0.**
+**New `[Needs Eriks]` questions: 0.**
+
+**Label census cross-check (`list_labels` before → after the first four calls):**
+Reply/Do 99→100, Newsletters & Learning 1984→1985, Professional Networking 140→141,
+Promotions & Ads 2815→2816. **Sum of per-label thread deltas = 4 = the 4
+`label_thread` calls made before that census; no label at +0.** The fifth call (Simply
+Piano) came after it and is covered by its own read-back.
+
+**Inbox census reconciliation — investigated, not smoothed.** `INBOX.threadsTotal`
+read **14** after two archives where 13 was expected. Cause: thread
+`1a0c47d050482bd0` arrived at 15:02:01Z, after the sweep's `search_threads`. Three
+independent figures agree: `messagesTotal` 18 → 17 (−2 archived, +1 arrival), `UNREAD`
+threads 9669 → 9670, and a fresh `in:inbox` listing showing the new thread. After its
+own archive the inbox closes at **13 threads** (15 + 1 − 3), confirmed by a final
+`in:inbox` listing. Nothing unexplained.
+
+**Review task.** Day's task `6hXf2pQ7qQ5pRHRQ` (`[Act] Review inbox labels —
+2026-09-21`) exists and is completed (06:29:30Z). `find-tasks` for an open one,
+paginated to exhaustion, returned 0. Per Eriks's answer applied this run, **one
+comment** posted with the counts — comment id `6hXp2X8HRVM7h4px`, returned in the
+write's own response. No continuation task created, no description edited.
+
+**Watermarks.** `mail.last_internaldate_ms` → **1790002921000**, the `internalDate` of
+the newest message actually processed (Simply Piano, 2026-09-21T15:02:01Z), read off
+the message, not derived from the clock or the ISO string.
+`sources.gmail.inbox.last_sweep_date` → 2026-09-21. `calendar.last_scanned_date` left
+at 2026-09-21 (unchanged; `list_calendars` populated but no calendar sweep runs in the
+hourly form). Step 3 not run — vault not reachable from this runner, so
+`vault.mail_snapshot.last_internaldate_ms` is untouched.
+
+**Registry drift: none.** Every tool used is in `config/tools.md`.
+
+**Anomalies and notes**
+1. **Simply Piano is a genuinely split sender** (2026-09-20 rule): this instance filed
+   `play@piano.hellosimply.com` Promotions on 13 and 20 Sep and Newsletters on 17 Sep;
+   the ledgers hold 83 promotions rows against 33 newsletters. Classified **Promotions**
+   on content (an engagement nudge, not editorial) and on the majority precedent, and
+   named here and in the review-task comment rather than picked quietly. Seventh split
+   sender in a fortnight (Skool, sendfox/Value Hunter, Revolut, Litres,
+   acro.police.uk, Sleep Doctor, now Simply Piano) — and the ACRO one was settled by
+   Eriks this run, which is the channel that fixes these. A per-sender rule for the
+   rest is his to set.
+2. **Detached HEAD, twelfth consecutive run** — repaired by the authorised rule. The
+   frequency stays at 100% of cloud runs; the durable fix (the runner cloning onto
+   `main`) remains outside this instance's reach.
+3. **A thread that arrived mid-run was processed, not deferred.** The previous entry
+   left one for the next sweep and said so; this run had the thread in hand, read it in
+   full and handled it under the same rules. The watermark advances to that message, so
+   no work is repeated. Recorded because the two runs chose differently and the next
+   reader should know both are within the procedure — Step 1 sweeps the inbox, and the
+   watermark guards against skipping, not against including.
+4. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
+   browsing, no force-push. All three connectors used are the ones `config/tools.md`
+   names.
