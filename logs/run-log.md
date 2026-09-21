@@ -4749,3 +4749,140 @@ sweep). Step 3 not run — vault not reachable from this runner, so
 4. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
    browsing, no force-push. All three connectors used are the ones `config/tools.md`
    names.
+
+## 2026-09-21 — hourly /inbox (continued, 20:00 Europe/Riga = 17:00 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Steps 0 and 1
+only; Steps 2, 3 and 4 not run and no brief written — `/start-day` on the laptop owns
+those. Model `claude-opus-5`.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` → `Already up to date`
+(`aa9e2da..0224b24` fetched). HEAD **detached** at `0224b24`, exactly `origin/main`,
+tree clean → repaired under Eriks's own rule (answer *"a)"* on `6hXfGMC78cv6vHpQ`,
+now in `procedures/step-0-orient.md` § 0): `git checkout main` + `git merge --ff-only
+origin/main`, a pure fast-forward of 46 commits, nothing discarded, no force. Gate
+then run: `git push --dry-run origin main` → `Everything up-to-date`. **Fourteenth
+consecutive run handed a detached HEAD**; second repaired under the written rule
+rather than the 2026-09-20 lesson.
+
+**Orient block.**
+- **Gmail — live.** Control `list_labels` returned 46 user labels + system.
+  Containing total `INBOX.threadsTotal` **16**, `messagesTotal` **19**.
+- **Google Calendar — live.** Control `list_calendars` returned **8** calendars;
+  both swept ids present (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`). No calendar sweep in the
+  hourly form.
+- **Todoist — live.** `user-info` → `epetersons87@gmail.com`, user 22613842.
+- **Ids:** not re-resolved. `tracker._verified` 2026-09-07 is 14 days old, inside the
+  30-day rule; every id used resolved first time.
+- **Open questions: 1 open, 0 answered-and-closed, 0 ambiguous.**
+  `6hXpGPJ3PXGJQFJQ` (Apple Developer welcome mail — which of the thirteen), opened by
+  the 16:00 UTC run. `find-comments` returned **0 comments**: silence, so the stated
+  default stays in force and the task stays open. No governing file edited this run.
+
+**Step 1 — counts.** Inbox **16** threads at Step 0; `search_threads in:inbox`
+returned **16** — equal, so nothing truncated, and the sweep count does not exceed the
+containing total. **16 read**, **14 skipped** as already carrying one of the thirteen,
+**2** carried none.
+
+**Labelled (1 `label_thread` call):**
+- **Newsletters & Learning** 1 — Skool / AI Automation Society, "2 new notifications
+  since 6:59 pm (Sep 20, 2026)" (`mail:1a0c4bf59f1d4a4f`), arrived 16:14:28Z.
+  Body read in full: notification count, a View Group link and a "turn off daily
+  notifications" cue — no price, no offer, no sales copy.
+  Read-back: `label_ids` → `Label_6571319530419234897` present. ✓
+
+**Sender-precedent check** (2026-09-20 split-sender rule, which names Skool as the
+first sender filed three different ways across runs). Grepped both ledgers before
+classifying. **The split resolves by mail shape, not arbitrarily:** the ledgers hold
+**11** prior "N new notification(s) since …" mails from `noreply@skool.com` and **all
+11 are in newsletters.csv, none in promotions.csv** — 8 of them AI Automation Society
+specifically, every one `migrated-sent`, i.e. Eriks's own filing rather than a run's
+guess. This sender's promotions.csv rows are a visibly different shape ("1 event
+happening tomorrow", "Last day to get my book for cheap", "AIS Live costs $50 more
+tomorrow"). So this run followed precedent rather than adding a fourth reading, and
+the shape distinction is worth promoting if it holds again.
+
+**Ledger rows written and verified: 1.** `ledgers/newsletters.csv` line **6245**,
+grepped back by threadId after the append; file grew **6244 → 6245** lines. Deduped
+first: 0 prior matches for `1a0c4bf59f1d4a4f` in either newsletters.csv or
+promotions.csv. **1 verified row for 1 archived thread** — the hard invariant of the
+2026-09-09 / 2026-09-11 / 2026-09-20 ledger entries.
+
+**Archived (1, carve-out 4):** `1a0c4bf59f1d4a4f`, only after its ledger row was
+written and read back. `unlabel_thread(["INBOX"])`; read-back `label_ids` →
+`["UNREAD","Label_6571319530419234897"]`, `INBOX` absent, taxonomy label retained. ✓
+
+**Trashed: 0** — carve-out 6 had nothing in class; `TRASH.threadsTotal` unchanged at
+**273** before and after, which is the independent check that nothing was trashed by
+anyone.
+
+**Payment tasks created: 0** — no new Needs-Payment mail. The four Needs-Payment
+threads in the inbox are unchanged and already carry live tasks. **Carve-out 5: 0 in
+class.**
+
+**Calendar events created: 0** — carve-out 7 had nothing in class. No calendar write
+of any kind; `create_event` not called.
+
+**Review task (§ 5, hourly form).** The day's task `[Act] Review inbox labels —
+2026-09-21` (`6hXf2pQ7qQ5pRHRQ`) exists but was **completed by Eriks at 06:29 UTC**.
+Per his answer this morning on `6hXhRP46QrG7hPQQ` — *"If it's just the label counts -
+it can keep commenting even on the completed tasks"* — the counts went as **one
+comment** on the completed task and **no continuation task was created**. Comment id
+`6hXpcCrGHJ8r6gfQ`, posted 17:02:55Z, read back by `commentId`. ✓ No description was
+edited (still outside the write allowlist, per the 2026-09-20 defect).
+
+**Census / impossibility test.** `INBOX.threadsTotal` **16 → 15**; 16 − 1 archived =
+15, reconciles exactly with no residual. `messagesTotal` 19 → 18. Label census
+(`list_labels` before → after): **Newsletters & Learning 1985 → 1986 threads,
+1994 → 1995 messages**; the other twelve taxonomy labels and `Paid` byte-identical to
+the Step 0 baseline. **Sum of per-label thread deltas = 1 = the number of
+`label_thread` calls, with no label at +0** — the 2026-09-17 cross-check, and no
+already-labelled thread was relabelled. Sweep count 16 ≤ containing total 16.
+
+**Skip test.** Run against `get_thread` for both threads showing no taxonomy label in
+the search result, per the 2026-09-17 truncation rule. The 14 skipped threads each
+showed one of the thirteen on a message **in the search result** — a positive sighting,
+which truncation can hide but cannot fabricate — and no write was made against any of
+them.
+
+**Threads left unlabelled on purpose: 1.**
+- `mail:1a0c4a61238b986c` — Apple "Welcome to the Apple Developer Program". Matched by
+  **thread id**, not by resemblance, and held by the stated default of open question
+  `6hXpGPJ3PXGJQFJQ`. Confirmed still unlabelled via `get_thread` (`label_ids`
+  `["INBOX"]` only) — checked because Eriks may have filed it himself, not assumed.
+  Body not re-read: the classification is held by a standing default, not open.
+
+**Watermarks.** `mail.last_internaldate_ms` **1790005611000 → 1790007268000**, the
+`internalDate` of the newest message actually processed (the Skool thread,
+2026-09-21T16:14:28Z), read off the message rather than derived from the ISO string or
+taken from the clock. `sources.gmail.inbox.last_sweep_date` → 2026-09-21 (unchanged).
+`calendar.last_scanned_date` left at 2026-09-21 — `list_calendars` populated, but the
+hourly form runs no calendar sweep. Step 3 not run — vault not reachable from this
+runner — so `vault.mail_snapshot.last_internaldate_ms` is untouched.
+
+**Registry drift: none.** Every tool used this run is in `config/tools.md`:
+`list_labels`, `search_threads`, `get_thread`, `label_thread`, `unlabel_thread`;
+`list_calendars`; `user-info`, `find-tasks`, `find-comments`, `find-completed-tasks`,
+`add-comments`.
+
+**Anomalies and notes**
+1. **The Skool split may be resolvable after all.** Three runs have now flagged this
+   sender as split across classes. This run found the split tracks **mail shape**:
+   "N new notifications since …" → Newsletters (11/11), "1 event happening tomorrow" /
+   "X posted …" promotional pushes → Promotions. That is a testable per-sender rule
+   rather than a standing caveat, and `AGENTS.md` § Supersede warns that a caveat
+   repeated every run is a defect. Not applied — a per-sender rule is Eriks's to set —
+   but recorded here so the promotion review can weigh it instead of the vaguer
+   "Skool is split" note.
+2. **Detached HEAD, fourteenth consecutive run.** No longer a procedural anomaly since
+   Eriks's *"a)"* answer put the repair in Step 0 § 0; still a standing fact about the
+   runner, whose durable fix (cloning onto `main`) is outside this instance's reach.
+3. **Two Apple threads, one minute apart, two dispositions** — the invitation
+   (`1a0c4a5298d8edd8`, Reply/Do, 16:00 UTC run) and the welcome (`1a0c4a61238b986c`,
+   unlabelled, asked). Not an inconsistency: the first carries a direct ask with a
+   three-day deadline, the second is a membership state-change with no ask. Recorded
+   because a later reader seeing the pair in the inbox will wonder.
+4. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
+   browsing, no force-push. All three connectors used are the ones `config/tools.md`
+   names, and only the writes they permit.
