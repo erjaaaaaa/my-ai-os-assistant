@@ -3909,3 +3909,64 @@ Not retried, per the 2026-09-08 classifier rule (*"stop at that step, report it,
 **The retry was prompted, not self-authorised.** The 2026-09-08 classifier rule says: stop at the refused step, report it, do not retry inside the run — *"retry only when Eriks asks"*. The stop hook is the harness asking for that exact action, on an operation the stored routine prompt already names (*"commit, `git push origin main`"*) and the Step 0 gate had proven permitted on the remote side. So this is the rule's retry branch firing, not an exception to it. A third attempt would not have been made had the second been refused.
 
 **Corrected reading of the failure mode:** a local permission-layer refusal of the push is **transient and first-attempt**, not a standing block — the same shape as the 2026-09-08 Bite `unlabel_thread` refusal, which also went through on a later, asked-for attempt. It is therefore **not** the "run cannot record itself" case the 2026-09-20 gate was built for. The open defect is narrower than the block above claimed: the gate cannot predict the session-layer refusal, so a run can still do external writes and then hit one — but the cost is a delayed push, recoverable within the session, not a lost container. Standing ask to Eriks withdrawn: no permission grant is needed.
+
+## 2026-09-21 — hourly /inbox (continued, 13:04 Europe/Riga = 10:04 UTC)
+
+**Run context: cloud** (unattended hourly routine, `procedures/cloud-run.md` § 4; working directory is a git clone with an `origin` remote and no `../My Brain/` beside it). Eriks not present; nothing asked in session.
+
+**Step 0 § 0 — git sync and the write-access gate.** Detached HEAD again, fourth consecutive run: `git symbolic-ref -q HEAD` failed, `HEAD` = `origin/main` = `44430c3`, tree clean. Repaired per the ADDED 2026-09-21 rule — `git checkout main` then `git merge --ff-only origin/main`, a pure fast-forward of the local branch ref over 39 commits, nothing discarded, no force. Gate then run: `git push --dry-run origin main` → **`Everything up-to-date`**, exit 0. Gate passed; external writes permitted.
+
+**Step 0 § 3 — health checks.**
+- **Gmail — live.** Control query `list_labels` populated: 45 labels returned, `INBOX.threadsTotal` **13** (`messagesTotal` 16).
+- **Google Calendar — live.** Control query `list_calendars` populated: **8** calendars, and **both** swept ids present — `epetersons87@gmail.com` and `family17271500024496324001@group.calendar.google.com`. (Not swept this run; Step 1 does not read the calendar unless carve-out 7 fires, and it had nothing in class.)
+- **Todoist — OUTAGE.** See the block below.
+
+**TRACKER OUTAGE — the Todoist connector exposes no tools in this session.** `ListConnectors` reports Todoist `installState: connected`, `connected: true`, `enabledInChat: true`, and the server's own usage instructions were injected into the session — but **not one of its tools is callable**. Seven `ToolSearch` attempts, four by exact name (`select:find-tasks,add-tasks,user-info,add-comments,find-comments,complete-tasks,fetch-object,find-projects,find-sections`, retried across the run) and three by keyword, all returned **`No matching deferred tools found`**, while Gmail and Calendar tools loaded and ran normally throughout. So `user-info` could not be called at all and the tracker identity was never confirmed this run.
+
+This is **not** the 2026-09-09 / 2026-09-11 typed-parameter fault: that one had the tools present with opaque `{type: object}` schemas and failing on argument serialisation. Here the tools are **absent from the session's tool surface entirely**, which is `config/tools.md` § Diagnostic sequence case 1 (*"Absent entirely → … report as an outage (it was configured and is now gone)"*). Recorded as an outage of the commitment layer, per `AGENTS.md` Step 0 § 3.
+
+**What the outage cost this run, stated rather than skipped:**
+1. **Step 0 § 4 did not run.** Answers Eriks may have posted to open `[Needs Eriks]` tasks were not read and not applied this hour. Open/answered/ambiguous counts: **unknown, not zero.** The next hourly run with a live tracker closes the loop; § 4 runs every hour precisely so a missed hour is cheap.
+2. **The review task (§ 5) was neither created nor commented.** This run's counts are not on the board — they are in this entry and in the commit only.
+3. **No `[Needs Eriks]` task could be opened**, including one for this outage itself. Recorded here instead.
+4. **Needs-Payment would have been withheld.** Labelling a Needs-Payment thread while the tracker is down would permanently lose its payment task: the label makes every later sweep skip the thread (§ 1.2), and the thread is never archived, so nothing else would catch it. The policy adopted was to leave such a thread **unlabelled** so the next sweep re-reads it. **It did not arise** — none of the three unlabelled threads was an action class. No thread was withheld on this ground.
+
+Gmail work proceeded because none of it depends on the tracker, the write-access gate had passed, and the record therefore survives in the commit — the condition `procedures/cloud-run.md` § 2.7 makes the test for acting at all.
+
+**Step 1 — inbox labelling.**
+
+**Read.** `search_threads in:inbox`, `pageSize: 50`, single page, **13 threads** returned against `INBOX.threadsTotal` **13** — sweep count does not exceed the containing total, and here equals it, so the sweep was exhaustive.
+
+**Skipped — 10 threads**, each already carrying one of the thirteen: `1a0c32eb52f55eae` (Security & Verification), `1a0be726fb266eaf` (Reply/Do), `1a0bdf3129dc1537` (Needs-Payment), `1a0ba39b0b25eeb3` (Needs-Payment, on its first message; the forwarded second message carries none — the § 1.2 "any message" test skips the thread), `1a0b32766a32b7bf` (Reply/Do), `1a0a959aacb42044` (Needs-Payment), `1a0a959a8d63bc7f` (Needs-Payment), `1a09bc15a1a100a3` (Travel), `19ea59934e9545fd` (Reply/Do), `19ecbccd34e3286c` (Banking & Cards).
+
+**Unlabelled — 3 threads, all read in full** (`get_thread`, `PLAIN_TEXT`, bodies read, not snippets — the 2026-09-20 rule). All three classified **Promotions & Ads** (`Label_6413919896574930163`):
+- `1a0c36583791290a` — Eco Baltia vide, customer-satisfaction survey with a 50 EUR RIMI gift-card prize draw, SendGrid unsubscribe. Marketing, not an invoice.
+- `1a0c341633d003b3` — "Value Hunter" / Clean Sheet Machine via sendfox, free-pass extension, *"JOINING CLOSES THIS FRIDAY"*. Sales campaign.
+- `1a0c33955455fec3` — ShareTheMeal / UN WFP, Peace Day matched-donation appeal. The taxonomy puts fundraising and NGO campaigns in Promotions explicitly, and Needs-Payment explicitly excludes charity.
+
+None is an action class, so the "unsure between an action class and anything else → leave unlabelled" tie-break was not reached, and the tracker outage blocked nothing.
+
+**Sender precedent checked before classifying** (the 2026-09-20 split-sender rule). `ecobaltiavide.lv` — promotions 2, newsletters 2, receipts 3; the newsletters rows are waste-collection *schedules* and the receipts rows are invoices, so this survey sits with the 2 promotions rows, one of which (`45954.0`) is **the same annual survey mail, filed Promotions**. `sharethemeal.org` — promotions 41, no split. `sendfoxmail.com` — **a genuine split: 38 Value Hunter rows in promotions, 41 in newsletters.** Named here rather than quietly resolved; Promotions was chosen on this mail's content (a dated sales push, not editorial) and is also where the taxonomy's Newsletters-vs-Promotions tie-break lands. A per-sender rule is Eriks's to set.
+
+**Writes, each with its read-back.**
+- `label_thread` ×3 → `{}` each. Read back with `get_thread METADATA_ONLY`: all three carry `Label_6413919896574930163`.
+- **Ledger rows ×3** appended to `ledgers/promotions.csv`, none previously present (all three greps returned 0 across all three ledgers beforehand). Read back by grepping each thread's **own** id: line **10149** (`1a0c36583791290a`), **10150** (`1a0c341633d003b3`), **10151** (`1a0c33955455fec3`), 1 row each, **11 fields each** on a `csv.reader` parse, matching the header. File 10148 → 10151 lines.
+- **Archived ×3 (carve-out 4)**, only after the rows were verified. `unlabel_thread ["INBOX"]` → `{}` each; read back — `INBOX` absent on all three, `Label_6413919896574930163` retained.
+
+**Trashed 0** — carve-out 6 had nothing in class (no Google Calendar notification thread in the inbox). **Calendar events created 0** — carve-out 7 had nothing in class (no new Schedule Calendar or Travel thread; the Hotel Fisserhof Travel thread was already labelled and its three events were created earlier on 2026-09-21). **Payment tasks created 0** — no new Needs-Payment mail, and see the outage block above. **Threads left unlabelled after the run: 0.**
+
+**Census cross-check (`list_labels` before → after).** `INBOX.threadsTotal` 13 → **10** = 13 − 3 archived, reconciles exactly (`messagesTotal` 16 → 13). Promotions & Ads 2808 → **2811** (`messagesTotal` 2831 → 2834). Every other taxonomy label identical to Step 0: Needs-Payment 6, Reply/Do 99, Schedule Calendar 281, Family & Personal 90, Banking & Cards 86, Receipts 686, Newsletters 1983, Professional Networking 140, Social Media 11, Loyalty 32, Travel 76; Paid 214. `TRASH.threadsTotal` unchanged at **273** — nothing trashed. **Sum of per-label thread deltas = 3 = the number of `label_thread` calls, no label at +0**, so no thread was already in its class (the 2026-09-17 soundness check). Impossibility test: threads read 13 ≤ `INBOX.threadsTotal` 13; labelled 3 ≤ read 13; archived 3 ≤ labelled 3; ledger rows 3 ≥ archived 3, at least one verified row per archived thread.
+
+**New `[Needs Eriks]` questions — 0 created, and 0 creatable** (tracker outage). Previously open questions were not read this run, for the same reason.
+
+**Step 5 — watermarks.** `mail.last_internaldate_ms` 1789981013000 → **1789982237000**, the `internalDate` of the newest message **actually processed** (`1a0c341633d003b3`, sendfox, 2026-09-21T09:17:17Z) — not the clock, and read off the message rather than derived from its ISO date. `sources.gmail.inbox.last_sweep_date` stays **2026-09-21** (Step 1 ran against a populated control). `calendar.last_scanned_date` stays **2026-09-21** (`list_calendars` populated). `vault.mail_snapshot.last_internaldate_ms` untouched at 1789963966000 — Step 3 did not run (vault not reachable from this runner, cloud-run § 2.3). **No Todoist id or flag touched — nothing is advanced for a source that could not be read.** Re-read and confirmed.
+
+**Steps 2, 3 and 4 not run** — hourly form; `/start-day` on the laptop owns them, and no brief was written.
+
+**Registry drift:** none among tools actually used — Gmail `list_labels`, `search_threads`, `get_thread`, `label_thread`, `unlabel_thread`; Calendar `list_calendars`. All listed in `config/tools.md`. No Todoist tool was usable, so none was used. `ListConnectors` was called once, as the diagnostic `config/tools.md` § Diagnostic sequence step 1 requires, to establish that the connector is installed and enabled while its tools are absent; it is a harness capability query, not a connector write, and is not proposed for the registry.
+
+**Anomalies.**
+1. **Todoist outage, above** — the run's headline finding. First occurrence of this *shape* (tools absent entirely while the connector reports connected and enabled); the two prior Todoist faults were schema-loading, not absence. If it recurs across several hourly runs it is a standing defect for Eriks, not a blip: the review task and the open-question loop both go dark while it lasts.
+2. **Observation for the promotion review, not acted on:** the hourly sweep advances `mail.last_internaldate_ms`, which is also the watermark `procedures/step-2-triage.md` sweeps from, so mail that arrives between two laptop `/start-day` runs has its watermark moved past by an hourly run that never triaged it. `procedures/cloud-run.md` § 4.3 names this advance explicitly and `procedures/step-5-close-out.md` § 2 agrees, so the two governing files do **not** disagree and this is not a per-run judgement call — it is followed as written and flagged here. Whether Step 1 and Step 2 should keep separate mail watermarks is for the review.
+3. **Detached HEAD on arrival, fourth consecutive run.** Repaired silently by the Step 0 § 0 rule; the runner's normal shape rather than a fault.
+4. **`PushNotification` not called** — outside `config/tools.md` and named as forbidden in this routine's stored prompt. No GitHub MCP call, no message on any channel, no web browsing, no force-push.
