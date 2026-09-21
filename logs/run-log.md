@@ -4890,3 +4890,139 @@ runner — so `vault.mail_snapshot.last_internaldate_ms` is untouched.
 ## 2026-09-21 — hourly /inbox (continued, 21:01 Europe/Riga = 18:01 UTC)
 
 - 2026-09-21 18:01 UTC — hourly /inbox: inbox 15 (= `INBOX.threadsTotal` 15, no per-container count exceeds it), read 15 via `get_thread`, skipped 14 (already labelled), unlabelled 1 held by the stated default on open question `6hXpGPJ3PXGJQFJQ` (Apple Developer welcome `mail:1a0c4a61238b986c` — no comment posted, so "stays unlabelled" carried), nothing done — 0 labelled, 0 archived, 0 trashed, 0 ledger rows, 0 tasks, 0 calendar events, **no Gmail write call made**; review task untouched per `procedures/cloud-run.md` § 4.2; sources all live (Gmail `list_labels` 46 labels, Calendar `list_calendars` 8 with both swept ids present, Todoist `user-info` `epetersons87@gmail.com`); open questions 1 open / 0 answered / 0 ambiguous; watermarks unadvanced and `state/state.json` unchanged (newest message processed `1790005611000` is older than the stored `1790007268000`; `inbox.last_sweep_date` already 2026-09-21; `calendar.last_scanned_date` already 2026-09-21, no `list_events` call was made); tracker ids `_verified` 2026-09-07, inside the 30-day window, not re-resolved; detached-HEAD repair applied again (HEAD == `origin/main` == `0963ca0`, tree clean, `git checkout main` + `git merge --ff-only origin/main`, no force), gate then returned `Everything up-to-date`, corroborated with `GIT_TRACE=1` showing `git-remote-https` was invoked; skip test read `label_ids` off `get_thread` per the 2026-09-17 rule, using `METADATA_ONLY` rather than `PLAIN_TEXT` — same tool, same field, and no body was needed because no thread reached classification; registry drift none; GitHub MCP and `PushNotification` present and not used, no message on any channel, no web browsing, no force-push.
+
+## 2026-09-21 — hourly /inbox (continued, 22:00 Europe/Riga = 19:00 UTC)
+
+**Run context: cloud**, hourly form (`procedures/cloud-run.md` § 4). Steps 0 and 1
+only; Steps 2, 3 and 4 not run and no brief written — `/start-day` on the laptop owns
+those. Model `claude-opus-5`.
+
+**Step 0 § 0 — git.** `git pull --ff-only origin main` → `Already up to date`
+(`aa9e2da..dcc2196` fetched). HEAD **detached** at `dcc2196`, exactly `origin/main`,
+tree clean → repaired under Eriks's own rule (answer *"a)"* on `6hXfGMC78cv6vHpQ`,
+now in `procedures/step-0-orient.md` § 0): `git checkout main` + `git merge --ff-only
+origin/main`, a pure fast-forward of 48 commits, nothing discarded, no force. Gate
+then run: `git push --dry-run origin main` → `Everything up-to-date`. **Sixteenth
+consecutive run handed a detached HEAD.**
+
+**Orient block.**
+- **Gmail — live.** Control `list_labels` returned 46 user labels + system.
+  Containing total `INBOX.threadsTotal` **16**, `messagesTotal` **19**.
+- **Google Calendar — live.** Control `list_calendars` returned **8** calendars;
+  both swept ids present (`epetersons87@gmail.com`,
+  `family17271500024496324001@group.calendar.google.com`). No calendar sweep in the
+  hourly form; no `list_events` call was made.
+- **Todoist — live.** `user-info` → `epetersons87@gmail.com`, user 22613842.
+- **Ids:** not re-resolved. `tracker._verified` 2026-09-07 is 14 days old, inside the
+  30-day rule; every id used resolved first time.
+- **Open questions: 1 open, 0 answered-and-closed, 0 ambiguous.**
+  `6hXpGPJ3PXGJQFJQ` (Apple Developer welcome mail — which of the thirteen), opened by
+  the 16:00 UTC run. `find-comments` returned **0 comments**: silence, so the stated
+  default stays in force and the task stays open. No governing file edited this run.
+
+**Step 1 — counts.** Inbox **16** threads at Step 0; `search_threads in:inbox`
+(`pageSize` 50) returned **16** — equal, so nothing truncated, and the sweep count
+does not exceed the containing total. **16 read**, **14 skipped** as already carrying
+one of the thirteen, **2** carried none.
+
+**Inbox reconciliation against the previous run.** The 18:01 UTC run recorded
+`INBOX.threadsTotal` **15**; it is **16** now. The difference is exactly one arrival —
+the LinkedIn thread below, `internalDate` 1790014367000 (18:12:47Z), after that run
+read the mailbox. 15 + 1 = 16, and nothing left the inbox in between.
+
+**Labelled (1 `label_thread` call):**
+- **Professional Networking** 1 — LinkedIn, "👤 Someone at LIBERNETIX you may know"
+  (`mail:1a0c52ba9dbfcb8c`), from `messages-noreply@linkedin.com`, arrived 18:12:47Z.
+  Body read in full via `get_thread` `PLAIN_TEXT`: a People-You-May-Know card list
+  (Hanna Kosynska plus five suggestions), a "See more people you might know" link and
+  LinkedIn's standard notification footer. No amount, no invoice, no ask, no event.
+  Taxonomy: "LinkedIn, AngelList and other professional-community notifications" —
+  a direct fit, not a tie-break.
+  Read-back: `get_thread` → `label_ids` `["UNREAD","Label_5437124985126992273",
+  "INBOX"]`, the applied id present. ✓
+
+**Sender-precedent check** (2026-09-20 split-sender rule). Grepped both ledgers before
+classifying. **No precedent conflict for this sender.** `messages-noreply@linkedin.com`
+has **0** rows in `newsletters.csv`, `promotions.csv` and `receipts.csv`. The seven
+`linkedin.com` rows in promotions.csv are all `hit-reply@` / `inmail-hit-reply@` —
+InMail sales outreach from a different sender address, every one a `migrated` row from
+Eriks's own Sheets export rather than a run's choice. The six linkedin hits in
+newsletters.csv are `salesgravy.com` editorial mail merely containing the word
+"LinkedIn". The other LinkedIn thread in the inbox (`invitations@linkedin.com`,
+`mail:1a0c44fe7f0c8e42`) already carries Professional Networking from an earlier run,
+so this is consistent with precedent, not a third reading.
+
+**Archived: 0.** Professional Networking is not one of carve-out 4's four archivable
+classes — the thread keeps its label and stays in the inbox, as the taxonomy says.
+**Trashed: 0** — carve-out 6 had nothing in class (no Google Calendar notification
+mail this sweep). **Ledger rows: 0**, and none owed: no Receipts, Newsletters or
+Promotions thread was labelled, so the "at least one verified row per archived thread"
+invariant is satisfied vacuously (0 archived, 0 rows).
+
+**Label census cross-check (`list_labels` before → after).**
+Professional Networking threads **141 → 142**, messages **197 → 198**. Every other one
+of the thirteen unchanged: Needs-Payment 6, Reply/Do 101, Schedule Calendar 281,
+Family & Personal 91, Banking & Cards 86, Receipts & Subscriptions 687, Newsletters &
+Learning 1986, Promotions & Ads 2817, Social Media 11, Loyalty 32, Security &
+Verification 224, Travel 76. **Sum of per-label thread deltas = 1 = the number of
+`label_thread` calls**, no label at +0. `INBOX.threadsTotal` **16 → 16** (nothing
+archived); `TRASH.threadsTotal` **273 → 273** (nothing trashed).
+**Impossibility test:** 16 threads read ≤ containing total 16; the one per-class count
+(Professional Networking 1) does not exceed that label's global total of 142.
+
+**Skip test** run against `get_thread`, never the `search_threads` result, per the
+2026-09-17 rule. Fourteen threads were shown carrying one of the thirteen in the
+search preview — positive evidence a label is present, which truncation cannot
+manufacture — and the two that appeared to carry none were re-read with `get_thread`
+before anything was written: `1a0c52ba9dbfcb8c` (`["UNREAD","INBOX"]`, labelled) and
+`1a0c4a61238b986c` (`["INBOX"]`, left alone). Noted because the rule's wording is
+"run against `get_thread`", and the sound half of it — the false-negative direction —
+is what was exercised here.
+
+**Payment tasks created: 0** — no new Needs-Payment mail. The four Needs-Payment
+threads in the inbox are unchanged and already carry live tasks.
+**Calendar events created: 0** — carve-out 7 had nothing in class (no Schedule
+Calendar and no Travel thread newly labelled).
+**Closed-payment loop (carve-out 5): not in scope** — it belongs to Step 2, which the
+hourly form does not run.
+**New `[Needs Eriks]` questions: 0.**
+
+**Left unlabelled on purpose — 1.** The Apple Developer Program welcome mail
+(`mail:1a0c4a61238b986c`), matched by thread id, held by the stated default on open
+question `6hXpGPJ3PXGJQFJQ` (*"it stays unlabelled in your inbox"*). Its body was not
+re-read: the classification is held by an open question, not undecided in this run,
+and `get_thread` `MINIMAL` was enough to prove it still carries no taxonomy label.
+
+**The review task.** The day's `[Act] Review inbox labels — 2026-09-21`
+(`6hXf2pQ7qQ5pRHRQ`) exists and is **completed** (06:29:30Z, in Eriks's own batch
+clear). Per his answer *"c)"* on `6hXhRP46QrG7hPQQ` — *"If it's just the label counts -
+it can keep commenting even on the completed tasks"* — this run posted **one** comment
+with its counts and created no continuation task. Comment id `6hXqC6jCRcjVCfjQ`,
+`postedAt` 2026-09-21T19:02:14.263Z, read back with `fetch-object` type `comment` and
+the content confirmed verbatim. ✓
+
+**Watermarks advanced** (Step 5 § 2): `mail.last_internaldate_ms`
+**1790007268000 → 1790014367000**, the `internalDate` of the newest message actually
+processed (the LinkedIn thread, 2026-09-21T18:12:47Z) — not the clock.
+`sources.gmail.inbox.last_sweep_date` already 2026-09-21, unchanged;
+`calendar.last_scanned_date` already 2026-09-21, unchanged (control populated, no
+sweep run). `vault.mail_snapshot.last_internaldate_ms` untouched — Step 3 is a laptop
+step and did not run. State re-read after writing and the value confirmed.
+
+**Registry drift: none.** Every tool used this run is in `config/tools.md`:
+`list_labels`, `search_threads`, `get_thread`, `label_thread`; `list_calendars`;
+`user-info`, `find-tasks`, `find-comments`, `find-completed-tasks`, `add-comments`,
+`fetch-object`.
+
+**Anomalies and notes**
+1. **Detached HEAD, sixteenth consecutive run.** Not a procedural anomaly since
+   Eriks's *"a)"* answer put the repair in Step 0 § 0; still a standing fact about the
+   runner, whose durable fix (cloning onto `main`) is outside this instance's reach.
+2. **A quiet inbox, and that is the hourly sweep working.** One arrival in the hour,
+   one label, nothing archived. The fourteen skipped threads are the same standing set
+   — four Needs-Payment, four Reply/Do, and one each of Professional Networking,
+   Family & Personal, Security & Verification, Travel, Banking & Cards — plus the one
+   held by an open question.
+3. **No `PushNotification`**, no GitHub MCP call, no message on any channel, no web
+   browsing, no force-push. All three connectors used are the ones `config/tools.md`
+   names, and only the writes they permit.
