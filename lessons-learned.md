@@ -622,3 +622,28 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   paying the stale-worktree window, and **the run log must say so rather than reporting the
   recovery as though the hazard had been avoided.** Extends, does not replace, the two
   2026-09-21 unrelated-history entries; their rules are unchanged and correct.
+- 2026-09-22 — **The lost-ledger-row failure finally happened for real, and two runs passed over it
+  without noticing** — the 00:0x UTC hourly run labelled the Nate Herk thread
+  `1a0c65752b8524ca` **Newsletters & Learning** and **archived** it, posted two Todoist comments
+  claiming `newsletters.csv` line **6246**, and then never committed: there is no `00:0x` commit in
+  `git log`, no `2026-09-22 00:0x` run-log entry, and `state/state.json` still carried the 23:04
+  run's watermark. The Gmail writes are real and permanent — `get_thread` shows the thread carrying
+  `Label_6571319530419234897` and **no `INBOX`** — so the thread had left the inbox sweep for good
+  while the row recording it existed only in the dead container. This is exactly the harm
+  `procedures/cloud-run.md` § 2.7 CORRECTED was written for after the first cloud run lost 25 rows;
+  what is new is that it recurred **after** the write-access gate was added, and that the gate did
+  not prevent it. **How it was caught, which is the part worth keeping:** the 04:0x run appended its
+  own row, read it back at line **6246**, and recognised that number from the 00:0x run's comment on
+  the review task — the same line for a different thread is arithmetically impossible if both rows
+  exist. A line-number collision between a comment and a file is a **cheap, accidental** integrity
+  check; the 01:00 and 02:00 runs each reported "0 labelled" truthfully and never looked, because
+  nothing in the hourly form asks a run to confirm that the **previous** hour's writes landed.
+  **Rule:** at Step 0, after the git pull, a cloud run compares the newest `logs/run-log.md` entry
+  and the newest commit against the previous scheduled slot; when a slot is missing, it treats that
+  run's external writes as **unrecorded** and reconstructs them before doing its own work —
+  `search_threads` the archive classes for threads labelled but absent from their ledger, per
+  `cloud-run.md` § 2.7's recovery. A run that cannot record itself must not act; a run that finds an
+  **earlier** run which acted without recording must repair it, because nobody else will. Backfilled
+  this run at `ledgers/newsletters.csv:6247`, verified by grep, exactly one occurrence. Extends the
+  2026-09-20 write-access-gate entry: the gate proves *this* run can record itself and says nothing
+  about whether the *last* one did.
