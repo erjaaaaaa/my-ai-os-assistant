@@ -191,3 +191,16 @@ catch.
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all
   messages' `label_ids`, not just the newest.**
+- **2026-09-22 — `find-tasks` with `searchText` can return an EMPTY first page
+  with `hasMore: true`.** Looking up the day's review task by title returned
+  `{"tasks": [], "totalCount": 0, "hasMore": true, "nextCursor": "sDZoUUY1cTlXV1c4RzVKcng.NymK08WoXFCJcMGx"}`;
+  the cursor's page returned the task, with `totalCount: 1, hasMore: false`. So
+  `totalCount` is **per page, not a grand total**, and an empty page is not an
+  empty result. → A run that trusted page one would have concluded no review
+  task existed and created a **duplicate**, which is exactly what
+  `procedures/step-1-inbox.md` § 5's "search by title first; update rather than
+  duplicate" exists to prevent. → **Never conclude a task does not exist from a
+  `find-tasks` page that reports `hasMore: true` — paginate on `cursor` to
+  exhaustion first, and treat `totalCount` as a page count.** Strengthens the
+  2026-09-07 `limit: 10` entry above: that one warns a listing can be silently
+  truncated, this one shows it can be silently *empty*.
