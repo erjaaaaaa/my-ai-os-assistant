@@ -22,6 +22,12 @@ and performs every write.
 2. For every thread returned, `get_thread` with `messageFormat: PLAIN_TEXT`.
    Read `internalDate` off each message. A thread is **new** if its newest
    `internalDate` is greater than `mail.last_internaldate_ms`.
+   **CORRECTED 2026-09-22 — compare against `mail.triage_last_internaldate_ms`,
+   not `mail.last_internaldate_ms`.** The hourly cloud `/inbox` runs advance
+   the Step 1 key every hour, so a laptop triage comparing against it saw
+   nothing the cloud had already labelled (lessons-learned.md, 2026-09-22).
+   The triage key is advanced at Step 5 only by a run that performed this
+   step. Superseded text: "greater than `mail.last_internaldate_ms`".
 3. Census: the number of inbox threads read must not exceed
    `INBOX.threadsTotal` from Step 0. State both numbers.
 4. Classify each new thread per the routing rules. The label Step 1 applied
