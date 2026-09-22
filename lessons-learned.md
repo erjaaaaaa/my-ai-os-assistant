@@ -598,3 +598,27 @@ are candidates for the promotion review (see `AGENTS.md` § The learning loop).
   executable from an unattended run even with Eriks's yes. Extends the 2026-09-21
   unrelated-history entry above; its rule is unchanged and correct, and this is about
   **where that rule has to live** to actually bind.
+- 2026-09-22 — **The § 0 / § 1 ordering defect is now demonstrated twice, and the
+  fix has to be in the procedure, not in this file** — the 01:0x UTC hourly run met
+  the three preconditions of Eriks's *"a)"* on `6hXfGMC78cv6vHpQ` (detached `HEAD`,
+  `HEAD` == `origin/main` == `28bb653`, clean tree), followed
+  `procedures/step-0-orient.md` § 0 **as written**, and hit the identical failure the
+  21:01 and 23:04 runs hit: `git checkout main` succeeded onto the unrelated `aa9e2da`
+  history (44 and 50 commits diverged, no merge base), `git merge --ff-only origin/main`
+  failed with *refusing to merge unrelated histories*, and the worktree sat on the stale
+  tree — `procedures/step-0-orient.md` and `.claude/skills/inbox/SKILL.md` silently
+  reverted on disk — until `git checkout --detach 28bb653` restored it. No external write
+  had happened, nothing was discarded, no force, local `main` untouched. **Tally across
+  four consecutive hourly runs: the standing default (c) ran three times and mutated the
+  worktree all three; option (a)'s `git merge-base --is-ancestor` precondition was applied
+  once (00:0x) and prevented it outright; option (b) was refused by the session's own
+  permission layer.** The 2026-09-21 entry above predicted exactly this — a rule read at
+  § 1 cannot govern a mutation at § 0 — and the 00:0x run's compliance was ordering luck,
+  not a property of the procedure, which this run proves by being the same run type doing
+  the same thing wrong an hour later. **Rule:** treat a lesson whose only home is this file
+  as **not in force** for any action that precedes the § 1 read, and stop re-deriving it per
+  run: the precondition belongs **in** `procedures/step-0-orient.md` § 0 beside the
+  checkout. Until Eriks answers `6hXqrrHRVQHjvg9Q`, every run that reaches § 0 will keep
+  paying the stale-worktree window, and **the run log must say so rather than reporting the
+  recovery as though the hazard had been avoided.** Extends, does not replace, the two
+  2026-09-21 unrelated-history entries; their rules are unchanged and correct.
