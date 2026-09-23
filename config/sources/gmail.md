@@ -173,6 +173,16 @@ incompleteness is silent.
   returns threads carrying X anyway, because the query matches a thread if
   *any* message in it lacks the label. Verify labels by reading each message's
   `label_ids`, never by filtering them out in the query.
+- **A label query by leaf name returns `{}`; the full display path works.**
+  ADDED 2026-09-23: `search_threads label:"Social Media"` returned an empty
+  object while `label:"Interests & Marketing/Social Media"` returned all 11
+  threads the label held, and `list_labels` independently reported
+  `threadsTotal: 11`. **Query a nested label by its full display path in
+  quotes** — the leaf name alone is a query defect, not an absence, exactly
+  as a label-*id* query is (2026-09-10 entry above). Found while checking
+  whether Eriks had filed a platform policy notice as Social Media; trusting
+  the leaf-name `{}` would have hidden the precedent that decided the
+  classification.
 - **`resultCountEstimate` is not a count.** ADDED 2026-09-21: `search_threads
   in:anywhere after:2026/09/07` reported `resultCountEstimate: 201` and
   returned 380 threads over eight pages. **Paginate to exhaustion and count
