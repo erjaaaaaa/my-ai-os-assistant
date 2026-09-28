@@ -180,7 +180,31 @@ another.
   счетчики** (Family, monthly, created 2024-05-30 by margaritaeliya,
   occurrence seen Mon 28 Sep 20:15–21:15) — a household meter-reading
   chore. Same treatment: no task, listed in the Family section. Eriks may
-  strike it.
+  strike it. **CORRECTED 2026-09-28 by the assistant — Ervins Futbols has
+  moved venue, and the location recorded above is now wrong.** Superseded
+  text: *"Mārupes Valsts ģimnāzijas stadions"*. That venue holds for
+  occurrences up to 17 Sep; every occurrence from **19 Sep through 27 Oct**
+  reads **Mārupes Pamatskola, Viskalnu iela 7, Tīraine, Mārupes nov.,
+  LV-2167** (one outlier, 26 Sep, reads "Mārupes ģimnāzijas"). Both 28 Sep–5
+  Oct occurrences use the new venue. **Nothing about the treatment changes** —
+  still no task, still listed in the Family section; only the recorded
+  location is fixed, and the series' times (Thu 17:00 and Tue 18:00) are
+  unchanged.
+  **OBSERVED 2026-09-28, not a rule change — two of the series above appear to
+  have stopped, and this is recorded rather than acted on.** Over a 60-day
+  control window on the Family calendar (72 events returned, so a populated
+  read rather than an outage): **Take out rubbish** (Thu 22:00) has
+  occurrences only on **3 and 10 Sep**, and **Мусор** (Fri 08:00) only on
+  **4 Sep** — neither appears in the 28 Sep–5 Oct week nor anywhere in the
+  remaining 48 days of the control. The plausible reading is that both were
+  superseded by the 🗑️ Sadzīves atkritumi / ♻️ Šķirotie atkritumi pair, whose
+  descriptions say *"New schedule from 1 September 2026"* — but that is
+  **inference, unconfirmed**, and no entry above is withdrawn on it. By
+  contrast 🍾 Stikla iepakojums is behaving exactly as recorded (17 Sep and
+  15 Oct, every 4 weeks, correctly skipping this week). Treatment is unchanged
+  either way: these series never generated a task, so a stopped series costs
+  nothing but a stale line here. Eriks may strike both entries if he ended
+  them deliberately.
 - Confirmed per-item ownership on the Family calendar — ADDED 2026-09-11,
   **SETTLED 2026-09-14 by Eriks**. Superseded text: *"**These are recorded
   facts, not a rule**: no general test has been agreed, and the open question
