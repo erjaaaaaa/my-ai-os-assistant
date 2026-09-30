@@ -254,11 +254,11 @@ from Eriks's earlier automation on 2026-09-07.
 | Class (Eriks's label) | Test | Then |
 |---|---|---|
 | **Needs-Payment** (`Action Required/Needs-Payment`) | A request to pay a specific invoice or bill, or approve a payment due: invoice/receipt numbers, due dates, amounts, bank details, "pay invoice", "payment due", "outstanding balance". **Not** fundraising or charity ("donate", "give now", "support our mission"), marketing, newsletters, or anything with an unsubscribe cue. WIDENED 2026-09-14 by Eriks, answering the `[Needs Eriks]` question of the same day (ref `mail:1a099e498f6dc9a7`, task `6hW4p9MqPQFRg46Q`): **a failed-payment or update-your-payment-method notice from a subscription or service is Needs-Payment**, even with no amount, invoice number or due date — the markers this test otherwise keys on. Eriks: *"Youtube premium should be marked as Needs-payment since my payment failed."* The payment task follows per § The payment task, titled from the vendor with no amount. | Label + **payment task** (shape below). Stays in inbox. |
-| **Reply/Do** (`Action Required/Reply/Do`) | A direct ask needing Eriks's reply or a small action: "Can you confirm?", "Please send me the file", "Can you do X?" WIDENED 2026-09-21 by Eriks, answering `[Needs Eriks]` task `6hXM3WGgqj8QqGRQ` with *"a)"*, where option (a) read *"Reply/Do — a small decision of yours; it stays in the inbox with a label, no task"*: **a vendor account or service notice that needs no payment but carries a consequence** — a trial expiry, a policy change, a plan downgrade — is Reply/Do, no task. First items: Bluehost WHOIS-privacy expiry `mail:1a0b32766a32b7bf` (the item the options were written for) and Google AI Studio lower-tier `mail:1a0be726fb266eaf` (the second item named on the same task, labelled under the **assistant's reading** that the answer settles the class the task's last comment asked about — Eriks may narrow it to the one item). Superseded: the tie-break left these unlabelled. | Label. Feeds Step 2 triage (Act / Decide). Stays in inbox. |
+| **Reply/Do** (`Action Required/Reply/Do`) | A direct ask needing Eriks's reply or a small action: "Can you confirm?", "Please send me the file", "Can you do X?" WIDENED 2026-09-21 by Eriks, answering `[Needs Eriks]` task `6hXM3WGgqj8QqGRQ` with *"a)"*, where option (a) read *"Reply/Do — a small decision of yours; it stays in the inbox with a label, no task"*: **a vendor account or service notice that needs no payment but carries a consequence** — a trial expiry, a policy change, a plan downgrade — is Reply/Do, no task. First items: Bluehost WHOIS-privacy expiry `mail:1a0b32766a32b7bf` (the item the options were written for) and Google AI Studio lower-tier `mail:1a0be726fb266eaf` (the second item named on the same task, labelled under the **assistant's reading** that the answer settles the class the task's last comment asked about — Eriks may narrow it to the one item). Superseded: the tie-break left these unlabelled. WIDENED 2026-09-30 by Eriks, answering `[Needs Eriks]` task `6hfgFmCGFPjQFcmQ` (ref `mail:1a0edc42b9b404f2`) with *"It was do. I've already done it."* — read as option (b), **Reply/Do**: a **parcel-carrier in-transit notice** (SmartPosti, GLS and the like) that offers a delivery choice — pick a locker, redirect, reschedule — is **Reply/Do**, label only, no ledger row, no archive, no task. Superseded: the class was undecided, Eriks's own filing being split Reply/Do x3 / Receipts x2 / unlabelled x5. **Still open, and not decided by this answer:** whether an *arrival* notice ("paciņa jau gaida pakomātā") is treated the same — the task asked and he did not say, so it stays classified on its own content. Labels are never changed retroactively. | Label. Feeds Step 2 triage (Act / Decide). Stays in inbox. |
 | **Schedule Calendar** (`Action Required/Schedule Calendar`) | **Only** real invites, updates or confirmed bookings: must contain invitation / accepted / declined / rescheduled / canceled, or an `.ics`, or an explicit travel booking (itinerary, boarding pass). Newsletter cues (unsubscribe, manage preferences) mean it is **not** Schedule. | Sub-rule first: a Google Calendar daily agenda or "no events scheduled" mail, a marketing webinar / live session / register / sign up / subscribe / YouTube event, or anything from `bilesuserviss.lv` → label **Promotions & Ads** instead and archive (WIDENED 2026-09-08: also a Google Calendar notification or reminder for an event that § Source hints › Calendar classes as advertising; unsure → ask, per that rule). Otherwise: label, then the calendar match check and, if unmatched, a **calendar proposal** in the brief. Archived once handled. CHANGED 2026-09-09 by Eriks, two ways: (i) a **Google Calendar notification** (New/Updated/Cancelled event, Invitation, Accepted/Declined, daily agenda; WIDENED 2026-09-21 by Eriks: also "Notification:" reminders) → label, existence check, then **trash** under carve-out 6 — this supersedes the daily-agenda half of the sub-rule ("a Google Calendar daily agenda … → Promotions & Ads"); the marketing-webinar and `bilesuserviss.lv` halves survive. Eriks: *"The notifications from google should be ignored (those are usually about the event creation or deletion) so those can be deleted immediatlly."* (ii) an unmatched, uncancelled **real invite or booking** → **create the event** on Eriks's own calendar under carve-out 7, read back, then archive — supersedes "a calendar proposal in the brief"; the proposal survives only for the unsure case, as a `[Needs Eriks]` question. Eriks: *"Same goes with calendar invites - check if those exist, if not, create one."* |
 | **Family & Personal** | Personal or family messages: school, kids, health, family updates. WIDENED 2026-09-21 by Eriks, answering `[Needs Eriks]` task `6hXmJ9JJ9W6wJJ5x` (ref `mail:1a0c3f2870d74e1e`) with *"- **Family & Personal**"*, which was option (a) *"Keep the default — Family & Personal, stays in the inbox"*: **ACRO Criminal Records Office correspondence about a police-certificate application** — acknowledgements, reference-number notices, status mail carrying no charge — is Family & Personal, **not** Receipts & Subscriptions, and stays in the inbox with no ledger row. Superseded: the class was undecided, Eriks's own 1 Sep filing having split the same application `PC/26/151997` across both (`1a05cca515b98a07` → Receipts, `1a05c52b54997d50` → Family). Applies to future ACRO mail; labels are never changed retroactively. | Label. Stays in inbox. |
 | **Banking & Cards** (`Finance & Accounts/Banking & Cards`) | Bank statements, card alerts, suspicious transactions, balance notifications. | Label. Stays in inbox. |
-| **Receipts & Subscriptions** (`Finance & Accounts/…`) | Bills already charged, invoices paid, subscriptions, renewals, receipts showing charges. | Label + **ledger row** in `ledgers/receipts.csv`, then archive. |
+| **Receipts & Subscriptions** (`Finance & Accounts/…`) | Bills already charged, invoices paid, subscriptions, renewals, receipts showing charges. | Label + **ledger row** in `ledgers/receipts.csv` (one row **per purchase**, not per mail — see **One purchase, one receipts row** below), then archive. |
 | **Newsletters & Learning** (`Interests & Marketing/…`) | Recurring editorial content from publishers (Substack, Beehiiv, Mailchimp, industry blogs). Google Calendar daily agendas land here too. | Label + row in `ledgers/newsletters.csv`, then archive. Digested weekly. |
 | **Professional Networking** (`Interests & Marketing/…`) | LinkedIn, AngelList and other professional-community notifications. | Label. Stays in inbox. |
 | **Promotions & Ads** (`Interests & Marketing/…`) | Marketing, retail offers, casino ads, sales campaigns, discounts. Includes fundraising appeals and NGO campaigns unless a specific bill is due. | Label + row in `ledgers/promotions.csv`, then archive. Digested weekly. |
@@ -317,6 +317,13 @@ Subscriptions** (a moneyless ledger row plus an archive), **Promotions & Ads**
 (a ledger row plus an archive), and — for Apple and Workspace —
 **Reply/Do** (label only, stays in the inbox).
 
+**One thing Eriks chose not to act on, recorded so it is not lost.** The Malta
+Enterprise item is a **€17,244.99** MicroInvest tax-credit certificate whose own
+text says it *"is essential that the certificate is submitted together with the
+income tax return for the year in which the credit is claimed"* — a real future
+obligation. Option (b) would have put it on the board; he picked (a). It is not
+tasked, and a run does not re-raise it.
+
 **These are decisions now, not observed habits.** For these three senders they
 supersede the *tie-break* above: the thread is still left unlabelled, but it
 is no longer a low-confidence case, so **no `[Needs Eriks]` task is created
@@ -350,10 +357,22 @@ Three consequences, stated because they touch rules written elsewhere:
   thread's own `messageId`** in `notes`, so the grep that gates the archive
   still finds it and the thread still leaves a record behind. **If that grep
   cannot be satisfied, the thread is not archived** and the run reports it.
-- **No retro-fix.** The task stated past rows would not be corrected unless
-  Eriks asked, and he did not ask: the `303-2284563-0770752` pair at
-  `receipts.csv:557` and `:561`, the `303-8509501-1529908` pair and the
-  `305-0172236-5519513` pair stay exactly as they are.
+- **No retro-fix, with one exception — CORRECTED 2026-09-30 later the same day.**
+  Superseded text: *"the `303-2284563-0770752` pair at `receipts.csv:557` and
+  `:561`, the `303-8509501-1529908` pair and the `305-0172236-5519513` pair stay
+  exactly as they are."* True when written at 11:0x UTC; the laptop `/start-day`
+  then applied the decision to **the pair it was actually asked about**, on the
+  2026-09-14 rule that a message setting policy also sets an end state for the
+  item in hand. `receipts.csv:557` keeps the 45.34 EUR; **`:561`'s `amount` is
+  cleared to empty and its row kept**, with its superseded text preserved verbatim
+  in `notes`. The other two pairs (`303-8509501-1529908`, `305-0172236-5519513`)
+  are untouched and stay that way until Eriks asks.
+- **A correction supersedes in place; it never deletes a line.** Deleting `:561`
+  was attempted first and **refused by the session's permission layer as
+  irreversible local destruction** — and `AGENTS.md` § Supersede, never erase
+  prescribes the in-place form anyway. So: going forward, *update the existing
+  row*; retrospectively, *clear the duplicate amount and annotate*. Never remove
+  a ledger line.
 
 Boundary: same order or invoice **and** same transaction. Two genuinely
 different purchases in one thread are still two rows (the 2026-09-11 Bolt

@@ -53,7 +53,7 @@
       "labels_verified": "2026-09-07",
       "inbox.last_sweep_date": "2026-09-30",
       "paid_label_id": "Label_2307425248756940905",
-      "mail.triage_last_internaldate_ms": 1790568769000
+      "mail.triage_last_internaldate_ms": 1790604535000
     },
     "calendar": {
       "configured": true,
@@ -61,13 +61,13 @@
         "epetersons87@gmail.com",
         "family17271500024496324001@group.calendar.google.com"
       ],
-      "calendar.last_scanned_date": "2026-09-28",
+      "calendar.last_scanned_date": "2026-09-30",
       "_verified": "2026-09-07"
     }
   },
   "vault": {
     "path": "../My Brain",
-    "mail_snapshot.last_internaldate_ms": 1790578722000
+    "mail_snapshot.last_internaldate_ms": 1790759180000
   },
   "flags": {
     "inbox_sweep": true

@@ -113,8 +113,12 @@ unanswered … a multi-day stay creates nothing."*
 **DECIDED 2026-09-30 by Eriks** (task `6hc967pfqvR7J3qQ`, *"a)"*): an
 overlapping event with a **different title** is not a match, so a flight or
 booking still gets its own timed event even where a trip-level entry covers
-the dates. Full text and boundaries in `AGENTS.md` § Phase gates carve-out 7,
-authoritative there.
+the dates. The match test stays **title roughly equal AND times overlapping —
+both**. Full text and boundaries in `AGENTS.md` § Phase gates carve-out 7,
+authoritative there. (Written twice on 2026-09-30: the 11:00 UTC hourly cloud
+run and the laptop `/start-day` applied the same answer minutes apart, in
+different words. The two readings agreed; this is the merge, not a third
+rule.)
 
 **None autonomously. This source is read-only in every sweep.** NARROWED 2026-09-09 by Eriks: carve-out 7 below makes one creation class autonomous; the sentence otherwise stands. `create_event`,
 `update_event`, `delete_event` and `respond_to_event` are never called by a run

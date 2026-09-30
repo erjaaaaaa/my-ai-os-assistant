@@ -356,6 +356,7 @@ Four ship by default:
    brief. Supersedes "a calendar proposal in the brief, created on a
    per-item yes". Authorising decision, Eriks, 2026-09-09, in chat: *"Same goes with calendar invites - check if those exist, if not, create one."*
 
+
    **NARROWED 2026-09-15 by Eriks (applied 2026-09-17) — a booking whose
    date has already passed is never created, and its thread is archived
    anyway.** The appointment is over, so it counts as *handled* for
