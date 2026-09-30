@@ -299,6 +299,68 @@ Loyalty > Receipts > Promotions.** Unsure between Newsletters and Promotions →
 Schedule) and anything else → leave the thread **unlabelled and list it in the
 brief** rather than guess; a wrong action label costs more than a missing one.
 
+**Vendor account-lifecycle mail stays unlabelled — DECIDED 2026-09-30 by
+Eriks**, answering three `[Needs Eriks]` tasks in one sitting. The class is
+exactly: a vendor's own account, membership or onboarding notice carrying no
+payment, no ask and no event. It gets **no label, no ledger row, no archive
+and no task** — it sits in the inbox until Eriks files or clears it by hand.
+Three senders are settled by name:
+
+| Sender / class | Task | Eriks's words |
+|---|---|---|
+| `no_reply@email.apple.com` — Apple Developer Program membership and App Store Connect status mail | `6hXpGPJ3PXGJQFJQ` | *"Leave it unlabelled"* |
+| `client.portal@maltaenterprise.com` — MicroInvest tax-credit certificate mail | `6hXxcJ9mX8MwVR5x` | *"a)"* — option (a), *"keep the default"*, i.e. stays unlabelled |
+| `workspace-noreply@google.com` — Google Workspace trial and onboarding mail | `6hcWfpHR58RVxwRQ` | *"a)"* — option (a), *"keep the default"*, i.e. stays unlabelled |
+
+All three had the same alternatives offered and declined: **Receipts &
+Subscriptions** (a moneyless ledger row plus an archive), **Promotions & Ads**
+(a ledger row plus an archive), and — for Apple and Workspace —
+**Reply/Do** (label only, stays in the inbox).
+
+**These are decisions now, not observed habits.** For these three senders they
+supersede the *tie-break* above: the thread is still left unlabelled, but it
+is no longer a low-confidence case, so **no `[Needs Eriks]` task is created
+for it and it is not raised in the brief as unsure** — a run labels nothing
+and moves on. Both boundaries: this is **three named senders**, not a general
+rule about vendor mail, so a fourth vendor's account-lifecycle mail is still
+the unsure case the tie-break governs; and a mail from these three that *does*
+carry a payment, an ask or an event is classified on that content like
+anything else.
+
+**One purchase, one receipts row — DECIDED 2026-09-30 by Eriks**, answering
+`[Needs Eriks]` task `6hfX7G46FMMwMqFx`: *"You should write it down only once,
+no duplicate amount for the same purchase"* — option (b) of the three offered.
+The class: a receipt mail whose **order or invoice number is already in
+`ledgers/receipts.csv` for the same transaction**, typically Amazon's
+*Ordered* confirmation followed days later by its *Dispatched* notice, which
+arrive as two separate threads. On it the run **updates the existing row**
+instead of appending a second one — the later message's `messageId` and date
+go into that row's `notes`, and `amount` carries the final figure. Declined:
+(a) one row per receipt mail, the standing default, which double-counts every
+Amazon order; (c) a second row with `amount` left empty.
+
+Three consequences, stated because they touch rules written elsewhere:
+
+- **This is the first ledger rule that edits rather than appends.** Every
+  other row is append-only, and the edit is confined to one existing row's
+  `notes` and, where the later mail corrects it, its `amount`.
+- **The hard invariant is unchanged and the edit must satisfy it**: *at least
+  one verified row per archived thread* (`lessons-learned.md` 2026-09-09,
+  extended 2026-09-11). The updated row therefore has to carry the **archived
+  thread's own `messageId`** in `notes`, so the grep that gates the archive
+  still finds it and the thread still leaves a record behind. **If that grep
+  cannot be satisfied, the thread is not archived** and the run reports it.
+- **No retro-fix.** The task stated past rows would not be corrected unless
+  Eriks asked, and he did not ask: the `303-2284563-0770752` pair at
+  `receipts.csv:557` and `:561`, the `303-8509501-1529908` pair and the
+  `305-0172236-5519513` pair stay exactly as they are.
+
+Boundary: same order or invoice **and** same transaction. Two genuinely
+different purchases in one thread are still two rows (the 2026-09-11 Bolt
+case, unchanged); a corrected re-send inside one thread is still the
+2026-09-20 getguru supersede case, which this decision generalises **across**
+threads rather than replacing.
+
 **The payment task** (Needs-Payment only): title `Pay <vendor> <amount>
 <currency>` (omit what the mail does not state; never invent an amount from an
 attachment the connector cannot read); **This Week** — CORRECTED 2026-09-07

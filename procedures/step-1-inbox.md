@@ -23,6 +23,15 @@ manager re-reads the thread before labelling it.
    Unsure between an action class and anything else → leave unlabelled and
    list it for the brief; never guess an action label.
 
+   **ADDED 2026-09-30 (Eriks, tasks `6hXpGPJ3PXGJQFJQ`, `6hXxcJ9mX8MwVR5x`,
+   `6hcWfpHR58RVxwRQ`):** mail from `no_reply@email.apple.com`,
+   `client.portal@maltaenterprise.com` or `workspace-noreply@google.com`
+   that carries no payment, no ask and no event is **left unlabelled by
+   decision** — no label, no row, no archive, and **no `[Needs Eriks]` task
+   and no brief entry**, because the class is settled rather than unsure.
+   Rule and boundaries in `config/routing-rules.md` § Mail label taxonomy ›
+   *Vendor account-lifecycle mail stays unlabelled*.
+
 ## 2. Label
 
 `label_thread(threadId, [id])` with exactly one label id from state. Read the
@@ -56,6 +65,19 @@ amount is only in an attachment, the row still gets written with
 `notes: amount not in body; attachment not readable via connector`. Append to
 `ledgers/receipts.csv` unless the `messageId` is already there; re-read the
 file to confirm the row; then archive.
+
+**CHANGED 2026-09-30 by Eriks (task `6hfX7G46FMMwMqFx`) — one purchase, one
+row.** Before appending, check the order or invoice number against the rows
+already in `ledgers/receipts.csv`. Already there for the **same
+transaction** (Amazon's *Ordered* mail then its *Dispatched* mail, two
+separate threads) → **update that row** rather than appending: put this
+thread's own `messageId` and date in its `notes`, keep `amount` at the final
+figure, then grep the file for **this thread's** `messageId` and archive only
+if it is found. Policy, boundaries and the declined options are in
+`config/routing-rules.md` § Mail label taxonomy › *One purchase, one receipts
+row* — authoritative there, not restated here. Superseded text: *"Append to
+`ledgers/receipts.csv` unless the `messageId` is already there"* as an
+unconditional append.
 
 **Newsletters & Learning / Promotions & Ads.** Append to
 `ledgers/newsletters.csv` / `ledgers/promotions.csv`: received_date (message

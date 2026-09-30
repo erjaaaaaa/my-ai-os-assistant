@@ -36,6 +36,37 @@ GitHub App had read but not write access. The archived threads never
 re-enter the sweep, so their ledger rows were lost with the container. A
 run that cannot record what it did must not do it.
 
+**DECIDED 2026-09-30 by Eriks — keep the default; § 0 gains no guard.**
+Answering `[Needs Eriks]` task `6hXqrrHRVQHjvg9Q` with *"c)"*, where option
+(c) read *"Keep the default — repair, restore on failure, carry on."* So the
+repair above stands exactly as written: attempt it, and if it fails, restore
+the worktree to the commit the run arrived on, then gate and push.
+**Declined:** (a) a `git merge-base --is-ancestor` precondition gating the
+checkout; (b) letting a run re-point the local branch (`checkout -B`,
+`branch -f`, `branch -m` + `checkout -b`); (e) and "the fetch form" — an
+unshallow or deepen run as a *precondition*, with or without the guard —
+which roughly nineteen runs had recommended over ten days across 27 comments
+on that task. Eriks weighed the evidence and chose; the assistant does not get
+a vote on its own restraints (§ Lifting a gate reasoning applies).
+
+**The accepted cost, written here so no later run re-litigates it.** Where the
+container's clone is shallow, `git checkout main` can land on the graft
+lineage and `git merge --ff-only` then fail with *refusing to merge unrelated
+histories*, leaving the worktree on a stale tree until it is restored — files
+silently revert, and any file read taken inside that window is **void**
+(`lessons-learned.md`, 2026-09-27 11:0x). That window is now **authorised, not
+a defect to report.** A run still records in the run log whether it paid the
+window and whether it read any file inside it, because a void read is still
+void — but it does **not** open a new `[Needs Eriks]` task about the hazard,
+and it does **not** comment on `6hXqrrHRVQHjvg9Q`, which is closed.
+
+**What "restore on failure" may use.** The plain detach-restore has itself
+been refused by the session's permission layer (2026-09-28 20:0x), so the
+purely additive recovery — `git fetch --unshallow` or `--deepen`, then
+`git merge --ff-only` — remains available **as recovery after a failure**,
+which is what (c) prescribes. What Eriks declined is running it *before* the
+checkout as a precondition.
+
 ## 1. Read the governing files
 
 `config/routing-rules.md`, `config/tools.md`, `config/methods.md`, every file

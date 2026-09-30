@@ -396,6 +396,23 @@ Four ship by default:
    was created this way the same day. Superseded default: *a multi-day stay
    creates nothing.* The paragraph below is kept as the record of the gap.
 
+   **DECIDED 2026-09-30 by Eriks — an overlapping event with a different
+   title is not a match, so a flight still gets its own timed event.**
+   Answering `[Needs Eriks]` task `6hc967pfqvR7J3qQ` with *"a)"*, where
+   option (a) read *"Keep the default — flights get their own timed events
+   regardless of what else overlaps."* The match test stays exactly as
+   written — **title roughly equal AND times overlapping** — so a
+   trip-level entry on either swept calendar does **not** suppress a booking
+   event that overlaps it; the reference case is the all-day **"Viena"** span
+   of 23–25 Sep on the Family calendar, which did not stop the two airBaltic
+   BT273/BT274 flight events being created. Declined: (b) treating any
+   overlapping event as a match whatever its title, and (c) asking per item.
+   The cost Eriks accepted: a duplicate-looking event he deletes himself,
+   since `delete_event` is forbidden to the assistant in every phase.
+   Superseded status — this was the *stated default* of an open question and
+   is now a **decision**, so a run no longer raises a `[Needs Eriks]`
+   question when an overlapping differently-titled event exists.
+
    **WAS OPEN, and blocked the multi-day half of that widening:** option
    (b) also asked *"Say whether you want one all-day span for a stay (3–10
    Jan) or separate check-in/check-out entries."* Eriks did not say, and

@@ -110,6 +110,12 @@ in the inbox. **ANSWERED 2026-09-21** (Eriks, task `6hW4pGFRrff5M2FQ`: *"Seperat
 entries — see `AGENTS.md` § Phase gates. Superseded text: *"Still
 unanswered … a multi-day stay creates nothing."*
 
+**DECIDED 2026-09-30 by Eriks** (task `6hc967pfqvR7J3qQ`, *"a)"*): an
+overlapping event with a **different title** is not a match, so a flight or
+booking still gets its own timed event even where a trip-level entry covers
+the dates. Full text and boundaries in `AGENTS.md` § Phase gates carve-out 7,
+authoritative there.
+
 **None autonomously. This source is read-only in every sweep.** NARROWED 2026-09-09 by Eriks: carve-out 7 below makes one creation class autonomous; the sentence otherwise stands. `create_event`,
 `update_event`, `delete_event` and `respond_to_event` are never called by a run
 on its own judgement. A calendar write reaches other people — attendees are
