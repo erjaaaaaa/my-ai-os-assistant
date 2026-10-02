@@ -33,7 +33,7 @@
     "gmail": {
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
-      "mail.last_internaldate_ms": 1790917540000,
+      "mail.last_internaldate_ms": 1790929396000,
       "_verified": "2026-09-07",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
@@ -53,7 +53,7 @@
       "labels_verified": "2026-09-07",
       "inbox.last_sweep_date": "2026-10-02",
       "paid_label_id": "Label_2307425248756940905",
-      "mail.triage_last_internaldate_ms": 1790604535000
+      "mail.triage_last_internaldate_ms": 1790929396000
     },
     "calendar": {
       "configured": true,
@@ -61,13 +61,13 @@
         "epetersons87@gmail.com",
         "family17271500024496324001@group.calendar.google.com"
       ],
-      "calendar.last_scanned_date": "2026-09-30",
+      "calendar.last_scanned_date": "2026-10-02",
       "_verified": "2026-09-07"
     }
   },
   "vault": {
     "path": "../My Brain",
-    "mail_snapshot.last_internaldate_ms": 1790759180000
+    "mail_snapshot.last_internaldate_ms": 1790927396000
   },
   "flags": {
     "inbox_sweep": true
