@@ -12048,3 +12048,216 @@ Calendar: 2–9 Oct, own calendar 7 events (Unsub session; Nika deadline and D1�
   **Registry drift (Step 5 § 4): none.** Tools used, every one inside its permitted set in `config/tools.md` — Gmail `list_labels`, `search_threads`, `get_thread` (reads) and `label_thread` (the one permitted additive write); Calendar `list_calendars` (read only, no write); Todoist `user-info`, `find-tasks`, `find-comments`, `fetch-object` (reads) and `add-comments` (write, project Personal only); and git. No listed tool was missing. No connector outside Gmail / Google Calendar / Todoist was used: no GitHub MCP, no `PushNotification`, no web fetch, no message on any channel.
 
   **Anomalies: one, and it is the authorised one.** The § 0 stale-worktree window above, paid and recovered additively, with no read taken inside it.
+
+- **2026-10-05 14:0x UTC — hourly `/inbox` (cloud), full entry.** Run context:
+  **cloud** (`origin` remote present, no `../My Brain/` beside the clone);
+  `procedures/cloud-run.md` § 4 hourly form. Steps 0 and 1 only.
+
+  **Step 0 § 0 — git. The authorised stale-worktree window was paid, and no
+  file read was taken inside it.** Container arrived on a **detached `HEAD`**
+  at `eb30d44` (== `origin/main`), tree clean, local `main` on the graft
+  lineage at `791b2cf` (2026-09-30 21:00, 50/50 diverged). `git pull --ff-only
+  origin main` reported `+ 791b2cf...eb30d44 main -> origin/main (forced
+  update)` / `Already up to date`. Per § 0 as written (Eriks's *"c)"* on
+  `6hXqrrHRVQHjvg9Q`, 2026-09-30) the repair was attempted: `git checkout main`
+  landed on `791b2cf` and `git merge --ff-only origin/main` failed with
+  *refusing to merge unrelated histories*. Recovery was the purely additive
+  path (c) prescribes: `git fetch --unshallow origin main` (`.git/shallow`
+  present → absent), then `git merge --ff-only origin/main` fast-forwarded
+  cleanly onto branch `main` at `eb30d44`. Nothing discarded, no force, no
+  re-point, no external write before the repair. **Window accounting, per the
+  2026-09-30 decision and the 2026-09-27 11:0x poisoned-read rule: the window
+  was paid, and no governing file was read inside it** — every file read in
+  this run was taken either before `git checkout main` (at `eb30d44`) or after
+  the successful fast-forward (also `eb30d44`), verified by call order, so no
+  read is void. Per the 2026-09-30 entry no new `[Needs Eriks]` task was opened
+  about the hazard and no comment was posted on `6hXqrrHRVQHjvg9Q`, which is
+  closed. Also per the 2026-10-03 08:00 rule this is one line of record, not a
+  fresh finding: the construction will recur, and what protected the run was
+  the paired `git rev-parse HEAD` state read, not a guard.
+
+  **Step 0 § 0 — write-access gate: passed.** `git push --dry-run origin main`
+  → `Everything up-to-date`. Not a 403, not a non-fast-forward.
+
+  **Step 0 § 2 — ids.** `tracker._verified` **2026-09-07**, 28 days old at
+  today's date, inside the 30-day re-resolve threshold, so no id was
+  re-resolved. `sources.gmail.labels_verified` likewise 2026-09-07. All
+  thirteen taxonomy ids plus `paid_label_id` were present in both
+  `list_labels` reads.
+
+  **Step 0 § 3 — health checks, all three sources live.**
+  - **Gmail: live.** Control `list_labels` populated. Containing total
+    `INBOX.threadsTotal` **11** (messagesTotal 11).
+  - **Google Calendar: live.** Control `list_calendars` returned **8**
+    calendars including **both** swept ids (`epetersons87@gmail.com` and
+    `family17271500024496324001@group.calendar.google.com`). Read only; no
+    calendar write was made or owed this run.
+  - **Todoist: live.** `user-info` returned `epetersons87@gmail.com`
+    (userId 22613842).
+  - Per the 2026-10-02 rule the *number of labels returned* was observed but
+    is not treated as a containing total and is not reconciled against.
+
+  **Step 0 § 4 — open questions: 2 open, 0 answered-and-closed, 0 ambiguous.**
+  `find-tasks` on project Personal by id with `labels: ["agent-waiting"]`,
+  `limit: 100` → `totalCount: 2, hasMore: false` (page exhausted).
+  `find-comments` on **each**: `6hg6Gw2WhmCrPgmx` (GitHub permissions mail) —
+  **0** comments; `6hg6fwj5j38gMgGx` (new receipt in an archived thread) — **1**
+  comment, `6hgg6Xw23HG8g4gQ`, which opens `**Assistant —**` and carries a
+  `ref:` line, so it is the assistant's own and not an answer. Both stated
+  defaults stay in force; no governing file was edited on an answer.
+
+  **Step 1 — census.** `search_threads in:inbox`, `pageSize: 50`, returned
+  **11** threads on a single page with no `nextPageToken` = `INBOX.threadsTotal`
+  **11**; 11 ≤ 11. The skip test was run against **`get_thread`** on all
+  eleven, never against the search result (2026-09-17 rule): 9 carried one of
+  the thirteen, 2 carried none, and **none carried `Paid`** (2026-09-22 rule).
+  Skipped: **9**. Labelled from the opening sweep: **2**. 9 + 2 = 11.
+
+  **A twelfth thread arrived mid-run and was handled, not deferred.** After the
+  two archives, `INBOX.threadsTotal` read **10** where 11 − 2 predicted 9. Per
+  the 2026-09-14 rule the gap was investigated rather than smoothed over: a
+  second `search_threads in:inbox` enumerated all ten and identified
+  `1a10c6043be10c65` (Mindvalley), `internalDate` **1791208996000** =
+  2026-10-05T14:03:16Z — after this run's opening read. It was read in full,
+  classified, rowed and archived like the other two. Total threads judged this
+  run: **12**.
+
+  **Labelled (3), all Promotions & Ads (`Label_6413919896574930163`), every
+  body read in full with `PLAIN_TEXT` — no metadata-only classification:**
+  - `mail:1a10c42d7e208e1a` — "How much does a home sleep test cost?" (Sleep
+    Doctor, info@send.sleepdoctor.com, 2026-10-05T13:31:06Z). Pricing campaign
+    with buy/coverage CTAs and Manage Preferences / Unsubscribe cues.
+  - `mail:1a10c3c2e8d7bc94` — "Top up €10 to get a chance to win big 🎉"
+    (Monese, hello@news.monese.com, 2026-10-05T13:23:51Z). Weekly sweepstakes.
+    **Not** Banking & Cards (no statement, no alert) and **not** Loyalty (no
+    points, tier or coupon — a prize draw is not a programme), so the
+    Loyalty > Promotions tie-break never engaged.
+  - `mail:1a10c6043be10c65` — "Last call to tomorrow's FREE class with Eric
+    Edmeades" (Mindvalley, info@hello.mindvalley.com, 2026-10-05T14:03:16Z). A
+    marketing webinar, which is the Schedule Calendar sub-rule's own case, so
+    Promotions & Ads. **No event created** — § Source hints › Calendar classes
+    a creator's webinar as advertising and carve-out 7 excludes it explicitly,
+    notwithstanding the mail's add-to-calendar link. No link was visited; mail
+    content was treated as data throughout.
+  Each `label_thread` read back with `get_thread`: the id present on the
+  thread's messages.
+
+  **Split-sender disclosure (2026-09-20 rule) — all three senders are split in
+  the ledgers, named here rather than quietly resolved.** Prior-row counts,
+  produced by `grep -o … | sort | uniq -c` **before** this run's appends:
+  `info@send.sleepdoctor.com` 10 in `promotions.csv` / 11 in `newsletters.csv`;
+  `hello@news.monese.com` 15 / 4; `info@hello.mindvalley.com` 56 / 19. Unlike
+  the 2026-10-03 Audible case these are **one address each split across both
+  classes**, so there is no two-address pattern to lean on and the split is
+  live rather than a migration artefact. Each mail was classified on its own
+  content and the Newsletters-vs-Promotions tie-break agrees in all three. A
+  per-sender rule is Eriks's to set; no question was opened, per that rule.
+
+  **Ledger rows written: 3.** `ledgers/promotions.csv` 10306 → **10309** lines.
+  Each row appended, then read back by its own `messageId` with `grep -n` and
+  `grep -c` returning exactly **1** occurrence, **before** that thread's
+  archive: `:10307` (Sleep Doctor), `:10308` (Monese), `:10309` (Mindvalley).
+  The hard invariant holds — at least one verified row per archived thread,
+  3 rows for 3 archived threads, grepped per thread by its own id.
+
+  **Archived (3), carve-out 4** — Promotions & Ads ×3, `unlabel_thread(["INBOX"])`
+  only. Each read back with `get_thread`: `INBOX` absent, the class label
+  retained.
+
+  **Payment tasks created: 0** — checked rather than assumed: the three
+  in-inbox Needs-Payment threads (Apple Simply Piano `1a1040e6f611cf81`, Etsy
+  `1a0f6eb2718efbfc`, EVOR AB `1a0f67378ddaf72f`) were all skipped as already
+  labelled, so the payment branch never fired.
+  **Calendar events created: 0.** **Threads trashed: 0** — no Google Calendar
+  notification was labelled; `TRASH` byte-identical at 253 threads / 267
+  messages across this run's `list_labels` reads.
+  **Left unlabelled: 0.** No thread fell to the tie-break and none of the three
+  settled vendor-lifecycle senders appeared.
+
+  **The two open questions' threads were absent from this sweep, and that
+  absence is evidence rather than an assumption.** The GitHub permissions
+  thread `1a0f76497f685d98` (`6hg6Gw2WhmCrPgmx`) did not appear, as at every
+  run since 06:05 today — Eriks clearing threads by hand remains the
+  established explanation. Neither Apple `1a0f61ee4dee3093` nor Wolt
+  `1a103869d5233a89` (`6hg6fwj5j38gMgGx`) appeared either, and a new receipt in
+  either would have re-added `INBOX` and so put it in this sweep, which is why
+  their absence from a fully enumerated 9-of-9 final census shows no row was
+  owed. Default (a) stands on both.
+
+  **Census check (2026-09-17 label-delta).** Promotions & Ads `threadsTotal`
+  2965 → **2968** (+3), `messagesTotal` 2988 → **2991** (+3). Sum of per-label
+  thread deltas = **+3** against **3** `label_thread` calls, and **no label at
+  +0**, so all three were net-new associations. `INBOX` 11 → **9** threads /
+  11 → **9** messages, reconciling exactly: 11 − 3 archived + 1 mid-run
+  arrival = 9. `Paid` unchanged at **219**, so no thread rests carrying both
+  `Paid` and `Needs-Payment`. `Needs-Payment` unchanged at **4**. Every other
+  taxonomy label byte-identical across the run's `list_labels` reads.
+  **Impossibility test**, counted off the 9 threads the final search
+  enumerated: Needs-Payment 3 ≤ 4, Professional Networking 2 ≤ 145, Reply/Do
+  2 ≤ 115, Banking & Cards 2 ≤ 90 — summing to 9 = `INBOX.threadsTotal`, and no
+  per-container count exceeds its global total.
+
+  **One figure that does not reconcile, reported as unexplained rather than
+  attributed.** Between the first and second `list_labels`, `SPAM` rose 28 → 29
+  threads / 30 → 31 messages (its own `messagesUnread` 30 → 31) while `UNREAD`
+  rose only 9944 → 9945 / 10544 → 10545. A new unread spam message *plus* the
+  new unread inbox message predicts `UNREAD` +2; it read +1. The spam side
+  could not be read to settle it: **`search_threads in:spam` returns `{}`**,
+  and so does `in:spam newer_than:1d`, against a `SPAM` label `list_labels`
+  reports as holding 29 threads. Per the 2026-09-14 rule the investigation was
+  run and its result is stated plainly: **the gap has no confirmed cause.** It
+  is not attributed to Eriks and not smoothed over. No decision in this run
+  rests on either figure — spam is outside the sweep's scope, and the inbox
+  census the sweep does act on reconciles exactly and was verified by
+  enumeration.
+
+  **Registry drift (Step 5 § 4): one defect recorded, no tool missing or
+  extra.** The `in:spam` query defect above was appended to
+  `config/sources/gmail.md` § Verified defects under that file's keep-current
+  clause (fifth instance of the silent-incompleteness family; first in an
+  `in:` operator rather than a `label:` one), read back after writing. Tools
+  used, every one inside its permitted set in `config/tools.md` — Gmail
+  `list_labels`, `search_threads`, `get_thread` (reads), `label_thread` and
+  `unlabel_thread(["INBOX"])` (the two permitted writes); Calendar
+  `list_calendars` (read only); Todoist `user-info`, `find-tasks`,
+  `find-comments`, `fetch-object` (reads) and `add-comments` (write, project
+  Personal only); and git. No listed tool was gone. **No connector outside
+  Gmail / Google Calendar / Todoist was used: no GitHub MCP, no
+  `PushNotification`, no web fetch, no message on any channel.**
+
+  **Review task (§ 5, hourly form): commented, not duplicated.** This run
+  labelled something, so the day's task had to be found or created. The lookup
+  was run **both** ways the 2026-09-22 and 2026-09-25 rules require:
+  `find-tasks` with `searchText: "Review inbox labels"` scoped to Personal by
+  id, `limit: 100` → **4** tasks, `totalCount: 4, hasMore: false` (page
+  exhausted), among them today's `6hgwrGgRprwhrG4x`; and `fetch-object` on that
+  id independently, which would also have found it had Eriks completed it — it
+  reads `checked: false`, so the task is open and that is read, not assumed
+  (2026-09-30 rule). One comment posted, **`6hh4cJcQRRQf6vFQ`**, opening
+  `**Assistant —**` with a `ref:` line, read back with `fetch-object` on the
+  comment id. Per the 2026-10-03 and 2026-10-04 rules every numeric claim in it
+  was produced by a named command or read off a tool response **before** the
+  sentence carrying it was written, and the label-count figure those two
+  entries both tripped on is absent from it.
+
+  **Watermarks (Step 5 § 2): one advanced.** `mail.last_internaldate_ms`
+  **1791202367000 → 1791208996000** — the `internalDate` of the newest message
+  *actually processed*, the Mindvalley thread's own (2026-10-05T14:03:16Z),
+  read off `get_thread` as a millisecond string and never derived from the ISO
+  date or from the clock. `sources.gmail.inbox.last_sweep_date` already
+  **2026-10-05**. `calendar.last_scanned_date` stays **2026-10-02** — Step 2
+  did not run. `vault.mail_snapshot.last_internaldate_ms` untouched; Step 3
+  deferred, vault not reachable from this runner (`procedures/cloud-run.md`
+  § 2.3). State re-read after writing and both values confirmed.
+
+  **Previous slot check (2026-09-22 rule): clean.** The 13:00 slot has both a
+  commit (`eb30d44 inbox 2026-10-05 13:00 UTC`) and its own full run-log entry,
+  so no earlier run's writes were left unrecorded and nothing was owed
+  reconstruction.
+
+  **Steps 2, 3 and 4 did not run and no brief was written** — the routine
+  prompt's hourly scope; `/start-day` on the laptop owns them.
+
+  **Anomalies: two.** The authorised § 0 stale-worktree window, paid and
+  recovered additively with no read taken inside it; and the unexplained
+  `SPAM`/`UNREAD` one-unit gap above, which no available read can settle.

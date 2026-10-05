@@ -187,3 +187,23 @@ incompleteness is silent.
   in:anywhere after:2026/09/07` reported `resultCountEstimate: 201` and
   returned 380 threads over eight pages. **Paginate to exhaustion and count
   what came back; the estimate is never a containing total.**
+- **`in:spam` returns `{}` while `list_labels` reports the SPAM label holding
+  threads.** ADDED 2026-10-05 (14:0x UTC hourly run, under this instance's
+  keep-current clause): `search_threads query: in:spam` returned an empty
+  object, and so did `in:spam newer_than:1d`, in the same minute that
+  `list_labels` reported `SPAM` with `threadsTotal: 29` / `messagesTotal: 31`.
+  Found while reconciling a census: `SPAM` had risen +1 thread / +1 message
+  between two `list_labels` calls while `UNREAD` rose only +1 where the new
+  spam message plus a new inbox message predicted +2, and the spam side could
+  not be read to settle it. **Rule: `in:spam` is not usable as a read against
+  this mailbox through this connector — an empty result from it is a query
+  defect, never evidence that spam is empty or unchanged.** Where a spam
+  figure matters, the only reads that have worked are `list_labels`' own
+  `SPAM` counts; a run that cannot read the folder says the discrepancy is
+  **unexplained** rather than attributing it. Fifth instance of the
+  silent-incompleteness family above (the tool answers, the answer is
+  incomplete, nothing in the response marks it), and a sibling of the
+  `label:<label_id>` and leaf-name-label entries: the same shape in an `in:`
+  operator rather than a `label:` one. Note what is *not* established: the
+  one-unit `SPAM`/`UNREAD` gap itself has no confirmed cause, and spam is
+  outside the sweep's scope either way, so no sweep decision rests on it.
