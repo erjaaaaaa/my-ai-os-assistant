@@ -204,3 +204,27 @@ catch.
   exhaustion first, and treat `totalCount` as a page count.** Strengthens the
   2026-09-07 `limit: 10` entry above: that one warns a listing can be silently
   truncated, this one shows it can be silently *empty*.
+- **2026-10-09 — `find-activity` with `eventType: deleted` cannot be paginated
+  to exhaustion.** The 08:0x UTC hourly run ran the § Anti-duplication
+  deleted-task leg (`find-activity`, `objectType: task`, `eventType: deleted`,
+  `projectId` Personal, `limit: 100`) and got `{"events": [], "totalCount": 0,
+  "hasMore": true, "nextCursor": "…"}` — and then the same thing on the next
+  three cursors, four consecutive **empty** pages each handing back a fresh
+  advancing cursor. → The dedupe check `config/routing-rules.md`
+  § Anti-duplication prescribes ("check the ref against … **deleted** tasks in
+  the last 60 days (via the activity log)") **cannot be completed** through this
+  connector: an empty page there is not evidence of no deletions (the
+  2026-09-22 `hasMore: true` rule), and the pages do not run out. →
+  **Rule: treat the deleted-task leg as unavailable rather than as returning
+  zero. Do not spend more than a few cursors on it; record that it could not be
+  exhausted, and carry the dedupe on the legs that do answer — open tasks by
+  ref, completed tasks, and, where it applies, the decisive timing argument
+  that no run has yet seen the thread (a thread whose newest message postdates
+  the previous run's watermark cannot have produced a task).** Note a second,
+  separate limit found in the same check: **`find-completed-tasks` silently
+  clamps its window** — `dateFrom: 2026-08-10` came back with
+  `appliedFilters.since: "2026-10-03"`, so a 60-day completed-task sweep is not
+  what the call returns; read `appliedFilters` back and state the window
+  actually covered. Seventh instance of the silent-incompleteness family in
+  `config/sources/gmail.md` § Verified defects, and the second on the Todoist
+  side after the 2026-09-22 empty-first-page entry above.
