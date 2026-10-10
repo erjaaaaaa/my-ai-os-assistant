@@ -191,6 +191,27 @@ catch.
   while the earlier automation applied them per message. → A thread read back
   shows the label on every message. → **Check "already labelled" across all
   messages' `label_ids`, not just the newest.**
+  **NARROWED 2026-10-10 (22:0x hourly run) — "every message" holds only for the
+  messages present when the label was applied.** `label_thread`'s own
+  description says the operation affects "all messages currently in the thread
+  **and any future messages added to it**"; it does not. The 19:0x run labelled
+  `1a1272f8acce10f2` **Security & Verification** across its 4 messages; a 5th
+  arrived 2026-10-10T21:07:37Z and `get_thread` this run returns it with
+  `labelIds ["UNREAD","INBOX"]` — **no class label** — while the other four
+  still carry `Label_626686719135409347`. Confirmed independently by the label's
+  own counts: `Security & Verification` stayed **243 threads / 264 messages**
+  across both of this run's `list_labels` calls, where a propagating label would
+  read 265. Superseded text: *"A thread read back shows the label on every
+  message."* **The rule above is unchanged and is what protects the sweep** —
+  checking every message means a part-labelled thread is still correctly skipped
+  (Step 1 § 1.2 skips when *any* message carries one of the thirteen). Two things
+  do change: a label's `messagesTotal` is **not** a reliable per-thread message
+  count once a thread keeps growing, so a census must not predict it from
+  `messageCount`; and a thread can rest **part-labelled indefinitely**, since the
+  skip test forbids a run from relabelling it. Whether that state is worth
+  closing — it would need a widening, because applying a label to a thread
+  already carrying one of the thirteen is outside the write allowlist — is for
+  the promotion review and for Eriks, not for a run.
 - **2026-09-22 — `find-tasks` with `searchText` can return an EMPTY first page
   with `hasMore: true`.** Looking up the day's review task by title returned
   `{"tasks": [], "totalCount": 0, "hasMore": true, "nextCursor": "sDZoUUY1cTlXV1c4RzVKcng.NymK08WoXFCJcMGx"}`;
