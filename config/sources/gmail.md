@@ -229,3 +229,23 @@ incompleteness is silent.
   silent-incompleteness family in this section, and the third on a `label:`
   operator after the 2026-09-10 label-id entry and the 2026-09-23 leaf-name
   entry.
+- **A new message can be invisible to `search_threads` while `list_labels` already
+  counts it.** ADDED 2026-10-13 (20:0x UTC hourly run, under this instance's
+  keep-current clause): between the run's two `list_labels` calls, `INBOX` moved
+  **49 → 48** threads and **59 → 59** messages, and `UNREAD` **10728 → 10729**
+  messages with its unread thread count unchanged at 10118. One archive accounts
+  for the thread delta; the net-zero message delta requires one new message in an
+  already-counted inbox thread, and the `UNREAD` shape corroborates it. The
+  message could not be found: `get_thread` on the only growing candidate returned
+  3 messages (unchanged), and `search_threads in:inbox after:2026/10/13
+  newer_than:1d` returned 12 threads with nothing newer than 20:01:57Z.
+  **Rule: a `search_threads` window query is not evidence that no newer message
+  exists — `list_labels` counts can lead it. Where the two disagree, report the
+  discrepancy as unexplained rather than attributing it, and never advance a
+  watermark to cover a message no read has returned** (advance only to the newest
+  message actually processed, which leaves an unseen arrival for the next run).
+  Note what is **not** established: index lag is the obvious guess and no read
+  this run supports it, so the cause is unknown and which thread received the
+  message is unknown. Ninth instance of the silent-incompleteness family in this
+  section, and the first in which the incompleteness shows up as a *reconciliation*
+  that closes rather than as one tool's visibly thin answer.
