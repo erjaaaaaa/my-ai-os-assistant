@@ -207,3 +207,25 @@ incompleteness is silent.
   operator rather than a `label:` one. Note what is *not* established: the
   one-unit `SPAM`/`UNREAD` gap itself has no confirmed cause, and spam is
   outside the sweep's scope either way, so no sweep decision rests on it.
+- **A label query by full display path returns `{}` for a label whose name
+  contains ` & ` and ` - `.** ADDED 2026-10-13 (11:0x UTC hourly run, under
+  this instance's keep-current clause): `search_threads query: in:inbox
+  label:"Travel - Bookings & Iterinary"` returned an empty object in the same
+  minute that two inbox threads demonstrably carried that label. The label had
+  just been applied to both by this run, and three independent reads disagree
+  with the query: `get_thread` on each thread returns
+  `Label_219377032455978970` in its `labelIds` alongside `INBOX`;
+  `list_labels` moved the label from **79 → 81** `threadsTotal` across the
+  run's two calls; and `in:inbox from:airbnb.com` returns both threads with
+  that id present. **Rule: an empty result from a `label:"<display name>"`
+  query is a query defect for this label, never evidence of absence — verify a
+  label by reading `labelIds` off the threads, by the label's own
+  `threadsTotal` delta, or by a sender- or date-scoped `in:inbox` query.**
+  Note what is **not** established: *which* character breaks it. The 2026-09-23
+  entry above found the full display path working where the leaf name failed
+  (`Interests & Marketing/Social Media`, which also contains ` & `), so the
+  ampersand alone cannot be the whole story and the ` - ` in this label's name
+  is an untested hypothesis, not a finding. Eighth instance of the
+  silent-incompleteness family in this section, and the third on a `label:`
+  operator after the 2026-09-10 label-id entry and the 2026-09-23 leaf-name
+  entry.
