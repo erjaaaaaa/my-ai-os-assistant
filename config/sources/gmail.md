@@ -249,3 +249,29 @@ incompleteness is silent.
   message is unknown. Ninth instance of the silent-incompleteness family in this
   section, and the first in which the incompleteness shows up as a *reconciliation*
   that closes rather than as one tool's visibly thin answer.
+- **`get_thread` refuses a trashed thread with a *permissions* error, which reads
+  exactly like a write-scope outage.** ADDED 2026-10-16 (11:0x UTC hourly run,
+  under this instance's keep-current clause): `get_thread` on the trashed
+  MyHeritage thread `1a1406363998b9bf` returned **"The caller does not have
+  permission"**. Allowed-write 5 above already notes that `get_thread` refuses a
+  trashed thread and that the read-back goes through `search_threads … in:anywhere`
+  with `includeTrash: true` — which is what settled it here, returning the thread
+  as `labelIds ["UNREAD","TRASH"]`. What was **not** written down is the *shape* of
+  the refusal, and that is the hazard: `lessons-learned.md` 2026-09-07 says to treat
+  a permission error on a Gmail call as a **write-side outage** — retry once, stop
+  all Gmail writes, write no ledger row, archive nothing, do not advance
+  `inbox.last_sweep_date`. A run that met this string without already knowing the
+  thread was trashed would have followed that rule and declared a false outage,
+  abandoning a sweep that was working. **Rule: a permission error from `get_thread`
+  on a single thread is not an outage signal until the thread has been located with
+  `in:anywhere` + `includeTrash` — a trashed thread produces this error on a fully
+  healthy connector. The 2026-09-07 outage rule is about a permission error on a
+  *write* (`label_thread` and its kind), and this entry narrows it rather than
+  replacing it: nothing about the write-side rule changes.** The control query
+  (`list_labels`) is the independent check and came back populated with 50 labels
+  in the same minute. Note what is **not** established: whether every trashed
+  thread produces this exact string, and whether other single-object reads
+  (`get_message`) behave the same way — one observation, not a characterisation.
+  Tenth instance of the silent-incompleteness family in this section, and the
+  first where the misleading part is the error's *wording* rather than a response
+  that is quietly thin.
