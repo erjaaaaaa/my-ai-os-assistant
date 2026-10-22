@@ -34,7 +34,7 @@
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
       "mail.last_internaldate_ms": 1792622064000,
-      "_verified": "2026-10-21",
+      "_verified": "2026-10-22",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
         "Reply/Do": "Label_1359182492550918712",
@@ -51,7 +51,7 @@
         "Travel - Bookings & Iterinary": "Label_219377032455978970"
       },
       "labels_verified": "2026-10-07",
-      "inbox.last_sweep_date": "2026-10-21",
+      "inbox.last_sweep_date": "2026-10-22",
       "paid_label_id": "Label_2307425248756940905",
       "mail.triage_last_internaldate_ms": 1790929396000
     },
@@ -62,7 +62,7 @@
         "family17271500024496324001@group.calendar.google.com"
       ],
       "calendar.last_scanned_date": "2026-10-02",
-      "_verified": "2026-10-21"
+      "_verified": "2026-10-22"
     }
   },
   "vault": {
