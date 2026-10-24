@@ -33,7 +33,7 @@
     "gmail": {
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
-      "mail.last_internaldate_ms": 1792832542000,
+      "mail.last_internaldate_ms": 1792837098000,
       "_verified": "2026-10-24",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
@@ -62,7 +62,7 @@
         "family17271500024496324001@group.calendar.google.com"
       ],
       "calendar.last_scanned_date": "2026-10-02",
-      "_verified": "2026-10-23"
+      "_verified": "2026-10-24"
     }
   },
   "vault": {
