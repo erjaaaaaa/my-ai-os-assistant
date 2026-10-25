@@ -275,3 +275,29 @@ incompleteness is silent.
   Tenth instance of the silent-incompleteness family in this section, and the
   first where the misleading part is the error's *wording* rather than a response
   that is quietly thin.
+- **The preview truncates to the NEWEST ~5 messages, not the oldest — and that is the half that never carries a label.** ADDED 2026-10-25 (22:0x UTC hourly run, under
+  this instance's keep-current clause): `search_threads in:inbox` returned
+  `1a134bea3374b59a` (`messageCount: 8`) with **no taxonomy label on any of the
+  five messages it listed**, while `get_thread` on the same id returns
+  `Label_219377032455978970` (Travel - Bookings & Iterinary) on **message 1** —
+  applied by the 2026-10-13 run (`logs/run-log.md:19816`). The preview had
+  returned messages **4–8** (15–25 Oct) and dropped the **oldest three** (13 Oct).
+  This contradicts the tool's own description (*"only the ~5 OLDEST messages"*)
+  and the 2026-10-15 lessons entry's wording (*"truncates at ~5 oldest
+  messages"*). **Why it is the dangerous direction:** by the 2026-10-10 finding
+  above, `label_thread` does not label future messages, so on a growing thread
+  the class label rests only on the messages present when it was applied — the
+  **oldest**. Truncation that keeps the newest therefore discards exactly the
+  messages that can carry a label, and a label-free preview on a long thread is
+  the *expected* reading whether the thread is labelled or not. **Rule: a
+  preview is evidence about a thread's labels only when that thread's
+  `messageCount` ≤ 5; above that, `get_thread` is the only sound read, and the
+  2026-10-15 skip-test rule is applied per-thread rather than per-sweep.** This
+  is the third instance of the preview-hiding defect (2026-09-17 Luminor, then
+  the 2026-10-15 entry's analysis) and it strengthens rather than replaces them.
+  Note what is **not** established: whether the window is always the newest ~5,
+  or varies with thread size or `view` — one observation, not a
+  characterisation; the 2026-09-17 case does not record which messages returned,
+  so it is consistent with either direction. Eleventh instance of the
+  silent-incompleteness family in this section, and the second where the
+  misleading part is the tool's **documentation** rather than its response.
