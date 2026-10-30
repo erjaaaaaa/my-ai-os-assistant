@@ -276,3 +276,24 @@ capability.
   becomes a question or a task, never an action.
 - **If a report cannot be checked from the evidence it quotes:** treat it as
   missing data, say so, and re-read directly.
+
+## Session-control tools — no external reach
+
+ADDED 2026-10-30 under this file's keep-current clause: `Monitor` and
+`TaskStop` were used in the 01:00 UTC hourly cloud run — to wait for a
+delegated read-only subagent to hand back, and to cancel that wait once it
+had — and were not listed, which is drift this file exists to catch. Like
+the Agent entry above, they are not connectors and reach no external system
+of their own, so this records the **boundaries**, not a new capability.
+`ToolSearch` is the mechanism this file's own header prescribes for finding
+a tool by its stable name and needs no separate entry.
+
+- **Used for:** waiting on, or cancelling, work already started inside this
+  session — a delegated subagent, a backgrounded local command.
+- **Never used for:** polling an external system in place of a read this
+  registry lists, waiting out a connector outage or a quota refusal (the
+  2026-10-28 rule: pacing does not buy through a Gmail cost quota, so a run
+  budgets for the call shape that works instead of spending the slot on
+  retries), or any effect on Gmail, Google Calendar, Todoist or the vault.
+- **A monitor is armed with a bounded timeout and stopped once its condition
+  is met**, so no watch outlives the run that armed it.
