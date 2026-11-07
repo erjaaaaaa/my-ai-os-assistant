@@ -139,6 +139,21 @@ the orient block at Step 0 and in the run-log entry at Step 5.
   MCP is not used. The push is a message to Eriks himself, not to another
   person, so it does not touch the property the security boundary protects
   — but it is not adopted as delivery until Eriks says so in writing.
+- **Tool rules in the sweep prompt — ADDED 2026-11-07 by Eriks** (*"Yes,
+  apply and test"*). From 2026-11-03 05:00 UTC nearly every sweep stopped in
+  `requires_action` on a Bash permission prompt ("A variable in this command
+  can't be checked before it runs") at its first shell file write — a
+  heredoc, `>>` or `python3 - <<`. Cloud runs start in auto mode, where a
+  Bash command the permission check cannot parse waits for approval and no
+  allow rule overrides it; an unattended run cannot answer, so it hangs.
+  The routine prompt now carries a TOOL RULES paragraph: files are written
+  only with Write/Edit, Bash only for simple literal commands (git, grep,
+  tail, head, wc, ls, jq on a literal path), no variables, `$(...)`,
+  heredocs or inline scripts. Test run `cse_013n6E1yNkqgHsPgYjvkbnef`
+  finished and pushed with no prompt. Side effect, harmless: Edit
+  normalises stray CRLF line endings in the ledgers, so a diff looks larger
+  than the rows it adds (`git diff --ignore-cr-at-eol` shows the real
+  change).
 - **Routine ids** are recorded in `state/state.json` under
   `cloud.routine_id` (daily) and `cloud.hourly_routine_id` (hourly) with a
   `_verified` date, like every other id.
