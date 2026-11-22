@@ -19,9 +19,41 @@ manager re-reads the thread before labelling it.
    `label_ids` off the messages. **If any message carries any of the thirteen
    label ids in `state/state.json`, skip the thread** — Eriks's or an earlier
    run's label wins and is never changed. Count skipped threads.
+   **WIDENED 2026-11-22:** the skip test is *"any of the thirteen **or
+   `paid_label_id`**"*. A thread that carries `Paid` is never labelled by a
+   sweep, whatever else it carries. `Paid` means a payment loop that has
+   already been closed, and relabelling it from its content would put back the
+   Needs-Payment label and a duplicate payment task. This promotes the
+   2026-09-22 lesson, which had stayed in `lessons-learned.md` only. It became
+   urgent the same day, when Eriks had `Paid` applied to `1a1ea8e4041997dc`,
+   which stays in the inbox.
 3. For each remaining thread, classify from the **full text** per the taxonomy.
    Unsure between an action class and anything else → leave unlabelled and
    list it for the brief; never guess an action label.
+
+   **CHANGED 2026-11-22 (Eriks: *"fix so this doesn't happen again"*).**
+   Before a thread may be left unlabelled as unsure, run these four checks in
+   order. They are part of Step 1, so the hourly form runs them in full and
+   never skims them. Policy and boundaries are in `config/routing-rules.md`
+   § Tie-breaks › *Precedent before "unsure"*.
+   a. **Original sender.** For a forward, read the `From:` inside the
+      forwarded block. That address is the thread's sender for b and c. The
+      forwarder is never the class key.
+   b. **Precedent.** `search_threads "<original sender address>" in:anywhere`.
+      If the earlier threads agree on one taxonomy class, or carry `Paid`
+      (which counts as Needs-Payment), apply that class with its post-actions
+      and stop.
+   c. **Open-question hold.** The thread is held behind an open
+      `[Needs Eriks]` default only if it is that task's `ref:`, or its
+      original sender matches the task's `source:` line.
+   d. **Visibility.** If the thread is still unsure, make it visible in
+      Todoist in this run. If c found a covering question, post one comment on
+      it naming the new thread id. Otherwise open a `[Needs Eriks]` task. Only
+      a thread that has one of these may be reported as "held unchanged" by
+      later runs.
+   The run log names, for every thread left unlabelled, the check that held it
+   (c with the task id, or d with the comment or task id), or the settled
+   decision that exempts it.
 
    **ADDED 2026-09-30 (Eriks, tasks `6hXpGPJ3PXGJQFJQ`, `6hXxcJ9mX8MwVR5x`,
    `6hcWfpHR58RVxwRQ`):** mail from `no_reply@email.apple.com`,

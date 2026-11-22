@@ -299,6 +299,58 @@ Loyalty > Receipts > Promotions.** Unsure between Newsletters and Promotions →
 Schedule) and anything else → leave the thread **unlabelled and list it in the
 brief** rather than guess; a wrong action label costs more than a missing one.
 
+**Precedent before "unsure", and a forward goes by its original sender.
+ADDED 2026-11-22 by Eriks.** The trigger: the 17 Nov Mārupe sports-school
+invoice (`1a1ea8e4041997dc`, `finanses@marupe.lv` forwarded by margaritaeliya)
+sat unlabelled for five days with no task. The 17 Nov 21:00 UTC sweep held it
+as *"same held class as earlier Margarita fwds"*, which put it behind the Lidl
+Arena question `6hhxfXFwgfMpWh8x`. Yet the October invoice from the same sender
+(`1a13fb2ef43a53c0`) had been labelled Needs-Payment and tasked, Eriks had paid
+it, and carve-out 5 had closed it to `Paid`. Eriks: *"I've already paid, please
+just label this thread as Paid. Then fix so this doesn't happen again."* The
+four rules below narrow the tie-break above. The tie-break still holds, but
+only for a thread that is still unsure after rules 1–3.
+
+1. **A forward is classified by its original sender.** A mail is a forward if
+   it has a `Fwd:` subject or a "Forwarded message" block. Its class key is the
+   `From:` inside the forwarded block, never the forwarder. Margarita forwards
+   bills from several unrelated vendors, so "a Margarita forward" is not a
+   class. The same holds for her `Re:` re-sends of an earlier forward.
+2. **Same-sender precedent settles the class.** Before calling a thread
+   unsure, search for earlier mail from the same original sender:
+   `search_threads "<address>" in:anywhere`. For a forward the address is in
+   the body, and a plain address search finds it there. If the earlier threads
+   carry one taxonomy class, that class applies, with all its post-actions.
+   `Paid` counts as Needs-Payment, because it is the closed form of that
+   class. Weigh a precedent Eriks acted on (a completed payment task, a `Paid`
+   label, his own filing) above a label a run applied that nobody acted on.
+   The thread is unsure only when the same-sender precedents disagree (as with
+   Lidl Arena: Receipts by Eriks's own September filing, Needs-Payment by the
+   taxonomy) or there are none.
+3. **An open `[Needs Eriks]` question holds only the sender it names.** A
+   thread is held behind an open question's "stays unlabelled" default only if
+   it is the task's own `ref:`, or its original sender is the one in the
+   task's `source:` line. A shared forwarder, a shared shape (amount only in a
+   PDF) or a similar subject does not put a thread in the class. This narrows
+   the 2026-11-01 lesson (*grep open questions for the candidate's
+   sender/subject*). That lesson's loose match on forwarder and shape is what
+   caught the sports-school mail.
+4. **A held thread is never silent.** "List it in the brief" reaches nobody
+   from an hourly sweep, because the sweep writes no brief. So the first run
+   that leaves a new thread unsure makes it visible in Todoist in the same
+   run. If an open question covers it under rule 3, the run posts one comment
+   on that task naming the new thread id. Otherwise it opens a new
+   `[Needs Eriks]` task for the thread. Later runs may carry the thread as
+   "held unchanged" only once one of those exists. The settled-by-decision
+   senders (*Vendor account-lifecycle mail* below) are exempt, as before.
+
+Both boundaries. **Not** a new write class: comments and `[Needs Eriks]`
+tasks are already allowed writes. **Not** a licence to label on precedent from
+a *different* sender: precedent means the same original sender address,
+however similar the mail looks. Open question `6hhxfXFwgfMpWh8x` is unchanged.
+Its default still holds both Lidl Arena forwards (`1a1204f4f87d74a8`,
+`1a1cb3044f75b224`), because their sender is the one it names.
+
 **Vendor account-lifecycle mail stays unlabelled — DECIDED 2026-09-30 by
 Eriks**, answering three `[Needs Eriks]` tasks in one sitting. The class is
 exactly: a vendor's own account, membership or onboarding notice carrying no
