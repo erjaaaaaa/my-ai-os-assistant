@@ -5,6 +5,8 @@ Append one entry per correction. Never reword or delete an entry — if a rule
 changes, append a new one saying which it replaces. Entries older than 7 days
 are candidates for the promotion review (see `AGENTS.md` § The learning loop).
 
+**CHANGED 2026-11-01 (Eriks):** this file is **not read at the start of a run any more** — it is the append-only log of corrections. The live rules are in the governing files and `config/rules-digest.md`. Keep appending; the line above that says every rule here is applied at start is superseded.
+
 - 2026-09-07 — **The personal mailbox has a manual label tree** — The setup
   interview recorded "no manual labels", but the control query returned a
   46-label user tree (`Action Required/…`, `Finance & Accounts/…`, and more).

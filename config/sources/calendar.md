@@ -132,3 +132,11 @@ on `epetersons87@gmail.com` — **never with attendees**, because an invite
 reaches another person. Each creation is read back, logged with Eriks's words,
 and the source thread is then archived. It is never a standing permission, and
 the next such write needs their yes again.
+
+**WIDENED 2026-11-12 by Eriks, one named batch only:** ten Latvian flag-day
+events (yearly recurring, all-day, no attendees, free) were created on the
+**Family** calendar, which until then had only been read. Eriks's words:
+*"add when I need to put the flag out to my Family Calendar on those specific
+days"*, then *"Family, record WIDENED"*. Authoritative text: `AGENTS.md`
+§ Security boundary. This permission is spent; it is not a standing Family
+calendar permission.

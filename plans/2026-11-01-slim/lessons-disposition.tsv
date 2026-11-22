@@ -1,0 +1,131 @@
+2026-09-07	The personal mailbox has a manual label tree	8	13	COVERED	config/routing-rules.md:142 "never removed, never renamed, never created"
+2026-09-07	Todoist labels are shared with another instance on the same account	14	17	COVERED	config/tools.md:121 "Always scope task searches to project Personal by id."
+2026-09-07	Attachment content is not retrievable through the Gmail connector	18	23	COVERED	config/tools.md:138 "amount that is not in the message body"
+2026-09-07	The Gmail control query proves read scope, not write scope	24	32	COVERED	config/tools.md:149 "outage of that write class: retry once, stop, log the proposals"
+2026-09-07	Gmail links must name the account	33	39	COVERED	procedures/step-1-inbox.md:86 "https://mail.google.com/mail/?authuser=epetersons87@gmail.com#all/<threadId>"
+2026-09-07	The digest is not part of `/start-day`	40	45	COVERED	AGENTS.md:582 "produced **only by `/digest`**"
+2026-09-07	"Requires additional permissions" from Gmail is an OAuth scope problem, not an app permission problem	46	56	COVERED	config/tools.md:158 "the fix is a reconnect with every Google consent checkbox"
+2026-09-07	Payment tasks go to This Week, not Backlog	57	65	COVERED	config/routing-rules.md:386 "always put in THIS"
+2026-09-07	A completed payment task closes its mail	66	76	COVERED	AGENTS.md:298 "Closing the payment loop."
+2026-09-08	The review task goes to This Week	77	84	COVERED	procedures/step-1-inbox.md:109 "Upsert one Todoist task for the day in Personal, **This Week**"
+2026-09-08	Only real-person calendar events are appointments	85	98	COVERED	config/routing-rules.md:101 "Only an event with a real person on the other side is an appointment"
+2026-09-08	A permission-layer refusal is not a Gmail outage, and is cleared by Eriks's explicit ask	99	111	DISTILL	D01
+2026-09-08	Eriks's own recurring health routine is a task plus a brief reminder	112	121	COVERED	config/routing-rules.md:232 "Standing reminders — carried in every brief until their end date"
+2026-09-09	Google Calendar notification mail is trashed, not filed	122	132	COVERED	AGENTS.md:315 "Trashing Google Calendar notification mail."
+2026-09-09	An unmatched real invite is created, not proposed	133	142	COVERED	AGENTS.md:339 "Creating the event for an unmatched invite."
+2026-09-09	Todoist array-input "outage" was a schema-loading problem	143	143	COVERED	config/tools.md:183 "reload once with `ToolSearch select:`"
+2026-09-09	A Receipts thread was archived without its ledger row	144	153	COVERED	config/routing-rules.md:355 "one verified row per archived thread"
+2026-09-10	A Gmail `label:<label_id>` query returns `{}` while the label is plainly on the threads	154	166	COVERED	config/sources/gmail.md:169 "Query labels by display name in quotes, never by id"
+2026-09-10	A conditional answer whose condition is false is not an answer	167	179	ASK	Should Step 0 §4 gain a rule that a conditional answer whose condition is false ("if from Telegram, no") leaves the question open with a one-line provenance reply? Current text only covers "ambiguous".
+2026-09-10	Eriks can authorise a single label removal in chat	180	193	COVERED	config/sources/gmail.md:102 "A per-item label removal Eriks asks for in chat"
+2026-09-11	One archived thread can owe more than one ledger row	194	207	COVERED	config/routing-rules.md:378 "different purchases in one thread are still two rows"
+2026-09-11	The global `/start-day` skill shadows this instance's own	208	218	OBSOLETE	No global start-day skill remains: `ls ~/.claude/skills | grep -i -E 'start|day'` returned nothing on 2026-11-01 and the session skill list shows only the instance's own start-day.
+2026-09-11	The `raw/` backlog was always the run's work; the default was wrong, not merely unchosen	219	235	COVERED	procedures/step-3-ingest.md:122 "*ingesting* is unconditional over the `raw/` root"
+2026-09-11	A per-item chat instruction also authorises an archive, not just a label removal	236	250	COVERED	config/sources/gmail.md:116 "A per-item archive Eriks asks for in chat"
+2026-09-11	Todoist typed parameters can degrade mid-session	251	268	COVERED	config/tools.md:184 "reload returns `{type: object}` again, stop"
+2026-09-14	A hotel booking satisfies two taxonomy classes and the tie-break does not separate them	269	284	COVERED	AGENTS.md:384 "This also settles the 2026-09-14"
+2026-09-14	Carve-out 7 has no rule for a booking that is already in the past	285	299	COVERED	AGENTS.md:353 "Unsure whether the mail is a real booking"
+2026-09-14	A classifier refusal mid-swap should stop the whole class, not just the one thread	300	311	DISTILL	D02
+2026-09-14	A half-finished carve-out is a defect, not a neutral pause	312	325	DISTILL	D03
+2026-09-14	When a class answer and a per-item instruction arrive in one message, execute the end state, not the sequence	326	337	ASK	Should a message that states a general rule plus a disposition for the item in hand be executed as policy-for-future plus end-state-for-now, never replaying intermediate steps in sentence order? (reading of Eriks's words; consent-adjacent)
+2026-09-14	Reconcile a census discrepancy before reporting, even a favourable-looking one	338	349	DISTILL	D30
+2026-09-17	The "already labelled → skip" check was run against a truncated message list	350	377	DISTILL	D07,D08
+2026-09-20	A corrected re-send of the same invoice is one receipt, not two	378	392	DISTILL	D11
+2026-09-20	Two oversized threads were classified without their bodies, and that needs saying out loud rather than quietly	393	409	DISTILL	D09
+2026-09-20	Read access is not write access, and a run that cannot record itself must not act	411	423	COVERED	procedures/step-0-orient.md:28 "prove write access before any external write"
+2026-09-20	The review task cannot be updated, because the write allowlist has no description edit	426	439	COVERED	procedures/step-1-inbox.md:124 "that is settled, a comment is the update."
+2026-09-20	A second run on the same date appends to the day's brief, never overwrites it	440	448	DISTILL	D50
+2026-09-20	The same sender has been filed under three different taxonomy classes in four runs	449	465	DISTILL	D10
+2026-09-20	The "same campaign sent twice" case has a rule for receipts and none for promotions	467	487	DISTILL	D12
+2026-09-20	The write-access gate can refuse for a reason that has nothing to do with write access	489	515	COVERED	procedures/step-0-orient.md:25 "a non-fast-forward after this repair is reported as an anomaly"
+2026-09-21	A Step 3 watermark of `0` read literally means "snapshot the whole mailbox"	516	528	DISTILL	D48
+2026-09-21	Gmail's `resultCountEstimate` is an estimate and can be off by nearly half	529	535	COVERED	config/sources/gmail.md:186 "`resultCountEstimate` is not a count."
+2026-09-21	The calendar connector dates an all-day event by the UTC day of its timestamps	536	547	COVERED	config/sources/calendar.md:92 "Rule: for an all-day event pass"
+2026-09-21	The write-access gate proves GitHub's permission, not the session's	548	548	SUPERSEDED	2026-09-21 — CORRECTION to the entry immediately above: the local push refusal was transient
+2026-09-21	CORRECTION to the entry immediately above: the local push refusal was transient, and the push succeeded on a prompted second attempt	549	549	DISTILL	D04,D05
+2026-09-21	The detached-HEAD repair can check out an unrelated history, and the checkout succeeds before the merge fails	550	573	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-21	A safety rule read at Step 0 § 1 cannot govern a mutation performed at Step 0 § 0	574	600	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-22	The § 0 / § 1 ordering defect is now demonstrated twice, and the fix has to be in the procedure, not in this file	601	624	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-22	The lost-ledger-row failure finally happened for real, and two runs passed over it without noticing	625	649	DISTILL	D06
+2026-09-21	Replacement order tracked only as a comment on the superseded task	650	650	DISTILL	D47
+2026-09-22	Step 2 shares its "new mail" watermark with the hourly Step 1 sweep, so the laptop triage never sees what the cloud already labelled	651	651	COVERED	procedures/step-2-triage.md:25 "compare against `mail.triage_last_internaldate_ms`"
+2026-09-22	A thread mid-carve-out-5 reads as "unlabelled" to Step 1's skip test	652	652	DISTILL	D07
+2026-09-22	The "unrelated histories" that has blocked Step 0's repair for six runs is a shallow-clone graft, and `git fetch --unshallow` dissolves it	653	653	COVERED	procedures/step-0-orient.md:65 "`git fetch --unshallow` or `--deepen`"
+2026-09-22	A `find-tasks` search returned an empty first page with `hasMore: true`, and trusting it would have created a duplicate task	654	654	COVERED	config/tools.md:223 "Never conclude a task does not exist from a"
+2026-09-25	A completed review task is invisible to `find-tasks`, so § 5's "search by title first" would have created a duplicate	655	655	DISTILL	D23
+2026-09-25	Option (b) of the Step 0 git question is executable after all, and one command proves a local reset discarded nothing	656	656	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-26	The Step 0 § 0 guard was evaluated and still did not gate the mutation, because it shared a shell command with it	657	657	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-26	A lesson written at 05:0x was violated at 06:0x by the next run of the same routine — which proves the § 0 fix cannot live in this file	658	658	OBSOLETE	Premise (a lessons entry is read at §1, after §0 actions run) disappears when lessons-learned is no longer read at start; the §0 git question was decided by Eriks (c) on 2026-09-30, so no reusable rule remains.
+2026-09-26	A content diff was used to justify discarding a git ref, and the reachability proof was run afterwards	659	659	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-27	Re-pointing a ref and discarding one are not the same act, and a rename makes the Step 0 § 0 window reversible instead of merely lucky	660	660	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-27	A connector can report "connected and enabled in this chat" and still publish no tools at all, which is a third and different Todoist failure	661	661	DISTILL	D21
+2026-09-27	"Run the guard in its own call and read the exit status" is not a guard — this run obeyed that wording exactly and still mutated the worktree	662	662	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-27	The Step 0 § 0 stale-worktree window is an epistemic hazard, not only a file-revert one: this run read the stale tree while diagnosing the stale tree, and got a false answer about its own lessons file	663	663	COVERED	procedures/step-0-orient.md:56 "any file read taken inside that window is"
+2026-09-27	A thread can be trashed by Eriks *between* the label call and its read-back, which breaks two checks at once and leaves the class's post-action half-applicable	664	664	DISTILL	D16
+2026-09-28	The detach-restore that every Step 0 § 0 recovery assumes can itself be refused, leaving the additive `--unshallow` + `--ff-only` path as the only way out of the stale-worktree window	665	665	COVERED	procedures/step-0-orient.md:64 "been refused by the session's permission layer (2026-09-28 20:0x)"
+2026-09-29	The permission layer distinguishes `checkout -B` from `branch -m` + `checkout -b`, observed in one session minutes apart — the first controlled data point on a question ten days of cross-session evidence could not settle	666	666	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-30	`checkout -B` was permitted again, so the "it is the command shape" conclusion of six days' evidence is too strong — the right word is *unpredictable	667	667	SUPERSEDED	2026-09-30 — Eriks chose (c) on the Step 0 § 0 git question
+2026-09-30	Eriks chose (c) on the Step 0 § 0 git question, against ten days and 27 comments recommending otherwise — and the reporting loop closes with the decision, not with agreement	668	668	COVERED	procedures/step-0-orient.md:49 "chose; the assistant does not get"
+2026-09-30	Seven answers arrived at once and the tasks were closed by Eriks himself, which breaks the "I'll close it myself" assumption every `[Needs Eriks]` description states	669	669	DISTILL	D24
+2026-09-30	A permission-layer refusal on a local file is answered by the safer act, not by the same act through another tool	670	670	DISTILL	D01
+2026-09-30	A census that fails to reconcile can fail in the user's favour, and the investigation is the same either way	671	671	DISTILL	D30
+2026-09-30	A snapshot decision is only as good as the clock it was made against	672	672	DISTILL	D49
+2026-09-30	Two runs answering the same `[Needs Eriks]` questions wrote the same rules twice, and git merged most of the duplicates without a conflict	673	673	ASK	Should the unattended sweep keep applying answered [Needs Eriks] tasks at Step 0 §4 (two runs wrote duplicate rules after a rebase) or only read them and leave applying to the laptop run?
+2026-10-02	The `list_labels` label *total* oscillates run to run and is not a containing total; the per-label `threadsTotal` figures are the stable ones	674	674	DISTILL	D27
+2026-10-03	A supporting figure was asserted inside an external write before it was read, and only the run's own re-read caught it	675	675	DISTILL	D34
+2026-10-03	A shell `if` around a pipeline tested `tail`'s exit status, and printed MERGE_OK over a failed merge	676	676	DISTILL	D46
+2026-10-03	The pipe-swallows-exit-status rule was broken again one hour after it was written, by the next run of the same routine — a third demonstration that a lesson living only in this file does not bind the action it governs	677	677	DISTILL	D46
+2026-10-04	The "figure asserted before it was read" defect recurred two days later on the same write surface, and the only thing that caught it was the run's own re-read	678	678	DISTILL	D34
+2026-10-05	A ledger dedupe `grep` can match an id quoted in another row's prose, so "already there" is not the same as "a row exists"	679	679	DISTILL	D14
+2026-10-05	The pipe exit-status construction recurred a fourth time, and the paired state read caught it again — logged in one line as the standing rule requires	680	680	DISTILL	D46
+2026-10-08	A figure in an external write was read but *mislabelled*, which the "grep it or drop it" rule does not catch	681	681	DISTILL	D35
+2026-10-08	`git push -u origin main` is refused by the session's permission layer while plain `git push origin main` is allowed, so the environment's git guidance and this instance's Step 5 disagree on the one command that records a run	682	682	DISTILL	D05
+2026-10-09	An `add-tasks` call that omits `projectId` silently lands the task in Todoist's default Inbox — outside the write allowlist — and every removal path is forbidden	683	683	DISTILL	D25,D26
+2026-10-09	The plain `git push origin main` was refused too, so the 2026-10-08 entry's conclusion that it is "the form that runs" is one data point, not a property	684	684	SUPERSEDED	2026-10-09 — CORRECTION to the entry immediately above: the identical plain git push origin main succeeded
+2026-10-09	CORRECTION to the entry immediately above: the identical plain `git push origin main` succeeded on the one prompted retry, so the refusal was the transient first-attempt kind after all	685	685	DISTILL	D04
+2026-10-10	`label_thread` does not label future messages, contrary to its own tool description — so a thread can rest part-labelled and a label's `messagesTotal` is not a per-thread message count	686	686	COVERED	config/tools.md:208 "a label's `messagesTotal` is **not** a reliable per-thread message"
+2026-10-11	A census passed its aggregate impossibility test and still carried a wrong per-label figure, because the per-label breakdown was never summed	687	687	DISTILL	D29
+2026-10-11	The "figure asserted before it was read" defect recurred in a new place: a claim about a *sibling run's* counts, where the run log is the only authoritative source and was not opened until close-out	688	688	DISTILL	D37
+2026-10-13	A label read-back query returned `{}` for the label the run had just written, and the verification only held because three other reads were already in hand	689	689	COVERED	config/sources/gmail.md:221 "query is a query defect for this label, never evidence of absence"
+2026-10-13	Step 0 § 4's two legs came apart, and the `find-comments` half ran after Step 1 had already written	690	690	COVERED	procedures/step-0-orient.md:103 "before any other step does work"
+2026-10-13	A census can reconcile on every available invariant and still contain one term no read can locate — and the honest record is "unexplained", not the obvious guess	691	691	DISTILL	D32
+2026-10-13	The census term the previous run recorded as "unexplained" was locatable one hour later, and the cause was a mid-run arrival rather than index lag	692	692	DISTILL	D32
+2026-10-14	A `grep -A N` context window on a log of single-line entries reads the *next* entry's text as this one's, and the run nearly published an append-only violation that had not happened	693	693	DISTILL	D44
+2026-10-14	A two-bucket partition was miscounted in the direction the sum cannot catch, because both buckets sum to the same right total either way	694	694	DISTILL	D41
+2026-10-15	A ledger value containing the delimiter was written unquoted, and the repair was worse than the fault — a whole-file rewrite silently re-ended 50 settled rows	695	695	DISTILL	D13,D15
+2026-10-15	The skip test was run off the sweep's own `label_ids` for 32 of 44 threads, against a written rule — and what makes that sound is a fact about the inbox, not about the method	696	696	ASK	May Step 1 §1.2 skip a thread on its search_threads preview labels when that thread's messageCount <= 5 (per thread) instead of get_thread on every thread? This relaxes a written safety check and would cut reads.
+2026-10-15	The "characterises another run" rule failed to bind, and the sentence it should have stopped was the one sentence in the comment that no decision rested on	697	697	DISTILL	D37
+2026-10-16	A Gmail permission error on a *read* of one trashed thread is not the write-scope outage the 2026-09-07 rule is about, and following that rule literally would have abandoned a working sweep	698	698	COVERED	config/sources/gmail.md:265 "a permission error from `get_thread`"
+2026-10-16	A run-log entry heading can be bolded, so the `^- YYYY-MM-DD` parse the standing rule prescribes silently drops it	699	699	DISTILL	D44
+2026-10-19	A run claimed novelty for a condition three earlier runs had already recorded, and the check that would have caught it was one `grep` of a file the run already had open	700	700	DISTILL	D37
+2026-10-19	A claim about a thread's current state was taken from a Todoist task's own record while the run's sweep result, already in hand, contradicted it	701	701	DISTILL	D38
+2026-10-22	A Todoist HTTP 503 can be *sustained* rather than first-attempt-transient, so the Step 0 § 3 outage verdict is not final for the run — this one was falsified mid-run by a re-check at the point of need	702	702	DISTILL	D22
+2026-10-22	The two-bucket miscount recurred eight days on, in the same place and with the same passing checksum	703	703	DISTILL	D41
+2026-10-23	A column-exact ledger check keyed on a column the file does not have returns a silent 0, which reads exactly like a real absence — and it nearly decided a disposition	704	704	DISTILL	D14
+2026-10-24	An "unexplained" census term stayed unexplained for four runs because one run over-generalised the `in:spam` defect to `in:trash`, and a bracketed pair of queries settled it in three calls	705	705	DISTILL	D32
+2026-10-24	The two-bucket miscount recurred a third time, in the same place, and is recorded in one line rather than re-derived	706	706	DISTILL	D41
+2026-10-24	The two-bucket miscount recurred a fourth time, inside the very comment that cites the rule against it	707	707	DISTILL	D42
+2026-10-24	A miscounted sum did not just misstate a figure, it manufactured a phantom data-loss hypothesis and handed the next run a work item that did not exist	708	708	DISTILL	D33
+2026-10-25	The Trash-purge floor is a *lagging* boundary, not a 30.0-day cut, and six unread threads leaving at once kills the coincidence branch of the `UNREAD` question	709	709	SUPERSEDED	2026-10-28 — A Trash purge with UNREAD flat settles the question the 2026-10-26 entry handed forward
+2026-10-25	The sweep preview truncates to the NEWEST messages, not the oldest — which is the exact half that never carries the label, so for any part-labelled thread over ~5 messages the preview hides the label systematically	710	710	COVERED	config/sources/gmail.md:293 "preview is evidence about a thread's labels only when that thread's"
+2026-10-26	Entering Trash removes a thread from `UNREAD` immediately, which decides the hypothesis pair the purge question was stuck on — from the entry side rather than the purge side	711	711	DISTILL	D31
+2026-10-27	The sum/bucket miscount recurred a fifth time, in a single clause that put the task count where the thread count belonged	712	712	DISTILL	D42
+2026-10-27	The bucket-size miscount recurred a sixth time, on the smaller half of a two-page sweep	713	713	DISTILL	D42
+2026-10-27	The two-bucket miscount recurred a seventh time, and this time the wrong clause and its own correction sat in the same sentence	714	714	DISTILL	D41
+2026-10-27	The co-ordinate-count miscount recurred an eighth time, and the number it borrowed was a correct figure from the same comment	715	715	DISTILL	D42
+2026-10-28	The Gmail cost quota blocked the sweep itself, and the cheap call shape is what proved the connector live	716	716	DISTILL	D17
+2026-10-28	A Trash purge with `UNREAD` flat settles the question the 2026-10-26 entry handed forward: `UNREAD` excludes `TRASH` with no lag	717	717	DISTILL	D31
+2026-10-28	A second consecutive quota block is a cadence question for Eriks, where a single one was infrastructure — the handling is unchanged, only the escalation is added	718	718	DISTILL	D19
+2026-10-28	A third cheap shape gets through the Gmail quota, and it is the one that answers the *label* question rather than only membership	719	719	ASK	May the skip test use get_thread messageFormat METADATA_ONLY instead of PLAIN_TEXT (cheaper, returns per-message labelIds), only under quota or by default? Already open as option (e) on task 6hrHC8JvF6QP8cfQ.
+2026-10-28	The cheap `METADATA_ONLY` shape got 1 of 60 where the previous run got 10 of 59, so its yield is not a property of the shape — and the hypothesis built on it was offered to Eriks before it was tested twice	720	720	DISTILL	D18
+2026-10-28	A timed-out Gmail write is indeterminate, and the cheap census read is what makes the retry safe	721	721	DISTILL	D20
+2026-10-28	The manager's spot-check caught a subagent's dropped item, and it happened to settle a count two earlier runs disagreed about	722	722	COVERED	config/tools.md:277 "If a report cannot be checked from the evidence it quotes"
+2026-10-28	An unfinished self-correction went out inside an external write, carrying a figure from another run	723	723	DISTILL	D36,D40
+2026-10-28	A figure in an external write was neither miscounted nor misremembered but *forecast*: a comment id predicted before the comment existed	724	724	DISTILL	D39
+2026-10-28	A cross-reference inside an external write named a sibling comment by a date that comment does not have, so the figure-in-a-write family now includes dates, not just numbers and ids	725	725	DISTILL	D39
+2026-10-28	The bucket miscount recurred a ninth time, and the inline self-correction written to fix it was wrong in both directions — the mechanical derivation is what settled it	726	726	DISTILL	D43
+2026-10-28	A repeat-counter built from `grep -c` on the run log counts the entries that *mention* a condition, not the runs that *met* it — so every run quoting the figure inflates it	727	727	DISTILL	D45
+2026-10-28	The prior-run-figure trap recurred, in the same write surface and from the same source — the day's review task description	728	728	DISTILL	D36
+2026-10-28	`search_threads` can lead `list_labels` on the inbox *thread* count, which is the mirror of the 2026-10-13 finding and not the same one	729	729	DISTILL	D28
+2026-10-28	The self-correction rule was broken in the write it was written for, and the figure it mangled was a script's display index	730	730	DISTILL	D35,D40
+2026-10-29	The `add-tasks` missing-`projectId` defect recurred, three weeks on, and the tool again reported success	731	731	DISTILL	D25,D26

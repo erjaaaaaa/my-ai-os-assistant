@@ -200,3 +200,14 @@ Everything in §§ 1–2 applies; these are the differences:
    the assistant's — the label decides whether a thread leaves the inbox,
    so the model choice is a quality decision. Recorded as an open point in
    the plan.
+   **DECIDED 2026-11-01 by Eriks, in chat:** the hourly routine
+   (`trig_01X5cu18Ba6kNcWbaAABCGR8`) moves from `claude-opus-5` to
+   `claude-sonnet-5-5`, after a usage review showed the hourly sweep as the
+   dominant scheduled spend (~168 Opus runs a week, each reading ~100k
+   tokens of governing files). Words: *"Yes, apply"*, answering "Apply the
+   cheaper-model and vault-path fixes?". Superseded default: Opus. The
+   quality risk this item names stands: if mislabelling rises, the model is
+   the first thing to revisit. **DECIDED 2026-11-01 by Eriks:** the
+   schedule moves from hourly to every 4 hours (*"Run every 4 hours"*) —
+   see `AGENTS.md` § The routine. The run counts above ("up to 23 a day")
+   are superseded: about 6 a day now.

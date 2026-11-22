@@ -70,7 +70,8 @@ checkout as a precondition.
 ## 1. Read the governing files
 
 `config/routing-rules.md`, `config/tools.md`, `config/methods.md`, every file
-in `config/sources/`, and `lessons-learned.md`. Not `config/planning-rules.md`
+in `config/sources/`, and `config/rules-digest.md` (**CHANGED 2026-11-01:** in place of
+`lessons-learned.md`, which is an append-only log and is not read at start). Not `config/planning-rules.md`
 (planning reads it), not `config/voice-style-guide.md` (loaded only when
 drafting).
 

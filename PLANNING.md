@@ -12,7 +12,7 @@ inside an accepted month plan works from that month's.
 
 ## Step 0 — Orient
 
-Read `config/planning-rules.md`, `config/methods.md`, `lessons-learned.md`,
+Read `config/planning-rules.md`, `config/methods.md`, `config/rules-digest.md`,
 `state/state.json`, `state/planning-state.json`, and the most recent accepted
 plan for the enclosing horizon in `plans/` if one exists. Run the Todoist and
 Calendar control queries. Tracker outage → stop; calendar outage → continue
