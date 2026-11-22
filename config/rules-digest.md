@@ -69,6 +69,22 @@ D49 [ingest] A "declined, nothing durable" snapshot decision holds only for the 
 
 D50 [brief] When `briefs/YYYY-MM-DD.md` already exists for today, append the new brief below it under its own dated heading marked "(second run)"; never truncate or rewrite a delivered brief. (2026-09-20 — second run appends to the day's brief)
 
+## Added 2026-11-22 — lessons the cloud appended after this digest was drafted
+
+ADDED 2026-11-22 at the laptop–GitHub sync, at Eriks's request to carry the
+2026-11-01 edits over *"without losing anything"*. This digest was drafted
+from the laptop's copy of `lessons-learned.md`, which stopped at 2026-10-29
+08:00 UTC. The cloud sweeps appended seven more entries after that. Without
+this section they would be read nowhere once the digest replaced the lessons
+file at Step 0.
+
+D51 [sweep] Missing slot: its reconstruction block went down with its unpushed commits, so don't look for it. Rebuild from what survives outside git, in this order: (i) any `[Needs Eriks]` task the missing run opened; (ii) per-label `threadsTotal` deltas against the last recorded closing census, which give how many threads moved and into which class; (iii) `search_threads in:anywhere` with `includeTrash` over the slot's window, filtered to archive-class threads without `INBOX`, each checked column-exact against its ledger. (ii) sets the expected count; a reconstruction that finds a different number is not finished. Extends D06. (2026-10-29 — reconstruction block cannot survive its own failure)
+D52 [sweep] Open-question holds: a thread is held behind an open `[Needs Eriks]` "stays unlabelled" default only if it is the task's `ref:` or its **original** sender (for a forward, the `From:` inside it) is the one in the task's `source:` line. Before applying a default to any thread other than the `ref:`, also grep `logs/run-log.md` for the class, because an earlier run may already have narrowed it. Policy: `config/routing-rules.md` § Tie-breaks › *Precedent before "unsure"* (rule 3). This narrows the 2026-11-01 lesson (*grep descriptions for sender/subject*), whose loose match held the Mārupe sports-school invoice for five days. (2026-10-29 — default nearly over-applied; 2026-11-01 — held-by-question check; 2026-11-22 — forwarder taken for the class)
+D53 [all] When a delegate's own flagged inconsistency turns out to be an error in its report rather than in the source, put the correction beside the figure in the artefact Eriks reads (not only in a lesson), and re-derive any count the delegate computed from its ids instead of repairing the number it stated. (2026-10-29 — subagent misattributed id)
+D54 [all] Never arm a wait (`Monitor` or similar) on a subagent's transcript or on any string it is not required to emit. Its hand-back already notifies, so do other work and wait. If a wait is armed anyway, `TaskStop` it the moment its purpose is served. Never write that a monitor was stopped unless a `TaskStop` call or an observed exit shows it. (2026-10-31 — Monitor outlived the run)
+
+The 2026-10-29 seventh bucket-miscount entry adds no rule. It is folded into D41, which it confirms. The 2026-11-22 Mārupe entry's rules live in `config/routing-rules.md` § Tie-breaks and `procedures/step-1-inbox.md` § 1.2–1.3, which every run reads in full. D52 points there rather than restating them.
+
 ## Left out, and why
 
 - 5 ASK entries (consent or check-relaxation questions for Eriks, see the TSV): conditional answers, class answer plus per-item instruction, two runs applying the same answers, skip test off preview labels, METADATA_ONLY for the skip test. The post-rebase check (count each `[Needs Eriks]` task id and rule heading after a rebase; expect one) is held with the two-runs ASK.
