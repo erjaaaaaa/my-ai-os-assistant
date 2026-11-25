@@ -27,13 +27,13 @@
       "size/XL": "2184640972",
       "size/XXL": "2184640969"
     },
-    "_verified": "2026-10-07"
+    "_verified": "2026-11-25"
   },
   "sources": {
     "gmail": {
       "configured": true,
       "mailbox": "epetersons87@gmail.com",
-      "mail.last_internaldate_ms": 1795578728000,
+      "mail.last_internaldate_ms": 1795594887000,
       "_verified": "2026-10-25",
       "labels": {
         "Needs-Payment": "Label_302269771500551203",
